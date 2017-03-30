@@ -19,4 +19,4 @@ class Rect {
     }
 }
 
-//Rect.isContainedIn 
+export default Rect;

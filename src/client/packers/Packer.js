@@ -1,16 +1,23 @@
+const METHOD = {
+    Default: "Default"
+};
+
 class Packer {
 
     constructor() {
     }
 
-    get type() {
-        return "default";
+    static get type() {
+        return "Default";
     }
 
-    get methods() {
-        return [{
-            name: "default",
-            type: "default"
-        }];
+    static get methods() {
+        return METHOD;
+    }
+
+    static getMethodProps(id=0) {
+        return {name: "Default", description: "Default placement"};
     }
 }
+
+export default Packer;
