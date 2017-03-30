@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>4.4.0</string>
         <key>fileName</key>
-        <string>D:/Temp/t-packer/project.tps</string>
+        <string>D:/Odrick/Projects/WWW/t-packer/client/test_data/project.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -28,13 +28,13 @@
             </struct>
         </array>
         <key>allowRotation</key>
-        <true/>
+        <false/>
         <key>shapeDebug</key>
         <false/>
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>cocos2d</string>
+        <string>pixijs</string>
         <key>textureFileName</key>
         <filename></filename>
         <key>flipPVR</key>
@@ -90,9 +90,9 @@
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
-            <int>2048</int>
+            <int>300</int>
             <key>height</key>
-            <int>2048</int>
+            <int>300</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -150,11 +150,11 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>cocos.plist</filename>
+                <filename>../../../../../../aaa-{n}.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
-        <false/>
+        <true/>
         <key>forceIdenticalLayout</key>
         <false/>
         <key>outputFormat</key>

@@ -31,11 +31,11 @@ class TextureView {
                 ctx.save();
                 ctx.translate(item.x+item.width, item.y);
                 ctx.rotate(Math.PI/2);
-                ctx.drawImage(img, 0, 0, img.width, img.height, padding, padding, img.width, img.height);
+                ctx.drawImage(img, item.spriteSourceSize.x, item.spriteSourceSize.y, item.spriteSourceSize.w, item.spriteSourceSize.h, padding, padding, item.spriteSourceSize.w, item.spriteSourceSize.h);
                 ctx.restore();
             }
             else {
-                ctx.drawImage(img, 0, 0, img.width, img.height, item.x+padding, item.y+padding, img.width, img.height);
+                ctx.drawImage(img, item.spriteSourceSize.x, item.spriteSourceSize.y, item.spriteSourceSize.w, item.spriteSourceSize.h, item.x+padding, item.y+padding, item.spriteSourceSize.w, item.spriteSourceSize.h);
             }
         }
     }

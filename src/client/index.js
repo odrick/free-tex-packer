@@ -1,6 +1,7 @@
 import ImagesLoader from './utils/ImagesLoader';
 import TextureView from './utils/TextureView';
 import MaxRectsBinPack from './packers/MaxRectsBin';
+import Trimmer from './utils/Trimmer';
 
 window.addEventListener("load", start, false);
 
@@ -37,11 +38,23 @@ function pack(images) {
         maxHeight += img.height;
 
         rects.push({
-            width: img.width + padding * 2,
-            height: img.height + padding * 2,
+            x: 0,
+            y: 0,
+            rotated: false,
+            trimmed: false,
+            spriteSourceSize: {x: 0, y: 0, w: img.width, h: img.height},
+            width: img.width,
+            height: img.height,
             name: key,
             image: img
-        })
+        });
+    }
+
+    Trimmer.trim(rects);
+
+    for(let item of rects) {
+        item.width += padding*2;
+        item.height += padding*2;
     }
 
     let width=300, height=300;
@@ -50,7 +63,7 @@ function pack(images) {
     if(!height) height = maxHeight;
 
     while(rects.length) {
-        let packer = new MaxRectsBinPack(width, height, false);
+        let packer = new MaxRectsBinPack(width, height, true);
         let result = packer.insert2(rects, MaxRectsBinPack.methods.BestShortSideFit);
 
         let tView = new TextureView();

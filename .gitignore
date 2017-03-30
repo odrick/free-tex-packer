@@ -3,3 +3,7 @@
 
 #node modules
 node_modules/*
+
+#temp files
+index.js
+index.js.map

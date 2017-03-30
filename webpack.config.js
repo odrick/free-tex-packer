@@ -23,5 +23,5 @@ module.exports = {
             { test: /\.(html|htm)$/, loader: 'dom' }
         ]
     },
-    devServer: { contentBase: __dirname }
+    devServer: { contentBase: path.resolve(__dirname, "src") }
 };
