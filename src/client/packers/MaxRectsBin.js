@@ -87,7 +87,9 @@ class MaxRectsBin extends Packer {
             rect.y = bestNode.y;
 
             if(rect.width != bestNode.width || rect.height != bestNode.height) {
-                rect.flipped = true;
+                rect.rotated = true;
+                rect.width = bestNode.width;
+                rect.height = bestNode.height;
             }
 
             res.push(rect);
