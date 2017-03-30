@@ -8275,25 +8275,35 @@
 	
 	    var padding = 2;
 	
+	    var maxWidth = 0,
+	        maxHeight = 0;
+	
 	    for (var key in images) {
 	        var img = images[key];
+	
+	        maxWidth += img.width;
+	        maxHeight += img.height;
 	
 	        rects.push({
 	            width: img.width + padding * 2,
 	            height: img.height + padding * 2,
-	            name: key
+	            name: key,
+	            image: img
 	        });
 	    }
 	
-	    var width = 400,
-	        height = 400;
+	    var width = 300,
+	        height = 300;
+	
+	    if (!width) width = maxWidth;
+	    if (!height) height = maxHeight;
 	
 	    while (rects.length) {
 	        var packer = new _MaxRectsBin2.default(width, height, false);
 	        var result = packer.insert2(rects, _MaxRectsBin2.default.methods.BestShortSideFit);
 	
 	        var tView = new _TextureView2.default();
-	        tView.show(images, result, padding);
+	        tView.show(result, padding);
 	
 	        document.body.appendChild(tView.view);
 	
@@ -8444,8 +8454,8 @@
 	
 	    _createClass(TextureView, [{
 	        key: "show",
-	        value: function show(images, data) {
-	            var padding = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+	        value: function show(data) {
+	            var padding = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 	
 	            var ctx = this.view.getContext("2d");
 	
@@ -8495,7 +8505,8 @@
 	                for (var _iterator2 = data[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
 	                    var _item = _step2.value;
 	
-	                    var img = images[_item.name];
+	                    var img = _item.image;
+	                    var a = 1;
 	
 	                    if (_item.rotated) {
 	                        ctx.save();

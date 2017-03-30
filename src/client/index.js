@@ -28,24 +28,33 @@ function pack(images) {
 
     let padding = 2;
 
+    let maxWidth = 0, maxHeight = 0;
+
     for(let key in images) {
         let img = images[key];
+
+        maxWidth += img.width;
+        maxHeight += img.height;
 
         rects.push({
             width: img.width + padding * 2,
             height: img.height + padding * 2,
-            name: key
+            name: key,
+            image: img
         })
     }
 
-    let width=400, height=400;
+    let width=300, height=300;
+
+    if(!width) width = maxWidth;
+    if(!height) height = maxHeight;
 
     while(rects.length) {
         let packer = new MaxRectsBinPack(width, height, false);
         let result = packer.insert2(rects, MaxRectsBinPack.methods.BestShortSideFit);
 
         let tView = new TextureView();
-        tView.show(images, result, padding);
+        tView.show(result, padding);
 
         document.body.appendChild(tView.view);
 

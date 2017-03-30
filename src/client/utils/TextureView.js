@@ -5,7 +5,7 @@ class TextureView {
         this.view.style.border = "1px solid #000";
     }
 
-    show(images, data, padding=0) {
+    show(data, padding=0) {
         let ctx = this.view.getContext("2d");
 
         let width=0, height=0;
@@ -25,7 +25,7 @@ class TextureView {
         ctx.clearRect(0, 0, width, height);
 
         for(let item of data) {
-            let img = images[item.name];
+            let img = item.image;
 
             if(item.rotated) {
                 ctx.save();
