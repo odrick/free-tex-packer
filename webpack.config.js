@@ -21,7 +21,8 @@ module.exports = {
             },
             { test: /\.json$/, loader: 'json' },
             { test: /\.(html|htm)$/, loader: 'dom' }
-        ]
+        ],
+        noParse: /.*[\/\\]bin[\/\\].+\.js/
     },
     devServer: { contentBase: path.resolve(__dirname, "src") }
 };

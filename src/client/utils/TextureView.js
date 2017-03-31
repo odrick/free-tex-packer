@@ -3,6 +3,9 @@ class TextureView {
     constructor() {
         this.view = document.createElement("canvas");
         this.view.style.border = "1px solid #000";
+
+        this.width = 0;
+        this.height = 0;
     }
 
     show(data, options={}) {
@@ -17,11 +20,21 @@ class TextureView {
             height = 0;
 
             for (let item of data) {
-                if (item.frame.x + item.frame.w > width) {
-                    width = item.frame.x + item.frame.w;
+
+                let w = item.frame.x + item.frame.w;
+                let h = item.frame.y + item.frame.h;
+
+                if(item.rotated) {
+                    w = item.frame.x + item.frame.h;
+                    h = item.frame.y + item.frame.w;
                 }
-                if (item.frame.y + item.frame.h > height) {
-                    height = item.frame.y + item.frame.h;
+
+
+                if (w > width) {
+                    width = w;
+                }
+                if (h > height) {
+                    height = h;
                 }
             }
 
@@ -30,6 +43,8 @@ class TextureView {
 
         }
 
+        this.width = width;
+        this.height = height;
         this.view.width = width;
         this.view.height = height;
 
@@ -40,7 +55,8 @@ class TextureView {
 
             if(item.rotated) {
                 ctx.save();
-                ctx.translate(item.frame.x + item.frame.w, item.frame.y);
+                ctx.translate(item.frame.x + item.frame.h, item.frame.y);
+
                 ctx.rotate(Math.PI/2);
                 ctx.drawImage(img,
                               item.spriteSourceSize.x,
@@ -48,7 +64,7 @@ class TextureView {
                               item.spriteSourceSize.w,
                               item.spriteSourceSize.h,
                               0, 0,
-                              item.frame.h, item.frame.w);
+                              item.frame.w, item.frame.h);
                 ctx.restore();
             }
             else {

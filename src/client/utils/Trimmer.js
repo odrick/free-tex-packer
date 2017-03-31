@@ -107,8 +107,8 @@ class Trimmer {
             }
 
             if(item.trimmed) {
-                item.frame.width = item.spriteSourceSize.w;
-                item.frame.height = item.spriteSourceSize.h;
+                item.frame.w = item.spriteSourceSize.w;
+                item.frame.h = item.spriteSourceSize.h;
             }
         }
     }
