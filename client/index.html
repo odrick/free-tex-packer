@@ -1,1 +1,39 @@
-<script src="index.js"></script>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Textures packer</title>
+
+    <meta http-equiv="Content-Type" content="text/html, charset=utf-8" />
+
+    <script src="index.js"></script>
+
+</head>
+
+<body>
+
+    <div id="controls">
+
+        width: <input type="number" id="width" value="300" min="0"/>
+        height: <input type="number" id="height" value="300" min="0"/>
+        fixedSize: <input type="checkbox" value="1" id="fixedSize"/>
+        <br/>
+        padding: <input type="number" id="padding" value="0" min="0"/>
+        <br/>
+        allowRotation: <input type="checkbox" value="1" id="allowRotation" checked="checked" />
+        allowTrim: <input type="checkbox" value="1" id="allowTrim" checked="checked" />
+        <br/>
+        packer: <select id="packer"></select>
+        packerMethod: <select id="packerMethod"></select>
+        <br/><br/>
+        <button id="start">START</button>
+    </div>
+
+    <hr/>
+
+    <div id="result"></div>
+
+</body>
+
+</html>

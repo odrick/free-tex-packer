@@ -7,6 +7,11 @@ class Packer {
     constructor() {
     }
 
+    pack(data, method) {
+        throw Error("Abstarct method. Override it.");
+    }
+
+
     static get type() {
         return "Default";
     }

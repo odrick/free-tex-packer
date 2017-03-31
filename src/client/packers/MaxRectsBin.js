@@ -24,6 +24,11 @@ class MaxRectsBin extends Packer {
         this.freeRectangles.push(new Rect(0, 0, width, height));
     }
 
+    pack(data, method) {
+        return this.insert2(data, method);
+
+    }
+
     insert(width, height, method=METHOD.BestShortSideFit) {
         let newNode = new Rect();
         let score1 = {value:0};
@@ -67,7 +72,7 @@ class MaxRectsBin extends Packer {
             for(let i= 0; i < rectangles.length; i++) {
                 let score1 = {value:0};
                 let score2 = {value:0};
-                let newNode = this._scoreRectangle(rectangles[i].width, rectangles[i].height, method, score1, score2);
+                let newNode = this._scoreRectangle(rectangles[i].frame.w, rectangles[i].frame.h, method, score1, score2);
 
                 if (score1.value < bestScore1 || (score1.value == bestScore1 && score2.value < bestScore2)) {
                     bestScore1 = score1.value;
@@ -83,13 +88,13 @@ class MaxRectsBin extends Packer {
 
             this._placeRectangle(bestNode);
             let rect = rectangles.splice(bestRectangleIndex, 1)[0];
-            rect.x = bestNode.x;
-            rect.y = bestNode.y;
+            rect.frame.x = bestNode.x;
+            rect.frame.y = bestNode.y;
 
-            if(rect.width != bestNode.width || rect.height != bestNode.height) {
+            if(rect.frame.w != bestNode.width || rect.frame.h != bestNode.height) {
                 rect.rotated = true;
-                rect.width = bestNode.width;
-                rect.height = bestNode.height;
+                rect.frame.w = bestNode.width;
+                rect.frame.h = bestNode.height;
             }
 
             res.push(rect);
