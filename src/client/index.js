@@ -7,7 +7,7 @@ import SpriteViewer from './utils/SpriteViewer';
 
 window.addEventListener("load", start, false);
 
-let images = [];
+let images = null;
 let currentResult = null;
 
 function start() {
@@ -36,6 +36,9 @@ function start() {
         exporterSelect.appendChild(option);
     }
 
+    document.getElementById("addImages").addEventListener("change", loadImages, false);
+
+    /*
     let data = [];
     for(let i=1; i<=24; i++) {
         data.push(i + ".png");
@@ -43,6 +46,19 @@ function start() {
 
     let loader = new ImagesLoader("test_data");
     loader.load(data, null, preloadComplete);
+    */
+}
+
+function loadImages(e) {
+    let loader = new ImagesLoader();
+    loader.load(e.target.files, null, loadImagesComplete);
+}
+
+function loadImagesComplete(data) {
+    document.getElementById("addImages").value = "";
+    
+    images = data;
+    pack();
 }
 
 function showPackerMethods(type) {
@@ -63,12 +79,9 @@ function showPackerMethods(type) {
     }
 }
 
-function preloadComplete(data) {
-    console.log("LOADED");
-    images = data;
-}
-
 function pack() {
+    if(!images) return;
+    
     let options = {
         width: Number(document.getElementById("width").value),
         height: Number(document.getElementById("width").value),
@@ -87,7 +100,6 @@ function pack() {
             break;
         }
     }
-
 
     let res = PackProcessor.pack(images, options);
 

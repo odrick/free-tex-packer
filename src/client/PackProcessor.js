@@ -3,7 +3,7 @@ import Trimmer from './utils/Trimmer';
 
 class PackProcessor {
 
-    static pack(images=[], options={}) {
+    static pack(images={}, options={}) {
 
         let rects = [];
 

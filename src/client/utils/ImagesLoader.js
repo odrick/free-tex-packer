@@ -1,44 +1,51 @@
+const UPLOAD_URL = "http://localhost:3000/upload";
+
 class ImagesLoader {
 
-    constructor(basePath="") {
-        this.loaded = {};
+    constructor() {
         this.data = null;
-        this.basePath = (basePath.substr(basePath.length-1, 1) == "/") ? basePath : basePath + "/";
-
+        this.loaded = {};
+        
         this.onProgress = null;
         this.onEnd = null;
     }
 
     load(data, onProgress=null, onEnd=null) {
-        this.data = data;
+        this.data = [];
+        
+        for(let i=0; i<data.length; i++) {
+            this.data.push(data[i]);
+        }
 
         this.onProgress = onProgress;
         this.onEnd = onEnd;
 
-        for(let item of this.data) {
-            let img = new Image();
-            img.src = this.basePath + item;
-            this.loaded[item] = img;
-        }
-
-        this.wait();
+        this.loadNext();
     }
-
-    wait() {
-        let itemsLoaded = 0;
-        let itemsTotal = 0;
-        for(let key in this.loaded) {
-            if(this.loaded[key].complete)	itemsLoaded++;
-            itemsTotal++;
-        }
-
-        if(itemsLoaded >= itemsTotal) {
+    
+    loadNext() {
+        if(!this.data.length) {
             if(this.onEnd) this.onEnd(this.loaded);
+            return;
         }
-        else {
-            if(this.onProgress) this.onProgress(Math.floor(itemsLoaded / itemsTotal));
-            setTimeout(() => this.wait(), 50);
-        }
+        
+        let item = this.data.pop();
+        
+        //TODO: cross browser
+        let xhr = new XMLHttpRequest();
+        let fd = new FormData();
+        xhr.open("POST", UPLOAD_URL, true);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let img = new Image();
+                img.src = xhr.responseText;
+                this.loaded[item.name] = img;
+                
+                img.onload = () => this.loadNext();
+            }
+        };
+        fd.append("image", item);
+        xhr.send(fd);
     }
 }
 
