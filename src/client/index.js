@@ -4,6 +4,7 @@ import packers from './packers';
 import exporters from './exporters';
 import TextureView from './utils/TextureView';
 import SpriteViewer from './utils/SpriteViewer';
+import Downloader from './utils/Downloader';
 
 window.addEventListener("load", start, false);
 
