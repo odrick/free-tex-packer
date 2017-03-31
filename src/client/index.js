@@ -141,21 +141,43 @@ function doExport() {
         if(exporterClass) {
             let exporter = new exporterClass();
 
+            let fileName = document.getElementById("fileName").value || "texture";
+
+            let files = [];
+
             let ix = 0;
             for(let item of currentResult) {
 
+                let fName = fileName + (currentResult.length > 1 ? "_" + ix : "");
+
+                let imageData = item.view.view.toDataURL();
+                let parts = imageData.split(",");
+                parts.shift();
+                imageData = parts.join(",");
+
+                files.push({
+                    name: fName + ".png",
+                    content: imageData,
+                    base64: true
+                });
+
                 let options = {
-                    imageName: "texture_" + ix + ".png",
+                    imageName: fName + ".png",
                     format: "RGBA8888",
                     imageWidth: item.view.width,
                     imageHeight: item.view.height,
                     scale: 1
                 };
 
-                console.log(exporter.run(item.data, options));
+                files.push({
+                    name: fName + "." + exporterClass.fileExt,
+                    content: exporter.run(item.data, options)
+                });
 
                 ix++;
             }
+
+            Downloader.run(files);
         }
     }
 }

@@ -9,6 +9,10 @@ class Exporter {
     run(data) {
 
     }
+
+    static get fileExt() {
+        return "txt";
+    }
 }
 
 export default Exporter;

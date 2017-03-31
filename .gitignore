@@ -5,5 +5,5 @@
 node_modules/*
 
 #temp files
-index.js
-index.js.map
+./index.js
+./index.js.map

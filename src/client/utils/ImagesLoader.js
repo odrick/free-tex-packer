@@ -1,10 +1,11 @@
-const UPLOAD_URL = "http://localhost:3000/upload";
+import appInfo from '../../../package.json';
 
 class ImagesLoader {
 
     constructor() {
         this.data = null;
         this.loaded = {};
+        this.loadedCnt = 0;
         
         this.onProgress = null;
         this.onEnd = null;
@@ -29,17 +30,24 @@ class ImagesLoader {
             return;
         }
         
-        let item = this.data.pop();
+        let item = this.data.shift();
         
         //TODO: cross browser
         let xhr = new XMLHttpRequest();
         let fd = new FormData();
-        xhr.open("POST", UPLOAD_URL, true);
+        xhr.open("POST", appInfo["image-proxy"], true);
         xhr.onreadystatechange = () => {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 let img = new Image();
                 img.src = xhr.responseText;
+
+                img._ix = this.loadedCnt;
                 this.loaded[item.name] = img;
+                this.loadedCnt++;
+
+                if(this.onProgress) {
+                    this.onProgress(this.loadedCnt / (this.loadedCnt + this.data.length));
+                }
                 
                 img.onload = () => this.loadNext();
             }

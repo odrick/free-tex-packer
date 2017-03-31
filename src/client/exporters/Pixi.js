@@ -39,7 +39,7 @@ class Pixi extends Exporter {
             meta: meta
         };
 
-        return res;
+        return JSON.stringify(res, null, 2);
     }
 
     static get type() {
@@ -48,6 +48,10 @@ class Pixi extends Exporter {
 
     static get description() {
         return "pixi.js format";
+    }
+
+    static get fileExt() {
+        return "json";
     }
 }
 

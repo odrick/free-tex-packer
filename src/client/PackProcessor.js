@@ -28,7 +28,8 @@ class PackProcessor {
                 spriteSourceSize: {x: 0, y: 0, w: img.width, h: img.height},
                 sourceSize: {w: img.width, h: img.height},
                 name: key,
-                image: img
+                image: img,
+                ix: img._ix
             });
         }
 

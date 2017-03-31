@@ -45,6 +45,7 @@ class SpriteViewer {
 
                 let tex = new PIXI.Texture(baseTexture, frame, orig, trim, config.rotated ? 2 : 0);
                 tex._name = config.name;
+                tex._ix = config.ix;
                 this.textures.push(tex);
             }
         }
@@ -123,6 +124,13 @@ class SpriteViewer {
             this.spriteView.visible = false;
         }
         else {
+
+            textures = textures.sort((a, b) => {
+                if(a._ix > b._ix) return 1;
+                if(a._ix < b._ix) return -1;
+                return 0;
+            });
+
             this.spriteView.visible = true;
             
             this.spriteView.textures = textures;

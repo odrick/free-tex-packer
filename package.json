@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Online textures packer",
   "url": "http://tex-packer.com/",
+  "image-proxy": "http://localhost/t-packer/server/image-proxy.php",
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --host 0.0.0.0 --port 4000 --content-base client/",
@@ -27,8 +28,6 @@
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-stage-0": "^6.22.0",
     "babel-runtime": "^6.23.0",
-    "express": "^4.15.2",
-    "express-fileupload": "^0.1.2",
     "glob": "^7.1.1",
     "json-loader": "^0.5.4",
     "optimist": "^0.6.1",
