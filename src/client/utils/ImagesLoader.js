@@ -35,7 +35,7 @@ class ImagesLoader {
         //TODO: cross browser
         let xhr = new XMLHttpRequest();
         let fd = new FormData();
-        xhr.open("POST", appInfo["image-proxy"], true);
+        xhr.open("POST", appInfo["base64-proxy"], true);
         xhr.onreadystatechange = () => {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 let img = new Image();
@@ -52,7 +52,7 @@ class ImagesLoader {
                 img.onload = () => this.loadNext();
             }
         };
-        fd.append("image", item);
+        fd.append("input_file", item);
         xhr.send(fd);
     }
 }

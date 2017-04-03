@@ -1,6 +1,3 @@
-import JSZip from "../bin/jszip.min";
-import saveSaver from "../bin/file_saver.js";
-
 class Downloader {
     
     static run(files) {
@@ -12,7 +9,7 @@ class Downloader {
         }
 
         zip.generateAsync({type:"blob"}).then((content) => {
-            saveSaver(content, "textures.zip");
+            saveAs(content, "textures.zip");
         });
     }
     

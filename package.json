@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "description": "Online textures packer",
   "url": "http://tex-packer.com/",
-  "image-proxy": "http://localhost/t-packer/server/image-proxy.php",
+  "base64-proxy": "http://localhost/t-packer/dist/utils/base64-proxy.php",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --host 0.0.0.0 --port 4000 --content-base client/",
+    "start": "webpack-dev-server --host 0.0.0.0 --port 4000 --content-base dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

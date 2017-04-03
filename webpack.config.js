@@ -6,7 +6,7 @@ module.exports = {
 		'./src/client/index',
         'webpack-dev-server/client?http://localhost:4000'
     ],
-    output: { filename: 'index.js' },
+    output: { filename: 'static/js/index.js' },
     debug: true,
     devtool: 'source-map',
     module: {
@@ -24,5 +24,5 @@ module.exports = {
         ],
         noParse: /.*[\/\\]bin[\/\\].+\.js/
     },
-    devServer: { contentBase: path.resolve(__dirname, "src") }
+    devServer: { contentBase: path.resolve(__dirname, "dist") }
 };

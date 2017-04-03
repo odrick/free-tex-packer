@@ -1,5 +1,3 @@
-import "../bin/pixi.min";
-
 class SpriteViewer {
 
     constructor(data) {
