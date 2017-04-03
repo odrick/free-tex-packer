@@ -33,29 +33,43 @@ class SpriteViewer {
         
         this.update = this.update.bind(this);
         
-        this.updateSprite();
-        
         this.updateTimer = null;
+        
+        this.update();
     }
     
     createDOM() {
         this.container = document.createElement("div");
         this.container.align = "center";
         this.container.style.background = "#ccc";
-        this.canvas = document.createElement("canvas");
 
         let text = document.createElement("span");
         text.innerHTML = "name pattern:";
         this.container.appendChild(text);
 
         this.patternInput = document.createElement("input");
-        this.patternInput.value = "dir1/";
-        this.patternInput.addEventListener("change", () => this.updateSprite());
+        this.patternInput.value = "";
+        this.patternInput.focus();
         this.container.appendChild(this.patternInput);
+        
+        let btn = document.createElement("button");
+        btn.innerHTML = "GO";
+        btn.addEventListener("click", () => this.updateSprite(), false);
+        this.container.appendChild(btn);
+        
         this.container.appendChild(document.createElement("br"));
 
+        this.canvas = document.createElement("canvas");
         this.container.appendChild(this.canvas);
 
+        this.buffer = document.createElement("canvas");
+        this.buffer.width = 1000;
+        this.buffer.height = 1000;
+        this.buffer.style.visibility = "hidden";
+        this.buffer.style.width = "1px";
+        this.buffer.style.height = "1px";
+        this.container.appendChild(this.buffer);
+        
         this.container.appendChild(document.createElement("br"));
 
         text = document.createElement("span");
@@ -63,16 +77,15 @@ class SpriteViewer {
         this.container.appendChild(text);
 
         this.speed = document.createElement("input");
-        this.speed.addEventListener("change", () => this.updateSprite());
         this.speed.type = "range";
         this.speed.min = 1;
         this.speed.max = 60;
-        this.speed.value = 2;
+        this.speed.value = 24;
         this.container.appendChild(this.speed);
 
         this.container.appendChild(document.createElement("br"));
         
-        let btn = document.createElement("button");
+        btn = document.createElement("button");
         btn.innerHTML = "CLOSE";
         btn.addEventListener("click", () => this.close(), false);
         this.container.appendChild(btn);
@@ -115,7 +128,7 @@ class SpriteViewer {
     
     render() {
         this.canvas.getContext("2d").clearRect(0, 0, this.width, this.height);
-        this.sprite.render(this.canvas, this.width/2, this.height/2);
+        this.sprite.render(this.canvas, this.buffer, this.width/2, this.height/2);
     }
 
     show(container=document.body) {
@@ -141,7 +154,6 @@ class Sprite {
     constructor() {
         this.currentFrame = 0;
         this.textures = [];
-        this.buffer = document.createElement("canvas");
     }
     
     gotoFrame(ix) {
@@ -163,16 +175,13 @@ class Sprite {
         }
     }
     
-    render(cns, x, y) {
+    render(cns, buffer, x, y) {
       
         let texture = this.textures[this.currentFrame];
         if(!texture) return;
         
-        this.buffer.width = texture.config.sourceSize.w;
-        this.buffer.height = texture.config.sourceSize.h;
-        
-        let bufferCtx = this.buffer.getContext("2d");
-        bufferCtx.clearRect(0, 0, this.buffer.width, this.buffer.height);
+        let bufferCtx = buffer.getContext("2d");
+        bufferCtx.clearRect(0, 0, texture.config.sourceSize.w, texture.config.sourceSize.h);
         
         if(texture.config.rotated) {
             bufferCtx.save();
@@ -196,11 +205,11 @@ class Sprite {
                 texture.config.spriteSourceSize.w, texture.config.spriteSourceSize.h);
         }
         
-        cns.getContext("2d").drawImage(this.buffer,
+        cns.getContext("2d").drawImage(buffer,
                                        0, 0,
-                                       this.buffer.width, this.buffer.height,
-                                       x - this.buffer.width/2, y - this.buffer.height/2,
-                                       this.buffer.width, this.buffer.height);
+                                       texture.config.sourceSize.w, texture.config.sourceSize.h,
+                                       x - texture.config.sourceSize.w/2, y - texture.config.sourceSize.h/2,
+                                       texture.config.sourceSize.w, texture.config.sourceSize.h);
     }
 }
 
