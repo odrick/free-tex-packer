@@ -3,6 +3,63 @@ import Trimmer from './utils/Trimmer';
 
 class PackProcessor {
 
+    static detectIdentical(rects) {
+
+        let identical = [];
+        
+        for(let i=0; i<rects.length; i++) {
+            let rect1 = rects[i];
+            for(let n=i+1; n<rects.length; n++) {
+                let rect2 = rects[n];
+                if(rect1.image._base64 == rect2.image._base64 && identical.indexOf(rect2) < 0) {
+                    rect2.identical = rect1;
+                    identical.push(rect2);
+                }
+            }
+        }
+        
+        for(let rect of identical) {
+            rects.splice(rects.indexOf(rect), 1);
+        }
+        
+        return {
+            rects: rects,
+            identical: identical
+        }
+    }
+    
+    static applyIdentical(rects, identical) {
+        let clones = [];
+        let removeIdentical = [];
+        
+        for(let item of identical) {
+            let ix = rects.indexOf(item.identical);
+            if(ix >= 0) {
+                let rect = rects[ix];
+                
+                let clone = Object.assign({}, rect);
+                
+                clone.name = item.name;
+                clone.image = item.image;
+                clone.ix = item.image._ix;
+                clone.skipRender = true;
+
+                removeIdentical.push(item);
+                clones.push(clone);
+            }
+        }
+
+        for(let item of removeIdentical) {
+            identical.splice(identical.indexOf(item), 1);
+        }
+        
+        for(let item of clones) {
+            rects.push(item);
+        }
+        
+        return rects;
+    }
+    
     static pack(images={}, options={}) {
 
         let rects = [];
@@ -51,6 +108,15 @@ class PackProcessor {
             item.frame.w += padding*2;
             item.frame.h += padding*2;
         }
+        
+        let identical = [];
+        
+        if(options.detectIdentical) {
+            let res = PackProcessor.detectIdentical(rects);
+
+            rects = res.rects;
+            identical = res.identical;
+        }
 
         let packerClass = options.packer || MaxRectsBinPack;
         let packerMethod = options.packerMethod || MaxRectsBinPack.methods.BestShortSideFit;
@@ -66,6 +132,10 @@ class PackProcessor {
                 item.frame.y += padding;
                 item.frame.w -= padding*2;
                 item.frame.h -= padding*2;
+            }
+
+            if(options.detectIdentical) {
+                result = PackProcessor.applyIdentical(result, identical);
             }
 
             res.push(result);

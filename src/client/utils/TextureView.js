@@ -51,30 +51,34 @@ class TextureView {
         ctx.clearRect(0, 0, width, height);
 
         for(let item of data) {
-            let img = item.image;
+            if(!item.skipRender) {
 
-            if(item.rotated) {
-                ctx.save();
-                ctx.translate(item.frame.x + item.frame.h, item.frame.y);
+                let img = item.image;
 
-                ctx.rotate(Math.PI/2);
-                ctx.drawImage(img,
-                              item.spriteSourceSize.x,
-                              item.spriteSourceSize.y,
-                              item.spriteSourceSize.w,
-                              item.spriteSourceSize.h,
-                              0, 0,
-                              item.frame.w, item.frame.h);
-                ctx.restore();
-            }
-            else {
-                ctx.drawImage(img,
-                              item.spriteSourceSize.x,
-                              item.spriteSourceSize.y,
-                              item.spriteSourceSize.w,
-                              item.spriteSourceSize.h,
-                              item.frame.x, item.frame.y,
-                              item.frame.w, item.frame.h);
+                if (item.rotated) {
+                    ctx.save();
+                    ctx.translate(item.frame.x + item.frame.h, item.frame.y);
+
+                    ctx.rotate(Math.PI / 2);
+                    ctx.drawImage(img,
+                        item.spriteSourceSize.x,
+                        item.spriteSourceSize.y,
+                        item.spriteSourceSize.w,
+                        item.spriteSourceSize.h,
+                        0, 0,
+                        item.frame.w, item.frame.h);
+                    ctx.restore();
+                }
+                else {
+                    ctx.drawImage(img,
+                        item.spriteSourceSize.x,
+                        item.spriteSourceSize.y,
+                        item.spriteSourceSize.w,
+                        item.spriteSourceSize.h,
+                        item.frame.x, item.frame.y,
+                        item.frame.w, item.frame.h);
+                }
+                
             }
         }
     }

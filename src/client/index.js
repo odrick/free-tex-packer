@@ -90,6 +90,7 @@ function pack() {
         padding: Number(document.getElementById("padding").value),
         allowRotation: document.getElementById("allowRotation").checked,
         allowTrim: document.getElementById("allowTrim").checked,
+        detectIdentical: document.getElementById("detectIdentical").checked,
         packer: null,
         packerMethod: document.getElementById("packerMethod").value
     };

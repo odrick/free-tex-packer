@@ -39,9 +39,11 @@ class ImagesLoader {
         xhr.onreadystatechange = () => {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 let img = new Image();
+                
                 img.src = xhr.responseText;
-
+                img._base64 = xhr.responseText;
                 img._ix = this.loadedCnt;
+                
                 this.loaded[item.name] = img;
                 this.loadedCnt++;
 
