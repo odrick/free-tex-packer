@@ -1,4 +1,5 @@
 import ImagesLoader from './utils/ImagesLoader';
+import ZipLoader from './utils/ZipLoader';
 import PackProcessor from './PackProcessor';
 import packers from './packers';
 import exporters from './exporters';
@@ -38,16 +39,7 @@ function start() {
     }
 
     document.getElementById("addImages").addEventListener("change", loadImages, false);
-
-    /*
-    let data = [];
-    for(let i=1; i<=24; i++) {
-        data.push(i + ".png");
-    }
-
-    let loader = new ImagesLoader("test_data");
-    loader.load(data, null, preloadComplete);
-    */
+    document.getElementById("addZip").addEventListener("change", loadZip, false);
 }
 
 function loadImages(e) {
@@ -57,9 +49,15 @@ function loadImages(e) {
 
 function loadImagesComplete(data) {
     document.getElementById("addImages").value = "";
+    document.getElementById("addZip").value = "";
     
     images = data;
     pack();
+}
+
+function loadZip(e) {
+    let loader = new ZipLoader();
+    loader.load(e.target.files[0], null, loadImagesComplete);
 }
 
 function showPackerMethods(type) {
