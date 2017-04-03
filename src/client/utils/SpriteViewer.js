@@ -8,7 +8,8 @@ class SpriteViewer {
 
         this.textures = [];
         
-        this.sprite = new Sprite();
+        this.currentTextures = [];
+        this.currentFrame = 0;
 
         this.width = 0;
         this.height = 0;
@@ -30,6 +31,8 @@ class SpriteViewer {
 
         this.canvas.width = this.width;
         this.canvas.height = this.height;
+        this.buffer.width = this.width;
+        this.buffer.height = this.height;
         
         this.update = this.update.bind(this);
         
@@ -54,7 +57,7 @@ class SpriteViewer {
         
         let btn = document.createElement("button");
         btn.innerHTML = "GO";
-        btn.addEventListener("click", () => this.updateSprite(), false);
+        btn.addEventListener("click", () => this.updateCurrentTextures(), false);
         this.container.appendChild(btn);
         
         this.container.appendChild(document.createElement("br"));
@@ -63,8 +66,6 @@ class SpriteViewer {
         this.container.appendChild(this.canvas);
 
         this.buffer = document.createElement("canvas");
-        this.buffer.width = 1000;
-        this.buffer.height = 1000;
         this.buffer.style.visibility = "hidden";
         this.buffer.style.width = "1px";
         this.buffer.style.height = "1px";
@@ -91,7 +92,7 @@ class SpriteViewer {
         this.container.appendChild(btn);
     }
 
-    updateSprite() {
+    updateCurrentTextures() {
         let textures = [];
         let pattern = this.patternInput.value;
         
@@ -112,77 +113,38 @@ class SpriteViewer {
             return 0;
         });
 
-        this.sprite.textures = textures;
-        this.sprite.gotoFrame(0);
+        this.currentTextures = textures;
+        this.currentFrame = 0;
         this.update(true);
     }
     
-    update(skipSpriteUpdate) {
-        clearInterval(this.updateTimer);
+    update(skipFrameUpdate) {
+        clearTimeout(this.updateTimer);
         
-        if(!skipSpriteUpdate) this.sprite.update();
+        if(!skipFrameUpdate){
+            this.currentFrame++;
+            if(this.currentFrame >= this.currentTextures.length) {
+                this.currentFrame = 0;
+            }
+        }
         this.render();
 
         this.updateTimer = setTimeout(this.update, 1000 / this.speed.value);
     }
     
     render() {
-        this.canvas.getContext("2d").clearRect(0, 0, this.width, this.height);
-        this.sprite.render(this.canvas, this.buffer, this.width/2, this.height/2);
-    }
-
-    show(container=document.body) {
-        this.container.style.position = "absolute";
-        this.container.style.left = "0px";
-        this.container.style.top = "0px";
-        container.appendChild(this.container);
-    }
-
-    close() {
-        clearInterval(this.updateTimer);
+        let ctx = this.canvas.getContext("2d");
         
-        if(this.container.parentNode) this.container.parentNode.removeChild(this.container);
-        else if(this.container.parentElement) this.container.parentElement.removeChild(this.container);
-        else {
-        }
-    }
+        ctx.clearRect(0, 0, this.width, this.height);
 
-}
-
-class Sprite {
-    
-    constructor() {
-        this.currentFrame = 0;
-        this.textures = [];
-    }
-    
-    gotoFrame(ix) {
-        if(!this.textures.length) {
-            this.currentFrame = 0;
-            return;
-        }
-        
-        this.currentFrame = Math.floor(ix);
-        if(this.currentFrame < 0 || this.currentFrame > this.textures.length) {
-            this.currentFrame = this.textures.length-1;
-        }
-    }
-    
-    update() {
-        this.currentFrame++;
-        if(this.currentFrame >= this.textures.length) {
-            this.currentFrame = 0;
-        }
-    }
-    
-    render(cns, buffer, x, y) {
-      
-        let texture = this.textures[this.currentFrame];
+        let texture = this.currentTextures[this.currentFrame];
         if(!texture) return;
-        
-        let bufferCtx = buffer.getContext("2d");
+
+        let bufferCtx = this.buffer.getContext("2d");
         bufferCtx.clearRect(0, 0, texture.config.sourceSize.w, texture.config.sourceSize.h);
         
+        let x = this.width/2, y = this.height/2;
+
         if(texture.config.rotated) {
             bufferCtx.save();
 
@@ -194,7 +156,7 @@ class Sprite {
                 texture.config.frame.h, texture.config.frame.w,
                 -texture.config.spriteSourceSize.h/2, -texture.config.spriteSourceSize.w/2,
                 texture.config.spriteSourceSize.h, texture.config.spriteSourceSize.w);
-            
+
             bufferCtx.restore();
         }
         else {
@@ -204,13 +166,30 @@ class Sprite {
                 texture.config.spriteSourceSize.x, texture.config.spriteSourceSize.y,
                 texture.config.spriteSourceSize.w, texture.config.spriteSourceSize.h);
         }
-        
-        cns.getContext("2d").drawImage(buffer,
-                                       0, 0,
-                                       texture.config.sourceSize.w, texture.config.sourceSize.h,
-                                       x - texture.config.sourceSize.w/2, y - texture.config.sourceSize.h/2,
-                                       texture.config.sourceSize.w, texture.config.sourceSize.h);
+
+        ctx.drawImage(this.buffer,
+                0, 0,
+                texture.config.sourceSize.w, texture.config.sourceSize.h,
+                x - texture.config.sourceSize.w/2, y - texture.config.sourceSize.h/2,
+                texture.config.sourceSize.w, texture.config.sourceSize.h);
     }
+
+    show(container=document.body) {
+        this.container.style.position = "absolute";
+        this.container.style.left = "0px";
+        this.container.style.top = "0px";
+        container.appendChild(this.container);
+    }
+
+    close() {
+        clearTimeout(this.updateTimer);
+        
+        if(this.container.parentNode) this.container.parentNode.removeChild(this.container);
+        else if(this.container.parentElement) this.container.parentElement.removeChild(this.container);
+        else {
+        }
+    }
+
 }
 
 export default SpriteViewer;

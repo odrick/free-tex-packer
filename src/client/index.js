@@ -1,4 +1,4 @@
-import ImagesLoader from './utils/ImagesLoader';
+import LocalImagesLoader from './utils/LocalImagesLoader';
 import ZipLoader from './utils/ZipLoader';
 import PackProcessor from './PackProcessor';
 import packers from './packers';
@@ -43,7 +43,7 @@ function start() {
 }
 
 function loadImages(e) {
-    let loader = new ImagesLoader();
+    let loader = new LocalImagesLoader();
     loader.load(e.target.files, null, loadImagesComplete);
 }
 
