@@ -6,62 +6,36 @@ class SpriteViewer {
         
         this.data = data;
 
-        this.baseTextures = [];
         this.textures = [];
+        
+        this.sprite = new Sprite();
 
         this.width = 0;
         this.height = 0;
 
         for(let part of data) {
-            let baseTexture = new PIXI.BaseTexture(part.view.view);
-            this.baseTextures.push(baseTexture);
+            let baseTexture = part.view.view;
 
             for(let config of part.data) {
-                let rect = config.frame;
-                let frame = null;
-                let trim = null;
-                let orig = new PIXI.Rectangle(0, 0, config.sourceSize.w, config.sourceSize.h);
-
+                
                 if(this.width < config.sourceSize.w) this.width = config.sourceSize.w;
                 if(this.height < config.sourceSize.h) this.height = config.sourceSize.h;
 
-                if (config.rotated) {
-                    frame = new PIXI.Rectangle(rect.x, rect.y, rect.h, rect.w);
-                }
-                else {
-                    frame = new PIXI.Rectangle(rect.x, rect.y, rect.w, rect.h);
-                }
-
-                if (config.trimmed) {
-                    trim = new PIXI.Rectangle(
-                        config.spriteSourceSize.x,
-                        config.spriteSourceSize.y,
-                        config.spriteSourceSize.w,
-                        config.spriteSourceSize.h
-                    );
-                }
-
-                let tex = new PIXI.Texture(baseTexture, frame, orig, trim, config.rotated ? 2 : 0);
-                tex._name = config.name;
-                tex._ix = config.ix;
-                this.textures.push(tex);
+                this.textures.push({
+                    config: config,
+                    baseTexture: baseTexture
+                });
             }
         }
 
         this.canvas.width = this.width;
         this.canvas.height = this.height;
-
-        this.app = new PIXI.Application(this.width, this.height, {backgroundColor : 0x000000, view: this.canvas});
-        let p = new PIXI.Container();
-        p.position.set(this.width/2, this.height/2);
-        this.app.stage.addChild(p);
-
-        this.spriteView = new PIXI.extras.AnimatedSprite([PIXI.Texture.EMPTY]);
-        this.spriteView.anchor.set(0.5);
-
-        p.addChild(this.spriteView);
-
+        
+        this.update = this.update.bind(this);
+        
         this.updateSprite();
+        
+        this.updateTimer = null;
     }
     
     createDOM() {
@@ -75,6 +49,7 @@ class SpriteViewer {
         this.container.appendChild(text);
 
         this.patternInput = document.createElement("input");
+        this.patternInput.value = "dir1/";
         this.patternInput.addEventListener("change", () => this.updateSprite());
         this.container.appendChild(this.patternInput);
         this.container.appendChild(document.createElement("br"));
@@ -92,7 +67,7 @@ class SpriteViewer {
         this.speed.type = "range";
         this.speed.min = 1;
         this.speed.max = 60;
-        this.speed.value = 24;
+        this.speed.value = 2;
         this.container.appendChild(this.speed);
 
         this.container.appendChild(document.createElement("br"));
@@ -109,7 +84,7 @@ class SpriteViewer {
         
         for(let tex of this.textures) {
             if(pattern.length > 0) {
-                if(tex._name.substr(0, pattern.length) == pattern) {
+                if(tex.config.name.substr(0, pattern.length) == pattern) {
                     textures.push(tex);
                 }
             }
@@ -118,24 +93,29 @@ class SpriteViewer {
             }
         }
         
-        if(!textures.length) {
-            this.spriteView.visible = false;
-        }
-        else {
+        textures = textures.sort((a, b) => {
+            if(a.config.ix > b.config.ix) return 1;
+            if(a.config.ix < b.config.ix) return -1;
+            return 0;
+        });
 
-            textures = textures.sort((a, b) => {
-                if(a._ix > b._ix) return 1;
-                if(a._ix < b._ix) return -1;
-                return 0;
-            });
+        this.sprite.textures = textures;
+        this.sprite.gotoFrame(0);
+        this.update(true);
+    }
+    
+    update(skipSpriteUpdate) {
+        clearInterval(this.updateTimer);
+        
+        if(!skipSpriteUpdate) this.sprite.update();
+        this.render();
 
-            this.spriteView.visible = true;
-            
-            this.spriteView.textures = textures;
-
-            this.spriteView.animationSpeed = this.speed.value / 60;
-            this.spriteView.gotoAndPlay(0);
-        }
+        this.updateTimer = setTimeout(this.update, 1000 / this.speed.value);
+    }
+    
+    render() {
+        this.canvas.getContext("2d").clearRect(0, 0, this.width, this.height);
+        this.sprite.render(this.canvas, this.width/2, this.height/2);
     }
 
     show(container=document.body) {
@@ -143,11 +123,10 @@ class SpriteViewer {
         this.container.style.left = "0px";
         this.container.style.top = "0px";
         container.appendChild(this.container);
-
     }
 
     close() {
-        this.app.stop();
+        clearInterval(this.updateTimer);
         
         if(this.container.parentNode) this.container.parentNode.removeChild(this.container);
         else if(this.container.parentElement) this.container.parentElement.removeChild(this.container);
@@ -155,6 +134,74 @@ class SpriteViewer {
         }
     }
 
+}
+
+class Sprite {
+    
+    constructor() {
+        this.currentFrame = 0;
+        this.textures = [];
+        this.buffer = document.createElement("canvas");
+    }
+    
+    gotoFrame(ix) {
+        if(!this.textures.length) {
+            this.currentFrame = 0;
+            return;
+        }
+        
+        this.currentFrame = Math.floor(ix);
+        if(this.currentFrame < 0 || this.currentFrame > this.textures.length) {
+            this.currentFrame = this.textures.length-1;
+        }
+    }
+    
+    update() {
+        this.currentFrame++;
+        if(this.currentFrame >= this.textures.length) {
+            this.currentFrame = 0;
+        }
+    }
+    
+    render(cns, x, y) {
+      
+        let texture = this.textures[this.currentFrame];
+        if(!texture) return;
+        
+        this.buffer.width = texture.config.sourceSize.w;
+        this.buffer.height = texture.config.sourceSize.h;
+        
+        let bufferCtx = this.buffer.getContext("2d");
+        bufferCtx.clearRect(0, 0, this.buffer.width, this.buffer.height);
+        
+        if(texture.config.rotated) {
+            bufferCtx.save();
+
+            bufferCtx.translate(texture.config.spriteSourceSize.x + texture.config.spriteSourceSize.w/2, texture.config.spriteSourceSize.y + texture.config.spriteSourceSize.h/2);
+            bufferCtx.rotate(-Math.PI/2);
+
+            bufferCtx.drawImage(texture.baseTexture,
+                texture.config.frame.x, texture.config.frame.y,
+                texture.config.frame.h, texture.config.frame.w,
+                -texture.config.spriteSourceSize.h/2, -texture.config.spriteSourceSize.w/2,
+                texture.config.spriteSourceSize.h, texture.config.spriteSourceSize.w);
+            
+            bufferCtx.restore();
+        }
+        else {
+            bufferCtx.drawImage(texture.baseTexture,
+                texture.config.frame.x, texture.config.frame.y,
+                texture.config.frame.w, texture.config.frame.h,
+                texture.config.spriteSourceSize.x, texture.config.spriteSourceSize.y,
+                texture.config.spriteSourceSize.w, texture.config.spriteSourceSize.h);
+        }
+        
+        cns.getContext("2d").drawImage(this.buffer,
+                                       0, 0,
+                                       this.buffer.width, this.buffer.height,
+                                       x - this.buffer.width/2, y - this.buffer.height/2,
+                                       this.buffer.width, this.buffer.height);
+    }
 }
 
 export default SpriteViewer;
