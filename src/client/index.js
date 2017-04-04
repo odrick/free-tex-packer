@@ -147,7 +147,7 @@ function doExport() {
             let ix = 0;
             for(let item of currentResult) {
 
-                let fName = fileName + (currentResult.length > 1 ? "_" + ix : "");
+                let fName = fileName + (currentResult.length > 1 ? "-" + ix : "");
 
                 let imageData = item.view.view.toDataURL();
                 let parts = imageData.split(",");
@@ -165,6 +165,7 @@ function doExport() {
                     format: "RGBA8888",
                     imageWidth: item.view.width,
                     imageHeight: item.view.height,
+                    removeFileExtension: true,
                     scale: 1
                 };
 

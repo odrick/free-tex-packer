@@ -7,23 +7,19 @@ class Pixi extends Exporter {
     }
 
     run(data, options) {
-        let scale = options.scale || 1;
+        
+        let rects = this.prepare(data, options);
 
         let frames = {};
         let meta = {};
 
-        for(let item of data) {
-
-            let frame = {x: item.frame.x/scale, y: item.frame.y/scale, w: item.frame.w/scale, h: item.frame.h/scale};
-            let spriteSourceSize = {x: item.spriteSourceSize.x/scale, y: item.spriteSourceSize.y/scale, w: item.spriteSourceSize.w/scale, h: item.spriteSourceSize.h/scale};
-            let sourceSize = {w: item.sourceSize.w/scale, h: item.sourceSize.h/scale};
-
+        for(let item of rects) {
             frames[item.name] = {
-                frame: frame,
+                frame: item.frame,
                 rotated: item.rotated,
                 trimmed: item.trimmed,
-                spriteSourceSize: spriteSourceSize,
-                sourceSize: sourceSize
+                spriteSourceSize: item.spriteSourceSize,
+                sourceSize: item.sourceSize
             };
         }
 
@@ -32,7 +28,7 @@ class Pixi extends Exporter {
         meta.image = options.imageName || "texture.png";
         meta.format = options.format || "RGBA8888";
         meta.size = {w: options.imageWidth, h: options.imageHeight};
-        meta.scale = scale;
+        meta.scale = options.scale || 1;
 
         let res = {
             frames: frames,
