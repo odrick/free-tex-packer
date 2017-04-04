@@ -5,6 +5,7 @@ import Css from './Css';
 import Pixi from './Pixi';
 import PhaserHash from './PhaserHash';
 import PhaserArray from './PhaserArray';
+import Cocos2d from './Cocos2d';
 
 export default [
     JsonHash,
@@ -13,5 +14,6 @@ export default [
     Css,
     Pixi,
     PhaserHash,
-    PhaserArray
+    PhaserArray,
+    Cocos2d
 ];

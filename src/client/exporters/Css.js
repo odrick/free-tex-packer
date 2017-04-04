@@ -15,11 +15,9 @@ class Css extends Exporter {
     }
 
     run(data, options) {
-        let rects = this.prepare(data, options);
-
-        options.removeFileExtension = true;
+        let {rects, config} = this.prepare(data, options);
         
-        let image = options.imageName || "texture.png";
+        let image = config.imageName || "texture.png";
         
         let frames = [];
 

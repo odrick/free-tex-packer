@@ -1,5 +1,7 @@
 import appInfo from '../../../package.json';
 
+let prettyData = require('pretty-data').pd;
+
 class Exporter {
 
     constructor() {
@@ -11,6 +13,12 @@ class Exporter {
     }
     
     prepare(data, options) {
+
+        let opt = Object.assign({}, options);
+
+        opt.imageName = opt.imageName || "texture.png";
+        opt.format = opt.format || "RGBA8888";
+        opt.scale = opt.scale || 1;
         
         let ret = [];
         let scale = options.scale || 1;
@@ -48,7 +56,7 @@ class Exporter {
             
         }
         
-        return ret;
+        return {rects: ret, config: opt};
     }
     
     createXML(rootString) {
@@ -72,11 +80,14 @@ class Exporter {
         return xml;
     }
     
-    getXMLString(xml) {
+    getXMLString(xml, additionalHeader="") {
         let str = '<?xml version="1.0" encoding="UTF-8"?>' + "\n";
+        if(additionalHeader) {
+            str += additionalHeader + "\n";
+        }
         str += (new XMLSerializer()).serializeToString(xml)
         
-        return str;
+        return prettyData.xml(str);
     }
 
     static get fileExt() {

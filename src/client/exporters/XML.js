@@ -3,12 +3,19 @@ import Exporter from './Exporter';
 class XML extends Exporter {
     run(data, options) {
 
-        let rects = this.prepare(data, options);
+        let {rects, config} = this.prepare(data, options);
 
         let xml = this.createXML("<TextureAtlas></TextureAtlas>");
+
+        xml.documentElement.setAttribute("imagePath", config.imageName);
+        xml.documentElement.setAttribute("width", config.imageWidth);
+        xml.documentElement.setAttribute("height", config.imageWidth);
+        xml.documentElement.setAttribute("scale", config.scale);
+        xml.documentElement.setAttribute("format", config.format);
         
         let info = [];
-        info.push(" Created with " + this.appInfo.name + " v" + this.appInfo.version + " " + this.appInfo.url + " ");
+        info.push("");
+        info.push("Created with " + this.appInfo.name + " v" + this.appInfo.version + " " + this.appInfo.url);
         info.push("Format:");
         info.push("n  => name");
         info.push("x  => x pos");
@@ -49,8 +56,6 @@ class XML extends Exporter {
 
             xml.documentElement.append(node);
         }
-        
-        console.log(xml);
         
         return this.getXMLString(xml);
     }

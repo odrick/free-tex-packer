@@ -30,6 +30,7 @@
     "json-loader": "^0.5.4",
     "optimist": "^0.6.1",
     "prettify": "^0.1.7",
+    "pretty-data": "^0.40.0",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   }
