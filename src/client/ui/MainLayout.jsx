@@ -1,12 +1,16 @@
 import React from 'react';
 
 class MainLayout extends React.Component {
-    constructor(config) {
+    constructor() {
         super();
     }
     
     render() {
-        return <h1>Hello</h1>
+        return (
+            <div>
+                <h1>T-Packer</h1>
+            </div>
+        );
     }
 }
 

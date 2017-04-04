@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
     entry: [
@@ -32,5 +33,10 @@ module.exports = {
         ],
         noParse: /.*[\/\\]bin[\/\\].+\.js/
     },
-    devServer: { contentBase: path.resolve(__dirname, "dist") }
+    devServer: { contentBase: path.resolve(__dirname, "dist") },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': '"development"'
+        })
+    ]
 };
