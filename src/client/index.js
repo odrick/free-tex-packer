@@ -18,7 +18,7 @@ let images = null;
 let currentResult = null;
 
 function start() {
-    ReactDOM.render(React.createElement(MainLayout, {a: 1, b: 2}, "a", "b", "c"), document.getElementById("react"));
+    ReactDOM.render(React.createElement(MainLayout), document.getElementById("main"));
     
     document.getElementById("start").addEventListener("click", pack, false);
     document.getElementById("export").addEventListener("click", doExport, false);
