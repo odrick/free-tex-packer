@@ -1,6 +1,6 @@
-import Exporter from './Exporter';
+import XML from './XML';
 
-class Cocos2d extends Exporter {
+class Cocos2d extends XML {
     
     constructor() {
         super();
@@ -55,8 +55,6 @@ class Cocos2d extends Exporter {
         this.addValue(xml, metaDict, "realTextureFileName", "string", config.imageName);
         this.addValue(xml, metaDict, "size", "string", "{"+config.imageWidth+","+config.imageHeight+"}");
         this.addValue(xml, metaDict, "textureFileName", "string", config.imageName);
-        
-        console.log(xml);
 
         let header = '<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">';
         return this.getXMLString(xml, header);

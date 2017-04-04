@@ -1,5 +1,7 @@
 import Exporter from './Exporter';
 
+const prettyData = require('pretty-data').pd;
+
 class XML extends Exporter {
     run(data, options) {
 
@@ -58,6 +60,37 @@ class XML extends Exporter {
         }
         
         return this.getXMLString(xml);
+    }
+
+    createXML(rootString) {
+        let xml = null;
+
+        if (typeof window.DOMParser != "undefined")
+        {
+            xml = (new window.DOMParser()).parseFromString(rootString, "text/xml");
+        }
+        else if (typeof window.ActiveXObject != "undefined" && new window.ActiveXObject("Microsoft.XMLDOM"))
+        {
+            xml = new window.ActiveXObject("Microsoft.XMLDOM");
+            xml.async = "false";
+            xml.loadXML(rootString);
+        }
+        else
+        {
+            throw new Error("No XML parser found");
+        }
+
+        return xml;
+    }
+
+    getXMLString(xml, additionalHeader="") {
+        let str = '<?xml version="1.0" encoding="UTF-8"?>' + "\n";
+        if(additionalHeader) {
+            str += additionalHeader + "\n";
+        }
+        str += (new XMLSerializer()).serializeToString(xml);
+
+        return prettyData.xml(str);
     }
 
     static get type() {
