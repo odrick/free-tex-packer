@@ -1,21 +1,21 @@
 import Json from './Json';
 
-class Pixi extends Json {
+class PhaserHash extends Json {
 
     constructor() {
         super();
     }
 
     run(data, options) {
-        return super.run(data, options);
+        return super.run(data, options, {addPivot: true});
     }
 
     static get type() {
-        return "pixi.js";
+        return "Phaser (hash)";
     }
 
     static get description() {
-        return "pixi.js format";
+        return "Phaser (json hash)";
     }
 
     static get fileExt() {
@@ -23,4 +23,4 @@ class Pixi extends Json {
     }
 }
 
-export default Pixi;
+export default PhaserHash;

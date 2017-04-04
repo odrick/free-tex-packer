@@ -1,21 +1,21 @@
 import Json from './Json';
 
-class Pixi extends Json {
+class JsonHash extends Json {
 
     constructor() {
         super();
     }
 
     run(data, options) {
-        return super.run(data, options);
+        return super.run(data, options, {addPivot: true});
     }
 
     static get type() {
-        return "pixi.js";
+        return "JSON hash";
     }
 
     static get description() {
-        return "pixi.js format";
+        return "Json hash";
     }
 
     static get fileExt() {
@@ -23,4 +23,4 @@ class Pixi extends Json {
     }
 }
 
-export default Pixi;
+export default JsonHash;

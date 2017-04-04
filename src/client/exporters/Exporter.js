@@ -50,6 +50,34 @@ class Exporter {
         
         return ret;
     }
+    
+    createXML(rootString) {
+        let xml = null;
+
+        if (typeof window.DOMParser != "undefined")
+        {
+            xml = (new window.DOMParser()).parseFromString(rootString, "text/xml");
+        }
+        else if (typeof window.ActiveXObject != "undefined" && new window.ActiveXObject("Microsoft.XMLDOM"))
+        {
+            xml = new window.ActiveXObject("Microsoft.XMLDOM");
+            xml.async = "false";
+            xml.loadXML(rootString);
+        }
+        else
+        {
+            throw new Error("No XML parser found");
+        }
+
+        return xml;
+    }
+    
+    getXMLString(xml) {
+        let str = '<?xml version="1.0" encoding="UTF-8"?>' + "\n";
+        str += (new XMLSerializer()).serializeToString(xml)
+        
+        return str;
+    }
 
     static get fileExt() {
         return "txt";
