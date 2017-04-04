@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import LocalImagesLoader from './utils/LocalImagesLoader';
 import ZipLoader from './utils/ZipLoader';
 import PackProcessor from './PackProcessor';
@@ -7,12 +10,16 @@ import TextureView from './utils/TextureView';
 import SpriteViewer from './utils/SpriteViewer';
 import Downloader from './utils/Downloader';
 
+import MainLayout from './ui/MainLayout.jsx';
+
 window.addEventListener("load", start, false);
 
 let images = null;
 let currentResult = null;
 
 function start() {
+    ReactDOM.render(React.createElement(MainLayout, {a: 1, b: 2}, "a", "b", "c"), document.getElementById("react"));
+    
     document.getElementById("start").addEventListener("click", pack, false);
     document.getElementById("export").addEventListener("click", doExport, false);
     document.getElementById("showSprites").addEventListener("click", showSprites, false);

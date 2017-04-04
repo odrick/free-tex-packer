@@ -31,7 +31,12 @@
     "optimist": "^0.6.1",
     "prettify": "^0.1.7",
     "pretty-data": "^0.40.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
+  },
+  "devDependencies": {
+    "babel-preset-react": "^6.23.0"
   }
 }
