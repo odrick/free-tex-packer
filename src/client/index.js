@@ -1,6 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import MainLayout from './ui/MainLayout.jsx';
+
+window.addEventListener("load", start, false);
+
+function start() {
+    ReactDOM.render(React.createElement(MainLayout), document.getElementById("main"));
+}
+
+/*
 import LocalImagesLoader from './utils/LocalImagesLoader';
 import ZipLoader from './utils/ZipLoader';
 import PackProcessor from './PackProcessor';
@@ -9,10 +18,6 @@ import exporters from './exporters';
 import TextureView from './utils/TextureView';
 import SpriteViewer from './utils/SpriteViewer';
 import Downloader from './utils/Downloader';
-
-import MainLayout from './ui/MainLayout.jsx';
-
-window.addEventListener("load", start, false);
 
 let images = null;
 let currentResult = null;
@@ -195,3 +200,4 @@ function showSprites() {
         viewer.show();
     }
 }
+*/
