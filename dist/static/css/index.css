@@ -42,6 +42,7 @@ html, body {
     height: 100%;
     float: right;
     background: #eee;
+    overflow-y: auto;
 }
 
 .images-controllers {
@@ -137,4 +138,17 @@ html, body {
 
 .pack-properties-containter td {
     font-weight: bold;
+    padding: 2px;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.pack-properties-containter td > input[type=text],
+.pack-properties-containter td > select {
+    width: 100%
+}
+
+.pack-properties-containter td > input,
+.pack-properties-containter td > select {
+    border: 1px solid #999;
 }

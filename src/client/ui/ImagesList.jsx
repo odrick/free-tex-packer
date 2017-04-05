@@ -14,14 +14,10 @@ class ImagesList extends React.Component {
         this.addImages = this.addImages.bind(this);
         this.addZip = this.addZip.bind(this);
         this.clear = this.clear.bind(this);
+
+        this.state = {images: {}};
     }
 
-    componentDidMount() {
-        this.setState({
-            images: {}
-        });
-    }
-    
     addImages(e) {
         let loader = new LocalImagesLoader();
         //TODO: show load progress
@@ -98,11 +94,8 @@ class ImagesList extends React.Component {
     
     render() {
 
-        let data = null;
-        if(this.state) {
-            data = this.getImagesTree(this.state.images);
-        }
-        
+        let data = this.getImagesTree(this.state.images);
+
         return (
             <div className="images-list">
                 
@@ -141,12 +134,12 @@ class TreePart extends React.Component {
     
     render() {
         if(!this.props.data || !this.props.data.items.length) {
-            return (<span></span>);
+            return (<span>&nbsp;</span>);
         }
         
         return (
             <div>
-                {this.props.data.items.map((item, i) => {
+                {this.props.data.items.map((item) => {
                     
                     if(item.isFolder) {
                         return (
@@ -176,7 +169,7 @@ class TreeItem extends React.Component {
         Observer.on(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onOtherSelected, this);
     }
 
-    onOtherSelected(e) {
+    onOtherSelected() {
         if(this.selected) {
             this.refs.container.style.background = "";
             this.selected = false;
