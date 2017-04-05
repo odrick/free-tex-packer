@@ -12,11 +12,7 @@ class MainLayout extends React.Component {
         return (
             <div className="main-layout">
                 <ImagesList/>
-
-                <div className="props-list">
-                    <PackProperties/>
-                </div>
-
+                <PackProperties/>
                 <div className="result-view"></div>
             </div>
         );
