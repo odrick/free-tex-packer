@@ -126,3 +126,15 @@ html, body {
     filter: alpha(opacity=0);
     cursor: pointer;
 }
+
+.center-align {
+    text-align: center;
+}
+
+.pack-properties-containter {
+    padding: 8px;
+}
+
+.pack-properties-containter td {
+    font-weight: bold;
+}

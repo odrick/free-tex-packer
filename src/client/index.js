@@ -49,27 +49,6 @@ function start() {
         option.innerHTML = exporter.type;
         exporterSelect.appendChild(option);
     }
-
-    document.getElementById("addImages").addEventListener("change", loadImages, false);
-    document.getElementById("addZip").addEventListener("change", loadZip, false);
-}
-
-function loadImages(e) {
-    let loader = new LocalImagesLoader();
-    loader.load(e.target.files, null, loadImagesComplete);
-}
-
-function loadImagesComplete(data) {
-    document.getElementById("addImages").value = "";
-    document.getElementById("addZip").value = "";
-    
-    images = data;
-    pack();
-}
-
-function loadZip(e) {
-    let loader = new ZipLoader();
-    loader.load(e.target.files[0], null, loadImagesComplete);
 }
 
 function showPackerMethods(type) {

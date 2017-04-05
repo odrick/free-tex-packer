@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ImagesList from './ImagesList.jsx';
-import TempLayout from './TempLayout.jsx';
+import PackProperties from './PackProperties.jsx';
 
 class MainLayout extends React.Component {
     constructor() {
@@ -14,7 +14,7 @@ class MainLayout extends React.Component {
                 <ImagesList/>
 
                 <div className="props-list">
-                    <TempLayout/>
+                    <PackProperties/>
                 </div>
 
                 <div className="result-view"></div>
