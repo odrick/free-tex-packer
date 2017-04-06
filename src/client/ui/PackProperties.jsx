@@ -64,8 +64,6 @@ class PackProperties extends React.Component {
 
     render() {
         
-        //TODO: remove test defaults
-        
         return (
             <div className="props-list">
                 <div className="pack-properties-containter">
@@ -84,7 +82,7 @@ class PackProperties extends React.Component {
                                 <td><input ref="scale" type="number" min="1" defaultValue="1" onBlur={this.onExporterPropChanged}/></td>
                             </tr>
                             <tr>
-                                <td>export to</td>
+                                <td>format</td>
                                 <td>
                                     <select ref="exporter" onChange={this.onExporterPropChanged}>
                                     {exporters.map(node => {
@@ -105,11 +103,11 @@ class PackProperties extends React.Component {
                             
                             <tr>
                                 <td>width</td>
-                                <td><input ref="width" type="number" min="0" defaultValue="300" onBlur={this.onPropChanged}/></td>
+                                <td><input ref="width" type="number" min="0" defaultValue="256" onBlur={this.onPropChanged}/></td>
                             </tr>
                             <tr>
                                 <td>height</td>
-                                <td><input ref="height" type="number" min="0" defaultValue="300" onBlur={this.onPropChanged}/></td>
+                                <td><input ref="height" type="number" min="0" defaultValue="256" onBlur={this.onPropChanged}/></td>
                             </tr>
                             <tr>
                                 <td>fixed size</td>
@@ -121,15 +119,15 @@ class PackProperties extends React.Component {
                             </tr>
                             <tr>
                                 <td>allow rotation</td>
-                                <td><input ref="allowRotation" type="checkbox" onChange={this.onPropChanged}/></td>
+                                <td><input ref="allowRotation" type="checkbox" onChange={this.onPropChanged} defaultChecked="checked" /></td>
                             </tr>
                             <tr>
                                 <td>allow trim</td>
-                                <td><input ref="allowTrim" type="checkbox" onChange={this.onPropChanged}/></td>
+                                <td><input ref="allowTrim" type="checkbox" onChange={this.onPropChanged} defaultChecked="checked"/></td>
                             </tr>
                             <tr>
                                 <td>detect identical</td>
-                                <td><input ref="detectIdentical" type="checkbox" onChange={this.onPropChanged}/></td>
+                                <td><input ref="detectIdentical" type="checkbox" onChange={this.onPropChanged} defaultChecked="checked"/></td>
                             </tr>
                             <tr>
                                 <td>packer</td>

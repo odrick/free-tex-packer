@@ -51,9 +51,10 @@ class ImagesList extends React.Component {
 
     clear() {
         //TODO: prompt
-        this.setState({images: {}});
         Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, {});
+        Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, null);
         LAST_TREE_ITEM_SELECTED = null;
+        this.setState({images: {}});
     }
     
     createImagesFolder(name, path) {
@@ -178,7 +179,7 @@ class TreeItem extends React.Component {
     constructor(props) {
         super(props);
         
-        this.selected = LAST_TREE_ITEM_SELECTED && LAST_TREE_ITEM_SELECTED == this.props.data;
+        this.selected = LAST_TREE_ITEM_SELECTED == this.props.data.path;
         
         this.onSelect = this.onSelect.bind(this);
         Observer.on(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onOtherSelected, this);
@@ -187,19 +188,28 @@ class TreeItem extends React.Component {
     componentDidMount() {
         this.updateView();
     }
+
+    componentWillUnmount() {
+        Observer.off(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onOtherSelected, this);
+    }
     
-    onOtherSelected(e) {
-        if(e != this.props.data) {
-            this.selected = false;
-            this.updateView();
-        }
+    onOtherSelected(path) {
+        this.selected = path == this.props.data.path;
+        this.updateView();
     }
     
     onSelect() {
-        this.selected = !this.selected;
-        LAST_TREE_ITEM_SELECTED = this.selected ? this.props.data : null;
-        this.updateView();
+        LAST_TREE_ITEM_SELECTED = !this.selected ? this.props.data.path : null;
         Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, LAST_TREE_ITEM_SELECTED);
+        
+        /*
+        this.updateView();
+        
+        if(newSelection != LAST_TREE_ITEM_SELECTED) {
+            LAST_TREE_ITEM_SELECTED = newSelection;
+            Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, LAST_TREE_ITEM_SELECTED);
+        }
+        */
     }
     
     updateView() {

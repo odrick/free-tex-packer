@@ -152,8 +152,8 @@ html, body {
 }
 
 .results-view-container {
-    height: calc(100% - 30px);
-    background: #fff;
+    height: calc(100% - 40px);
+    background: #333;
     overflow: auto;
 }
 
@@ -161,7 +161,7 @@ html, body {
     display: block;
     border-top: 1px solid #999;
     background: #eee;
-    height: 30px;
+    height: 38px;
     box-sizing: border-box;
     padding: 8px;
     text-align: center;
@@ -170,24 +170,41 @@ html, body {
 
 .texture-view {
     display: inline-block;
-    margin: 4px;
+    margin-left: 8px;
+    margin-top: 8px;
     float: left;
 }
 
-canvas.white-back {
+.white-back {
     background: #fff;
 }
 
-canvas.gray-back {
+.pink-back {
+    background: #f0f;
+}
+
+.gray-back {
     background: #ccc;
 }
 
-canvas.black-back {
+.black-back {
     background: #000;
 }
 
-canvas.grid-back {
+.grid-back {
     background: url("../images/grid.png");
+}
+
+.results-view-footer > .btn {
+    margin-bottom: 6px;
+    margin-right: 8px;
+    width: 4px;
+    height: 4px;
+}
+
+.results-view-footer > .btn.selected {
+    border-color: #999;
+    border-width: 2px;
 }
 
 .center-align {
