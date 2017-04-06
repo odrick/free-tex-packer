@@ -7,6 +7,8 @@ import ZipLoader from '../utils/ZipLoader';
 
 import {Observer, GLOBAL_EVENT} from '../Observer';
 
+let LAST_TREE_ITEM_SELECTED = null;
+
 class ImagesList extends React.Component {
     constructor(props) {
         super(props);
@@ -51,6 +53,7 @@ class ImagesList extends React.Component {
         //TODO: prompt
         this.setState({images: {}});
         Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, {});
+        LAST_TREE_ITEM_SELECTED = null;
     }
     
     createImagesFolder(name, path) {
@@ -175,25 +178,34 @@ class TreeItem extends React.Component {
     constructor(props) {
         super(props);
         
-        this.selected = false;
+        this.selected = LAST_TREE_ITEM_SELECTED && LAST_TREE_ITEM_SELECTED == this.props.data;
         
         this.onSelect = this.onSelect.bind(this);
         Observer.on(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onOtherSelected, this);
     }
 
-    onOtherSelected() {
-        if(this.selected) {
-            let node = ReactDOM.findDOMNode(this.refs.container);
-            if(node) node.style.background = "";
+    componentDidMount() {
+        this.updateView();
+    }
+    
+    onOtherSelected(e) {
+        if(e != this.props.data) {
             this.selected = false;
+            this.updateView();
         }
     }
     
     onSelect() {
-        if(!this.selected) {
-            Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.props.data);
-            this.selected = true;
-            ReactDOM.findDOMNode(this.refs.container).style.background = "#ccc";
+        this.selected = !this.selected;
+        LAST_TREE_ITEM_SELECTED = this.selected ? this.props.data : null;
+        this.updateView();
+        Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, LAST_TREE_ITEM_SELECTED);
+    }
+    
+    updateView() {
+        let node = ReactDOM.findDOMNode(this.refs.container);
+        if(node) {
+            node.style.background = this.selected ? "#ccc" : "";
         }
     }
     

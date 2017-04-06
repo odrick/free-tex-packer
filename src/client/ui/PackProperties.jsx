@@ -27,6 +27,7 @@ class PackProperties extends React.Component {
         return {
             fileName: ReactDOM.findDOMNode(this.refs.fileName).value || "texture",
             removeFileExtension: ReactDOM.findDOMNode(this.refs.removeFileExtension).checked,
+            scale: Number(ReactDOM.findDOMNode(this.refs.scale).value) || 1,
             exporter: getExporterByType(ReactDOM.findDOMNode(this.refs.exporter).value),
             width: Number(ReactDOM.findDOMNode(this.refs.width).value) || 0,
             height: Number(ReactDOM.findDOMNode(this.refs.height).value) || 0,
@@ -56,9 +57,15 @@ class PackProperties extends React.Component {
     onExporterPropChanged() {
         Observer.emit(GLOBAL_EVENT.PACK_EXPORTER_CHANGED, this.getPackOptions());
     }
+    
+    startExport() {
+        Observer.emit(GLOBAL_EVENT.START_EXPORT);
+    }
 
     render() {
-
+        
+        //TODO: remove test defaults
+        
         return (
             <div className="props-list">
                 <div className="pack-properties-containter">
@@ -73,6 +80,10 @@ class PackProperties extends React.Component {
                                 <td><input ref="removeFileExtension" type="checkbox" onChange={this.onExporterPropChanged} /></td>
                             </tr>
                             <tr>
+                                <td>scale</td>
+                                <td><input ref="scale" type="number" min="1" defaultValue="1" onBlur={this.onExporterPropChanged}/></td>
+                            </tr>
+                            <tr>
                                 <td>export to</td>
                                 <td>
                                     <select ref="exporter" onChange={this.onExporterPropChanged}>
@@ -84,7 +95,7 @@ class PackProperties extends React.Component {
                             </tr>
                             <tr>
                                 <td colSpan="2" className="center-align">
-                                    <div className="btn">Export</div>
+                                    <div className="btn" onClick={this.startExport}>Export</div>
                                 </td>
                             </tr>
                             
@@ -94,11 +105,11 @@ class PackProperties extends React.Component {
                             
                             <tr>
                                 <td>width</td>
-                                <td><input ref="width" type="number" min="0" onBlur={this.onPropChanged}/></td>
+                                <td><input ref="width" type="number" min="0" defaultValue="300" onBlur={this.onPropChanged}/></td>
                             </tr>
                             <tr>
                                 <td>height</td>
-                                <td><input ref="height" type="number" min="0" onBlur={this.onPropChanged}/></td>
+                                <td><input ref="height" type="number" min="0" defaultValue="300" onBlur={this.onPropChanged}/></td>
                             </tr>
                             <tr>
                                 <td>fixed size</td>

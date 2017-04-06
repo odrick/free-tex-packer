@@ -28,12 +28,13 @@ html, body {
     float: left;
     background: #eee;
     position: relative;
+    border-right: 1px solid #999;
 }
 
-.result-view {
+.results-view {
     display: block;
-    overflow: auto;
     height: 100%;
+    background: #ffe;
 }
 
 .props-list {
@@ -43,6 +44,7 @@ html, body {
     float: right;
     background: #eee;
     overflow-y: auto;
+    border-left: 1px solid #999;
 }
 
 .images-controllers {
@@ -147,6 +149,45 @@ html, body {
 .pack-properties-containter td > input,
 .pack-properties-containter td > select {
     border: 1px solid #999;
+}
+
+.results-view-container {
+    height: calc(100% - 30px);
+    background: #fff;
+    overflow: auto;
+}
+
+.results-view-footer {
+    display: block;
+    border-top: 1px solid #999;
+    background: #eee;
+    height: 30px;
+    box-sizing: border-box;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.texture-view {
+    display: inline-block;
+    margin: 4px;
+    float: left;
+}
+
+canvas.white-back {
+    background: #fff;
+}
+
+canvas.gray-back {
+    background: #ccc;
+}
+
+canvas.black-back {
+    background: #000;
+}
+
+canvas.grid-back {
+    background: url("../images/grid.png");
 }
 
 .center-align {
