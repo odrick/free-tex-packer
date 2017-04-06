@@ -13,5 +13,5 @@ function getPackerByType(type) {
     return null;
 }
 
-export {getPackerByType};
+export { getPackerByType };
 export default list;

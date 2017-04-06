@@ -1,30 +1,58 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import exporters from '../exporters';
-import { getPackerByType } from '../packers';
+import { getExporterByType } from '../exporters';
 import packers from '../packers';
+import { getPackerByType } from '../packers';
 
 import {Observer, GLOBAL_EVENT} from '../Observer';
 
 class PackProperties extends React.Component {
-    constructor(...params) {
-        super(...params);
+    constructor(props) {
+        super(props);
 
         this.onPackerChange = this.onPackerChange.bind(this);
+        this.onPropChanged = this.onPropChanged.bind(this);
 
         this.state = {packer: packers[0].type};
     }
 
-    getPackProps() {
-
+    componentDidMount() {
+        this.emitChanges();
+    }
+    
+    getPackOptions() {
+        let options = {
+            fileName: ReactDOM.findDOMNode(this.refs.fileName).value || "texture",
+            removeFileExtension: ReactDOM.findDOMNode(this.refs.removeFileExtension).checked,
+            exporter: getExporterByType(ReactDOM.findDOMNode(this.refs.exporter).value),
+            width: Number(ReactDOM.findDOMNode(this.refs.width).value) || 0,
+            height: Number(ReactDOM.findDOMNode(this.refs.height).value) || 0,
+            fixedSize: ReactDOM.findDOMNode(this.refs.fixedSize).checked,
+            padding: Number(ReactDOM.findDOMNode(this.refs.padding).value) || 0,
+            allowRotation: ReactDOM.findDOMNode(this.refs.allowRotation).checked,
+            allowTrim: ReactDOM.findDOMNode(this.refs.allowTrim).checked,
+            detectIdentical: ReactDOM.findDOMNode(this.refs.detectIdentical).checked,
+            packer: getPackerByType(ReactDOM.findDOMNode(this.refs.packer).value),
+            packerMethod: ReactDOM.findDOMNode(this.refs.packerMethod).value
+        };
+        
+        console.log(options);
+        
+        return options;
     }
 
     emitChanges() {
-        Observer.emit(GLOBAL_EVENT.PACK_PROPS_CHANGED, this.getPackProps());
+        Observer.emit(GLOBAL_EVENT.PACK_OPTIONS_CHANGED, this.getPackOptions());
     }
 
     onPackerChange(e) {
         this.setState({packer: e.target.value});
+        this.onPropChanged();
+    }
+    
+    onPropChanged() {
         this.emitChanges();
     }
 
@@ -37,14 +65,18 @@ class PackProperties extends React.Component {
                         <tbody>
                             <tr>
                                 <td>file name</td>
-                                <td><input type="text" defaultValue="texture" /></td>
+                                <td><input ref="fileName" type="text" defaultValue="texture" onChange={this.onPropChanged} /></td>
+                            </tr>
+                            <tr>
+                                <td>remove file ext</td>
+                                <td><input ref="removeFileExtension" type="checkbox" onChange={this.onPropChanged} /></td>
                             </tr>
                             <tr>
                                 <td>export to</td>
                                 <td>
-                                    <select>
+                                    <select ref="exporter" onChange={this.onPropChanged}>
                                     {exporters.map(node => {
-                                        return (<option key={"exporter" + "|" + node.type} defaultValue={node.type}>{node.type}</option>)
+                                        return (<option key={"exporter-" + node.type} defaultValue={node.type}>{node.type}</option>)
                                     })}
                                     </select>
                                 </td>
@@ -61,45 +93,45 @@ class PackProperties extends React.Component {
                             
                             <tr>
                                 <td>width</td>
-                                <td><input type="number" min="0"/></td>
+                                <td><input ref="width" type="number" min="0" onChange={this.onPropChanged}/></td>
                             </tr>
                             <tr>
                                 <td>height</td>
-                                <td><input type="number" min="0"/></td>
+                                <td><input ref="height" type="number" min="0" onChange={this.onPropChanged}/></td>
                             </tr>
                             <tr>
                                 <td>fixed size</td>
-                                <td><input type="checkbox"/></td>
+                                <td><input ref="fixedSize" type="checkbox" onChange={this.onPropChanged}/></td>
                             </tr>
                             <tr>
                                 <td>padding</td>
-                                <td><input type="number" defaultValue="0" min="0"/></td>
+                                <td><input ref="padding" type="number" defaultValue="0" min="0" onChange={this.onPropChanged}/></td>
                             </tr>
                             <tr>
                                 <td>allow rotation</td>
-                                <td><input type="checkbox"/></td>
+                                <td><input ref="allowRotation" type="checkbox" onChange={this.onPropChanged}/></td>
                             </tr>
                             <tr>
                                 <td>allow trim</td>
-                                <td><input type="checkbox"/></td>
+                                <td><input ref="allowTrim" type="checkbox" onChange={this.onPropChanged}/></td>
                             </tr>
                             <tr>
                                 <td>detect identical</td>
-                                <td><input type="checkbox"/></td>
+                                <td><input ref="detectIdentical" type="checkbox" onChange={this.onPropChanged}/></td>
                             </tr>
                             <tr>
                                 <td>packer</td>
                                 <td>
-                                    <select onChange={this.onPackerChange}>
+                                    <select ref="packer" onChange={this.onPackerChange}>
                                     {packers.map(node => {
-                                        return (<option key={"packer" + "|" + node.type} defaultValue={node.type}>{node.type}</option>)
+                                        return (<option key={"packer-" + node.type} defaultValue={node.type}>{node.type}</option>)
                                     })}
                                     </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td>method</td>
-                                <td><PackerMethods packer={this.state.packer}/></td>
+                                <td><PackerMethods ref="packerMethod" packer={this.state.packer} handler={this.onPropChanged}/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -120,11 +152,11 @@ class PackerMethods extends React.Component {
         let items = [];
 
         for(let item in packer.methods) {
-            items.push(<option value={item} key={"packer-method" + "|" + item }>{item}</option>);
+            items.push(<option value={item} key={"packer-method-" + item }>{item}</option>);
         }
 
         return (
-            <select>{items}</select>
+            <select onChange={this.props.handler}>{items}</select>
         )
     }
 }

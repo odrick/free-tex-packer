@@ -8,8 +8,8 @@ import ZipLoader from '../utils/ZipLoader';
 import {Observer, GLOBAL_EVENT} from '../Observer';
 
 class ImagesList extends React.Component {
-    constructor(...params) {
-        super(...params);
+    constructor(props) {
+        super(props);
         
         this.addImages = this.addImages.bind(this);
         this.addZip = this.addZip.bind(this);
@@ -51,10 +51,18 @@ class ImagesList extends React.Component {
         Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, {});
     }
     
+    createImagesFolder(name, path) {
+        return {
+            isFolder: true,
+            name: name,
+            path: path,
+            items: []
+        };
+    }
+    
     getImagesTree(data, path="", res=null) {
-        if(!res) {
-            res = {isFolder: true, name: "", path: path, items: []};
-        }
+        
+        if(!res) res = this.createImagesFolder("", path);
         
         for(let name in data) {
             let parts = name.split("/");
@@ -69,19 +77,19 @@ class ImagesList extends React.Component {
                 });
             }
             else {
-                let dirName = parts.pop();
-                let dirPath = parts.join("/");
-                if(dirPath == path) {
+                let folderName = parts.pop();
+                let folderPath = parts.join("/");
+                if(folderPath == path) {
                     let present = false;
                     for(let item of res.items) {
-                        if(item.isFolder && item.name == dirName) {
+                        if(item.isFolder && item.name == folderName) {
                             present = true;
                             break;
                         }
                     }
                     
                     if(!present) {
-                        let folder = {isFolder: true, name: dirName, path: path, items: []};
+                        let folder = this.createImagesFolder(folderName, path);
                         res.items.push(folder);
                         this.getImagesTree(data, itemPath, folder);
                     }
@@ -128,8 +136,8 @@ class ImagesList extends React.Component {
 
 class TreePart extends React.Component {
     
-    constructor(...params) {
-        super(...params);
+    constructor(props) {
+        super(props);
     }
     
     render() {
@@ -143,14 +151,14 @@ class TreePart extends React.Component {
                     
                     if(item.isFolder) {
                         return (
-                            <TreeView key={"img_list" + "|" + item.path} nodeLabel={item.name} defaultCollapsed={false}>
+                            <TreeView key={"img_list-" + item.path} nodeLabel={item.name} defaultCollapsed={false}>
                                 <TreePart data={item}/>
                             </TreeView>
                         );
                     }
                     
                     return (
-                        <TreeItem key={"img_list" + "|" + item.path} data={item}/>
+                        <TreeItem key={"img_list-" + item.path} data={item}/>
                     );
                 })}
             </div>
@@ -160,8 +168,8 @@ class TreePart extends React.Component {
 
 class TreeItem extends React.Component {
 
-    constructor(...params) {
-        super(...params);
+    constructor(props) {
+        super(props);
         
         this.selected = false;
         
@@ -171,15 +179,18 @@ class TreeItem extends React.Component {
 
     onOtherSelected() {
         if(this.selected) {
-            this.refs.container.style.background = "";
+            let node = ReactDOM.findDOMNode(this.refs.container);
+            if(node) node.style.background = "";
             this.selected = false;
         }
     }
     
     onSelect() {
-        Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.props.data);
-        this.selected = true;
-        this.refs.container.style.background = "#ccc";
+        if(!this.selected) {
+            Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.props.data);
+            this.selected = true;
+            ReactDOM.findDOMNode(this.refs.container).style.background = "#ccc";
+        }
     }
     
     render() {

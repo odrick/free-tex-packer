@@ -128,10 +128,6 @@ html, body {
     cursor: pointer;
 }
 
-.center-align {
-    text-align: center;
-}
-
 .pack-properties-containter {
     padding: 8px;
 }
@@ -151,4 +147,8 @@ html, body {
 .pack-properties-containter td > input,
 .pack-properties-containter td > select {
     border: 1px solid #999;
+}
+
+.center-align {
+    text-align: center!important;
 }

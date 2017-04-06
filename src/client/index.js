@@ -10,65 +10,6 @@ function start() {
 }
 
 /*
-import LocalImagesLoader from './utils/LocalImagesLoader';
-import ZipLoader from './utils/ZipLoader';
-import PackProcessor from './PackProcessor';
-import packers from './packers';
-import exporters from './exporters';
-import TextureView from './utils/TextureView';
-import SpriteViewer from './utils/SpriteViewer';
-import Downloader from './utils/Downloader';
-
-let images = null;
-let currentResult = null;
-
-function start() {
-    ReactDOM.render(React.createElement(MainLayout), document.getElementById("main"));
-    
-    document.getElementById("start").addEventListener("click", pack, false);
-    document.getElementById("export").addEventListener("click", doExport, false);
-    document.getElementById("showSprites").addEventListener("click", showSprites, false);
-
-    let packerSelect = document.getElementById("packer");
-    packerSelect.innerHTML = "";
-    packerSelect.addEventListener("change", showPackerMethods, false);
-
-    for(let packer of packers) {
-        let option = document.createElement("option");
-        option.value = packer.type;
-        option.innerHTML = packer.type;
-        packerSelect.appendChild(option);
-    }
-
-    showPackerMethods(packerSelect.value);
-
-    let exporterSelect = document.getElementById("exporter");
-    for(let exporter of exporters) {
-        let option = document.createElement("option");
-        option.value = exporter.type;
-        option.innerHTML = exporter.type;
-        exporterSelect.appendChild(option);
-    }
-}
-
-function showPackerMethods(type) {
-    let methodSelect = document.getElementById("packerMethod");
-    methodSelect.innerHTML = "";
-
-    for(let packer of packers) {
-        if(packer.type == type) {
-            for(let method in packer.methods) {
-                let option = document.createElement("option");
-                option.value = method;
-                option.innerHTML = method;
-                methodSelect.appendChild(option);
-            }
-
-            return;
-        }
-    }
-}
-
 function pack() {
     if(!images) return;
     

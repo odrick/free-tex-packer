@@ -4,8 +4,8 @@ import ImagesList from './ImagesList.jsx';
 import PackProperties from './PackProperties.jsx';
 
 class MainLayout extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
     
     render() {

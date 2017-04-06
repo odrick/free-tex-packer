@@ -7,7 +7,7 @@ import PhaserHash from './PhaserHash';
 import PhaserArray from './PhaserArray';
 import Cocos2d from './Cocos2d';
 
-export default [
+const list = [
     JsonHash,
     JsonArray,
     XML,
@@ -17,3 +17,15 @@ export default [
     PhaserArray,
     Cocos2d
 ];
+
+function getExporterByType(type) {
+    for(let item of list) {
+        if(item.type == type) {
+            return item;
+        }
+    }
+    return null;
+}
+
+export { getExporterByType };
+export default list;
