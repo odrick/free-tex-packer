@@ -5,7 +5,8 @@
   "url": "http://tex-packer.com/",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --host 0.0.0.0 --port 4000 --content-base dist/"
+    "start": "webpack-dev-server --host 0.0.0.0 --port 4000 --content-base dist/",
+    "build": "webpack --mode build"
   },
   "repository": {
     "type": "git",
