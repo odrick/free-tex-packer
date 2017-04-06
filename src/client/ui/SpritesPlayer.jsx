@@ -17,6 +17,7 @@ class SpritesPlayer extends React.Component {
         this.updateTimer = null;
 
         this.update = this.update.bind(this);
+        this.forceUpdate = this.forceUpdate.bind(this);
         this.updateCurrentTextures = this.updateCurrentTextures.bind(this);
     }
 
@@ -62,6 +63,11 @@ class SpritesPlayer extends React.Component {
         this.updateCurrentTextures();
     }
 
+    forceUpdate(e) {
+        let key = e.keyCode || e.which;
+        if(key == 13) this.updateCurrentTextures();
+    }
+
     updateCurrentTextures() {
         let textures = [];
         let pattern = ReactDOM.findDOMNode(this.refs.spriteName).value;
@@ -78,8 +84,15 @@ class SpritesPlayer extends React.Component {
         }
 
         textures = textures.sort((a, b) => {
-            if(a.config.ix > b.config.ix) return 1;
-            if(a.config.ix < b.config.ix) return -1;
+            let name1 = a.config.name.toUpperCase();
+            let name2 = b.config.name.toUpperCase();
+            if (name1 < name2) {
+                return -1;
+            }
+            if (name1 > name2) {
+                return 1;
+            }
+
             return 0;
         });
 
@@ -155,7 +168,7 @@ class SpritesPlayer extends React.Component {
             <div ref="container" className="player-container">
                 <div className="player-window">
                     <div>
-                        Sprite name: <input type="text" ref="spriteName" onBlur={this.updateCurrentTextures} />
+                        Sprite name: <input type="text" ref="spriteName" onBlur={this.updateCurrentTextures} onKeyDown={this.forceUpdate} />
                     </div>
                     <div ref="playerContainer">
                         <canvas ref="view"> </canvas>

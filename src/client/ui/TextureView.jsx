@@ -99,33 +99,13 @@ class TextureView extends React.Component {
         ctx.stroke();
     }
 
-    getClickCoords(e) {
-        let canvas = ReactDOM.findDOMNode(this.refs.view);
-
-        let totalOffsetX = 0,
-            totalOffsetY = 0,
-            canvasX,
-            canvasY,
-            currentElement = canvas;
-
-        do {
-            totalOffsetX += currentElement.offsetLeft;
-            totalOffsetY += currentElement.offsetTop;
-        }
-        while (currentElement = currentElement.offsetParent);
-
-        canvasX = e.pageX - totalOffsetX;
-        canvasY = e.pageY - totalOffsetY;
-
-        canvasX = Math.round(canvasX * (canvas.width / canvas.offsetWidth));
-        canvasY = Math.round(canvasY * (canvas.height / canvas.offsetHeight));
-
-        return {x: canvasX, y: canvasY};
-    }
-
     onViewClick(e) {
         let selectedItem = null;
-        let coords = this.getClickCoords(e);
+
+        let canvas = ReactDOM.findDOMNode(this.refs.view);
+        let rect = canvas.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        let y = e.clientY - rect.top;
 
         for (let item of this.props.data.data) {
             let w = item.frame.w;
@@ -135,10 +115,10 @@ class TextureView extends React.Component {
                 h = item.frame.w;
             }
 
-            if(coords.x >= item.frame.x &&
-                coords.x < item.frame.x + w &&
-                coords.y >= item.frame.y &&
-                coords.y < item.frame.y + h
+            if(x >= item.frame.x &&
+               x < item.frame.x + w &&
+               y >= item.frame.y &&
+               y < item.frame.y + h
             ) {
                 selectedItem = item;
                 break;

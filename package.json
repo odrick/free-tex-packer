@@ -1,6 +1,6 @@
 {
   "name": "tex-packer",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Online textures packer",
   "url": "http://tex-packer.com/",
   "main": "src/index.js",

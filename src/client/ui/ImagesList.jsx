@@ -179,14 +179,10 @@ class TreeItem extends React.Component {
     constructor(props) {
         super(props);
         
-        this.selected = LAST_TREE_ITEM_SELECTED == this.props.data.path;
-        
+        this.state = {selected: LAST_TREE_ITEM_SELECTED == this.props.data.path};
+
         this.onSelect = this.onSelect.bind(this);
         Observer.on(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onOtherSelected, this);
-    }
-
-    componentDidMount() {
-        this.updateView();
     }
 
     componentWillUnmount() {
@@ -194,34 +190,22 @@ class TreeItem extends React.Component {
     }
     
     onOtherSelected(path) {
-        this.selected = path == this.props.data.path;
-        this.updateView();
+        let currentState = this.state.selected;
+        let newState = path == this.props.data.path;
+
+        if(currentState != newState) {
+            this.setState({selected: newState});
+        }
     }
     
     onSelect() {
-        LAST_TREE_ITEM_SELECTED = !this.selected ? this.props.data.path : null;
+        LAST_TREE_ITEM_SELECTED = !this.state.selected ? this.props.data.path : null;
         Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, LAST_TREE_ITEM_SELECTED);
-        
-        /*
-        this.updateView();
-        
-        if(newSelection != LAST_TREE_ITEM_SELECTED) {
-            LAST_TREE_ITEM_SELECTED = newSelection;
-            Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, LAST_TREE_ITEM_SELECTED);
-        }
-        */
     }
-    
-    updateView() {
-        let node = ReactDOM.findDOMNode(this.refs.container);
-        if(node) {
-            node.style.background = this.selected ? "#ccc" : "";
-        }
-    }
-    
+
     render() {
         return (
-            <div ref="container" className="image-list-item" onClick={this.onSelect} >
+            <div className={"image-list-item" + (this.state.selected ? " selected" : "")} onClick={this.onSelect} >
                 <div className="image-list-image-container">
                     <img src={this.props.data.img.src} className="image-list-image" />
                 </div>

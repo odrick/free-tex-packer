@@ -73,6 +73,10 @@ html, body {
     cursor: pointer;
 }
 
+.image-list-item.selected {
+    background: #ccc;
+}
+
 .image-list-image-container {
     width: 25px;
     height: 25px;
@@ -185,7 +189,6 @@ html, body {
     display: inline-block;
     margin-left: 8px;
     margin-top: 8px;
-    float: left;
 }
 
 .white-back {

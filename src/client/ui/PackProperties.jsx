@@ -15,6 +15,7 @@ class PackProperties extends React.Component {
         this.onPackerChange = this.onPackerChange.bind(this);
         this.onPropChanged = this.onPropChanged.bind(this);
         this.onExporterPropChanged = this.onExporterPropChanged.bind(this);
+        this.forceUpdate = this.forceUpdate.bind(this);
 
         this.state = {packer: packers[0].type};
     }
@@ -56,6 +57,11 @@ class PackProperties extends React.Component {
     
     onExporterPropChanged() {
         Observer.emit(GLOBAL_EVENT.PACK_EXPORTER_CHANGED, this.getPackOptions());
+    }
+
+    forceUpdate(e) {
+        let key = e.keyCode || e.which;
+        if(key == 13) this.onPropChanged();
     }
     
     startExport() {
@@ -103,11 +109,11 @@ class PackProperties extends React.Component {
                             
                             <tr>
                                 <td>width</td>
-                                <td><input ref="width" type="number" min="0" defaultValue="256" onBlur={this.onPropChanged}/></td>
+                                <td><input ref="width" type="number" min="0" defaultValue="2048" onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
                             </tr>
                             <tr>
                                 <td>height</td>
-                                <td><input ref="height" type="number" min="0" defaultValue="256" onBlur={this.onPropChanged}/></td>
+                                <td><input ref="height" type="number" min="0" defaultValue="2048" onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
                             </tr>
                             <tr>
                                 <td>fixed size</td>
@@ -115,7 +121,7 @@ class PackProperties extends React.Component {
                             </tr>
                             <tr>
                                 <td>padding</td>
-                                <td><input ref="padding" type="number" defaultValue="0" min="0" onBlur={this.onPropChanged}/></td>
+                                <td><input ref="padding" type="number" defaultValue="0" min="0" onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
                             </tr>
                             <tr>
                                 <td>allow rotation</td>
