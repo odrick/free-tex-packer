@@ -69,7 +69,9 @@ class PackProcessor {
         let maxWidth = 0, maxHeight = 0;
         let minWidth = 0, minHeight = 0;
 
-        for(let key in images) {
+        let names = Object.keys(images);
+        
+        for(let key of names) {
             let img = images[key];
 
             maxWidth += img.width;

@@ -13,7 +13,7 @@ class MainLayout extends React.Component {
             <div className="main-layout">
                 <ImagesList/>
                 <PackProperties/>
-                <div className="result-view"></div>
+                <div className="result-view" id="resultContainer"></div>
             </div>
         );
     }

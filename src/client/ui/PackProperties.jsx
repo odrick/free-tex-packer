@@ -14,6 +14,7 @@ class PackProperties extends React.Component {
 
         this.onPackerChange = this.onPackerChange.bind(this);
         this.onPropChanged = this.onPropChanged.bind(this);
+        this.onExporterPropChanged = this.onExporterPropChanged.bind(this);
 
         this.state = {packer: packers[0].type};
     }
@@ -23,7 +24,7 @@ class PackProperties extends React.Component {
     }
     
     getPackOptions() {
-        let options = {
+        return {
             fileName: ReactDOM.findDOMNode(this.refs.fileName).value || "texture",
             removeFileExtension: ReactDOM.findDOMNode(this.refs.removeFileExtension).checked,
             exporter: getExporterByType(ReactDOM.findDOMNode(this.refs.exporter).value),
@@ -37,10 +38,6 @@ class PackProperties extends React.Component {
             packer: getPackerByType(ReactDOM.findDOMNode(this.refs.packer).value),
             packerMethod: ReactDOM.findDOMNode(this.refs.packerMethod).value
         };
-        
-        console.log(options);
-        
-        return options;
     }
 
     emitChanges() {
@@ -55,6 +52,10 @@ class PackProperties extends React.Component {
     onPropChanged() {
         this.emitChanges();
     }
+    
+    onExporterPropChanged() {
+        Observer.emit(GLOBAL_EVENT.PACK_EXPORTER_CHANGED, this.getPackOptions());
+    }
 
     render() {
 
@@ -65,16 +66,16 @@ class PackProperties extends React.Component {
                         <tbody>
                             <tr>
                                 <td>file name</td>
-                                <td><input ref="fileName" type="text" defaultValue="texture" onChange={this.onPropChanged} /></td>
+                                <td><input ref="fileName" type="text" defaultValue="texture" onBlur={this.onExporterPropChanged} /></td>
                             </tr>
                             <tr>
                                 <td>remove file ext</td>
-                                <td><input ref="removeFileExtension" type="checkbox" onChange={this.onPropChanged} /></td>
+                                <td><input ref="removeFileExtension" type="checkbox" onChange={this.onExporterPropChanged} /></td>
                             </tr>
                             <tr>
                                 <td>export to</td>
                                 <td>
-                                    <select ref="exporter" onChange={this.onPropChanged}>
+                                    <select ref="exporter" onChange={this.onExporterPropChanged}>
                                     {exporters.map(node => {
                                         return (<option key={"exporter-" + node.type} defaultValue={node.type}>{node.type}</option>)
                                     })}
@@ -93,11 +94,11 @@ class PackProperties extends React.Component {
                             
                             <tr>
                                 <td>width</td>
-                                <td><input ref="width" type="number" min="0" onChange={this.onPropChanged}/></td>
+                                <td><input ref="width" type="number" min="0" onBlur={this.onPropChanged}/></td>
                             </tr>
                             <tr>
                                 <td>height</td>
-                                <td><input ref="height" type="number" min="0" onChange={this.onPropChanged}/></td>
+                                <td><input ref="height" type="number" min="0" onBlur={this.onPropChanged}/></td>
                             </tr>
                             <tr>
                                 <td>fixed size</td>
@@ -105,7 +106,7 @@ class PackProperties extends React.Component {
                             </tr>
                             <tr>
                                 <td>padding</td>
-                                <td><input ref="padding" type="number" defaultValue="0" min="0" onChange={this.onPropChanged}/></td>
+                                <td><input ref="padding" type="number" defaultValue="0" min="0" onBlur={this.onPropChanged}/></td>
                             </tr>
                             <tr>
                                 <td>allow rotation</td>
@@ -150,8 +151,9 @@ class PackerMethods extends React.Component {
         }
 
         let items = [];
-
-        for(let item in packer.methods) {
+        
+        let methods = Object.keys(packer.methods);
+        for(let item of methods) {
             items.push(<option value={item} key={"packer-method-" + item }>{item}</option>);
         }
 

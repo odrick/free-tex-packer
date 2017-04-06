@@ -30,7 +30,9 @@ class ZipLoader {
         let extensions = ["png", "jpg", "jpeg"];
         this.filesList = [];
         
-        for(let name in this.zip.files) {
+        let files = Object.keys(this.zip.files);
+        
+        for(let name of files) {
             let file = this.zip.files[name];
             
             if(!file.dir) {

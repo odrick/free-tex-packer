@@ -37,7 +37,9 @@ class ImagesList extends React.Component {
         
         let images = this.state.images;
         
-        for(let name in data) {
+        let names = Object.keys(data);
+        
+        for(let name of names) {
             images[name] = data[name];
         }
         
@@ -64,7 +66,9 @@ class ImagesList extends React.Component {
         
         if(!res) res = this.createImagesFolder("", path);
         
-        for(let name in data) {
+        let names = Object.keys(data);
+        
+        for(let name of names) {
             let parts = name.split("/");
             let itemName = parts.pop();
             let itemPath = parts.join("/");
