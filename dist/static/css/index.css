@@ -279,3 +279,67 @@ html, body {
     margin-top: 8px;
     margin-bottom: 8px;
 }
+
+.message-box-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.message-box-window {
+    width: 340px;
+    height: 200px;
+    background: #eee;
+    margin: auto;
+    margin-top: 64px;
+    font-size: 14px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 16px;
+}
+
+.message-box-content {
+    height: 170px;
+    overflow: auto;
+}
+
+.message-box-buttons {
+    padding: 8px;
+    text-align: center;
+}
+
+.message-box-buttons .btn {
+    margin-left: 8px;
+}
+
+.processing-shader {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.2);
+    background-image: url("../images/processing.gif");
+    background-repeat: no-repeat;
+    background-position: center 200px;
+    background-size: 48px 48px;
+}
+
+.processing-content {
+    text-align: center;
+    margin-top: 150px;
+    color: #fff;
+    font-size: 24px;
+}

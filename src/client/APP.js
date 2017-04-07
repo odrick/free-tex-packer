@@ -32,13 +32,23 @@ class APP {
     }
     
     pack() {
-        //TODO: show ui shader
+        let keys = Object.keys(this.images);
         
+        if(keys.length > 0) {
+            Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
+            setTimeout(() => this.doPack(), 0);
+        }
+        else {
+            this.doPack();
+        }
+    }
+    
+    doPack() {
         let res = PackProcessor.pack(this.images, this.packOptions);
 
         if(res.error) {
-            //TODO: ui dialog
-            console.log(res);
+            Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, res.description);
         }
         else {
             this.packResult = [];
@@ -51,25 +61,28 @@ class APP {
                     buffer: renderer.buffer
                 });
             }
-            
+
             Observer.emit(GLOBAL_EVENT.PACK_COMPLETE, this.packResult);
+            Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
         }
     }
     
     startExport() {
-        if(!this.packResult) {
-            //TODO: ui dialog
-            console.log("Nothing to export...");
+        if(!this.packResult || !this.packResult.length) {
+            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, "Please, add images first");
             return;
         }
 
-        //TODO: show ui shader
-        
+        Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
+        setTimeout(() => this.doExport(), 0);
+    }
+
+    doExport() {
         let exporter = new this.packOptions.exporter();
         let textureName = this.packOptions.textureName;
 
         let files = [];
-        
+
         let ix = 0;
         for(let item of this.packResult) {
 
@@ -99,11 +112,12 @@ class APP {
                 name: fName + "." + this.packOptions.exporter.fileExt,
                 content: exporter.run(item.data, options)
             });
-            
+
             ix++;
         }
 
         Downloader.run(files, this.packOptions.fileName);
+        Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
     }
 }
 

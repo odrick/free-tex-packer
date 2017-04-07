@@ -1,3 +1,5 @@
+import {Observer, GLOBAL_EVENT} from '../Observer';
+
 class ZipLoader {
     
     constructor() {
@@ -17,9 +19,8 @@ class ZipLoader {
         this.zip = new JSZip();
         this.zip.loadAsync(file).then(
             () => this.parseZip(),
-            //TODO: ui message
             () => {
-                console.log("Invalid zip file");
+                Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, "Invalid zip file");
                 if(this.onEnd) this.onEnd({});
             }
         );

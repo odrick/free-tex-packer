@@ -16,24 +16,29 @@ class ImagesList extends React.Component {
         this.addImages = this.addImages.bind(this);
         this.addZip = this.addZip.bind(this);
         this.clear = this.clear.bind(this);
+        this.doClear = this.doClear.bind(this);
 
         this.state = {images: {}};
     }
 
     addImages(e) {
+        Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
+        
         let loader = new LocalImagesLoader();
-        //TODO: show load progress
         loader.load(e.target.files, null, data => this.loadImagesComplete(data));
     }
     
     addZip(e) {
+        Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
+        
         let loader = new ZipLoader();
-        //TODO: show load progress
         loader.load(e.target.files[0], null, data => this.loadImagesComplete(data));
     }
 
     loadImagesComplete(data) {
 
+        Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+        
         ReactDOM.findDOMNode(this.refs.addImagesInput).value = "";
         ReactDOM.findDOMNode(this.refs.addZipInput).value = "";
         
@@ -50,7 +55,18 @@ class ImagesList extends React.Component {
     }
 
     clear() {
-        //TODO: prompt
+        let keys = Object.keys(this.state.images);
+        if(keys.length) {
+            let buttons = {
+                "yes": {caption: "YES", callback: this.doClear},
+                "no": {caption: "NO"}
+            };
+            
+            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, "Realy clear all images?", buttons);
+        }
+    }
+    
+    doClear() {
         Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, {});
         Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, null);
         LAST_TREE_ITEM_SELECTED = null;
