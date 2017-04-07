@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ImagesList from './ImagesList.jsx';
+import MainHeader from './MainHeader.jsx';
 import PackProperties from './PackProperties.jsx';
 import PackResults from './PackResults.jsx';
 import MessageBox from './MessageBox.jsx';
@@ -48,13 +49,18 @@ class MainLayout extends React.Component {
         let shader = this.state.shader ? (<ProcessingShader/>) : null;
         
         return (
-            <div className="main-layout">
-                <ImagesList/>
-                <PackProperties/>
-                <PackResults/>
-                {this.state.messageBox}
-                {shader}
-                <OldBrowserBlocker/>
+            
+            <div className="main-wrapper">
+                <MainHeader/>
+                
+                <div className="main-layout">
+                    <ImagesList/>
+                    <PackProperties/>
+                    <PackResults/>
+                    {this.state.messageBox}
+                    {shader}
+                    <OldBrowserBlocker/>
+                </div>
             </div>
         );
     }
