@@ -66,14 +66,14 @@ class APP {
         //TODO: show ui shader
         
         let exporter = new this.packOptions.exporter();
-        let fileName = this.packOptions.fileName;
+        let textureName = this.packOptions.textureName;
 
         let files = [];
         
         let ix = 0;
         for(let item of this.packResult) {
 
-            let fName = fileName + (this.packResult.length > 1 ? "-" + ix : "");
+            let fName = textureName + (this.packResult.length > 1 ? "-" + ix : "");
 
             let imageData = item.buffer.toDataURL();
             let parts = imageData.split(",");
@@ -103,7 +103,7 @@ class APP {
             ix++;
         }
 
-        Downloader.run(files);
+        Downloader.run(files, this.packOptions.fileName);
     }
 }
 
