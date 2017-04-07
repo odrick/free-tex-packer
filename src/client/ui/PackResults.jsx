@@ -2,6 +2,7 @@ import React from 'react';
 import {Observer, GLOBAL_EVENT} from '../Observer';
 import TextureView from './TextureView.jsx';
 import SpritesPlayer from './SpritesPlayer.jsx';
+import I18 from '../utils/I18';
 
 class PackResults extends React.Component {
     constructor(props) {
@@ -85,10 +86,10 @@ class PackResults extends React.Component {
                         )
                     })}
                     
-                    <label htmlFor="result-view-outline">Display outlines:</label>
+                    <label htmlFor="result-view-outline">{I18.f("DISPLAY_OUTLINES")}</label>
                     <input type="checkbox" id="result-view-outline" onChange={this.changeOutlines} />
                     
-                    <div className="btn" onClick={this.toggleSpritesPlayer}>Show sprites</div>
+                    <div className="btn" onClick={this.toggleSpritesPlayer}>{I18.f("SHOW_SPRITES")}</div>
                 </div>
             </div>
         );

@@ -5,6 +5,7 @@ import PackProperties from './PackProperties.jsx';
 import PackResults from './PackResults.jsx';
 import MessageBox from './MessageBox.jsx';
 import ProcessingShader from './ProcessingShader.jsx';
+import OldBrowserBlocker from './OldBrowserBlocker.jsx';
 
 import {Observer, GLOBAL_EVENT} from '../Observer';
 
@@ -53,6 +54,7 @@ class MainLayout extends React.Component {
                 <PackResults/>
                 {this.state.messageBox}
                 {shader}
+                <OldBrowserBlocker/>
             </div>
         );
     }

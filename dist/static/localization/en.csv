@@ -1,0 +1,49 @@
+OK;OK
+YES;YES
+NO;NO
+ADD_IMAGES;Add images
+ADD_IMAGES_TITLE;Add images
+ADD_ZIP;Add ZIP
+ADD_ZIP_TITLE;Add zipped images
+CLEAR;Clear
+CLEAR_TITLE;Clear all images
+DISPLAY_OUTLINES;Display outlines:
+SHOW_SPRITES;Show sprites
+SPRITE_NAME;Sprite name:
+ANIMATION_SPEED;Animation speed:
+TEXTURE_NAME;Texture name:
+TEXTURE_NAME_TITLE;Texture name for export
+REMOVE_FILE_EXT;Remove file ext:
+REMOVE_FILE_EXT_TITLE;Remove file ext in sprites name
+SCALE;Scale:
+SCALE_TITLE;Base texture scale
+FORMAT;Format:
+FORMAT_TITLE;Export format
+FILE_NAME;File name:
+FILE_NAME_TITLE;Result file name
+WIDTH;Width:
+WIDTH_TITLE;Max texture width
+HEIGHT;Height:
+HEIGHT_TITLE;Max texture height
+FIXED_SIZE;Fixed size:
+FIXED_SIZE_TITLE;Fixed texture size
+PADDING;Padding:
+PADDING_TITLE;Sprites padding
+ALLOW_ROTATION;Allow rotation:
+ALLOW_ROTATION_TITLE;Allow sprites rotation
+ALLOW_TRIM;Allow trim:
+ALLOW_TRIM_TITLE;Allow sprites trim
+DETECT_IDENTICAL;Detect identical:
+DETECT_IDENTICAL_TITLE;Detect identical sprites
+PACKER;Packer:
+PACKER_TITLE;Packer
+PACKER_METHOD;Method:
+PACKER_METHOD_TITLE;Packer method
+EXPORT;Export
+PLEASE_WAIT;Please, wait...
+INVALID_SIZE_ERROR;Invalid size. Min: %sx%s
+NO_IMAGES_ERROR;Please, add images first
+CLEAR_WARNING;Realy clear all images?
+INVALID_ZIP_ERROR;Invalid zip file
+OLD_BROWSER_MESSAGE1;Sorry, but your browser is too old for this application...
+OLD_BROWSER_MESSAGE2;Please, use one of modern browsers:

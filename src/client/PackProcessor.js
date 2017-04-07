@@ -1,6 +1,8 @@
 import MaxRectsBinPack from './packers/MaxRectsBin';
 import Trimmer from './utils/Trimmer';
 
+import I18 from './utils/I18';
+
 class PackProcessor {
 
     static detectIdentical(rects) {
@@ -99,7 +101,7 @@ class PackProcessor {
         if(!height) height = maxHeight;
 
         if(width < minWidth || height < minHeight) {
-            return {error: 1, description: "Invalid size. Min: " + minWidth + "x" + minHeight};
+            return {error: 1, description: I18.f("INVALID_SIZE_ERROR", minWidth, minHeight)};
         }
 
         if(options.allowTrim) {

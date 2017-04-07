@@ -3,6 +3,8 @@ import PackProcessor from './PackProcessor';
 import TextureRenderer from './utils/TextureRenderer';
 import Downloader from './utils/Downloader';
 
+import I18 from './utils/I18';
+
 class APP {
     
     constructor() {
@@ -69,7 +71,7 @@ class APP {
     
     startExport() {
         if(!this.packResult || !this.packResult.length) {
-            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, "Please, add images first");
+            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("NO_IMAGES_ERROR"));
             return;
         }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import I18 from '../utils/I18';
 
 class SpritesPlayer extends React.Component {
     
@@ -168,14 +169,14 @@ class SpritesPlayer extends React.Component {
             <div ref="container" className="player-container">
                 <div className="player-window">
                     <div>
-                        Sprite name: <input type="text" ref="spriteName" onBlur={this.updateCurrentTextures} onKeyDown={this.forceUpdate} />
+                        {I18.f("SPRITE_NAME")} <input type="text" ref="spriteName" onBlur={this.updateCurrentTextures} onKeyDown={this.forceUpdate} />
                     </div>
                     <div ref="playerContainer">
                         <canvas ref="view"> </canvas>
                         <canvas ref="buffer" className="player-buffer"> </canvas>
                     </div>
                     <div>
-                        speed: <input type="range" ref="speed" max="60" min="1" defaultValue="10"/>
+                        {I18.f("ANIMATION_SPEED")} <input type="range" ref="speed" max="60" min="1" defaultValue="10"/>
                     </div>
                 </div>
             </div>

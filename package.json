@@ -4,6 +4,7 @@
   "description": "Online textures packer",
   "url": "http://tex-packer.com/",
   "main": "src/index.js",
+  "localizations": ["en", "ru"],
   "scripts": {
     "start": "webpack-dev-server --host 0.0.0.0 --port 4000 --content-base dist/",
     "build": "webpack --mode build"

@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import I18 from '../utils/I18';
+
 class ProcessingShader extends React.Component {
     constructor(props) {
         super(props);
@@ -27,7 +29,7 @@ class ProcessingShader extends React.Component {
         return (
             <div ref="shader" className="processing-shader">
                 <div className="processing-content">
-                    Please, wait...
+                    {I18.f("PLEASE_WAIT")}
                 </div>
             </div>
         );

@@ -8,6 +8,8 @@ import { getExporterByType } from '../exporters';
 import packers from '../packers';
 import { getPackerByType } from '../packers';
 
+import I18 from '../utils/I18';
+
 import {Observer, GLOBAL_EVENT} from '../Observer';
 
 const STORAGE_OPTIONS_KEY = "pack-options";
@@ -120,20 +122,20 @@ class PackProperties extends React.Component {
                 <div className="pack-properties-containter">
                     <table>
                         <tbody>
-                            <tr>
-                                <td>texture name</td>
+                            <tr title={I18.f("TEXTURE_NAME_TITLE")}>
+                                <td>{I18.f("TEXTURE_NAME")}</td>
                                 <td><input ref="textureName" type="text" defaultValue={this.packOptions.textureName} onBlur={this.onExporterPropChanged} /></td>
                             </tr>
-                            <tr>
-                                <td>remove file ext</td>
+                            <tr title={I18.f("REMOVE_FILE_EXT_TITLE")}>
+                                <td>{I18.f("REMOVE_FILE_EXT")}</td>
                                 <td><input ref="removeFileExtension" type="checkbox" defaultChecked={this.packOptions.removeFileExtension ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
                             </tr>
-                            <tr>
-                                <td>scale</td>
+                            <tr title={I18.f("SCALE_TITLE")}>
+                                <td>{I18.f("SCALE")}</td>
                                 <td><input ref="scale" type="number" min="1" defaultValue={this.packOptions.scale} onBlur={this.onExporterPropChanged}/></td>
                             </tr>
-                            <tr>
-                                <td>format</td>
+                            <tr title={I18.f("FORMAT_TITLE")}>
+                                <td>{I18.f("FORMAT")}</td>
                                 <td>
                                     <select ref="exporter" onChange={this.onExporterPropChanged} defaultValue={this.packOptions.exporter}>
                                     {exporters.map(node => {
@@ -142,13 +144,13 @@ class PackProperties extends React.Component {
                                     </select>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>file name</td>
+                            <tr title={I18.f("FILE_NAME_TITLE")}>
+                                <td>{I18.f("FILE_NAME")}</td>
                                 <td><input ref="fileName" type="text" defaultValue={this.packOptions.fileName} onBlur={this.onExporterPropChanged} /></td>
                             </tr>
                             <tr>
                                 <td colSpan="2" className="center-align">
-                                    <div className="btn" onClick={this.startExport}>Export</div>
+                                    <div className="btn" onClick={this.startExport}>{I18.f("EXPORT")}</div>
                                 </td>
                             </tr>
                             
@@ -156,36 +158,36 @@ class PackProperties extends React.Component {
                                 <td colSpan="2">&nbsp;</td>
                             </tr>
                             
-                            <tr>
-                                <td>width</td>
+                            <tr title={I18.f("WIDTH_TITLE")}>
+                                <td>{I18.f("WIDTH")}</td>
                                 <td><input ref="width" type="number" min="0" defaultValue={this.packOptions.width} onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
                             </tr>
-                            <tr>
-                                <td>height</td>
+                            <tr title={I18.f("HEIGHT_TITLE")}>
+                                <td>{I18.f("HEIGHT")}</td>
                                 <td><input ref="height" type="number" min="0" defaultValue={this.packOptions.height} onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
                             </tr>
-                            <tr>
-                                <td>fixed size</td>
+                            <tr title={I18.f("FIXED_SIZE_TITLE")}>
+                                <td>{I18.f("FIXED_SIZE")}</td>
                                 <td><input ref="fixedSize" type="checkbox" onChange={this.onPropChanged} defaultChecked={this.packOptions.fixedSize ? "checked" : ""} /></td>
                             </tr>
-                            <tr>
-                                <td>padding</td>
+                            <tr title={I18.f("PADDING_TITLE")}>
+                                <td>{I18.f("PADDING")}</td>
                                 <td><input ref="padding" type="number" defaultValue={this.packOptions.padding} min="0" onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
                             </tr>
-                            <tr>
-                                <td>allow rotation</td>
+                            <tr title={I18.f("ALLOW_ROTATION_TITLE")}>
+                                <td>{I18.f("ALLOW_ROTATION")}</td>
                                 <td><input ref="allowRotation" type="checkbox" onChange={this.onPropChanged} defaultChecked={this.packOptions.allowRotation ? "checked" : ""} /></td>
                             </tr>
-                            <tr>
-                                <td>allow trim</td>
+                            <tr title={I18.f("ALLOW_TRIM_TITLE")}>
+                                <td>{I18.f("ALLOW_TRIM")}</td>
                                 <td><input ref="allowTrim" type="checkbox" onChange={this.onPropChanged} defaultChecked={this.packOptions.allowTrim ? "checked" : ""}/></td>
                             </tr>
-                            <tr>
-                                <td>detect identical</td>
+                            <tr title={I18.f("DETECT_IDENTICAL_TITLE")}>
+                                <td>{I18.f("DETECT_IDENTICAL")}</td>
                                 <td><input ref="detectIdentical" type="checkbox" onChange={this.onPropChanged} defaultChecked={this.packOptions.detectIdentical ? "checked" : ""}/></td>
                             </tr>
-                            <tr>
-                                <td>packer</td>
+                            <tr title={I18.f("PACKER_TITLE")}>
+                                <td>{I18.f("PACKER")}</td>
                                 <td>
                                     <select ref="packer" onChange={this.onPackerChange} defaultValue={this.packOptions.packer}>
                                     {packers.map(node => {
@@ -194,8 +196,8 @@ class PackProperties extends React.Component {
                                     </select>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>method</td>
+                            <tr title={I18.f("PACKER_METHOD_TITLE")}>
+                                <td>{I18.f("PACKER_METHOD")}</td>
                                 <td><PackerMethods ref="packerMethod" packer={this.state.packer} defaultMethod={this.packOptions.packerMethod} handler={this.onPropChanged}/></td>
                             </tr>
                         </tbody>

@@ -1,0 +1,49 @@
+OK;OK
+YES;ДА
+NO;НЕТ
+ADD_IMAGES;Добавить
+ADD_IMAGES_TITLE;Добавить изображения
+ADD_ZIP;Добавить ZIP
+ADD_ZIP_TITLE;Добавить упакованные изображения
+CLEAR;Очистить
+CLEAR_TITLE;Очистить все изображения
+DISPLAY_OUTLINES;Отображать контуры:
+SHOW_SPRITES;Показать спрайты
+SPRITE_NAME;Название спрайта:
+ANIMATION_SPEED;Скорость анимации:
+TEXTURE_NAME;Имя текстуры:
+TEXTURE_NAME_TITLE;Имя, которое будет использоваться для именования отдельных файлов
+REMOVE_FILE_EXT;Удалить расширение:
+REMOVE_FILE_EXT_TITLE;Удаляет расширения файла при экспорте
+SCALE;Масштаб:
+SCALE_TITLE;Текущий масштаб текстуры. Влияет на пересчет размеров и координат при экспорте.
+FORMAT;Формат:
+FORMAT_TITLE;Формат экспорта
+FILE_NAME;Имя файла:
+FILE_NAME_TITLE;Имя результирующего файла 
+WIDTH;Ширина:
+WIDTH_TITLE;Максимальная ширина текстуры
+HEIGHT;Высота:
+HEIGHT_TITLE;Максимальная высота текстуры
+FIXED_SIZE;Фиксированный размер:
+FIXED_SIZE_TITLE;Фиксированный размер текстуры
+PADDING;Отступы:
+PADDING_TITLE;Отступы между спрайтами в текстуре
+ALLOW_ROTATION;Разрешить повотор:
+ALLOW_ROTATION_TITLE;Разрешает повотор спрайта в текстуре
+ALLOW_TRIM;Разрешить обрезку:
+ALLOW_TRIM_TITLE;Разрешает обрезку незначимых пикселей спрайта в текстуре
+DETECT_IDENTICAL;Определять идентичные:
+DETECT_IDENTICAL_TITLE;Разрешает определять идентичные спрайты и не дублировать их в текстуре
+PACKER;Упаковщик:
+PACKER_TITLE;Упаковщик
+PACKER_METHOD;Метод:
+PACKER_METHOD_TITLE;Метод упаковщика
+EXPORT;Экспорт
+PLEASE_WAIT;Пожалуйста, подождите...
+INVALID_SIZE_ERROR;Неверный размер. Минимально возможный: %sx%s
+NO_IMAGES_ERROR;Добавьте сначала изображения
+CLEAR_WARNING;Дейстивтельно удалить все изображения?
+INVALID_ZIP_ERROR;Неверный zip файл
+OLD_BROWSER_MESSAGE1;Извините, но Ваш браузер устарел...
+OLD_BROWSER_MESSAGE2;Пожалуйста, установите и используйте один из современных браузеров:

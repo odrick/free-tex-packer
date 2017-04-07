@@ -1,5 +1,7 @@
 import React from 'react';
 
+import I18 from '../utils/I18';
+
 class MessageBox extends React.Component {
     constructor(props) {
         super(props);
@@ -8,7 +10,7 @@ class MessageBox extends React.Component {
         
         if(!this.buttons) {
             this.buttons = {
-                ok: {caption: "OK"}
+                ok: {caption: I18.f("OK")}
             }
         }
         
@@ -30,8 +32,7 @@ class MessageBox extends React.Component {
     render() {
         let buttons = [];
         
-        let keys = Object.keys(this.buttons);
-        for(let key of keys) {
+        for(let key of Object.keys(this.buttons)) {
             let btn = this.buttons[key];
             buttons.push((<div className="btn" key={"btn-" + key} onClick={btn.callback}>{btn.caption}</div>));
         }

@@ -4,6 +4,7 @@ import TreeView from 'react-treeview';
 
 import LocalImagesLoader from '../utils/LocalImagesLoader';
 import ZipLoader from '../utils/ZipLoader';
+import I18 from '../utils/I18';
 
 import {Observer, GLOBAL_EVENT} from '../Observer';
 
@@ -58,11 +59,11 @@ class ImagesList extends React.Component {
         let keys = Object.keys(this.state.images);
         if(keys.length) {
             let buttons = {
-                "yes": {caption: "YES", callback: this.doClear},
-                "no": {caption: "NO"}
+                "yes": {caption: I18.f("YES"), callback: this.doClear},
+                "no": {caption: I18.f("NO")}
             };
             
-            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, "Realy clear all images?", buttons);
+            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("CLEAR_WARNING"), buttons);
         }
     }
     
@@ -133,18 +134,18 @@ class ImagesList extends React.Component {
                 
                 <div className="images-controllers">
                     
-                    <div className="btn file-upload">
-                        Add images
+                    <div className="btn file-upload" title={I18.f("ADD_IMAGES_TITLE")}>
+                        {I18.f("ADD_IMAGES")}
                         <input type="file" ref="addImagesInput" multiple accept="image/png,image/jpg,image/jpeg,image/gif" onChange={this.addImages} />
                     </div>
     
-                    <div className="btn file-upload">
-                        Add ZIP
+                    <div className="btn file-upload" title={I18.f("ADD_ZIP_TITLE")}>
+                        {I18.f("ADD_ZIP")}
                         <input type="file" ref="addZipInput" accept=".zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" onChange={this.addZip} />
                     </div>
 
-                    <div className="btn" onClick={this.clear}>
-                        Clear
+                    <div className="btn" onClick={this.clear} title={I18.f("CLEAR_TITLE")}>
+                        {I18.f("CLEAR")}
                     </div>
 
                 </div>

@@ -1,4 +1,5 @@
 import {Observer, GLOBAL_EVENT} from '../Observer';
+import I18 from './I18';
 
 class ZipLoader {
     
@@ -20,7 +21,7 @@ class ZipLoader {
         this.zip.loadAsync(file).then(
             () => this.parseZip(),
             () => {
-                Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, "Invalid zip file");
+                Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("INVALID_ZIP_ERROR"));
                 if(this.onEnd) this.onEnd({});
             }
         );

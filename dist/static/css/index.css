@@ -158,6 +158,7 @@ html, body {
 }
 
 .pack-properties-containter td > input[type=text],
+.pack-properties-containter td > input[type=number],
 .pack-properties-containter td > select {
     width: 100%
 }
@@ -342,4 +343,37 @@ html, body {
     margin-top: 150px;
     color: #fff;
     font-size: 24px;
+}
+
+.old-browser-shader {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.old-browser-content {
+    width: 400px;
+    height: 180px;
+    background: #fff;
+    margin: auto;
+    margin-top: 64px;
+    font-size: 14px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 16px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.old-browser-content a {
+    margin: 12px;
 }
