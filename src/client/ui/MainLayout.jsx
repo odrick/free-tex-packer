@@ -7,6 +7,7 @@ import PackResults from './PackResults.jsx';
 import MessageBox from './MessageBox.jsx';
 import ProcessingShader from './ProcessingShader.jsx';
 import OldBrowserBlocker from './OldBrowserBlocker.jsx';
+import About from './About.jsx';
 
 import {Observer, GLOBAL_EVENT} from '../Observer';
 
@@ -16,7 +17,8 @@ class MainLayout extends React.Component {
 
         this.state = {
             messageBox: null,
-            shader: false
+            shader: false,
+            about: false
         };
 
         this.closeMessage = this.closeMessage.bind(this);
@@ -24,6 +26,8 @@ class MainLayout extends React.Component {
         Observer.on(GLOBAL_EVENT.SHOW_MESSAGE, this.showMessage, this);
         Observer.on(GLOBAL_EVENT.SHOW_SHADER, this.showShader, this);
         Observer.on(GLOBAL_EVENT.HIDE_SHADER, this.hideShader, this);
+        Observer.on(GLOBAL_EVENT.SHOW_ABOUT, this.showAbout, this);
+        Observer.on(GLOBAL_EVENT.HIDE_ABOUT, this.hideAbout, this);
     }
 
     showMessage(content, buttons=null) {
@@ -44,9 +48,18 @@ class MainLayout extends React.Component {
     hideShader() {
         this.setState({shader: false});
     }
+
+    showAbout() {
+        this.setState({about: true});
+    }
+
+    hideAbout() {
+        this.setState({about: false});
+    }
     
     render() {
         let shader = this.state.shader ? (<ProcessingShader/>) : null;
+        let about = this.state.about ? (<About/>) : null;
         
         return (
             
@@ -60,6 +73,7 @@ class MainLayout extends React.Component {
                     {this.state.messageBox}
                     {shader}
                     <OldBrowserBlocker/>
+                    {about}
                 </div>
             </div>
         );

@@ -2,6 +2,7 @@ import JsonHash from './JsonHash';
 import JsonArray from './JsonArray';
 import XML from './XML';
 import Css from './Css';
+import OldCss from './OldCss';
 import Pixi from './Pixi';
 import PhaserHash from './PhaserHash';
 import PhaserArray from './PhaserArray';
@@ -12,6 +13,7 @@ const list = [
     JsonArray,
     XML,
     Css,
+    OldCss,
     Pixi,
     PhaserHash,
     PhaserArray,

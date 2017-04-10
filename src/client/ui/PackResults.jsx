@@ -80,16 +80,29 @@ class PackResults extends React.Component {
                 </div>
 
                 <div className="results-view-footer back-white border-color-900">
-                    {this.textureBackColors.map(name => {
-                        return (
-                            <div key={"back-color-btn-" + name} className={"btn-back-color " + name + (this.state.textureBack == name ? " selected" : "")} onClick={this.setBack}>&nbsp;</div>
-                        )
-                    })}
                     
-                    <label htmlFor="result-view-outline">{I18.f("DISPLAY_OUTLINES")}</label>
-                    <input type="checkbox" id="result-view-outline" onChange={this.changeOutlines} />
-                    
-                    <div className="btn back-600 border-color-900 color-white" onClick={this.toggleSpritesPlayer}>{I18.f("SHOW_SPRITES")}</div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                {this.textureBackColors.map(name => {
+                                    return (
+                                        <td key={"back-color-btn-" + name}>
+                                            <div className={"btn-back-color " + name + (this.state.textureBack == name ? " selected" : "")} onClick={this.setBack}>&nbsp;</div>
+                                        </td>
+                                    )
+                                })}
+                                <td>
+                                    <label htmlFor="result-view-outline">{I18.f("DISPLAY_OUTLINES")}</label>
+                                </td>
+                                <td>
+                                    <input type="checkbox" id="result-view-outline" onChange={this.changeOutlines} />
+                                </td>
+                                <td>
+                                    <div className="btn back-600 border-color-900 color-white" onClick={this.toggleSpritesPlayer}>{I18.f("SHOW_SPRITES")}</div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                 </div>
             </div>
         );

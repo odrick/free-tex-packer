@@ -60,6 +60,14 @@ class Exporter {
     static get fileExt() {
         return "txt";
     }
+    
+    static get allowTrim() {
+        return true;
+    }
+
+    static get allowRotation() {
+        return true;
+    }
 }
 
 export default Exporter;

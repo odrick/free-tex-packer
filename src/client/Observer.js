@@ -11,7 +11,9 @@ let GLOBAL_EVENT = {
     START_EXPORT          : "START_EXPORT",
     SHOW_MESSAGE          : "SHOW_MESSAGE",
     SHOW_SHADER           : "SHOW_SHADER",
-    HIDE_SHADER           : "HIDE_SHADER"
+    HIDE_SHADER           : "HIDE_SHADER",
+    SHOW_ABOUT            : "SHOW_ABOUT",
+    HIDE_ABOUT            : "HIDE_ABOUT"
 };
 
 export {

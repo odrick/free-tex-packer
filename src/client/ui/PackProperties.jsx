@@ -20,6 +20,7 @@ class PackProperties extends React.Component {
 
         this.onPackerChange = this.onPackerChange.bind(this);
         this.onPropChanged = this.onPropChanged.bind(this);
+        this.onExporterChanged = this.onExporterChanged.bind(this);
         this.onExporterPropChanged = this.onExporterPropChanged.bind(this);
         this.forceUpdate = this.forceUpdate.bind(this);
         
@@ -98,6 +99,21 @@ class PackProperties extends React.Component {
         
         this.emitChanges();
     }
+
+    onExporterChanged() {
+        let exporter = getExporterByType(ReactDOM.findDOMNode(this.refs.exporter).value);
+        let allowTrimInput = ReactDOM.findDOMNode(this.refs.allowTrim);
+        let allowRotationInput = ReactDOM.findDOMNode(this.refs.allowRotation);
+        
+        let doRefresh = (allowTrimInput.checked != exporter.allowTrim) || 
+                        (allowRotationInput.checked != exporter.allowRotation);
+        
+        allowTrimInput.checked = exporter.allowTrim;
+        allowRotationInput.checked = exporter.allowRotation;
+        
+        this.onExporterPropChanged();
+        if(doRefresh) this.onPropChanged();
+    }
     
     onExporterPropChanged() {
         this.updatePackOptions();
@@ -116,6 +132,10 @@ class PackProperties extends React.Component {
     }
 
     render() {
+
+        let exporter = getExporterByType(this.packOptions.exporter);
+        let exporterRotationDisabled = exporter.allowRotation ? "" : "disabled";
+        let exporterTrimDisabled = exporter.allowTrim ? "" : "disabled";
         
         return (
             <div className="props-list back-white border-color-900">
@@ -137,7 +157,7 @@ class PackProperties extends React.Component {
                             <tr title={I18.f("FORMAT_TITLE")}>
                                 <td>{I18.f("FORMAT")}</td>
                                 <td>
-                                    <select ref="exporter" className="border-color-900" onChange={this.onExporterPropChanged} defaultValue={this.packOptions.exporter}>
+                                    <select ref="exporter" className="border-color-900" onChange={this.onExporterChanged} defaultValue={this.packOptions.exporter}>
                                     {exporters.map(node => {
                                         return (<option key={"exporter-" + node.type} defaultValue={node.type}>{node.type}</option>)
                                     })}
@@ -176,11 +196,11 @@ class PackProperties extends React.Component {
                             </tr>
                             <tr title={I18.f("ALLOW_ROTATION_TITLE")}>
                                 <td>{I18.f("ALLOW_ROTATION")}</td>
-                                <td><input ref="allowRotation" type="checkbox" className="border-color-900" onChange={this.onPropChanged} defaultChecked={this.packOptions.allowRotation ? "checked" : ""} /></td>
+                                <td><input ref="allowRotation" type="checkbox" className="border-color-900" onChange={this.onPropChanged} defaultChecked={this.packOptions.allowRotation ? "checked" : ""} disabled={exporterRotationDisabled} /></td>
                             </tr>
                             <tr title={I18.f("ALLOW_TRIM_TITLE")}>
                                 <td>{I18.f("ALLOW_TRIM")}</td>
-                                <td><input ref="allowTrim" type="checkbox" className="border-color-900" onChange={this.onPropChanged} defaultChecked={this.packOptions.allowTrim ? "checked" : ""}/></td>
+                                <td><input ref="allowTrim" type="checkbox" className="border-color-900" onChange={this.onPropChanged} defaultChecked={this.packOptions.allowTrim ? "checked" : ""}  disabled={exporterTrimDisabled} /></td>
                             </tr>
                             <tr title={I18.f("DETECT_IDENTICAL_TITLE")}>
                                 <td>{I18.f("DETECT_IDENTICAL")}</td>

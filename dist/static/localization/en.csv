@@ -47,3 +47,6 @@ CLEAR_WARNING;Realy clear all images?
 INVALID_ZIP_ERROR;Invalid zip file
 OLD_BROWSER_MESSAGE1;Sorry, but your browser is too old for this application...
 OLD_BROWSER_MESSAGE2;Please, use one of modern browsers:
+ABOUT_SOURCES;Sources:
+ABOUT_BUGS;Bugtracker:
+ABOUT_LIBS;Used libs:
