@@ -14,8 +14,6 @@ function loadLocalization() {
     I18.path = "static/localization";
     I18.init();
     I18.load(start);
-    
-    window.I18 = I18;
 }
 
 function start() {
