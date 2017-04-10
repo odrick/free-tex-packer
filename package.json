@@ -1,5 +1,5 @@
 {
-  "name": "t-packer",
+  "name": "free-tex-packer",
   "displayName": "Free textures packer",
   "version": "0.1.2",
   "description": "Online textures packer",
@@ -12,16 +12,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Odrick/t-packer.git"
+    "url": "git+https://github.com/odrick/free-tex-packer.git"
   },
   "keywords": [],
   "author": "Alexander Norinchak",
-  "authorSite": "https://github.com/Odrick/",
+  "authorSite": "https://github.com/odrick/",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Odrick/t-packer/issues"
+    "url": "https://github.com/odrick/free-tex-packer/issues"
   },
-  "homepage": "https://github.com/Odrick/t-packer",
+  "homepage": "https://github.com/odrick/free-tex-packer",
   "devDependencies": {
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",
