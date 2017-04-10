@@ -43,7 +43,6 @@ class PackProcessor {
                 
                 clone.name = item.name;
                 clone.image = item.image;
-                clone.ix = item.image._ix;
                 clone.skipRender = true;
 
                 removeIdentical.push(item);
@@ -90,8 +89,7 @@ class PackProcessor {
                 spriteSourceSize: {x: 0, y: 0, w: img.width, h: img.height},
                 sourceSize: {w: img.width, h: img.height},
                 name: key,
-                image: img,
-                ix: img._ix
+                image: img
             });
         }
 

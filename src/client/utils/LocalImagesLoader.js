@@ -7,6 +7,8 @@ class LocalImagesLoader {
 
         this.onProgress = null;
         this.onEnd = null;
+
+        this.waitImages = this.waitImages.bind(this);
     }
 
     load(data, onProgress=null, onEnd=null) {
@@ -24,7 +26,7 @@ class LocalImagesLoader {
 
     loadNext() {
         if(!this.data.length) {
-            if(this.onEnd) this.onEnd(this.loaded);
+            this.waitImages();
             return;
         }
 
@@ -36,7 +38,6 @@ class LocalImagesLoader {
         reader.onload = e => {
             img.src = e.target.result;
             img._base64 = e.target.result;
-            img._ix = this.loadedCnt;
 
             this.loaded[item.name] = img;
             this.loadedCnt++;
@@ -45,11 +46,28 @@ class LocalImagesLoader {
                 this.onProgress(this.loadedCnt / (this.loadedCnt + this.data.length));
             }
 
-            img.onload = () => this.loadNext();
+            this.loadNext();
         };
         reader.readAsDataURL(item);
     }
-    
+
+    waitImages() {
+        let ready = true;
+
+        for(let key of Object.keys(this.loaded)) {
+            if(!this.loaded[key].complete) {
+                ready = false;
+                break;
+            }
+        }
+
+        if(ready) {
+            if(this.onEnd) this.onEnd(this.loaded);
+        }
+        else {
+            setTimeout(this.waitImages, 50);
+        }
+    }
 }
 
 export default LocalImagesLoader;

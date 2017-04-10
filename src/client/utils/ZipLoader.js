@@ -10,6 +10,8 @@ class ZipLoader {
         this.filesList = [];
         this.loaded = {};
         this.loadedCnt = 0;
+
+        this.waitImages = this.waitImages.bind(this);
     }
     
     load(file, onProgress=null, onEnd=null) {
@@ -53,7 +55,7 @@ class ZipLoader {
     
     loadNext() {
         if(!this.filesList.length) {
-            if(this.onEnd) this.onEnd(this.loaded);
+            this.waitImages();
             return;
         }
         
@@ -68,8 +70,7 @@ class ZipLoader {
     
                 img.src = content;
                 img._base64 = content;
-                img._ix = this.loadedCnt;
-    
+
                 this.loaded[name] = img;
                 this.loadedCnt++;
     
@@ -77,8 +78,26 @@ class ZipLoader {
                     this.onProgress(this.loadedCnt / (this.loadedCnt + this.filesList.length));
                 }
                 
-                img.onload = () => this.loadNext();
+                this.loadNext();
             });
+    }
+
+    waitImages() {
+        let ready = true;
+
+        for(let key of Object.keys(this.loaded)) {
+            if(!this.loaded[key].complete) {
+                ready = false;
+                break;
+            }
+        }
+
+        if(ready) {
+            if(this.onEnd) this.onEnd(this.loaded);
+        }
+        else {
+            setTimeout(this.waitImages, 50);
+        }
     }
 }
 

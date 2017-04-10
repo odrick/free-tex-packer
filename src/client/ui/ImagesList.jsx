@@ -74,7 +74,7 @@ class ImagesList extends React.Component {
         this.setState({images: {}});
     }
     
-    createImagesFolder(name, path) {
+    createImagesFolder(name="", path="") {
         return {
             isFolder: true,
             name: name,
@@ -82,46 +82,52 @@ class ImagesList extends React.Component {
             items: []
         };
     }
-    
-    getImagesTree(data, path="", res=null) {
-        
-        if(!res) res = this.createImagesFolder("", path);
-        
-        let names = Object.keys(data);
-        
-        for(let name of names) {
-            let parts = name.split("/");
-            let itemName = parts.pop();
-            let itemPath = parts.join("/");
-            
-            if(itemPath == path) {
-                res.items.push({
-                    img: data[name],
-                    path: name,
-                    name: itemName
-                });
-            }
-            else {
-                let folderName = parts.pop();
-                let folderPath = parts.join("/");
-                if(folderPath == path) {
-                    let present = false;
-                    for(let item of res.items) {
-                        if(item.isFolder && item.name == folderName) {
-                            present = true;
-                            break;
-                        }
-                    }
-                    
-                    if(!present) {
-                        let folder = this.createImagesFolder(folderName, path);
-                        res.items.push(folder);
-                        this.getImagesTree(data, itemPath, folder);
-                    }
+
+    getImageSubFolder(root, parts) {
+        parts = parts.slice();
+
+        let folder = null;
+
+        while(parts.length) {
+            let name = parts.shift();
+
+            folder = null;
+
+            for (let item of root.items) {
+                if (item.isFolder && item.name == name) {
+                    folder = item;
+                    break;
                 }
             }
+
+            if (!folder) {
+                folder = this.createImagesFolder(name, parts.join("/") + "/" + name);
+                root.items.push(folder);
+            }
+
+            root = folder;
         }
-        
+
+        return folder || root;
+    }
+
+    getImagesTree() {
+        let res = this.createImagesFolder();
+
+        let keys = Object.keys(this.state.images);
+
+        for(let key of keys) {
+            let parts = key.split("/");
+            let name = parts.pop();
+            let folder = this.getImageSubFolder(res, parts);
+
+            folder.items.push({
+                img: this.state.images[key],
+                path: key,
+                name: name
+            });
+        }
+
         return res;
     }
     
@@ -174,9 +180,9 @@ class TreePart extends React.Component {
             <div>
                 {this.props.data.items.map((item) => {
 
-                    if(item.isFolder) {
+                    let key = item.path;
 
-                        let key = item.path ? item.path : item.name;
+                    if(item.isFolder) {
 
                         return (
                             <TreeView key={"img-list-folder-" + key} nodeLabel={item.name} defaultCollapsed={false}>
@@ -186,7 +192,7 @@ class TreePart extends React.Component {
                     }
 
                     return (
-                        <TreeItem key={"img-list-item-" + item.path} data={item}/>
+                        <TreeItem key={"img-list-item-" + key} data={item}/>
                     );
                 })}
             </div>
