@@ -14,19 +14,11 @@ class MessageBox extends React.Component {
             }
         }
         
-        //TODO: refactor this shit...
-        let keys = Object.keys(this.buttons);
-        for(let key of keys) {
-            let btn = this.buttons[key];
-            if(btn.callback) {
-                let cb = btn.callback;
-                btn.callback = () => {
-                    cb();
-                    this.props.closeCallback();
-                }
-            }
-            else btn.callback = this.props.closeCallback;
-        }
+        this.close = this.close.bind(this);
+    }
+    
+    close() {
+        this.props.closeCallback();
     }
 
     render() {
@@ -34,7 +26,7 @@ class MessageBox extends React.Component {
         
         for(let key of Object.keys(this.buttons)) {
             let btn = this.buttons[key];
-            buttons.push((<div className="btn back-600 border-color-900 color-white" key={"btn-" + key} onClick={btn.callback}>{btn.caption}</div>));
+            buttons.push((<MessageBoxButton key={"btn-" + key} caption={btn.caption} callback={btn.callback} parentBox={this} />));
         }
         
         return (
@@ -48,6 +40,25 @@ class MessageBox extends React.Component {
                     </div>
                 </div>
             </div>
+        );
+    }
+}
+
+class MessageBoxButton extends React.Component {
+    constructor(props) {
+        super(props);
+        
+        this.onClick = this.onClick.bind(this);
+    }
+    
+    onClick() {
+        if(this.props.callback) this.props.callback();
+        if(this.props.parentBox) this.props.parentBox.close();
+    }
+    
+    render() {
+        return (
+            <div className="btn back-600 border-color-900 color-white" onClick={this.onClick}>{this.props.caption}</div>
         );
     }
 }
