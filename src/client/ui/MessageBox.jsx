@@ -34,7 +34,7 @@ class MessageBox extends React.Component {
         
         for(let key of Object.keys(this.buttons)) {
             let btn = this.buttons[key];
-            buttons.push((<div className="btn" key={"btn-" + key} onClick={btn.callback}>{btn.caption}</div>));
+            buttons.push((<div className="btn back-600 border-color-900 color-white" key={"btn-" + key} onClick={btn.callback}>{btn.caption}</div>));
         }
         
         return (

@@ -52,7 +52,7 @@ class Css extends Exporter {
         
         ret += "/*\n";
         ret += "   ---------------------------\n";
-        ret += "   created with " + this.appInfo.name + " v" + this.appInfo.version + "\n";
+        ret += "   created with " + this.appInfo.displayName + " v" + this.appInfo.version + "\n";
         ret += "   " + this.appInfo.url + "\n";
         ret += "   ---------------------------\n";
         ret += "*/\n\n";

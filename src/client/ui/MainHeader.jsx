@@ -9,9 +9,10 @@ class MainHeader extends React.Component {
     
     render() {
         return (
-            <div className="main-header">
+            <div className="main-header back-900 color-white">
                 <div className="main-header-left">
-                    {appInfo.name}
+                    <img src="static/images/logo.png" />
+                    {appInfo.displayName} {appInfo.version}
                 </div>
                 <div className="main-header-right">
                     ?

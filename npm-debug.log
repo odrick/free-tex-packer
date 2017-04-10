@@ -1,0 +1,27 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'start' ]
+2 info using npm@3.10.10
+3 info using node@v6.10.1
+4 verbose stack Error: Invalid name: "Free textures packer"
+4 verbose stack     at ensureValidName (C:\Program Files\nodejs\node_modules\npm\node_modules\normalize-package-data\lib\fixer.js:336:15)
+4 verbose stack     at Object.fixNameField (C:\Program Files\nodejs\node_modules\npm\node_modules\normalize-package-data\lib\fixer.js:215:5)
+4 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\normalize-package-data\lib\normalize.js:32:38
+4 verbose stack     at Array.forEach (native)
+4 verbose stack     at normalize (C:\Program Files\nodejs\node_modules\npm\node_modules\normalize-package-data\lib\normalize.js:31:15)
+4 verbose stack     at final (C:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:349:5)
+4 verbose stack     at then (C:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:124:5)
+4 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:243:12
+4 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\graceful-fs\graceful-fs.js:78:16
+4 verbose stack     at tryToString (fs.js:456:3)
+5 verbose cwd D:\Projects\Www\t-packer
+6 error Windows_NT 10.0.14393
+7 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "start"
+8 error node v6.10.1
+9 error npm  v3.10.10
+10 error Invalid name: "Free textures packer"
+11 error If you need help, you may report this error at:
+11 error     <https://github.com/npm/npm/issues>
+12 verbose exit [ 1, true ]

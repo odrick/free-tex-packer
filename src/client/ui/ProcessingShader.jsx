@@ -27,7 +27,7 @@ class ProcessingShader extends React.Component {
 
     render() {
         return (
-            <div ref="shader" className="processing-shader">
+            <div ref="shader" className="processing-shader color-white">
                 <div className="processing-content">
                     {I18.f("PLEASE_WAIT")}
                 </div>

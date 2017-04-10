@@ -3,7 +3,7 @@ html, body {
     margin: 0;
     width: 100%;
     height: 100%;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: sans-serif, "Helvetica Neue", Helvetica, Arial;
     font-size: 12px;
 }
 
@@ -26,11 +26,10 @@ html, body {
 
 .main-header {
     width: 100%;
-    height: 40px;
-    background: #f66;
+    height: 64px;
     padding-left: 10px;
     padding-right: 10px;
-    line-height: 40px;
+    line-height: 64px;
     box-sizing: border-box;
     font-weight: bold;
 }
@@ -38,6 +37,11 @@ html, body {
 .main-header-left {
     float: left;
     font-size: 20px;
+}
+
+.main-header-left img {
+    vertical-align: middle;
+    margin-right: 8px;
 }
 
 .main-header-right {
@@ -58,16 +62,22 @@ html, body {
     width: 300px;
     height: 100%;
     float: left;
-    background: #eee;
+    text-align: left;
     position: relative;
-    border-right: 1px solid #999;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
 }
 
 .results-view {
     display: block;
     height: 100%;
-    background: #ffe;
     min-width: 600px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
 }
 
 .props-list {
@@ -75,14 +85,19 @@ html, body {
     width: 300px;
     height: 100%;
     float: right;
-    background: #eee;
     overflow-y: auto;
-    border-left: 1px solid #999;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
 }
 
 .images-controllers {
     padding: 8px;
-    border-bottom: 1px solid #999;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
     height: 30px;
 }
 
@@ -104,10 +119,6 @@ html, body {
 
 .image-list-item {
     cursor: pointer;
-}
-
-.image-list-item.selected {
-    background: #ccc;
 }
 
 .image-list-image-container {
@@ -141,7 +152,8 @@ html, body {
 }
 
 .btn {
-    border: 1px solid #ccc;
+    border-width: 1px;
+    border-style: solid;
     font-size: 12px;
     line-height: 1;
     text-align: center;
@@ -165,7 +177,6 @@ html, body {
 .file-upload {
     position: relative;
     overflow: hidden;
-    background: #eee;
     margin-bottom: 0;
 }
 
@@ -198,7 +209,8 @@ html, body {
 
 .pack-properties-containter td > input,
 .pack-properties-containter td > select {
-    border: 1px solid #999;
+    border-width: 1px;
+    border-style: solid;
 }
 
 .results-view-container {
@@ -206,14 +218,13 @@ html, body {
     height: -moz-calc(100% - 44px);
     height: -o-calc(100% - 44px);
     height: calc(100% - 44px);
-    background: #333;
     overflow: auto;
 }
 
 .results-view-footer {
     display: block;
-    border-top: 1px solid #999;
-    background: #eee;
+    border-top-width: 1px;
+    border-top-style: solid;
     height: 44px;
     box-sizing: border-box;
     padding: 8px;
@@ -267,7 +278,7 @@ html, body {
 }
 
 .results-view-footer > .btn-back-color.selected {
-    border-color: #999;
+    border-color: #000;
     border-width: 2px;
 }
 
@@ -292,7 +303,6 @@ html, body {
 }
 
 .player-window {
-    background: #eee;
     display: inline-block;
     padding: 8px;
     -webkit-border-radius: 4px;
@@ -300,7 +310,8 @@ html, body {
     -o-border-radius: 4px;
     -ms-border-radius: 4px;
     border-radius: 4px;
-    border: 2px solid #ccc;
+    border-width: 1px;
+    border-style: solid;
 }
 
 .player-buffer {
@@ -332,17 +343,19 @@ html, body {
 .message-box-window {
     width: 340px;
     height: 200px;
-    background: #eee;
     margin: auto;
-    margin-top: 64px;
+    margin-top: 86px;
     font-size: 14px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     -o-border-radius: 4px;
     -ms-border-radius: 4px;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border-width: 1px;
+    border-style: solid;
     padding: 16px;
+    background: #fff;
+    border-color: #ccc;
 }
 
 .message-box-content {
@@ -377,8 +390,8 @@ html, body {
 .processing-content {
     text-align: center;
     margin-top: 150px;
-    color: #fff;
     font-size: 24px;
+    font-weight: bold;
 }
 
 .old-browser-shader {
@@ -397,7 +410,7 @@ html, body {
     height: 180px;
     background: #fff;
     margin: auto;
-    margin-top: 64px;
+    margin-top: 86px;
     font-size: 14px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;

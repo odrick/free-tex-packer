@@ -167,7 +167,7 @@ class SpritesPlayer extends React.Component {
     render() {
         return (
             <div ref="container" className="player-container">
-                <div className="player-window">
+                <div className="player-window back-50 border-color-900">
                     <div>
                         {I18.f("SPRITE_NAME")} <input type="text" ref="spriteName" onBlur={this.updateCurrentTextures} onKeyDown={this.forceUpdate} />
                     </div>

@@ -69,8 +69,8 @@ class PackResults extends React.Component {
         }
         
         return (
-            <div className="results-view">
-                <div className="results-view-container" onClick={this.clearSelection}>
+            <div className="results-view border-color-900">
+                <div className="results-view-container back-white" onClick={this.clearSelection}>
                     <div className={this.state.playerVisible ? "block-hidden" : "block-visible"}>
                         {views}
                     </div>
@@ -79,7 +79,7 @@ class PackResults extends React.Component {
                     </div>
                 </div>
 
-                <div className="results-view-footer">
+                <div className="results-view-footer back-white border-color-900">
                     {this.textureBackColors.map(name => {
                         return (
                             <div key={"back-color-btn-" + name} className={"btn-back-color " + name + (this.state.textureBack == name ? " selected" : "")} onClick={this.setBack}>&nbsp;</div>
@@ -89,7 +89,7 @@ class PackResults extends React.Component {
                     <label htmlFor="result-view-outline">{I18.f("DISPLAY_OUTLINES")}</label>
                     <input type="checkbox" id="result-view-outline" onChange={this.changeOutlines} />
                     
-                    <div className="btn" onClick={this.toggleSpritesPlayer}>{I18.f("SHOW_SPRITES")}</div>
+                    <div className="btn back-600 border-color-900 color-white" onClick={this.toggleSpritesPlayer}>{I18.f("SHOW_SPRITES")}</div>
                 </div>
             </div>
         );

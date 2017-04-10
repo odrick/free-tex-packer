@@ -130,21 +130,21 @@ class ImagesList extends React.Component {
         let data = this.getImagesTree(this.state.images);
 
         return (
-            <div className="images-list">
+            <div className="images-list border-color-900 back-white">
                 
-                <div className="images-controllers">
+                <div className="images-controllers border-color-900">
                     
-                    <div className="btn file-upload" title={I18.f("ADD_IMAGES_TITLE")}>
+                    <div className="btn back-600 border-color-900 color-white file-upload" title={I18.f("ADD_IMAGES_TITLE")}>
                         {I18.f("ADD_IMAGES")}
                         <input type="file" ref="addImagesInput" multiple accept="image/png,image/jpg,image/jpeg,image/gif" onChange={this.addImages} />
                     </div>
     
-                    <div className="btn file-upload" title={I18.f("ADD_ZIP_TITLE")}>
+                    <div className="btn back-600 border-color-900 color-white file-upload" title={I18.f("ADD_ZIP_TITLE")}>
                         {I18.f("ADD_ZIP")}
                         <input type="file" ref="addZipInput" accept=".zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" onChange={this.addZip} />
                     </div>
 
-                    <div className="btn" onClick={this.clear} title={I18.f("CLEAR_TITLE")}>
+                    <div className="btn back-600 border-color-900 color-white" onClick={this.clear} title={I18.f("CLEAR_TITLE")}>
                         {I18.f("CLEAR")}
                     </div>
 
@@ -222,7 +222,7 @@ class TreeItem extends React.Component {
 
     render() {
         return (
-            <div className={"image-list-item" + (this.state.selected ? " selected" : "")} onClick={this.onSelect} >
+            <div className={"image-list-item" + (this.state.selected ? " back-300 color-white" : "")} onClick={this.onSelect} >
                 <div className="image-list-image-container">
                     <img src={this.props.data.img.src} className="image-list-image" />
                 </div>

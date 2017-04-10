@@ -17,7 +17,7 @@ class XML extends Exporter {
         
         let info = [];
         info.push("");
-        info.push("Created with " + this.appInfo.name + " v" + this.appInfo.version + " " + this.appInfo.url);
+        info.push("Created with " + this.appInfo.displayName + " v" + this.appInfo.version + " " + this.appInfo.url);
         info.push("Format:");
         info.push("n  => name");
         info.push("x  => x pos");
