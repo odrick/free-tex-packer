@@ -173,17 +173,20 @@ class TreePart extends React.Component {
         return (
             <div>
                 {this.props.data.items.map((item) => {
-                    
+
                     if(item.isFolder) {
+
+                        let key = item.path ? item.path : item.name;
+
                         return (
-                            <TreeView key={"img_list-" + item.path} nodeLabel={item.name} defaultCollapsed={false}>
+                            <TreeView key={"img-list-folder-" + key} nodeLabel={item.name} defaultCollapsed={false}>
                                 <TreePart data={item}/>
                             </TreeView>
                         );
                     }
-                    
+
                     return (
-                        <TreeItem key={"img_list-" + item.path} data={item}/>
+                        <TreeItem key={"img-list-item-" + item.path} data={item}/>
                     );
                 })}
             </div>
