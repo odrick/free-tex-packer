@@ -56,6 +56,7 @@ class PackProcessor {
         }
         
         for(let item of clones) {
+            item.cloned = true;
             rects.push(item);
         }
         

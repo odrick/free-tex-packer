@@ -45,7 +45,9 @@ class TextureView extends React.Component {
 
             if(this.props.displayOutline) {
                 for (let item of this.props.data.data) {
-                    this.drawOutline(ctx, item);
+                    if(!item.cloned) {
+                        this.drawOutline(ctx, item);
+                    }
                 }
             }
 

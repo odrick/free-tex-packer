@@ -66,7 +66,7 @@ class MainLayout extends React.Component {
             <div className="main-wrapper">
                 <MainHeader/>
                 
-                <div className="main-layout">
+                <div className="main-layout border-color-900">
                     <ImagesList/>
                     <PackProperties/>
                     <PackResults/>

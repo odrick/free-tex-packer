@@ -9,6 +9,7 @@ html, body {
 
 .main-container {
     position: absolute;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -20,7 +21,7 @@ html, body {
 .main-wrapper {
     height: 100%;
     min-width: 1100px;
-    min-height: 520px;
+    min-height: 440px;
     max-height: 800px;
 }
 
@@ -57,12 +58,18 @@ html, body {
 }
 
 .main-layout {
-    height: -webkit-calc(100% - 40px);
-    height: -moz-calc(100% - 40px);
-    height: -o-calc(100% - 40px);
-    height: calc(100% - 40px);
+    height: -webkit-calc(100% - 65px);
+    height: -moz-calc(100% - 65px);
+    height: -o-calc(100% - 65px);
+    height: calc(100% - 65px);
     max-width: 1280px;
     margin: auto;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-right-width: 1px;
+    border-right-style: solid;
 }
 
 .images-list {
@@ -72,20 +79,14 @@ html, body {
     float: left;
     text-align: left;
     position: relative;
-    border-left-width: 1px;
-    border-left-style: solid;
     border-right-width: 1px;
     border-right-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
 }
 
 .results-view {
     display: block;
     height: 100%;
     min-width: 600px;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
 }
 
 .props-list {
@@ -96,10 +97,6 @@ html, body {
     overflow-y: auto;
     border-left-width: 1px;
     border-left-style: solid;
-    border-right-width: 1px;
-    border-right-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
 }
 
 .images-controllers {
