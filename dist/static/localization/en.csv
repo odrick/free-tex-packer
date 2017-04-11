@@ -5,6 +5,7 @@ ADD_IMAGES;Add images
 ADD_IMAGES_TITLE;Add images
 ADD_ZIP;Add ZIP
 ADD_ZIP_TITLE;Add zipped images
+IMAGE_DROP_HELP;or drag'n'drop images here
 CLEAR;Clear
 CLEAR_TITLE;Clear all images
 DISPLAY_OUTLINES;Display outlines:

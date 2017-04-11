@@ -5,6 +5,7 @@ ADD_IMAGES;Добавить
 ADD_IMAGES_TITLE;Добавить изображения
 ADD_ZIP;Добавить ZIP
 ADD_ZIP_TITLE;Добавить упакованные изображения
+IMAGE_DROP_HELP;или перетяните изображения сюда
 CLEAR;Очистить
 CLEAR_TITLE;Очистить все изображения
 DISPLAY_OUTLINES;Отображать контуры:

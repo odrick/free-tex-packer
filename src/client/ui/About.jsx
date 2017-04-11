@@ -49,9 +49,6 @@ class About extends React.Component {
                                         <div>
                                             <a href="https://stuk.github.io/jszip/" target="_blank" className="color-300">JSZip</a>
                                         </div>
-                                        <div>
-                                            <a href="https://github.com/chenglou/react-treeview/" target="_blank" className="color-300">React-treeview</a>
-                                        </div>
                                     </td>
                                 </tr>
                             </tbody>

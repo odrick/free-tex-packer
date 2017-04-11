@@ -31,7 +31,7 @@ class ZipLoader {
     
     parseZip() {
         
-        let extensions = ["png", "jpg", "jpeg"];
+        let extensions = ["png", "jpg", "jpeg", "gif"];
         this.filesList = [];
         
         let files = Object.keys(this.zip.files);
