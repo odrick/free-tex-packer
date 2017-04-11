@@ -500,16 +500,22 @@ html, body {
     background-repeat: no-repeat;
     background-size: 44px 50px;
     float: left;
+    margin-left: 4px;
     margin-right: 16px;
     margin-bottom: 8px;
 }
 
 .about-author {
     margin-bottom: 8px;
+    text-align: center;
 }
 
 .about-author a {
     text-decoration: underline;
+}
+
+.about-app-info {
+    text-align: center;
 }
 
 .about-app-name {

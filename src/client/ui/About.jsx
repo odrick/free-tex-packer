@@ -24,7 +24,7 @@ class About extends React.Component {
                     <div className="about-author">
                         <a href={appInfo.authorSite} target="_blank" className="color-300">{appInfo.author}</a>
                     </div>
-                    <div>
+                    <div className="about-app-info">
                         <span className="about-app-name">{appInfo.displayName}</span>
                         <span className="about-app-version">{appInfo.version}</span>
                     </div>
@@ -48,6 +48,9 @@ class About extends React.Component {
                                         </div>
                                         <div>
                                             <a href="https://stuk.github.io/jszip/" target="_blank" className="color-300">JSZip</a>
+                                        </div>
+                                        <div>
+                                            <a href="https://github.com/eligrey/FileSaver.js" target="_blank" className="color-300">FileSaver.js</a>
                                         </div>
                                     </td>
                                 </tr>

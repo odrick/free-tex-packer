@@ -1,3 +1,6 @@
+const JSZip = require('jszip');
+const FileSaver = require('file-saver');
+
 class Downloader {
     
     static run(files, fileName) {
@@ -12,7 +15,7 @@ class Downloader {
         if(ext != "zip") fileName = fileName + ".zip";
 
         zip.generateAsync({type:"blob"}).then((content) => {
-            saveAs(content, fileName);
+            FileSaver.saveAs(content, fileName);
         });
     }
     
