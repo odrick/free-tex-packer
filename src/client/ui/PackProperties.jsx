@@ -30,24 +30,38 @@ class PackProperties extends React.Component {
     }
     
     loadOptions() {
-        let data = Storage.load(STORAGE_OPTIONS_KEY);
-        
+        return this.applyOptionsDefaults(Storage.load(STORAGE_OPTIONS_KEY));
+    }
+    
+    applyOptionsDefaults(data) {
         if(!data) data = {};
         
         data.textureName = data.textureName || "texture";
+        data.textureFormat = data.textureFormat || "png";
         data.removeFileExtension = data.removeFileExtension === undefined ? false : data.removeFileExtension;
         data.scale = data.scale || 1;
-        data.exporter = data.exporter || exporters[0].type;
+        data.exporter = getExporterByType(data.exporter) ? data.exporter : exporters[0].type;
         data.fileName = data.fileName || "pack-result";
         data.width = data.width === undefined ? 2048 : data.width;
         data.height = data.height === undefined ? 2048 : data.height;
         data.fixedSize = data.fixedSize === undefined ? false : data.fixedSize;
-        data.padding = data.padding || 1;
+        data.padding = data.padding === undefined ? 1 : data.padding;
         data.allowRotation = data.allowRotation === undefined ? true : data.allowRotation;
         data.allowTrim = data.allowTrim === undefined ? true : data.allowTrim;
         data.detectIdentical = data.detectIdentical === undefined ? true : data.detectIdentical;
-        data.packer = data.packer || packers[0].type;
-        data.packerMethod = data.packerMethod || packers[0].methods[0];
+        data.packer = getPackerByType(data.packer) ? data.packer : packers[0].type;
+        
+        let methodValid = false;
+        let packer = getPackerByType(data.packer);
+        let packerMethods = Object.keys(packer.methods);
+        for(let method of packerMethods) {
+            if(method == data.packerMethod) {
+                methodValid = true;
+                break;
+            }
+        }
+        
+        if(!methodValid) data.packerMethod = packerMethods[0];
         
         return data;
     }
@@ -61,20 +75,25 @@ class PackProperties extends React.Component {
     }
     
     updatePackOptions() {
-        this.packOptions.textureName = ReactDOM.findDOMNode(this.refs.textureName).value || "texture";
-        this.packOptions.removeFileExtension = ReactDOM.findDOMNode(this.refs.removeFileExtension).checked;
-        this.packOptions.scale = Number(ReactDOM.findDOMNode(this.refs.scale).value) || 1;
-        this.packOptions.exporter = ReactDOM.findDOMNode(this.refs.exporter).value;
-        this.packOptions.fileName = ReactDOM.findDOMNode(this.refs.fileName).value || "pack-result";
-        this.packOptions.width = Number(ReactDOM.findDOMNode(this.refs.width).value) || 0;
-        this.packOptions.height = Number(ReactDOM.findDOMNode(this.refs.height).value) || 0;
-        this.packOptions.fixedSize = ReactDOM.findDOMNode(this.refs.fixedSize).checked;
-        this.packOptions.padding = Number(ReactDOM.findDOMNode(this.refs.padding).value) || 0;
-        this.packOptions.allowRotation = ReactDOM.findDOMNode(this.refs.allowRotation).checked;
-        this.packOptions.allowTrim = ReactDOM.findDOMNode(this.refs.allowTrim).checked;
-        this.packOptions.detectIdentical = ReactDOM.findDOMNode(this.refs.detectIdentical).checked;
-        this.packOptions.packer = ReactDOM.findDOMNode(this.refs.packer).value;
-        this.packOptions.packerMethod = ReactDOM.findDOMNode(this.refs.packerMethod).value;
+        let data = {};
+        
+        data.textureName = ReactDOM.findDOMNode(this.refs.textureName).value;
+        data.textureFormat = ReactDOM.findDOMNode(this.refs.textureFormat).value;
+        data.removeFileExtension = ReactDOM.findDOMNode(this.refs.removeFileExtension).checked;
+        data.scale = Number(ReactDOM.findDOMNode(this.refs.scale).value);
+        data.exporter = ReactDOM.findDOMNode(this.refs.exporter).value;
+        data.fileName = ReactDOM.findDOMNode(this.refs.fileName).value;
+        data.width = Number(ReactDOM.findDOMNode(this.refs.width).value) || 0;
+        data.height = Number(ReactDOM.findDOMNode(this.refs.height).value) || 0;
+        data.fixedSize = ReactDOM.findDOMNode(this.refs.fixedSize).checked;
+        data.padding = Number(ReactDOM.findDOMNode(this.refs.padding).value) || 0;
+        data.allowRotation = ReactDOM.findDOMNode(this.refs.allowRotation).checked;
+        data.allowTrim = ReactDOM.findDOMNode(this.refs.allowTrim).checked;
+        data.detectIdentical = ReactDOM.findDOMNode(this.refs.detectIdentical).checked;
+        data.packer = ReactDOM.findDOMNode(this.refs.packer).value;
+        data.packerMethod = ReactDOM.findDOMNode(this.refs.packerMethod).value;
+
+        this.packOptions = this.applyOptionsDefaults(data);
     }
 
     getPackOptions() {
@@ -145,6 +164,15 @@ class PackProperties extends React.Component {
                             <tr title={I18.f("TEXTURE_NAME_TITLE")}>
                                 <td>{I18.f("TEXTURE_NAME")}</td>
                                 <td><input ref="textureName" type="text" className="border-color-900" defaultValue={this.packOptions.textureName} onBlur={this.onExporterPropChanged} /></td>
+                            </tr>
+                            <tr title={I18.f("TEXTURE_FORMAT_TITLE")}>
+                                <td>{I18.f("TEXTURE_FORMAT")}</td>
+                                <td>
+                                    <select ref="textureFormat" className="border-color-900" defaultValue={this.packOptions.textureFormat} onChange={this.onExporterChanged}>
+                                        <option value="png">png</option>
+                                        <option value="jpg">jpg</option>
+                                    </select>
+                                </td>
                             </tr>
                             <tr title={I18.f("REMOVE_FILE_EXT_TITLE")}>
                                 <td>{I18.f("REMOVE_FILE_EXT")}</td>

@@ -90,19 +90,19 @@ class APP {
 
             let fName = textureName + (this.packResult.length > 1 ? "-" + ix : "");
 
-            let imageData = item.buffer.toDataURL();
+            let imageData = item.buffer.toDataURL(this.packOptions.textureFormat == "png" ? "image/png" : "image/jpeg");
             let parts = imageData.split(",");
             parts.shift();
             imageData = parts.join(",");
 
             files.push({
-                name: fName + ".png",
+                name: `${fName}.${this.packOptions.textureFormat}`,
                 content: imageData,
                 base64: true
             });
 
             let options = {
-                imageName: fName + ".png",
+                imageName: `${fName}.${this.packOptions.textureFormat}`,
                 format: "RGBA8888",
                 imageWidth: item.buffer.width,
                 imageHeight: item.buffer.height,

@@ -27,10 +27,14 @@ class ImagesList extends React.Component {
             dropZone.ondrop = this.onFilesDrop;
 
             dropZone.ondragover = () => {
+                let help = ReactDOM.findDOMNode(this.refs.dropHelp);
+                if(help) help.className = "image-drop-help selected";
                 return false;
             };
 
             dropZone.ondragleave = () => {
+                let help = ReactDOM.findDOMNode(this.refs.dropHelp);
+                if(help) help.className = "image-drop-help";
                 return false;
             };
         }
@@ -164,7 +168,7 @@ class ImagesList extends React.Component {
 
         let data = this.getImagesTree(this.state.images);
         
-        let dropHelp = Object.keys(this.state.images).length > 0 ? null : (<div className="image-drop-help">{I18.f("IMAGE_DROP_HELP")}</div>);
+        let dropHelp = Object.keys(this.state.images).length > 0 ? null : (<div ref="dropHelp" className="image-drop-help">{I18.f("IMAGE_DROP_HELP")}</div>);
 
         return (
             <div className="images-list border-color-900 back-white">

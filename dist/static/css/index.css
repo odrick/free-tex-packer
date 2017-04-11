@@ -141,6 +141,10 @@ html, body {
     border-radius: 4px;
 }
 
+.image-drop-help.selected {
+    background: #ddd;
+}
+
 .image-list-item {
     cursor: pointer;
 }

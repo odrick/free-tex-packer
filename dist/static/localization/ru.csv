@@ -14,6 +14,8 @@ SPRITE_NAME;Название спрайта:
 ANIMATION_SPEED;Скорость анимации:
 TEXTURE_NAME;Имя текстуры:
 TEXTURE_NAME_TITLE;Имя, которое будет использоваться для именования отдельных файлов
+TEXTURE_FORMAT;Формат текстуры:
+TEXTURE_FORMAT_TITLE;Формат, в котором будет сохранена текстура
 REMOVE_FILE_EXT;Удалить расширение:
 REMOVE_FILE_EXT_TITLE;Удаляет расширения файла при экспорте
 SCALE;Масштаб:
