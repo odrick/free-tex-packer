@@ -1,3 +1,3 @@
-# t-packer
+# Free textures packer
 
 description later...

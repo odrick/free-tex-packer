@@ -39,24 +39,31 @@ class ImagesList extends React.Component {
     onFilesDrop(e) {
         e.preventDefault();
         
-        let loader = new LocalImagesLoader();
-        loader.load(e.dataTransfer.files, null, data => this.loadImagesComplete(data));
+        if(e.dataTransfer.files.length) {
+            let loader = new LocalImagesLoader();
+            loader.load(e.dataTransfer.files, null, data => this.loadImagesComplete(data));
+        }
         
         return false;
     }
 
     addImages(e) {
-        Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
-        
-        let loader = new LocalImagesLoader();
-        loader.load(e.target.files, null, data => this.loadImagesComplete(data));
+        if(e.target.files.length) {
+            Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
+
+            let loader = new LocalImagesLoader();
+            loader.load(e.target.files, null, data => this.loadImagesComplete(data));
+        }
     }
     
     addZip(e) {
-        Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
-        
-        let loader = new ZipLoader();
-        loader.load(e.target.files[0], null, data => this.loadImagesComplete(data));
+        let file = e.target.files[0];
+        if(file) {
+            Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
+
+            let loader = new ZipLoader();
+            loader.load(file, null, data => this.loadImagesComplete(data));
+        }
     }
 
     loadImagesComplete(data) {
@@ -210,7 +217,7 @@ class TreePart extends React.Component {
                     if(item.isFolder) {
 
                         return (
-                            <TreeView key={"img-list-folder-" + key} nodeLabel={item.name} defaultCollapsed={false}>
+                            <TreeView key={"img-list-folder-" + key} label={item.name}>
                                 <TreePart data={item}/>
                             </TreeView>
                         );

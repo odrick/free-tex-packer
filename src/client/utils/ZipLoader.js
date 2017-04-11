@@ -21,10 +21,12 @@ class ZipLoader {
         
         this.zip = new JSZip();
         this.zip.loadAsync(file).then(
-            () => this.parseZip(),
+            () => {
+                this.parseZip();
+            },
             () => {
                 Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("INVALID_ZIP_ERROR"));
-                if(this.onEnd) this.onEnd({});
+                if (this.onEnd) this.onEnd({});
             }
         );
     }

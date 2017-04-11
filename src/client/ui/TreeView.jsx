@@ -12,42 +12,36 @@ class TreeView extends React.Component {
         };
     }
 
-    handleClick(...args) {
+    handleClick() {
         this.setState({collapsed: !this.state.collapsed});
         if (this.props.onClick) {
-            this.props.onClick(...args);
+            this.props.onClick();
         }
     }
 
     render() {
-        let {
-            collapsed = this.state.collapsed,
-            className = '',
-            itemClassName = '',
-            nodeLabel,
-            children,
-            defaultCollapsed,
-            ...rest,
-        } = this.props;
+        let collapsed = this.state.collapsed;
+        let label = this.props.label;
+        let children = this.props.children;
 
-        let arrowClassName = 'tree-view-arrow';
-        let containerClassName = 'tree-view-children';
+        let arrowClass = 'tree-view-arrow';
+        let containerClass = 'tree-view-children';
         if (collapsed) {
-            arrowClassName += ' tree-view-arrow-collapsed';
-            containerClassName += ' tree-view-children-collapsed';
+            arrowClass += ' tree-view-arrow-collapsed';
+            containerClass += ' tree-view-children-collapsed';
         }
 
-        let arrow = (<div {...rest} className={className + ' ' + arrowClassName}/>);
+        let arrow = (<div className={arrowClass}/>);
         let folderIcon = (<div className="tree-view-folder"></div>);
                 
         return (
             <div className="tree-view">
-                <div className={'tree-view-item ' + itemClassName} onClick={this.handleClick}>
+                <div className={'tree-view-item'} onClick={this.handleClick}>
                     {arrow}
                     {folderIcon}
-                    {nodeLabel}
+                    {label}
                 </div>
-                <div className={containerClassName}>
+                <div className={containerClass}>
                     {children}
                 </div>
             </div>
