@@ -35,18 +35,25 @@ html, body {
     font-weight: bold;
 }
 
-.main-header-left {
+.main-header-app-name {
     float: left;
     font-size: 20px;
 }
 
-.main-header-left img {
+.main-header-app-name img {
     vertical-align: middle;
     margin-right: 8px;
 }
 
-.main-header-right {
-    float: right;
+.main-header-donate {
+    display: block;
+    position: absolute;
+    right: 44px;
+    top: 8px;
+}
+
+.main-header-donate img {
+    visibility: hidden;
 }
 
 .main-header-about {
@@ -54,7 +61,9 @@ html, body {
     color: #fff;
     text-decoration: underline;
     cursor: pointer;
+    padding-left: 8px;
     padding-right: 8px;
+    float: right;
 }
 
 .main-layout {
@@ -178,6 +187,7 @@ html, body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    white-space: nowrap;
 }
 
 .file-upload {
