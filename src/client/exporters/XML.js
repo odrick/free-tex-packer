@@ -1,6 +1,5 @@
 import Exporter from './Exporter';
-
-const prettyData = require('pretty-data').pd;
+import prettyData from 'pretty-data';
 
 class XML extends Exporter {
     run(data, options) {
@@ -90,7 +89,7 @@ class XML extends Exporter {
         }
         str += (new XMLSerializer()).serializeToString(xml);
 
-        return prettyData.xml(str);
+        return prettyData.pd.xml(str);
     }
 
     static get type() {

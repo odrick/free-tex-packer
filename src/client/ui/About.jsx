@@ -52,6 +52,9 @@ class About extends React.Component {
                                         <div>
                                             <a href="https://github.com/eligrey/FileSaver.js" target="_blank" className="color-300">FileSaver.js</a>
                                         </div>
+                                        <div>
+                                            <a href="https://github.com/vkiryukhin/pretty-data/" target="_blank" className="color-300">pretty-data</a>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>

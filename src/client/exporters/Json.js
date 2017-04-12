@@ -1,6 +1,5 @@
 import Exporter from './Exporter';
-
-const prettyData = require('pretty-data').pd;
+import prettyData from 'pretty-data';
 
 class Json extends Exporter {
     constructor() {
@@ -48,7 +47,7 @@ class Json extends Exporter {
             meta: meta
         };
 
-        return prettyData.json(JSON.stringify(res));
+        return prettyData.pd.json(JSON.stringify(res));
     }
 }
 

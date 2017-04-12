@@ -1,5 +1,5 @@
-const JSZip = require('jszip');
-const FileSaver = require('file-saver');
+import JSZip from 'jszip';
+import FileSaver from 'file-saver';
 
 class Downloader {
     
