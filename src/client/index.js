@@ -18,7 +18,7 @@ function loadLocalization() {
 
 function start() {
     app = new APP();
-    ReactDOM.render(React.createElement(MainLayout), document.getElementById("main"));
+    ReactDOM.render(React.createElement(MainLayout), document.getElementById("root"));
 }
 
 window.addEventListener("load", loadLocalization, false);

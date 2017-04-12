@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TreeView from 'react-treeview';
+import TreeView from './TreeView.jsx';
 
 import LocalImagesLoader from '../utils/LocalImagesLoader';
 import ZipLoader from '../utils/ZipLoader';
 import I18 from '../utils/I18';
 
 import {Observer, GLOBAL_EVENT} from '../Observer';
-
-let LAST_TREE_ITEM_SELECTED = null;
 
 class ImagesList extends React.Component {
     constructor(props) {
@@ -18,22 +16,58 @@ class ImagesList extends React.Component {
         this.addZip = this.addZip.bind(this);
         this.clear = this.clear.bind(this);
         this.doClear = this.doClear.bind(this);
+        this.onFilesDrop = this.onFilesDrop.bind(this);
 
         this.state = {images: {}};
     }
+    
+    componentDidMount() {
+        let dropZone = ReactDOM.findDOMNode(this.refs.imagesTree);
+        if(dropZone) {
+            dropZone.ondrop = this.onFilesDrop;
+
+            dropZone.ondragover = () => {
+                let help = ReactDOM.findDOMNode(this.refs.dropHelp);
+                if(help) help.className = "image-drop-help selected";
+                return false;
+            };
+
+            dropZone.ondragleave = () => {
+                let help = ReactDOM.findDOMNode(this.refs.dropHelp);
+                if(help) help.className = "image-drop-help";
+                return false;
+            };
+        }
+    }
+    
+    onFilesDrop(e) {
+        e.preventDefault();
+        
+        if(e.dataTransfer.files.length) {
+            let loader = new LocalImagesLoader();
+            loader.load(e.dataTransfer.files, null, data => this.loadImagesComplete(data));
+        }
+        
+        return false;
+    }
 
     addImages(e) {
-        Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
-        
-        let loader = new LocalImagesLoader();
-        loader.load(e.target.files, null, data => this.loadImagesComplete(data));
+        if(e.target.files.length) {
+            Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
+
+            let loader = new LocalImagesLoader();
+            loader.load(e.target.files, null, data => this.loadImagesComplete(data));
+        }
     }
     
     addZip(e) {
-        Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
-        
-        let loader = new ZipLoader();
-        loader.load(e.target.files[0], null, data => this.loadImagesComplete(data));
+        let file = e.target.files[0];
+        if(file) {
+            Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
+
+            let loader = new ZipLoader();
+            loader.load(file, null, data => this.loadImagesComplete(data));
+        }
     }
 
     loadImagesComplete(data) {
@@ -70,7 +104,6 @@ class ImagesList extends React.Component {
     doClear() {
         Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, {});
         Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, null);
-        LAST_TREE_ITEM_SELECTED = null;
         this.setState({images: {}});
     }
     
@@ -134,6 +167,8 @@ class ImagesList extends React.Component {
     render() {
 
         let data = this.getImagesTree(this.state.images);
+        
+        let dropHelp = Object.keys(this.state.images).length > 0 ? null : (<div ref="dropHelp" className="image-drop-help">{I18.f("IMAGE_DROP_HELP")}</div>);
 
         return (
             <div className="images-list border-color-900 back-white">
@@ -156,8 +191,9 @@ class ImagesList extends React.Component {
 
                 </div>
                 
-                <div className="images-tree">
+                <div ref="imagesTree" className="images-tree">
                     <TreePart data={data} />
+                    {dropHelp}
                 </div>
                 
             </div>
@@ -185,7 +221,7 @@ class TreePart extends React.Component {
                     if(item.isFolder) {
 
                         return (
-                            <TreeView key={"img-list-folder-" + key} nodeLabel={item.name} defaultCollapsed={false}>
+                            <TreeView key={"img-list-folder-" + key} label={item.name}>
                                 <TreePart data={item}/>
                             </TreeView>
                         );
@@ -205,7 +241,7 @@ class TreeItem extends React.Component {
     constructor(props) {
         super(props);
         
-        this.state = {selected: LAST_TREE_ITEM_SELECTED == this.props.data.path};
+        this.state = {selected: false};
 
         this.onSelect = this.onSelect.bind(this);
         Observer.on(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onOtherSelected, this);
@@ -225,8 +261,7 @@ class TreeItem extends React.Component {
     }
     
     onSelect() {
-        LAST_TREE_ITEM_SELECTED = !this.state.selected ? this.props.data.path : null;
-        Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, LAST_TREE_ITEM_SELECTED);
+        Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, !this.state.selected ? this.props.data.path : null);
     }
 
     render() {

@@ -27,10 +27,10 @@ html, body {
 
 .main-header {
     width: 100%;
-    height: 64px;
+    height: 70px;
     padding-left: 10px;
     padding-right: 10px;
-    line-height: 64px;
+    line-height: 70px;
     box-sizing: border-box;
     font-weight: bold;
 }
@@ -67,10 +67,10 @@ html, body {
 }
 
 .main-layout {
-    height: -webkit-calc(100% - 65px);
-    height: -moz-calc(100% - 65px);
-    height: -o-calc(100% - 65px);
-    height: calc(100% - 65px);
+    height: -webkit-calc(100% - 71px);
+    height: -moz-calc(100% - 71px);
+    height: -o-calc(100% - 71px);
+    height: calc(100% - 71px);
     max-width: 1280px;
     margin: auto;
     border-bottom-width: 1px;
@@ -129,6 +129,29 @@ html, body {
     right: 0;
     overflow: auto;
     padding: 8px;
+}
+
+.image-drop-help {
+    color: #555;
+    font-size: 12px;
+    text-align: center;
+
+    width: 250px;
+    padding: 30px 0;
+    margin: 50px auto;
+
+    background: #eee;
+    border: 1px solid #ccc;
+
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.image-drop-help.selected {
+    background: #ddd;
 }
 
 .image-list-item {
@@ -465,7 +488,7 @@ html, body {
 
 .about-content {
     width: 490px;
-    height: 220px;
+    height: 240px;
     background: #fff;
     margin: auto;
     margin-top: 86px;
@@ -487,16 +510,22 @@ html, body {
     background-repeat: no-repeat;
     background-size: 44px 50px;
     float: left;
+    margin-left: 4px;
     margin-right: 16px;
     margin-bottom: 8px;
 }
 
 .about-author {
     margin-bottom: 8px;
+    text-align: center;
 }
 
 .about-author a {
     text-decoration: underline;
+}
+
+.about-app-info {
+    text-align: center;
 }
 
 .about-app-name {
@@ -522,4 +551,53 @@ html, body {
     text-align: center;
     padding: 8px;
     margin-top: 24px;
+}
+
+.tree-view {
+    overflow-y: hidden;
+}
+
+.tree-view-item {
+    line-height: 16px;
+    vertical-align: middle;
+    font-weight: bold;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.tree-view-children {
+    margin-left: 16px;
+}
+
+.tree-view-children-collapsed {
+    height: 0;
+}
+
+.tree-view-arrow {
+    margin-right: 6px;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.tree-view-arrow:after {
+    content: '▾';
+}
+
+.tree-view-arrow-collapsed {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+.tree-view-folder {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(../images/folder.png);
+    margin-right: 4px;
+    margin-bottom: -4px;
 }

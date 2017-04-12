@@ -5,6 +5,7 @@ ADD_IMAGES;Добавить
 ADD_IMAGES_TITLE;Добавить изображения
 ADD_ZIP;Добавить ZIP
 ADD_ZIP_TITLE;Добавить упакованные изображения
+IMAGE_DROP_HELP;или перетяните изображения сюда
 CLEAR;Очистить
 CLEAR_TITLE;Очистить все изображения
 DISPLAY_OUTLINES;Отображать контуры:
@@ -13,6 +14,8 @@ SPRITE_NAME;Название спрайта:
 ANIMATION_SPEED;Скорость анимации:
 TEXTURE_NAME;Имя текстуры:
 TEXTURE_NAME_TITLE;Имя, которое будет использоваться для именования отдельных файлов
+TEXTURE_FORMAT;Формат текстуры:
+TEXTURE_FORMAT_TITLE;Формат, в котором будет сохранена текстура
 REMOVE_FILE_EXT;Удалить расширение:
 REMOVE_FILE_EXT_TITLE;Удаляет расширения файла при экспорте
 SCALE;Масштаб:

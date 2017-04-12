@@ -30,25 +30,32 @@ class LocalImagesLoader {
             return;
         }
 
+        let types = ["image/png", "image/jpg", "image/jpeg", "image/gif"];
         let item = this.data.shift();
+        
+        if(types.indexOf(item.type) >= 0) {
+            let img = new Image();
 
-        let img = new Image();
+            let reader = new FileReader();
+            reader.onload = e => {
+                img.src = e.target.result;
+                img._base64 = e.target.result;
 
-        let reader = new FileReader();
-        reader.onload = e => {
-            img.src = e.target.result;
-            img._base64 = e.target.result;
+                this.loaded[item.name] = img;
+                this.loadedCnt++;
 
-            this.loaded[item.name] = img;
-            this.loadedCnt++;
+                if (this.onProgress) {
+                    this.onProgress(this.loadedCnt / (this.loadedCnt + this.data.length));
+                }
 
-            if(this.onProgress) {
-                this.onProgress(this.loadedCnt / (this.loadedCnt + this.data.length));
-            }
+                this.loadNext();
+            };
 
+            reader.readAsDataURL(item);
+        }
+        else {
             this.loadNext();
-        };
-        reader.readAsDataURL(item);
+        }
     }
 
     waitImages() {

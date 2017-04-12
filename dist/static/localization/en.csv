@@ -5,6 +5,7 @@ ADD_IMAGES;Add images
 ADD_IMAGES_TITLE;Add images
 ADD_ZIP;Add ZIP
 ADD_ZIP_TITLE;Add zipped images
+IMAGE_DROP_HELP;or drag'n'drop images here
 CLEAR;Clear
 CLEAR_TITLE;Clear all images
 DISPLAY_OUTLINES;Display outlines:
@@ -13,6 +14,8 @@ SPRITE_NAME;Sprite name:
 ANIMATION_SPEED;Animation speed:
 TEXTURE_NAME;Texture name:
 TEXTURE_NAME_TITLE;Texture name for export
+TEXTURE_FORMAT;Texture format:
+TEXTURE_FORMAT_TITLE;Texture format for export
 REMOVE_FILE_EXT;Remove file ext:
 REMOVE_FILE_EXT_TITLE;Remove file ext in sprites name
 SCALE;Scale:

@@ -12,7 +12,7 @@ var devtool = "source-map";
 var output = "static/js/index.js";
 var debug = true;
 
-if(argv.mode == "build") {
+if(argv.p) {
     plugins.push(new webpack.optimize.UglifyJsPlugin({
         minimize: true,
         mangle: true,

@@ -1,3 +1,5 @@
+import JSZip from 'jszip';
+
 import {Observer, GLOBAL_EVENT} from '../Observer';
 import I18 from './I18';
 
@@ -21,17 +23,19 @@ class ZipLoader {
         
         this.zip = new JSZip();
         this.zip.loadAsync(file).then(
-            () => this.parseZip(),
+            () => {
+                this.parseZip();
+            },
             () => {
                 Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("INVALID_ZIP_ERROR"));
-                if(this.onEnd) this.onEnd({});
+                if (this.onEnd) this.onEnd({});
             }
         );
     }
     
     parseZip() {
         
-        let extensions = ["png", "jpg", "jpeg"];
+        let extensions = ["png", "jpg", "jpeg", "gif"];
         this.filesList = [];
         
         let files = Object.keys(this.zip.files);
