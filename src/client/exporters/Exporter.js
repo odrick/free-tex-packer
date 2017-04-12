@@ -20,7 +20,7 @@ class Exporter {
         
         let ret = [];
         let scale = options.scale || 1;
-        
+
         for(let item of data) {
             
             let name = item.name;
@@ -34,7 +34,7 @@ class Exporter {
                 parts.pop();
                 name = parts.join(".");
             }
-            
+
             if(!options.prependFolderName) {
                 name = name.split("/").pop();
             }

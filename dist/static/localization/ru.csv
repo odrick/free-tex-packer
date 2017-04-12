@@ -18,6 +18,8 @@ TEXTURE_FORMAT;Формат текстуры:
 TEXTURE_FORMAT_TITLE;Формат, в котором будет сохранена текстура
 REMOVE_FILE_EXT;Удалить расширение:
 REMOVE_FILE_EXT_TITLE;Удаляет расширения файла при экспорте
+PREPEND_FOLDER;Добавить путь:
+PREPEND_FOLDER_TITLE;Добавить путь к имени файла
 SCALE;Масштаб:
 SCALE_TITLE;Текущий масштаб текстуры. Влияет на пересчет размеров и координат при экспорте.
 FORMAT;Формат:

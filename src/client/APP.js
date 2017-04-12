@@ -107,6 +107,7 @@ class APP {
                 imageWidth: item.buffer.width,
                 imageHeight: item.buffer.height,
                 removeFileExtension: this.packOptions.removeFileExtension,
+                prependFolderName: this.packOptions.prependFolderName,
                 scale: this.packOptions.scale
             };
 

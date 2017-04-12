@@ -39,6 +39,7 @@ class PackProperties extends React.Component {
         data.textureName = data.textureName || "texture";
         data.textureFormat = data.textureFormat || "png";
         data.removeFileExtension = data.removeFileExtension === undefined ? false : data.removeFileExtension;
+        data.prependFolderName = data.prependFolderName === undefined ? true : data.prependFolderName;
         data.scale = data.scale || 1;
         data.exporter = getExporterByType(data.exporter) ? data.exporter : exporters[0].type;
         data.fileName = data.fileName || "pack-result";
@@ -80,6 +81,7 @@ class PackProperties extends React.Component {
         data.textureName = ReactDOM.findDOMNode(this.refs.textureName).value;
         data.textureFormat = ReactDOM.findDOMNode(this.refs.textureFormat).value;
         data.removeFileExtension = ReactDOM.findDOMNode(this.refs.removeFileExtension).checked;
+        data.prependFolderName = ReactDOM.findDOMNode(this.refs.prependFolderName).checked;
         data.scale = Number(ReactDOM.findDOMNode(this.refs.scale).value);
         data.exporter = ReactDOM.findDOMNode(this.refs.exporter).value;
         data.fileName = ReactDOM.findDOMNode(this.refs.fileName).value;
@@ -177,6 +179,10 @@ class PackProperties extends React.Component {
                             <tr title={I18.f("REMOVE_FILE_EXT_TITLE")}>
                                 <td>{I18.f("REMOVE_FILE_EXT")}</td>
                                 <td><input ref="removeFileExtension" className="border-color-900" type="checkbox" defaultChecked={this.packOptions.removeFileExtension ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
+                            </tr>
+                            <tr title={I18.f("PREPEND_FOLDER_TITLE")}>
+                                <td>{I18.f("PREPEND_FOLDER")}</td>
+                                <td><input ref="prependFolderName" className="border-color-900" type="checkbox" defaultChecked={this.packOptions.prependFolderName ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
                             </tr>
                             <tr title={I18.f("SCALE_TITLE")}>
                                 <td>{I18.f("SCALE")}</td>
