@@ -57,6 +57,10 @@ html, body {
 
 .main-header-donate {
     padding-top: 10px;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    margin-left: -46px;
 }
 
 .main-header-donate img {
