@@ -100,10 +100,13 @@ class APP {
                 content: imageData,
                 base64: true
             });
+            
+            //TODO: move to options
+            let pixelFormat = this.packOptions.textureFormat == "png" ? "RGBA8888" : "RGB888";
 
             let options = {
                 imageName: `${fName}.${this.packOptions.textureFormat}`,
-                format: "RGBA8888",
+                format: pixelFormat,
                 imageWidth: item.buffer.width,
                 imageHeight: item.buffer.height,
                 removeFileExtension: this.packOptions.removeFileExtension,
