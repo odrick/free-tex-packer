@@ -1,9 +1,9 @@
 {
   "name": "free-tex-packer",
-  "displayName": "Free textures packer",
+  "displayName": "Free texture packer",
   "version": "0.1.5",
-  "description": "Online textures packer",
-  "url": "http://tex-packer.com/",
+  "description": "Free online texture packer",
+  "url": "http://free-tex-packer.com/",
   "main": "src/index.js",
   "localizations": [
     "en",
