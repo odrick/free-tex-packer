@@ -80,8 +80,8 @@ html, body {
 .main-header-twitter {
     float: right;
     padding-right: 8px;
-    padding-top: 6px;
-    display: inline;
+    line-height: 20px;
+    padding-top: 25px;
 }
 
 .main-header-twitter a {
@@ -100,15 +100,17 @@ html, body {
 
 .main-layout {
     clear: both;
-    height: -webkit-calc(100% - 78px);
-    height: -moz-calc(100% - 78px);
-    height: -o-calc(100% - 78px);
-    height: calc(100% - 78px);
+    height: -webkit-calc(100% - 71px);
+    height: -moz-calc(100% - 71px);
+    height: -o-calc(100% - 71px);
+    height: calc(100% - 71px);
     max-width: 1280px;
     margin: auto;
-    border-width: 1px;
     border-style: solid;
-    
+    border-top-width: 0;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
 }
 
 .images-list {
