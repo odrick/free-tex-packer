@@ -11,7 +11,7 @@ class JsonArray extends Json {
     }
 
     static get type() {
-        return "JSON array";
+        return "JSON (array)";
     }
 
     static get description() {

@@ -13,7 +13,8 @@ let GLOBAL_EVENT = {
     SHOW_SHADER           : "SHOW_SHADER",
     HIDE_SHADER           : "HIDE_SHADER",
     SHOW_ABOUT            : "SHOW_ABOUT",
-    HIDE_ABOUT            : "HIDE_ABOUT"
+    HIDE_ABOUT            : "HIDE_ABOUT",
+    CHANGE_LANG           : "CHANGE_LANG"
 };
 
 export {

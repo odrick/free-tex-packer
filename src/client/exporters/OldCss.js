@@ -32,11 +32,6 @@ class OldCss extends Exporter {
             styles.push("width:" + item.frame.w + "px");
             styles.push("height:" + item.frame.h + "px");
 
-            if(item.trimmed) {
-                styles.push("margin-left:" + item.spriteSourceSize.x + "px");
-                styles.push("margin-top:" + item.spriteSourceSize.y + "px");
-            }
-
             frames.push("." + item.name + " {" + styles.join(";") + "}");
         }
 
@@ -55,7 +50,7 @@ class OldCss extends Exporter {
     }
 
     static get type() {
-        return "old css";
+        return "css (old)";
     }
 
     static get description() {
@@ -67,6 +62,10 @@ class OldCss extends Exporter {
     }
     
     static get allowRotation() {
+        return false;
+    }
+
+    static get allowTrim() {
         return false;
     }
 }

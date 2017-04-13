@@ -65,7 +65,7 @@ class Css extends Exporter {
     }
 
     static get type() {
-        return "css";
+        return "css (modern)";
     }
 
     static get description() {

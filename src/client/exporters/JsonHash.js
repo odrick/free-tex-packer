@@ -11,7 +11,7 @@ class JsonHash extends Json {
     }
 
     static get type() {
-        return "JSON hash";
+        return "JSON (hash)";
     }
 
     static get description() {

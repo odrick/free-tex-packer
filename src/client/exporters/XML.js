@@ -93,7 +93,7 @@ class XML extends Exporter {
     }
 
     static get type() {
-        return "XML plain";
+        return "XML";
     }
 
     static get description() {

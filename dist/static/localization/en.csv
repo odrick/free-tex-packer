@@ -1,6 +1,9 @@
 OK;OK
 YES;YES
 NO;NO
+LANGUAGE;language:
+LANGUAGE_en;english
+LANGUAGE_ru;русский
 ADD_IMAGES;Add images
 ADD_IMAGES_TITLE;Add images
 ADD_ZIP;Add ZIP

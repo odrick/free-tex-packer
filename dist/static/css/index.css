@@ -45,11 +45,18 @@ html, body {
     margin-right: 8px;
 }
 
+.main-header-language {
+    float: right;
+}
+
+.main-header-language select {
+    margin-left: 8px;
+    margin-right: 8px;
+    width: 100px;
+}
+
 .main-header-donate {
-    display: block;
-    position: absolute;
-    right: 44px;
-    top: 8px;
+    padding-top: 10px;
 }
 
 .main-header-donate img {
