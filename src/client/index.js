@@ -29,6 +29,16 @@ function loadLocalization() {
 
 function renderLayout() {
     layout = ReactDOM.render(React.createElement(MainLayout), document.getElementById("root"));
+    includeSocial();
+}
+
+function includeSocial() {
+    let id = "facebook-jssdk";
+    let js, fjs = document.getElementsByTagName("script")[0];
+    if (document.getElementById(id)) return;
+    js = document.createElement("script"); js.id = id;
+    js.src = "//connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v2.8";
+    fjs.parentNode.insertBefore(js, fjs);
 }
 
 function setLocale(locale) {
