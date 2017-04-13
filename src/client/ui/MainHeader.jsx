@@ -46,6 +46,10 @@ class MainHeader extends React.Component {
                     </select>
                 </div>
 
+                <div className="main-header-share">
+                    <div className="fb-like" data-href="http://free-tex-packer.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+                </div>
+
                 <div className="main-header-donate">
                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                         <input type="hidden" name="cmd" value="_s-xclick"/>

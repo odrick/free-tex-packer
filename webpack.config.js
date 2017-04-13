@@ -3,6 +3,11 @@ var webpack = require('webpack');
 
 var argv = require('optimist').argv;
 
+var entry = [
+    'babel-polyfill',
+    './src/client/index'
+];
+
 var plugins = [];
 
 var devtool = "source-map";
@@ -27,17 +32,15 @@ if(argv.p) {
     debug = false;
 }
 else {
+    entry.push('webpack-dev-server/client?http://localhost:4000');
+    
     plugins.push(new webpack.DefinePlugin({
         'process.env.NODE_ENV': '"development"'
     }));
 }
 
 module.exports = {
-    entry: [
-        'babel-polyfill',
-		'./src/client/index',
-        'webpack-dev-server/client?http://localhost:4000'
-    ],
+    entry: entry,
     output: { filename: output },
     debug: debug,
     devtool: devtool,

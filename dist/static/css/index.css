@@ -63,6 +63,15 @@ html, body {
     visibility: hidden;
 }
 
+.main-header-share {
+    float: right;
+    padding-right: 8px;
+}
+
+.main-header-share > div {
+    line-height: 20px;
+}
+
 .main-header-about {
     font-size: 18px;
     color: #fff;
