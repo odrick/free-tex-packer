@@ -3,6 +3,8 @@ import PackProcessor from './PackProcessor';
 import TextureRenderer from './utils/TextureRenderer';
 import Downloader from './utils/Downloader';
 
+import { getFilterByType } from './filters';
+
 import I18 from './utils/I18';
 
 class APP {
@@ -89,8 +91,11 @@ class APP {
         for(let item of this.packResult) {
 
             let fName = textureName + (this.packResult.length > 1 ? "-" + ix : "");
-
-            let imageData = item.buffer.toDataURL(this.packOptions.textureFormat == "png" ? "image/png" : "image/jpeg");
+            
+            let filterClass = getFilterByType(this.packOptions.filter);
+            let filter = new filterClass();
+            
+            let imageData = filter.apply(item.buffer).toDataURL(this.packOptions.textureFormat == "png" ? "image/png" : "image/jpeg");
             let parts = imageData.split(",");
             parts.shift();
             imageData = parts.join(",");

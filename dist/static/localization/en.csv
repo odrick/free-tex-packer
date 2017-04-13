@@ -25,6 +25,8 @@ PREPEND_FOLDER;Prepend folder name:
 PREPEND_FOLDER_TITLE;Prepend folder name to file name
 SCALE;Scale:
 SCALE_TITLE;Base texture scale
+FILTER;Filter:
+FILTER_TITLE;Filter for result texture
 FORMAT;Format:
 FORMAT_TITLE;Export format
 FILE_NAME;File name:

@@ -7,6 +7,8 @@ import exporters from '../exporters';
 import { getExporterByType } from '../exporters';
 import packers from '../packers';
 import { getPackerByType } from '../packers';
+import filters from '../filters';
+import { getFilterByType } from '../filters';
 
 import I18 from '../utils/I18';
 
@@ -41,6 +43,7 @@ class PackProperties extends React.Component {
         data.removeFileExtension = data.removeFileExtension === undefined ? false : data.removeFileExtension;
         data.prependFolderName = data.prependFolderName === undefined ? true : data.prependFolderName;
         data.scale = data.scale || 1;
+        data.filter = getFilterByType(data.filter) ? data.filter : filters[0].type;
         data.exporter = getExporterByType(data.exporter) ? data.exporter : exporters[0].type;
         data.fileName = data.fileName || "pack-result";
         data.width = data.width === undefined ? 2048 : data.width;
@@ -83,6 +86,7 @@ class PackProperties extends React.Component {
         data.removeFileExtension = ReactDOM.findDOMNode(this.refs.removeFileExtension).checked;
         data.prependFolderName = ReactDOM.findDOMNode(this.refs.prependFolderName).checked;
         data.scale = Number(ReactDOM.findDOMNode(this.refs.scale).value);
+        data.filter = ReactDOM.findDOMNode(this.refs.filter).value;
         data.exporter = ReactDOM.findDOMNode(this.refs.exporter).value;
         data.fileName = ReactDOM.findDOMNode(this.refs.fileName).value;
         data.width = Number(ReactDOM.findDOMNode(this.refs.width).value) || 0;
@@ -187,6 +191,16 @@ class PackProperties extends React.Component {
                             <tr title={I18.f("SCALE_TITLE")}>
                                 <td>{I18.f("SCALE")}</td>
                                 <td><input ref="scale" type="number" min="1" className="border-color-900" defaultValue={this.packOptions.scale} onBlur={this.onExporterPropChanged}/></td>
+                            </tr>
+                            <tr title={I18.f("FILTER_TITLE")}>
+                                <td>{I18.f("FILTER")}</td>
+                                <td>
+                                    <select ref="filter" className="border-color-900" onChange={this.onExporterChanged} defaultValue={this.packOptions.filter}>
+                                        {filters.map(node => {
+                                            return (<option key={"filter-" + node.type} defaultValue={node.type}>{node.type}</option>)
+                                        })}
+                                    </select>
+                                </td>
                             </tr>
                             <tr title={I18.f("FORMAT_TITLE")}>
                                 <td>{I18.f("FORMAT")}</td>
