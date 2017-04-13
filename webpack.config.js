@@ -4,15 +4,16 @@ var webpack = require('webpack');
 var argv = require('optimist').argv;
 
 var plugins = [];
-plugins.push(new webpack.DefinePlugin({
-    'process.env.NODE_ENV': '"development"'
-}));
 
 var devtool = "source-map";
 var output = "static/js/index.js";
 var debug = true;
 
 if(argv.p) {
+    plugins.push(new webpack.DefinePlugin({
+        'process.env.NODE_ENV': '"production"'
+    }));
+    
     plugins.push(new webpack.optimize.UglifyJsPlugin({
         minimize: true,
         mangle: true,
@@ -24,6 +25,11 @@ if(argv.p) {
     devtool = null;
     output = "dist/static/js/index.js";
     debug = false;
+}
+else {
+    plugins.push(new webpack.DefinePlugin({
+        'process.env.NODE_ENV': '"development"'
+    }));
 }
 
 module.exports = {
