@@ -33,6 +33,7 @@ html, body {
     line-height: 70px;
     box-sizing: border-box;
     font-weight: bold;
+    position: relative;
 }
 
 .main-header-app-name {
