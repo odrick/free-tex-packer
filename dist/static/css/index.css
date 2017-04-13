@@ -68,13 +68,24 @@ html, body {
     visibility: hidden;
 }
 
-.main-header-share {
+.main-header-fb {
     float: right;
     padding-right: 8px;
 }
 
-.main-header-share > div {
+.main-header-fb > div {
     line-height: 20px;
+}
+
+.main-header-twitter {
+    float: right;
+    padding-right: 8px;
+    padding-top: 6px;
+    display: inline;
+}
+
+.main-header-twitter a {
+    visibility: hidden;
 }
 
 .main-header-about {
@@ -88,18 +99,16 @@ html, body {
 }
 
 .main-layout {
-    height: -webkit-calc(100% - 71px);
-    height: -moz-calc(100% - 71px);
-    height: -o-calc(100% - 71px);
-    height: calc(100% - 71px);
+    clear: both;
+    height: -webkit-calc(100% - 78px);
+    height: -moz-calc(100% - 78px);
+    height: -o-calc(100% - 78px);
+    height: calc(100% - 78px);
     max-width: 1280px;
     margin: auto;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-left-width: 1px;
-    border-left-style: solid;
-    border-right-width: 1px;
-    border-right-style: solid;
+    border-width: 1px;
+    border-style: solid;
+    
 }
 
 .images-list {

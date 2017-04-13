@@ -46,8 +46,12 @@ class MainHeader extends React.Component {
                     </select>
                 </div>
 
-                <div className="main-header-share">
+                <div className="main-header-fb">
                     <div className="fb-like" data-href="http://free-tex-packer.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+                </div>
+
+                <div className="main-header-twitter">
+                    <a href="https://twitter.com/share" className="twitter-share-button" data-url="http://free-tex-packer.com">Tweet</a>
                 </div>
 
                 <div className="main-header-donate">

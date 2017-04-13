@@ -33,12 +33,29 @@ function renderLayout() {
 }
 
 function includeSocial() {
+    includeFb();
+    includeTwitter();
+}
+
+function includeFb() {
     let id = "facebook-jssdk";
     let js, fjs = document.getElementsByTagName("script")[0];
     if (document.getElementById(id)) return;
     js = document.createElement("script"); js.id = id;
     js.src = "//connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v2.8";
     fjs.parentNode.insertBefore(js, fjs);
+}
+
+function includeTwitter() {
+    let js, fjs = document.getElementsByTagName("script")[0];
+    let id = "twitter-wjs";
+    let p = /^http:/.test(document.location) ? 'http' : 'https';
+    if(!document.getElementById(id)) {
+        js = document.createElement("script");
+        js.id=id;
+        js.src = p + '://platform.twitter.com/widgets.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }
 }
 
 function setLocale(locale) {
