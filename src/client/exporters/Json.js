@@ -41,6 +41,10 @@ class Json extends Exporter {
         meta.format = config.format;
         meta.size = {w: config.imageWidth, h: config.imageHeight};
         meta.scale = config.scale;
+        
+        if(jsonOptions.meta) {
+            meta = Object.assign(meta, jsonOptions.meta);
+        }
 
         let res = {
             frames: frames,

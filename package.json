@@ -1,7 +1,7 @@
 {
   "name": "free-tex-packer",
   "displayName": "Free texture packer",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Free online texture packer",
   "url": "http://free-tex-packer.com/",
   "main": "src/index.js",
@@ -20,6 +20,7 @@
   "keywords": [],
   "author": "Alexander Norinchak",
   "authorSite": "https://github.com/odrick/",
+  "authorEmail": "norinchak@gmail.com",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/odrick/free-tex-packer/issues"

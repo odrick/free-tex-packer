@@ -7,6 +7,7 @@ import Pixi from './Pixi';
 import PhaserHash from './PhaserHash';
 import PhaserArray from './PhaserArray';
 import Cocos2d from './Cocos2d';
+import Unreal from './Unreal';
 
 const list = [
     JsonHash,
@@ -17,7 +18,8 @@ const list = [
     Pixi,
     PhaserHash,
     PhaserArray,
-    Cocos2d
+    Cocos2d,
+    Unreal
 ];
 
 function getExporterByType(type) {
