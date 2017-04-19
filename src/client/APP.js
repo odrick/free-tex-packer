@@ -15,6 +15,9 @@ class APP {
         this.packOptions = {};
         this.packResult = null;
         
+        this.onPackComplete = this.onPackComplete.bind(this);
+        this.onPackError = this.onPackError.bind(this);
+        
         Observer.on(GLOBAL_EVENT.IMAGES_LIST_CHANGED, this.onImagesListChanged, this);
         Observer.on(GLOBAL_EVENT.PACK_OPTIONS_CHANGED, this.onPackOptionsChanged, this);
         Observer.on(GLOBAL_EVENT.PACK_EXPORTER_CHANGED, this.onPackExporterOptionsChanged, this);
@@ -48,27 +51,28 @@ class APP {
     }
     
     doPack() {
-        let res = PackProcessor.pack(this.images, this.packOptions);
+        PackProcessor.pack(this.images, this.packOptions, this.onPackComplete, this.onPackError);
+    }
+    
+    onPackComplete(res) {
+        this.packResult = [];
 
-        if(res.error) {
-            Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
-            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, res.description);
+        for(let data of res) {
+            let renderer = new TextureRenderer(data, this.packOptions);
+
+            this.packResult.push({
+                data: data,
+                buffer: renderer.buffer
+            });
         }
-        else {
-            this.packResult = [];
 
-            for(let data of res) {
-                let renderer = new TextureRenderer(data, this.packOptions);
-
-                this.packResult.push({
-                    data: data,
-                    buffer: renderer.buffer
-                });
-            }
-
-            Observer.emit(GLOBAL_EVENT.PACK_COMPLETE, this.packResult);
-            Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
-        }
+        Observer.emit(GLOBAL_EVENT.PACK_COMPLETE, this.packResult);
+        Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+    }
+    
+    onPackError(err) {
+        Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+        Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, err.description);
     }
     
     startExport() {

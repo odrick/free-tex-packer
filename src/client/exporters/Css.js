@@ -16,7 +16,6 @@ class Css extends Exporter {
 
     run(data, options={}) {
 
-        options.removeFileExtension = true;
         let {rects, config} = this.prepare(data, options);
         
         let image = config.imageName || "texture.png";

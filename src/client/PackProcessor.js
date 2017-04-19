@@ -62,7 +62,7 @@ class PackProcessor {
         return rects;
     }
     
-    static pack(images={}, options={}) {
+    static pack(images={}, options={}, onComplete=null, onError=null) {
 
         let rects = [];
 
@@ -100,7 +100,10 @@ class PackProcessor {
         if(!height) height = maxHeight;
 
         if(width < minWidth || height < minHeight) {
-            return {error: 1, description: I18.f("INVALID_SIZE_ERROR", minWidth, minHeight)};
+            if(onError) onError({
+                description: I18.f("INVALID_SIZE_ERROR", minWidth, minHeight)
+            });
+            return;
         }
 
         if(options.allowTrim) {
@@ -148,7 +151,9 @@ class PackProcessor {
             }
         }
 
-        return res;
+        if(onComplete) {
+            onComplete(res);
+        }
     }
 
     static removeRect(rects, name) {
