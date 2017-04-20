@@ -8,6 +8,7 @@ import PhaserHash from './PhaserHash';
 import PhaserArray from './PhaserArray';
 import Cocos2d from './Cocos2d';
 import Unreal from './Unreal';
+import Starling from './Starling';
 
 const list = [
     JsonHash,
@@ -19,7 +20,8 @@ const list = [
     PhaserHash,
     PhaserArray,
     Cocos2d,
-    Unreal
+    Unreal,
+    Starling
 ];
 
 function getExporterByType(type) {
