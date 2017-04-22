@@ -39,8 +39,8 @@ FIXED_SIZE;Фиксированный размер:
 FIXED_SIZE_TITLE;Фиксированный размер текстуры
 PADDING;Отступы:
 PADDING_TITLE;Отступы между спрайтами в текстуре
-ALLOW_ROTATION;Разрешить повотор:
-ALLOW_ROTATION_TITLE;Разрешает повотор спрайта в текстуре
+ALLOW_ROTATION;Разрешить поворот:
+ALLOW_ROTATION_TITLE;Разрешает поворот спрайта в текстуре
 ALLOW_TRIM;Разрешить обрезку:
 ALLOW_TRIM_TITLE;Разрешает обрезку незначимых пикселей спрайта в текстуре
 DETECT_IDENTICAL;Определять идентичные:
