@@ -17,7 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/odrick/free-tex-packer.git"
   },
-  "keywords": [],
+  "keywords": ["javascript", "texture", "packer"],
   "author": "Alexander Norinchak",
   "authorSite": "https://github.com/odrick/",
   "authorEmail": "norinchak@gmail.com",
