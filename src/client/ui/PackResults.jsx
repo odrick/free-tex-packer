@@ -69,40 +69,47 @@ class PackResults extends React.Component {
         }
         
         return (
-            <div className="results-view border-color-900">
-                <div className="results-view-container back-white" onClick={this.clearSelection}>
-                    <div className={this.state.playerVisible ? "block-hidden" : "block-visible"}>
-                        {views}
+            <div className="results-view border-color-gray">
+                
+                <div className="results-view-wrapper">
+                
+                    <div className="results-view-container back-white" onClick={this.clearSelection}>
+                        <div className={this.state.playerVisible ? "block-hidden" : "block-visible"}>
+                            {views}
+                        </div>
+                        <div className={!this.state.playerVisible ? "block-hidden" : "block-visible"}>
+                            <SpritesPlayer ref="spritesPlayer" data={this.state.packResult} start={this.state.playerVisible} textureBack={this.state.textureBack} />
+                        </div>
                     </div>
-                    <div className={!this.state.playerVisible ? "block-hidden" : "block-visible"}>
-                        <SpritesPlayer ref="spritesPlayer" data={this.state.packResult} start={this.state.playerVisible} textureBack={this.state.textureBack} />
-                    </div>
-                </div>
-
-                <div className="results-view-footer back-white border-color-900">
                     
-                    <table>
-                        <tbody>
-                            <tr>
-                                {this.textureBackColors.map(name => {
-                                    return (
-                                        <td key={"back-color-btn-" + name}>
-                                            <div className={"btn-back-color " + name + (this.state.textureBack == name ? " selected" : "")} onClick={this.setBack}>&nbsp;</div>
-                                        </td>
-                                    )
-                                })}
-                                <td>
-                                    <label htmlFor="result-view-outline">{I18.f("DISPLAY_OUTLINES")}</label>
-                                </td>
-                                <td>
-                                    <input type="checkbox" id="result-view-outline" onChange={this.changeOutlines} />
-                                </td>
-                                <td>
-                                    <div className="btn back-600 border-color-900 color-white" onClick={this.toggleSpritesPlayer}>{I18.f("SHOW_SPRITES")}</div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div className="results-view-footer back-white border-color-gray">
+    
+                        <hr/>
+                        
+                        <table>
+                            <tbody>
+                                <tr>
+                                    {this.textureBackColors.map(name => {
+                                        return (
+                                            <td key={"back-color-btn-" + name}>
+                                                <div className={"btn-back-color " + name + (this.state.textureBack == name ? " selected" : "")} onClick={this.setBack}>&nbsp;</div>
+                                            </td>
+                                        )
+                                    })}
+                                    <td>
+                                        {I18.f("DISPLAY_OUTLINES")}
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" id="result-view-outline" onChange={this.changeOutlines} />
+                                    </td>
+                                    <td>
+                                        <div className="btn back-600 border-color-gray color-white" onClick={this.toggleSpritesPlayer}>{I18.f("SHOW_SPRITES")}</div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                    
                 </div>
             </div>
         );

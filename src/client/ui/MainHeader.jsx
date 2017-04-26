@@ -31,7 +31,7 @@ class MainHeader extends React.Component {
                     ?
                 </div>
 
-                <div className="main-header-language border-color-900">
+                <div className="main-header-language border-color-gray">
                     {I18.f("LANGUAGE")}
                     <select defaultValue={I18.currentLocale} onChange={this.changeLanguage}>
                         {

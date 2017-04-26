@@ -5,6 +5,7 @@ html, body {
     height: 100%;
     font-family: sans-serif, "Helvetica Neue", Helvetica, Arial;
     font-size: 12px;
+    background-color: #f1f1f1;
 }
 
 .main-container {
@@ -100,17 +101,16 @@ html, body {
 
 .main-layout {
     clear: both;
-    height: -webkit-calc(100% - 71px);
-    height: -moz-calc(100% - 71px);
-    height: -o-calc(100% - 71px);
-    height: calc(100% - 71px);
+    height: -webkit-calc(100% - 90px);
+    height: -moz-calc(100% - 90px);
+    height: -o-calc(100% - 90px);
+    height: calc(100% - 90px);
+    box-sizing: border-box;
     max-width: 1280px;
-    margin: auto;
-    border-style: solid;
-    border-top-width: 0;
-    border-left-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .images-list {
@@ -120,8 +120,9 @@ html, body {
     float: left;
     text-align: left;
     position: relative;
-    border-right-width: 1px;
-    border-right-style: solid;
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
 }
 
 .results-view {
@@ -136,15 +137,23 @@ html, body {
     height: 100%;
     float: right;
     overflow-y: auto;
-    border-left-width: 1px;
-    border-left-style: solid;
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
 }
 
 .images-controllers {
     padding: 8px;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
     height: 30px;
+    text-align: center;
+}
+
+.images-controllers hr {
+    margin-top: 16px;
+    border: none;
+    color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.2);
+    height: 1px;
 }
 
 .images-controllers .btn {
@@ -290,24 +299,40 @@ html, body {
     border-style: solid;
 }
 
+.results-view-wrapper {
+    height: 100%;
+    width: -webkit-calc(100% - 640px);
+    width: -moz-calc(100% - 640px);
+    width: -o-calc(100% - 640px);
+    width: calc(100% - 640px);
+    margin: auto;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
+}
+
 .results-view-container {
-    height: -webkit-calc(100% - 44px);
-    height: -moz-calc(100% - 44px);
-    height: -o-calc(100% - 44px);
-    height: calc(100% - 44px);
+    height: -webkit-calc(100% - 50px);
+    height: -moz-calc(100% - 50px);
+    height: -o-calc(100% - 50px);
+    height: calc(100% - 50px);
     overflow: auto;
 }
 
 .results-view-footer {
     display: block;
-    border-top-width: 1px;
-    border-top-style: solid;
-    height: 44px;
+    height: 50px;
     box-sizing: border-box;
     padding: 8px;
     vertical-align: bottom;
     text-align: center;
     font-weight: bold;
+}
+
+.results-view-footer hr {
+    margin-top: 0;
+    border: none;
+    color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.2);
+    height: 1px;
 }
 
 .results-view-footer table {
@@ -392,6 +417,7 @@ html, body {
     border-radius: 4px;
     border-width: 1px;
     border-style: solid;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
 }
 
 .player-buffer {
@@ -436,6 +462,7 @@ html, body {
     padding: 16px;
     background: #fff;
     border-color: #ccc;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
 }
 
 .message-box-content {
@@ -501,6 +528,7 @@ html, body {
     padding: 16px;
     text-align: center;
     font-weight: bold;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
 }
 
 .old-browser-content a {
@@ -533,6 +561,7 @@ html, body {
     border: 1px solid #ccc;
     padding: 16px;
     text-align: left;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
 }
 
 .about-logo {
@@ -632,4 +661,8 @@ html, body {
     background-image: url(../images/folder.png);
     margin-right: 4px;
     margin-bottom: -4px;
+}
+
+.border-color-gray {
+    border-color: rgba(0,0,0,0.2);
 }

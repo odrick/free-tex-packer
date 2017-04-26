@@ -58,7 +58,7 @@ class MessageBoxButton extends React.Component {
     
     render() {
         return (
-            <div className="btn back-600 border-color-900 color-white" onClick={this.onClick}>{this.props.caption}</div>
+            <div className="btn back-600 border-color-gray color-white" onClick={this.onClick}>{this.props.caption}</div>
         );
     }
 }

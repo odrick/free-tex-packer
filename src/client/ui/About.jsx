@@ -60,7 +60,7 @@ class About extends React.Component {
                             </tbody>
                         </table>
                         <div className="about-controls">
-                            <div className="btn back-600 border-color-900 color-white" onClick={this.close}>{I18.f("OK")}</div>
+                            <div className="btn back-600 border-color-gray color-white" onClick={this.close}>{I18.f("OK")}</div>
                         </div>
                     </div>
                     
