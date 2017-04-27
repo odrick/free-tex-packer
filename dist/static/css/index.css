@@ -157,7 +157,8 @@ html, body {
 }
 
 .images-controllers .btn {
-    margin-right: 8px;
+    margin-left: 4px;
+    margin-right: 4px;
     margin-bottom: -11px;
 }
 
