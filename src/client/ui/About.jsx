@@ -44,16 +44,19 @@ class About extends React.Component {
                                     <td>{I18.f("ABOUT_LIBS")}</td>
                                     <td>
                                         <div>
-                                            <a href="https://facebook.github.io/react/" target="_blank" className="color-300">React</a>
+                                            <a href="https://facebook.github.io/react" target="_blank" className="color-300">React</a>
                                         </div>
                                         <div>
-                                            <a href="https://stuk.github.io/jszip/" target="_blank" className="color-300">JSZip</a>
+                                            <a href="https://stuk.github.io/jszip" target="_blank" className="color-300">JSZip</a>
                                         </div>
                                         <div>
                                             <a href="https://github.com/eligrey/FileSaver.js" target="_blank" className="color-300">FileSaver.js</a>
                                         </div>
                                         <div>
-                                            <a href="https://github.com/vkiryukhin/pretty-data/" target="_blank" className="color-300">pretty-data</a>
+                                            <a href="https://github.com/vkiryukhin/pretty-data" target="_blank" className="color-300">pretty-data</a>
+                                        </div>
+                                        <div>
+                                            <a href="https://github.com/06wj/MaxRectsBinPack" target="_blank" className="color-300">MaxRectsBinPack</a>
                                         </div>
                                     </td>
                                 </tr>
