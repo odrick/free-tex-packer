@@ -628,6 +628,8 @@ html, body {
     -ms-user-select: none;
     user-select: none;
     cursor: pointer;
+    padding-top: 2px;
+    padding-bottom: 6px;
 }
 
 .tree-view-children {

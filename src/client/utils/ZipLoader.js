@@ -45,10 +45,9 @@ class ZipLoader {
             
             if(!file.dir) {
                 let ext = name.split(".").pop().toLowerCase();
-                if(extensions.indexOf(ext) >= 0) {
+                if(extensions.indexOf(ext) >= 0 && name.toUpperCase().indexOf("__MACOSX") < 0) {
                     this.filesList.push(name);
                 }
-                
             }
         }
 
