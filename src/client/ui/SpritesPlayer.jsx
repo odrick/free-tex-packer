@@ -38,6 +38,9 @@ class SpritesPlayer extends React.Component {
         this.textures = [];
         
         if(!this.props.data) return;
+
+        this.width = 0;
+        this.height = 0;
         
         for(let part of this.props.data) {
             let baseTexture = part.buffer;
@@ -125,6 +128,8 @@ class SpritesPlayer extends React.Component {
         if(!texture) return;
         
         let buffer = ReactDOM.findDOMNode(this.refs.buffer);
+        buffer.width = texture.config.sourceSize.w;
+        buffer.height = texture.config.sourceSize.h;
         
         let bufferCtx = buffer.getContext("2d");
         bufferCtx.clearRect(0, 0, texture.config.sourceSize.w, texture.config.sourceSize.h);
