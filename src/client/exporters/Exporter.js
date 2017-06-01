@@ -19,7 +19,6 @@ class Exporter {
         opt.scale = opt.scale || 1;
         
         let ret = [];
-        let scale = options.scale || 1;
 
         for(let item of data) {
             
@@ -39,9 +38,9 @@ class Exporter {
                 name = name.split("/").pop();
             }
 
-            let frame = {x: item.frame.x/scale, y: item.frame.y/scale, w: item.frame.w/scale, h: item.frame.h/scale};
-            let spriteSourceSize = {x: item.spriteSourceSize.x/scale, y: item.spriteSourceSize.y/scale, w: item.spriteSourceSize.w/scale, h: item.spriteSourceSize.h/scale};
-            let sourceSize = {w: item.sourceSize.w/scale, h: item.sourceSize.h/scale};
+            let frame = {x: item.frame.x, y: item.frame.y, w: item.frame.w, h: item.frame.h};
+            let spriteSourceSize = {x: item.spriteSourceSize.x, y: item.spriteSourceSize.y, w: item.spriteSourceSize.w, h: item.spriteSourceSize.h};
+            let sourceSize = {w: item.sourceSize.w, h: item.sourceSize.h};
             
             ret.push({
                 name: name,
