@@ -23,6 +23,8 @@ REMOVE_FILE_EXT;Удалить расширение:
 REMOVE_FILE_EXT_TITLE;Удаляет расширения файла при экспорте
 PREPEND_FOLDER;Добавить путь:
 PREPEND_FOLDER_TITLE;Добавить путь к имени файла
+BASE64_EXPORT_TITLE;Экспортировать в формате base64 (при возможности)
+BASE64_EXPORT;Экспортировать в base64
 SCALE;Масштаб:
 SCALE_TITLE;Текущий масштаб текстуры. Влияет на пересчет размеров и координат при экспорте
 FILTER;Фильтр:

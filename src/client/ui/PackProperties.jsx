@@ -85,6 +85,7 @@ class PackProperties extends React.Component {
         data.textureFormat = ReactDOM.findDOMNode(this.refs.textureFormat).value;
         data.removeFileExtension = ReactDOM.findDOMNode(this.refs.removeFileExtension).checked;
         data.prependFolderName = ReactDOM.findDOMNode(this.refs.prependFolderName).checked;
+        data.base64Export = ReactDOM.findDOMNode(this.refs.base64Export).checked;
         data.scale = Number(ReactDOM.findDOMNode(this.refs.scale).value);
         data.filter = ReactDOM.findDOMNode(this.refs.filter).value;
         data.exporter = ReactDOM.findDOMNode(this.refs.exporter).value;
@@ -187,6 +188,10 @@ class PackProperties extends React.Component {
                             <tr title={I18.f("PREPEND_FOLDER_TITLE")}>
                                 <td>{I18.f("PREPEND_FOLDER")}</td>
                                 <td><input ref="prependFolderName" className="border-color-gray" type="checkbox" defaultChecked={this.packOptions.prependFolderName ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
+                            </tr>
+                            <tr title={I18.f("BASE64_EXPORT_TITLE")}>
+                                <td>{I18.f("BASE64_EXPORT")}</td>
+                                <td><input ref="base64Export" className="border-color-gray" type="checkbox" defaultChecked={this.packOptions.base64Export ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
                             </tr>
                             <tr title={I18.f("SCALE_TITLE")}>
                                 <td>{I18.f("SCALE")}</td>

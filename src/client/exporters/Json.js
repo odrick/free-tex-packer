@@ -7,9 +7,8 @@ class Json extends Exporter {
     }
 
     run(data, options, jsonOptions={}) {
-
         let {rects, config} = this.prepare(data, options);
-
+        
         let frames = jsonOptions.isArray ? [] : {};
         let meta = {};
 
@@ -37,7 +36,17 @@ class Json extends Exporter {
 
         meta.app = this.appInfo.url;
         meta.version = this.appInfo.version;
-        meta.image = config.imageName;
+        
+        let image = "";
+        if(config.base64Export) {
+            if(config.textureFormat == "png") image = "data:image/png;base64," + config.imageData;
+            if(config.textureFormat == "jpg") image = "data:image/jpeg;base64," + config.imageData;
+        }
+        else {
+            image = config.imageName;
+        }
+        
+        meta.image = image;
         meta.format = config.format;
         meta.size = {w: config.imageWidth, h: config.imageHeight};
         meta.scale = config.scale;

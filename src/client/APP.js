@@ -115,11 +115,14 @@ class APP {
 
             let options = {
                 imageName: `${fName}.${this.packOptions.textureFormat}`,
+                imageData: imageData,
                 format: pixelFormat,
+                textureFormat: this.packOptions.textureFormat,
                 imageWidth: item.buffer.width,
                 imageHeight: item.buffer.height,
                 removeFileExtension: this.packOptions.removeFileExtension,
                 prependFolderName: this.packOptions.prependFolderName,
+                base64Export: this.packOptions.base64Export,
                 scale: this.packOptions.scale
             };
 
