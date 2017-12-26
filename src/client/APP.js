@@ -94,40 +94,25 @@ class APP {
         setTimeout(() => this.doExport(), 0);
     }
 
-    doExport() {
-        let textureName = this.packOptions.textureName;
-
-        let files = [];
-
-        let ix = 0, completed = 0;
-        for(let item of this.packResult) {
-            
-            this.exportItem(textureName + (this.packResult.length > 1 ? "-" + ix : ""), item, (result) => {
-                files = files.concat(result);
-                completed++;
-                if(completed >= this.packResult.length) {
-                    this.finishExport(files);
-                }
-            });
-
-            ix++;
-        }
-    }
-    
-    exportItem(fName, item, callback) {
+    async doExport() {
         let exporter = new this.packOptions.exporter();
-        
+        let textureName = this.packOptions.textureName;
         let filterClass = getFilterByType(this.packOptions.filter);
         let filter = new filterClass();
 
-        let imageData = filter.apply(item.buffer).toDataURL(this.packOptions.textureFormat == "png" ? "image/png" : "image/jpeg");
-        let parts = imageData.split(",");
-        parts.shift();
-        imageData = parts.join(",");
-
         let files = [];
 
-        this.tinifyImage(imageData, (imageData) => {
+        let ix = 0;
+        for(let item of this.packResult) {
+            
+            let fName = textureName + (this.packResult.length > 1 ? "-" + ix : "");
+            
+            let imageData = filter.apply(item.buffer).toDataURL(this.packOptions.textureFormat == "png" ? "image/png" : "image/jpeg");
+            let parts = imageData.split(",");
+            parts.shift();
+            imageData = parts.join(",");
+            imageData = await this.tinifyImage(imageData);
+
             files.push({
                 name: `${fName}.${this.packOptions.textureFormat}`,
                 content: imageData,
@@ -154,41 +139,43 @@ class APP {
                 name: fName + "." + this.packOptions.exporter.fileExt,
                 content: exporter.run(item.data, options)
             });
-            
-            callback(files);
-        });
-    }
-    
-    tinifyImage(imageData, callback) {
-        if(this.packOptions.tinify) {
-            POST(appInfo.tinifyUrl, {key: this.packOptions.tinifyKey, data: imageData}, (data) => {
-                data = JSON.parse(data);
-                
-                if(data.data) {
-                    callback(data.data);
-                }
-                else {
-                    Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
-                    if(data.error) {
-                        Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("TINIFY_ERROR", data.error));
-                    }
-                    else {
-                        Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("TINIFY_ERROR_COMMON"));
-                    }
-                }
-            }, () => {
-                Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
-                Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("TINIFY_ERROR_COMMON"));
-            });
+
+            ix++;
         }
-        else {
-            callback(imageData);
-        }
-    }
-    
-    finishExport(files) {
+
         Downloader.run(files, this.packOptions.fileName);
         Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+    }
+    
+    tinifyImage(imageData) {
+        return new Promise((resolve, reject) => {
+            if(this.packOptions.tinify) {
+                POST(appInfo.tinifyUrl, {key: this.packOptions.tinifyKey, data: imageData}, (data) => {
+                    data = JSON.parse(data);
+
+                    if(data.data) {
+                        resolve(data.data);
+                    }
+                    else {
+                        Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+                        if(data.error) {
+                            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("TINIFY_ERROR", data.error));
+                        }
+                        else {
+                            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("TINIFY_ERROR_COMMON"));
+                        }
+                        reject();
+                    }
+                }, () => {
+                    Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+                    Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("TINIFY_ERROR_COMMON"));
+                    reject();
+                });
+            }
+            else {
+                resolve(imageData);
+            }
+        });
     }
 }
 
