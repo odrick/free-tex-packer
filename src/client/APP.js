@@ -7,6 +7,10 @@ import { getFilterByType } from './filters';
 
 import I18 from './utils/I18';
 
+import appInfo from '../../package.json';
+
+import {POST} from './utils/ajax';
+
 class APP {
     
     constructor() {
@@ -81,35 +85,55 @@ class APP {
             return;
         }
 
+        if(this.packOptions.tinify && !this.packOptions.tinifyKey) {
+            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("NO_TINIFY_KEY_ERROR"));
+            return;
+        }
+
         Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
         setTimeout(() => this.doExport(), 0);
     }
 
     doExport() {
-        let exporter = new this.packOptions.exporter();
         let textureName = this.packOptions.textureName;
 
         let files = [];
 
-        let ix = 0;
+        let ix = 0, completed = 0;
         for(let item of this.packResult) {
-
-            let fName = textureName + (this.packResult.length > 1 ? "-" + ix : "");
             
-            let filterClass = getFilterByType(this.packOptions.filter);
-            let filter = new filterClass();
-            
-            let imageData = filter.apply(item.buffer).toDataURL(this.packOptions.textureFormat == "png" ? "image/png" : "image/jpeg");
-            let parts = imageData.split(",");
-            parts.shift();
-            imageData = parts.join(",");
+            this.exportItem(textureName + (this.packResult.length > 1 ? "-" + ix : ""), item, (result) => {
+                files = files.concat(result);
+                completed++;
+                if(completed >= this.packResult.length) {
+                    this.finishExport(files);
+                }
+            });
 
+            ix++;
+        }
+    }
+    
+    exportItem(fName, item, callback) {
+        let exporter = new this.packOptions.exporter();
+        
+        let filterClass = getFilterByType(this.packOptions.filter);
+        let filter = new filterClass();
+
+        let imageData = filter.apply(item.buffer).toDataURL(this.packOptions.textureFormat == "png" ? "image/png" : "image/jpeg");
+        let parts = imageData.split(",");
+        parts.shift();
+        imageData = parts.join(",");
+
+        let files = [];
+
+        this.tinifyImage(imageData, (imageData) => {
             files.push({
                 name: `${fName}.${this.packOptions.textureFormat}`,
                 content: imageData,
                 base64: true
             });
-            
+
             //TODO: move to options
             let pixelFormat = this.packOptions.textureFormat == "png" ? "RGBA8888" : "RGB888";
 
@@ -130,10 +154,39 @@ class APP {
                 name: fName + "." + this.packOptions.exporter.fileExt,
                 content: exporter.run(item.data, options)
             });
-
-            ix++;
+            
+            callback(files);
+        });
+    }
+    
+    tinifyImage(imageData, callback) {
+        if(this.packOptions.tinify) {
+            POST(appInfo.tinifyUrl, {key: this.packOptions.tinifyKey, data: imageData}, (data) => {
+                data = JSON.parse(data);
+                
+                if(data.data) {
+                    callback(data.data);
+                }
+                else {
+                    Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+                    if(data.error) {
+                        Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("TINIFY_ERROR", data.error));
+                    }
+                    else {
+                        Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("TINIFY_ERROR_COMMON"));
+                    }
+                }
+            }, () => {
+                Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+                Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("TINIFY_ERROR_COMMON"));
+            });
         }
-
+        else {
+            callback(imageData);
+        }
+    }
+    
+    finishExport(files) {
         Downloader.run(files, this.packOptions.fileName);
         Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
     }

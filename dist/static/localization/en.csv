@@ -25,6 +25,10 @@ PREPEND_FOLDER;Prepend folder name:
 PREPEND_FOLDER_TITLE;Prepend folder name to file name
 BASE64_EXPORT_TITLE;Export to base64 format (if possible)
 BASE64_EXPORT;Export to base64
+TINIFY_TITLE;Tinify using https://tinypng.com
+TINIFY;Tinify
+TINIFY_KEY_TITLE;TinyPNG key https://tinypng.com/developers 
+TINIFY_KEY;TinyPNG key
 SCALE;Scale:
 SCALE_TITLE;Base texture scale
 FILTER;Filter:
@@ -57,6 +61,9 @@ INVALID_SIZE_ERROR;Invalid size. Min: %sx%s
 NO_IMAGES_ERROR;Please, add images first
 CLEAR_WARNING;Realy clear all images?
 INVALID_ZIP_ERROR;Invalid zip file
+NO_TINIFY_KEY_ERROR;Please, set your TinyPNG key https://tinypng.com/developers
+TINIFY_ERROR;Tinify error: %s
+TINIFY_ERROR_COMMON;Tinify error...
 OLD_BROWSER_MESSAGE1;Sorry, but your browser is too old for this application...
 OLD_BROWSER_MESSAGE2;Please, use one of modern browsers:
 ABOUT_SOURCES;Sources:

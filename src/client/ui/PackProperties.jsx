@@ -45,6 +45,9 @@ class PackProperties extends React.Component {
         data.scale = data.scale || 1;
         data.filter = getFilterByType(data.filter) ? data.filter : filters[0].type;
         data.exporter = getExporterByType(data.exporter) ? data.exporter : exporters[0].type;
+        data.base64Export = data.base64Export === undefined ? false : data.base64Export;
+        data.tinify = data.tinify === undefined ? false : data.tinify;
+        data.tinifyKey = data.tinifyKey === undefined ? "" : data.tinifyKey;
         data.fileName = data.fileName || "pack-result";
         data.width = data.width === undefined ? 2048 : data.width;
         data.height = data.height === undefined ? 2048 : data.height;
@@ -86,6 +89,8 @@ class PackProperties extends React.Component {
         data.removeFileExtension = ReactDOM.findDOMNode(this.refs.removeFileExtension).checked;
         data.prependFolderName = ReactDOM.findDOMNode(this.refs.prependFolderName).checked;
         data.base64Export = ReactDOM.findDOMNode(this.refs.base64Export).checked;
+        data.tinify = ReactDOM.findDOMNode(this.refs.tinify).checked;
+        data.tinifyKey = ReactDOM.findDOMNode(this.refs.tinifyKey).value;
         data.scale = Number(ReactDOM.findDOMNode(this.refs.scale).value);
         data.filter = ReactDOM.findDOMNode(this.refs.filter).value;
         data.exporter = ReactDOM.findDOMNode(this.refs.exporter).value;
@@ -192,6 +197,14 @@ class PackProperties extends React.Component {
                             <tr title={I18.f("BASE64_EXPORT_TITLE")}>
                                 <td>{I18.f("BASE64_EXPORT")}</td>
                                 <td><input ref="base64Export" className="border-color-gray" type="checkbox" defaultChecked={this.packOptions.base64Export ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
+                            </tr>
+                            <tr title={I18.f("TINIFY_TITLE")}>
+                                <td>{I18.f("TINIFY")}</td>
+                                <td><input ref="tinify" className="border-color-gray" type="checkbox" defaultChecked={this.packOptions.tinify ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
+                            </tr>
+                            <tr title={I18.f("TINIFY_KEY_TITLE")}>
+                                <td>{I18.f("TINIFY_KEY")}</td>
+                                <td><input ref="tinifyKey" type="text" className="border-color-gray" defaultValue={this.packOptions.tinifyKey} onBlur={this.onExporterPropChanged} /></td>
                             </tr>
                             <tr title={I18.f("SCALE_TITLE")}>
                                 <td>{I18.f("SCALE")}</td>
