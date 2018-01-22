@@ -1,5 +1,7 @@
 <?php
 
+set_time_limit(60 * 5);
+
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: text/plain; charset=utf-8");
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
