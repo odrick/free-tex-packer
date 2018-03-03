@@ -41,6 +41,10 @@ class About extends React.Component {
                                     <td><a href={appInfo.bugs.url} target="_blank" className="color-300">{appInfo.bugs.url}</a></td>
                                 </tr>
                                 <tr>
+                                    <td>{I18.f("ABOUT_GULP_VERSION")}</td>
+                                    <td><a href="https://github.com/odrick/gulp-free-tex-packer" target="_blank" className="color-300">https://github.com/odrick/gulp-free-tex-packer</a></td>
+                                </tr>
+                                <tr>
                                     <td>{I18.f("ABOUT_LIBS")}</td>
                                     <td>
                                         <div>
