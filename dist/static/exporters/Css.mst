@@ -1,0 +1,9 @@
+/*
+   ---------------------------
+   created with {{appInfo.displayName}} v{{appInfo.version}}
+   {{{appInfo.url}}}
+   ---------------------------
+*/
+{{#rects}}
+.{{{name}}} { display:inline-block;overflow:hidden;background:url({{config.imageName}}) no-repeat -{{frame.x}}px -{{frame.y}}px;{{^rotated}}width:{{frame.w}}px;height:{{frame.h}}px;{{/rotated}}{{#rotated}}width:{{frame.h}}px;height:{{frame.w}}px;transform-origin:{{frame.hw}}px {{frame.hh}}px;-moz-transform-origin:{{frame.hw}}px {{frame.hh}}px;-ms-transform-origin:{{frame.hw}}px {{frame.hh}}px;-webkit-transform-origin:{{frame.hw}}px {{frame.hh}}px;-o-transform-origin:{{frame.hw}}px {{frame.hh}}px;transform:rotate(-90deg);-moz-transform:rotate(-90deg);-ms-transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-o-transform:rotate(-90deg);{{/rotated}}{{#trimmed}}margin-left:{{spriteSourceSize.x}}px;margin-top:{{spriteSourceSize.y}}px{{/trimmed}} }
+{{/rects}}

@@ -108,7 +108,15 @@ class APP {
             let parts = imageData.split(",");
             parts.shift();
             imageData = parts.join(",");
-            imageData = await this.tinifyImage(imageData);
+
+            try {
+                imageData = await this.tinifyImage(imageData);
+            }
+            catch(e) {
+                Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+                Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, e);
+                return;
+            }
 
             files.push({
                 name: `${fName}.${this.packOptions.textureFormat}`,
@@ -132,10 +140,17 @@ class APP {
                 scale: this.packOptions.scale
             };
 
-            files.push({
-                name: fName + "." + this.packOptions.exporter.fileExt,
-                content: await startExporter(exporter, item.data, options)
-            });
+            try {
+                files.push({
+                    name: fName + "." + this.packOptions.exporter.fileExt,
+                    content: await startExporter(exporter, item.data, options)
+                });
+            }
+            catch(e) {
+                Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+                Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("EXPORTER_ERROR", e));
+                return;
+            }
             
             ix++;
         }
@@ -154,19 +169,15 @@ class APP {
                         resolve(data.data);
                     }
                     else {
-                        Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
                         if(data.error) {
-                            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("TINIFY_ERROR", data.error));
+                            reject(I18.f("TINIFY_ERROR", data.error));
                         }
                         else {
-                            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("TINIFY_ERROR_COMMON"));
+                            reject(I18.f("TINIFY_ERROR_COMMON"));
                         }
-                        reject();
                     }
                 }, () => {
-                    Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
-                    Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("TINIFY_ERROR_COMMON"));
-                    reject();
+                    reject(I18.f("TINIFY_ERROR_COMMON"));
                 });
             }
             else {

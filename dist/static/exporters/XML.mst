@@ -1,0 +1,21 @@
+<!--
+Created with {{appInfo.displayName}} v{{appInfo.version}} {{{appInfo.url}}}
+Format:
+n  => name
+x  => x pos
+y  => y pos
+w  => width
+h  => height
+pX => x pos of the pivot point
+pY => y pos of the pivot point
+oX => x-corner offset
+oY => y-corner offset
+oW => original width
+oH => original height
+r => 'y' if sprite is rotated-->
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="{{config.imageName}}" width="{{config.imageWidth}}" height="{{config.imageWidth}}" scale="{{config.scale}}" format="{{config.format}}">
+  {{#rects}}
+  <sprite n="{{{name}}}" x="{{frame.x}}" y="{{frame.y}}" w="{{frame.w}}" h="{{frame.h}}" pX="0.5" pY="0.5"{{#trimmed}} oX="{{spriteSourceSize.x}}" oY="{{spriteSourceSize.y}}" oW="{{sourceSize.w}}" oH="{{sourceSize.h}}"{{/trimmed}}{{#rotated}} r="y"{{/rotated}}/>
+  {{/rects}}
+</TextureAtlas>

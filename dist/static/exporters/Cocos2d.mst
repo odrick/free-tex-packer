@@ -1,41 +1,43 @@
+{{=<% %>=}}
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
     <key>frames</key>
     <dict>
-      {{#rects}}
-      <key>{{{name}}}</key>
+      <%#rects%>
+      <key><%&name%></key>
       <dict>
         <key>aliases</key>
         <array/>
         <key>spriteOffset</key>
-        <string>{{#trimmed}}{0,0}{{/trimmed}}{{^trimmed}}{-1,0}{{/trimmed}}</string>
+        <string><%#trimmed%>{0,0}<%/trimmed%><%^trimmed%>{-1,0}<%/trimmed%></string>
         <key>spriteSize</key>
-        <string><%={=%>{{frame.w}},{{frame.h}}<%=}=%></string>
+        <string>{<%frame.w%>,<%frame.h%>}</string>
         <key>spriteSourceSize</key>
-        <string><%={=%>{{sourceSize.w}},{{sourceSize.h}}<%=}=%></string>
+        <string>{<%sourceSize.w%>,<%sourceSize.h%>}</string>
         <key>textureRect</key>
-        <string><%={{=%>{{frame.x}},{{frame.y}} },{ {{frame.w}},{{frame.h}}<%=}}=%></string>
+        <string>{{<%frame.x%>,<%frame.y%>},{<%frame.w%>,<%frame.h%>}}</string>
         <key>textureRotated</key>
-        {{#rotated}}<true/>{{/rotated}}{{^rotated}}<false/>{{/rotated}}
+        <<%rotated%>/>
       </dict>
-      {{/rects}}
+      <%/rects%>
     </dict>
     <key>metadata</key>
     <dict>
       <key>format</key>
       <integer>3</integer>
       <key>pixelFormat</key>
-      <string>RGBA8888</string>
+      <string><%config.format%></string>
       <key>premultiplyAlpha</key>
       <false/>
       <key>realTextureFileName</key>
-      <string>main.png</string>
+      <string><%config.imageName%></string>
       <key>size</key>
-      <string>{214,2043}</string>
+      <string>{<%config.imageWidth%>,<%config.imageHeight%>}</string>
       <key>textureFileName</key>
-      <string>main.png</string>
+      <string><%config.imageName%></string>
     </dict>
   </dict>
 </plist>
+<%={{ }}=%>

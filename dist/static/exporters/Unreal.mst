@@ -1,8 +1,7 @@
 {
-  "frames": [
+  "frames": {
     {{#rects}}
-    {
-      "filename": "{{{name}}}",
+    "{{{name}}}": {
       "frame": {
         "x": {{frame.x}},
         "y": {{frame.y}},
@@ -27,7 +26,7 @@
       }
     }{{^last}},{{/last}}
     {{/rects}}
-  ],
+  },
   "meta": {
     "app": "{{{appInfo.url}}}",
     "version": "{{appInfo.version}}",
@@ -37,6 +36,7 @@
       "w": {{config.imageWidth}},
       "h": {{config.imageHeight}}
     },
-    "scale": {{config.scale}}
+    "scale": {{config.scale}},
+    "target": "paper2d"
   }
 }

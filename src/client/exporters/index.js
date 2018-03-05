@@ -19,6 +19,7 @@ function prepareData(data, options) {
     opt.imageName = opt.imageName || "texture.png";
     opt.format = opt.format || "RGBA8888";
     opt.scale = opt.scale || 1;
+    opt.base64Prefix = options.textureFormat == "png" ? "data:image/png;base64," : "data:image/jpeg;base64,";
 
     let ret = [];
 
@@ -40,7 +41,7 @@ function prepareData(data, options) {
             name = name.split("/").pop();
         }
 
-        let frame = {x: item.frame.x, y: item.frame.y, w: item.frame.w, h: item.frame.h};
+        let frame = {x: item.frame.x, y: item.frame.y, w: item.frame.w, h: item.frame.h, hw: item.frame.w/2, hh: item.frame.h/2};
         let spriteSourceSize = {x: item.spriteSourceSize.x, y: item.spriteSourceSize.y, w: item.spriteSourceSize.w, h: item.spriteSourceSize.h};
         let sourceSize = {w: item.sourceSize.w, h: item.sourceSize.h};
 
@@ -55,7 +56,10 @@ function prepareData(data, options) {
 
     }
 
-    if(ret.length) ret[ret.length-1].last = true;
+    if(ret.length) {
+        ret[0].first = true;
+        ret[ret.length-1].last = true;
+    }
 
     return {rects: ret, config: opt};
 }
@@ -69,16 +73,26 @@ function startExporter(exporter, data, options) {
             appInfo: appInfo
         };
         
-        if(exporter.templateContent) {
-            resolve(mustache.render(exporter.templateContent, renderOptions));
+        if(exporter.content) {
+            finishExporter(exporter, renderOptions, resolve, reject);
             return;
         }
         
         GET("static/exporters/" + exporter.template, null, (template) => {
-            exporter.templateContent = template;
-            resolve(mustache.render(exporter.templateContent, renderOptions));
-        }, reject);
+            exporter.content = template;
+            finishExporter(exporter, renderOptions, resolve, reject);
+        }, () => reject(exporter.template + " not found"));
     });
+}
+
+function finishExporter(exporter, renderOptions, resolve, reject) {
+    try {
+        let ret = mustache.render(exporter.content, renderOptions);
+        resolve(ret);
+    }
+    catch(e) {
+        reject(e.message);
+    }
 }
 
 export {getExporterByType, startExporter};

@@ -1,13 +1,5 @@
 [
   {
-    "type": "cocos2d",
-    "description": "cocos2d format",
-    "allowTrim": true,
-    "allowRotation": true,
-    "template": "Cocos2d.mst",
-    "fileExt": "plist"
-  },
-  {
     "type": "JSON (hash)",
     "description": "Json hash",
     "allowTrim": true,
@@ -24,11 +16,75 @@
     "fileExt": "json"
   },
   {
+    "type": "XML",
+    "description": "Plain XML format",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "XML.mst",
+    "fileExt": "xml"
+  },
+  {
+    "type": "css (modern)",
+    "description": "css format",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "Css.mst",
+    "fileExt": "css"
+  },
+  {
     "type": "css (old)",
     "description": "old css format",
     "allowTrim": false,
     "allowRotation": false,
     "template": "OldCss.mst",
     "fileExt": "css"
+  },
+  {
+    "type": "pixi.js",
+    "description": "pixi.js format",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "JsonHash.mst",
+    "fileExt": "json"
+  },
+  {
+    "type": "Phaser (hash)",
+    "description": "Phaser (json hash)",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "JsonHash.mst",
+    "fileExt": "json"
+  },
+  {
+    "type": "Phaser (array)",
+    "description": "Phaser (json array)",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "JsonArray.mst",
+    "fileExt": "json"
+  },
+  {
+    "type": "cocos2d",
+    "description": "cocos2d format",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "Cocos2d.mst",
+    "fileExt": "plist"
+  },
+  {
+    "type": "UnrealEngine",
+    "description": "UnrealEngine - Paper2d",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "Unreal.mst",
+    "fileExt": "paper2dsprites"
+  },
+  {
+    "type": "Starling",
+    "description": "Starling format",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "Starling.mst",
+    "fileExt": "xml"
   }
 ]

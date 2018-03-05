@@ -70,3 +70,4 @@ ABOUT_SOURCES;Исходники:
 ABOUT_BUGS;Сообщить об ошибке:
 ABOUT_LIBS;Используемые библиотеки:
 ABOUT_GULP_VERSION;Модуль для gulp:
+EXPORTER_ERROR;Ошибка при экспортировании: %s

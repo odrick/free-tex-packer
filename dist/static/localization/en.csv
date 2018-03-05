@@ -70,3 +70,4 @@ ABOUT_SOURCES;Sources:
 ABOUT_BUGS;Bugtracker:
 ABOUT_LIBS;Used libs:
 ABOUT_GULP_VERSION;Gulp module:
+EXPORTER_ERROR;Export error: %s
