@@ -1,15 +1,12 @@
+import Mustache from 'mustache';
 import {Observer, GLOBAL_EVENT} from './Observer';
 import PackProcessor from './PackProcessor';
 import TextureRenderer from './utils/TextureRenderer';
 import Downloader from './utils/Downloader';
-
 import { getFilterByType } from './filters';
-
 import I18 from './utils/I18';
-
 import appInfo from '../../package.json';
-
-import {POST} from './utils/ajax';
+import {GET, POST} from './utils/ajax';
 
 class APP {
     
@@ -91,10 +88,14 @@ class APP {
         }
 
         Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
-        setTimeout(() => this.doExport(), 0);
+        //setTimeout(() => this.doExport(), 0);
+        
+        GET("static/exporters/JsonArray.mst", null, (template) => {
+            this.doExport(template);
+        });
     }
 
-    async doExport() {
+    async doExport(template="") {
         let exporter = new this.packOptions.exporter();
         let textureName = this.packOptions.textureName;
         let filterClass = getFilterByType(this.packOptions.filter);
@@ -140,6 +141,14 @@ class APP {
                 content: exporter.run(item.data, options)
             });
 
+            let {rects, config} = exporter.prepare(item.data, options);
+            
+            console.log(Mustache.render(template, {
+                rects: rects,
+                config: config,
+                appInfo: appInfo
+            }));
+            
             ix++;
         }
 

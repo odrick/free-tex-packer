@@ -52,6 +52,8 @@ class Exporter {
             });
             
         }
+
+        if(ret.length) ret[ret.length-1].last = true;
         
         return {rects: ret, config: opt};
     }
