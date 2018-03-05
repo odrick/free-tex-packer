@@ -1,0 +1,34 @@
+[
+  {
+    "type": "cocos2d",
+    "description": "cocos2d format",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "Cocos2d.mst",
+    "fileExt": "plist"
+  },
+  {
+    "type": "JSON (hash)",
+    "description": "Json hash",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "JsonHash.mst",
+    "fileExt": "json"
+  },
+  {
+    "type": "JSON (array)",
+    "description": "Json array",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "JsonArray.mst",
+    "fileExt": "json"
+  },
+  {
+    "type": "css (old)",
+    "description": "old css format",
+    "allowTrim": false,
+    "allowRotation": false,
+    "template": "OldCss.mst",
+    "fileExt": "css"
+  }
+]
