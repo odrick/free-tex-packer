@@ -1,14 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import Storage from '../utils/Storage';
-
 import {Observer, GLOBAL_EVENT} from '../Observer';
 import I18 from '../utils/I18';
-
 import { getExporterByType } from '../exporters';
-
 import mustache from 'mustache';
+import appInfo from '../../../package.json';
 
 const STORAGE_CUSTOM_EXPORTER_KEY = "custom-exporter";
 
@@ -55,8 +52,14 @@ class EditCustomExporter extends React.Component {
         return (
             <div className="edit-custom-exporter-shader">
                 <div className="edit-custom-exporter-content">
+
+                    <div>
+                        <a href={appInfo.homepage} className="color-300" target="_blank">{I18.f("DOCUMENTATION")}</a>
+                    </div>
                     
-                    <textarea ref="content" className="edit-custom-exporter-data" defaultValue={exporter.content}></textarea>
+                    <div>
+                        <textarea ref="content" className="edit-custom-exporter-data" defaultValue={exporter.content}></textarea>
+                    </div>
                     
                     <div>
                         <b>{I18.f("ALLOW_TRIM")}</b>

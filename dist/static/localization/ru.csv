@@ -75,3 +75,4 @@ ABOUT_GULP_VERSION;Модуль для gulp:
 EXPORTER_ERROR;Ошибка при экспортировании: %s
 CUSTOM_EXPORTER_ERROR;Ошибка в шаблоне: %s
 FILE_EXT;Расширение файла:
+DOCUMENTATION;документация

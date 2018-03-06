@@ -75,3 +75,4 @@ ABOUT_GULP_VERSION;Gulp module:
 EXPORTER_ERROR;Export error: %s
 CUSTOM_EXPORTER_ERROR;Template error: %s
 FILE_EXT;File extension:
+DOCUMENTATION;documentation
