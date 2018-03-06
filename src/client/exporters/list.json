@@ -86,5 +86,13 @@
     "allowRotation": true,
     "template": "Starling.mst",
     "fileExt": "xml"
+  },
+  {
+    "type": "custom",
+    "description": "Custom format",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "",
+    "fileExt": ""
   }
 ]

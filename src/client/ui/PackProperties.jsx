@@ -15,6 +15,7 @@ import I18 from '../utils/I18';
 import {Observer, GLOBAL_EVENT} from '../Observer';
 
 const STORAGE_OPTIONS_KEY = "pack-options";
+const STORAGE_CUSTOM_EXPORTER_KEY = "custom-exporter";
 
 class PackProperties extends React.Component {
     constructor(props) {
@@ -27,8 +28,20 @@ class PackProperties extends React.Component {
         this.forceUpdate = this.forceUpdate.bind(this);
         
         this.packOptions = this.loadOptions();
+        this.loadCustomExporter();
         
         this.state = {packer: this.packOptions.packer};
+    }
+    
+    loadCustomExporter() {
+        let data = Storage.load(STORAGE_CUSTOM_EXPORTER_KEY);
+        if(data) {
+            let exporter = getExporterByType("custom");
+            exporter.allowTrim = data.allowTrim;
+            exporter.allowRotation = data.allowRotation;
+            exporter.fileExt = data.fileExt;
+            exporter.content = data.content;
+        }
     }
     
     loadOptions() {
@@ -78,6 +91,7 @@ class PackProperties extends React.Component {
     }
 
     componentDidMount() {
+        this.updateEditCustomTemplateButton();
         this.emitChanges();
     }
     
@@ -142,8 +156,15 @@ class PackProperties extends React.Component {
         allowTrimInput.checked = exporter.allowTrim;
         allowRotationInput.checked = exporter.allowRotation;
         
+        this.updateEditCustomTemplateButton();
+        
         this.onExporterPropChanged();
         if(doRefresh) this.onPropChanged();
+    }
+    
+    updateEditCustomTemplateButton() {
+        let exporter = getExporterByType(ReactDOM.findDOMNode(this.refs.exporter).value);
+        ReactDOM.findDOMNode(this.refs.editCustomFormat).style.visibility = exporter.type == "custom" ? "visible" : "hidden";
     }
     
     onExporterPropChanged() {
@@ -162,6 +183,10 @@ class PackProperties extends React.Component {
         Observer.emit(GLOBAL_EVENT.START_EXPORT);
     }
 
+    editCustomExporter() {
+        Observer.emit(GLOBAL_EVENT.SHOW_EDIT_CUSTOM_EXPORTER);
+    }
+    
     render() {
 
         let exporter = getExporterByType(this.packOptions.exporter);
@@ -176,6 +201,7 @@ class PackProperties extends React.Component {
                             <tr title={I18.f("TEXTURE_NAME_TITLE")}>
                                 <td>{I18.f("TEXTURE_NAME")}</td>
                                 <td><input ref="textureName" type="text" className="border-color-gray" defaultValue={this.packOptions.textureName} onBlur={this.onExporterPropChanged} /></td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("TEXTURE_FORMAT_TITLE")}>
                                 <td>{I18.f("TEXTURE_FORMAT")}</td>
@@ -185,30 +211,37 @@ class PackProperties extends React.Component {
                                         <option value="jpg">jpg</option>
                                     </select>
                                 </td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("REMOVE_FILE_EXT_TITLE")}>
                                 <td>{I18.f("REMOVE_FILE_EXT")}</td>
                                 <td><input ref="removeFileExtension" className="border-color-gray" type="checkbox" defaultChecked={this.packOptions.removeFileExtension ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("PREPEND_FOLDER_TITLE")}>
                                 <td>{I18.f("PREPEND_FOLDER")}</td>
                                 <td><input ref="prependFolderName" className="border-color-gray" type="checkbox" defaultChecked={this.packOptions.prependFolderName ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("BASE64_EXPORT_TITLE")}>
                                 <td>{I18.f("BASE64_EXPORT")}</td>
                                 <td><input ref="base64Export" className="border-color-gray" type="checkbox" defaultChecked={this.packOptions.base64Export ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("TINIFY_TITLE")}>
                                 <td>{I18.f("TINIFY")}</td>
                                 <td><input ref="tinify" className="border-color-gray" type="checkbox" defaultChecked={this.packOptions.tinify ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("TINIFY_KEY_TITLE")}>
                                 <td>{I18.f("TINIFY_KEY")}</td>
                                 <td><input ref="tinifyKey" type="text" className="border-color-gray" defaultValue={this.packOptions.tinifyKey} onBlur={this.onExporterPropChanged} /></td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("SCALE_TITLE")}>
                                 <td>{I18.f("SCALE")}</td>
                                 <td><input ref="scale" type="number" min="1" className="border-color-gray" defaultValue={this.packOptions.scale} onBlur={this.onExporterPropChanged}/></td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("FILTER_TITLE")}>
                                 <td>{I18.f("FILTER")}</td>
@@ -219,6 +252,7 @@ class PackProperties extends React.Component {
                                         })}
                                     </select>
                                 </td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("FORMAT_TITLE")}>
                                 <td>{I18.f("FORMAT")}</td>
@@ -229,48 +263,59 @@ class PackProperties extends React.Component {
                                     })}
                                     </select>
                                 </td>
+                                <td>
+                                    <div className="edit-btn back-600" ref="editCustomFormat" onClick={this.editCustomExporter}></div>
+                                </td>
                             </tr>
                             <tr title={I18.f("FILE_NAME_TITLE")}>
                                 <td>{I18.f("FILE_NAME")}</td>
                                 <td><input ref="fileName" className="border-color-gray" type="text" defaultValue={this.packOptions.fileName} onBlur={this.onExporterPropChanged} /></td>
+                                <td></td>
                             </tr>
                             <tr>
-                                <td colSpan="2" className="center-align">
+                                <td colSpan="3" className="center-align">
                                     <div className="btn back-600 border-color-gray color-white" onClick={this.startExport}>{I18.f("EXPORT")}</div>
                                 </td>
                             </tr>
                             
                             <tr>
-                                <td colSpan="2">&nbsp;</td>
+                                <td colSpan="3">&nbsp;</td>
                             </tr>
                             
                             <tr title={I18.f("WIDTH_TITLE")}>
                                 <td>{I18.f("WIDTH")}</td>
                                 <td><input ref="width" type="number" min="0" className="border-color-gray" defaultValue={this.packOptions.width} onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("HEIGHT_TITLE")}>
                                 <td>{I18.f("HEIGHT")}</td>
                                 <td><input ref="height" type="number" min="0" className="border-color-gray" defaultValue={this.packOptions.height} onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("FIXED_SIZE_TITLE")}>
                                 <td>{I18.f("FIXED_SIZE")}</td>
                                 <td><input ref="fixedSize" type="checkbox" className="border-color-gray" onChange={this.onPropChanged} defaultChecked={this.packOptions.fixedSize ? "checked" : ""} /></td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("PADDING_TITLE")}>
                                 <td>{I18.f("PADDING")}</td>
                                 <td><input ref="padding" type="number" className="border-color-gray" defaultValue={this.packOptions.padding} min="0" onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("ALLOW_ROTATION_TITLE")}>
                                 <td>{I18.f("ALLOW_ROTATION")}</td>
                                 <td><input ref="allowRotation" type="checkbox" className="border-color-gray" onChange={this.onPropChanged} defaultChecked={this.packOptions.allowRotation ? "checked" : ""} disabled={exporterRotationDisabled} /></td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("ALLOW_TRIM_TITLE")}>
                                 <td>{I18.f("ALLOW_TRIM")}</td>
                                 <td><input ref="allowTrim" type="checkbox" className="border-color-gray" onChange={this.onPropChanged} defaultChecked={this.packOptions.allowTrim ? "checked" : ""}  disabled={exporterTrimDisabled} /></td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("DETECT_IDENTICAL_TITLE")}>
                                 <td>{I18.f("DETECT_IDENTICAL")}</td>
                                 <td><input ref="detectIdentical" type="checkbox" className="border-color-gray" onChange={this.onPropChanged} defaultChecked={this.packOptions.detectIdentical ? "checked" : ""}/></td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("PACKER_TITLE")}>
                                 <td>{I18.f("PACKER")}</td>
@@ -281,10 +326,12 @@ class PackProperties extends React.Component {
                                     })}
                                     </select>
                                 </td>
+                                <td></td>
                             </tr>
                             <tr title={I18.f("PACKER_METHOD_TITLE")}>
                                 <td>{I18.f("PACKER_METHOD")}</td>
                                 <td><PackerMethods ref="packerMethod" packer={this.state.packer} defaultMethod={this.packOptions.packerMethod} handler={this.onPropChanged}/></td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>
