@@ -12,8 +12,9 @@ Free texture packer uses [mustache](http://mustache.github.io/) template engine.
 There are 3 objects passed to template:
 
 **rects** (Array) list of sprites for export
+
 | prop             | type    | description                     |
-| -------------    |---------|-------------                    |
+| ---              | ---     | ---                             |
 | name             | String  | sprite name                     |
 | frame            | Object  | frame info (x, y, w, h, hw, hh) |
 | rotated          | Boolean | sprite rotation flag            |
@@ -24,8 +25,9 @@ There are 3 objects passed to template:
 | last             | Boolean | last element in array flag      |
 
 **config** (Object) currect export config
+
 | prop           | type    | description              |
-| -------------  |---------|-------------             |
+| ---            | ---     | ---                      |
 | imageWidth     | Number  | texture width            |
 | imageHeight    | Number  | texture height           |
 | scale          | Number  | texture scale            |
@@ -36,8 +38,9 @@ There are 3 objects passed to template:
 | imageData      | String  | base64 image data        |
 
 **appInfo** (Object) application info
+
 | prop           | type    | description          |
-| -------------  |---------|-------------         |
+| ---            | ---     | ---                  |
 | displayName    | String  | App name             |
 | version        | String  | App version          |
 | url            | String  | App url              |
