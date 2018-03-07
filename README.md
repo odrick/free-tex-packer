@@ -24,7 +24,7 @@ There are 3 objects passed to template:
 | first            | Boolean | first element in array flag     |
 | last             | Boolean | last element in array flag      |
 
-**config** (Object) currect export config
+**config** (Object) current export config
 
 | prop           | type    | description              |
 | ---            | ---     | ---                      |

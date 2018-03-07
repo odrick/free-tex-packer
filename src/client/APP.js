@@ -91,7 +91,7 @@ class APP {
         setTimeout(() => this.doExport(), 0);
     }
 
-    async doExport(template="") {
+    async doExport() {
         let exporter = this.packOptions.exporter;
         let textureName = this.packOptions.textureName;
         let filterClass = getFilterByType(this.packOptions.filter);

@@ -93,18 +93,6 @@ class I18 {
         return strings;
     }
 
-    static createLoaderQueue() {
-        let queue = new Queue();
-        let loader = createLoader(I18.path + "/" + I18.iniPrefix + I18.currentLocale + "." + I18.iniExt + "?v=" + (new Date().getTime()), this.context);
-        queue.add(loader);
-
-        queue.on('fileload', (e) => {
-            I18.setup(I18.parse(e.item.data));
-        });
-
-        return queue;
-    }
-
     static load(callback) {
         let url = I18.path + "/" + I18.iniPrefix + I18.currentLocale + "." + I18.iniExt + "?v=" + (new Date().getTime());
         GET(url, null, data => {

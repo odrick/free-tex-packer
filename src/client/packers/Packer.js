@@ -7,7 +7,7 @@ class Packer {
     constructor() {
     }
 
-    pack(data, method) {
+    pack() {
         throw Error("Abstarct method. Override it.");
     }
 
@@ -20,7 +20,7 @@ class Packer {
         return METHOD;
     }
 
-    static getMethodProps(id=0) {
+    static getMethodProps() {
         return {name: "Default", description: "Default placement"};
     }
 }

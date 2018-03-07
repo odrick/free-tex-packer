@@ -15,7 +15,7 @@ class Storage {
     static load(key, isJson=true) {
         key = PREFIX + key;
         
-        let value = localStorage.getItem(key, value);
+        let value = localStorage.getItem(key);
         
         if(value && isJson) {
             try {

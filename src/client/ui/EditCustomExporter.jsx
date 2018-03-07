@@ -42,7 +42,6 @@ class EditCustomExporter extends React.Component {
         }
         catch(e) {
             Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("EXPORTER_ERROR", e.message));
-            return;
         }
     }
 
