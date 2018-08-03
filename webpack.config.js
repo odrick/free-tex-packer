@@ -10,7 +10,7 @@ var entry = [
 
 var plugins = [];
 
-var devtool = "source-map";
+var devtool = "eval-source-map";
 var output = "static/js/index.js";
 var debug = true;
 

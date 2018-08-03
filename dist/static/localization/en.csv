@@ -13,7 +13,8 @@ ADD_ZIP_TITLE;Add zipped images
 IMAGE_DROP_HELP;or drag'n'drop images here
 CLEAR;Clear
 CLEAR_TITLE;Clear all images
-DISPLAY_OUTLINES;Display outlines:
+DISPLAY_OUTLINES;Outlines:
+SCALE;Scale:
 SHOW_SPRITES;Show sprites
 SPRITE_NAME;Sprite name:
 ANIMATION_SPEED;Animation speed:

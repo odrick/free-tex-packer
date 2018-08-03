@@ -15,11 +15,13 @@ class PackResults extends React.Component {
             textureBack: this.textureBackColors[0],
             displayOutline: false,
             selectedImage: null,
-            playerVisible: false
+            playerVisible: false,
+            scale: 1
         };
         
         this.setBack = this.setBack.bind(this);
         this.changeOutlines = this.changeOutlines.bind(this);
+        this.changeScale = this.changeScale.bind(this);
         this.toggleSpritesPlayer = this.toggleSpritesPlayer.bind(this);
 
         Observer.on(GLOBAL_EVENT.PACK_COMPLETE, this.updatePackResult, this);
@@ -52,6 +54,10 @@ class PackResults extends React.Component {
         this.setState({displayOutline: e.target.checked});
     }
 
+    changeScale(e) {
+        this.setState({scale: e.target.value});
+    }
+
     toggleSpritesPlayer() {
         this.setState({playerVisible: !this.state.playerVisible});
     }
@@ -62,7 +68,7 @@ class PackResults extends React.Component {
         if(this.state.packResult) {
             for (let item of this.state.packResult) {
                 views.push((
-                    <TextureView key={"tex-view-" + ix} data={item} textureBack={this.state.textureBack} selectedImage={this.state.selectedImage} displayOutline={this.state.displayOutline} />
+                    <TextureView key={"tex-view-" + ix} data={item} scale={this.state.scale} textureBack={this.state.textureBack} selectedImage={this.state.selectedImage} displayOutline={this.state.displayOutline} />
                 ));
                 ix++;
             }
@@ -92,7 +98,7 @@ class PackResults extends React.Component {
                                     {this.textureBackColors.map(name => {
                                         return (
                                             <td key={"back-color-btn-" + name}>
-                                                <div className={"btn-back-color " + name + (this.state.textureBack == name ? " selected" : "")} onClick={this.setBack}>&nbsp;</div>
+                                                <div className={"btn-back-color " + name + (this.state.textureBack === name ? " selected" : "")} onClick={this.setBack}>&nbsp;</div>
                                             </td>
                                         )
                                     })}
@@ -101,6 +107,12 @@ class PackResults extends React.Component {
                                     </td>
                                     <td>
                                         <input type="checkbox" id="result-view-outline" onChange={this.changeOutlines} />
+                                    </td>
+                                    <td>
+                                        {I18.f("SCALE")}
+                                    </td>
+                                    <td>
+                                        <input type="range" min="0.1" max="1" step="0.01" defaultValue="1" onChange={this.changeScale}/>
                                     </td>
                                     <td>
                                         <div className="btn back-600 border-color-gray color-white" onClick={this.toggleSpritesPlayer}>{I18.f("SHOW_SPRITES")}</div>

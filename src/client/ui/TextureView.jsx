@@ -23,7 +23,7 @@ class TextureView extends React.Component {
             let highLightItem = null;
             if(this.props.selectedImage) {
                 for (let item of this.props.data.data) {
-                    if (item.name == this.props.selectedImage) {
+                    if (item.name === this.props.selectedImage) {
                         highLightItem = item;
                         break;
                     }
@@ -32,6 +32,9 @@ class TextureView extends React.Component {
 
             view.width = this.props.data.buffer.width;
             view.height = this.props.data.buffer.height;
+            
+            view.style.width = Math.floor(view.width * this.props.scale) + "px";
+            view.style.height = Math.floor(view.height * this.props.scale) + "px";
 
             let ctx = view.getContext("2d");
 
@@ -106,8 +109,8 @@ class TextureView extends React.Component {
 
         let canvas = ReactDOM.findDOMNode(this.refs.view);
         let rect = canvas.getBoundingClientRect();
-        let x = e.clientX - rect.left;
-        let y = e.clientY - rect.top;
+        let x = (e.clientX - rect.left) / this.props.scale;
+        let y = (e.clientY - rect.top) / this.props.scale;
 
         for (let item of this.props.data.data) {
             let w = item.frame.w;

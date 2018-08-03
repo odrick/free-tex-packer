@@ -13,7 +13,8 @@ ADD_ZIP_TITLE;Добавить упакованные изображения
 IMAGE_DROP_HELP;или перетяните изображения сюда
 CLEAR;Очистить
 CLEAR_TITLE;Очистить все изображения
-DISPLAY_OUTLINES;Отображать контуры:
+DISPLAY_OUTLINES;Контуры:
+SCALE;Масштаб:
 SHOW_SPRITES;Показать спрайты
 SPRITE_NAME;Название спрайта:
 ANIMATION_SPEED;Скорость анимации:
