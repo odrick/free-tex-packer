@@ -45,6 +45,7 @@ WIDTH_TITLE;Max texture width
 HEIGHT;Height:
 HEIGHT_TITLE;Max texture height
 FIXED_SIZE;Fixed size:
+POWER_OF_TWO;Power of two:
 FIXED_SIZE_TITLE;Fixed texture size
 PADDING;Padding:
 PADDING_TITLE;Sprites padding

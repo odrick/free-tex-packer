@@ -45,6 +45,7 @@ WIDTH_TITLE;Максимальная ширина текстуры
 HEIGHT;Высота:
 HEIGHT_TITLE;Максимальная высота текстуры
 FIXED_SIZE;Фиксированный размер:
+FIXED_SIZE;Power of two:
 FIXED_SIZE_TITLE;Фиксированный размер текстуры
 PADDING;Отступы:
 PADDING_TITLE;Отступы между спрайтами в текстуре

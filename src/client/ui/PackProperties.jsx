@@ -65,6 +65,7 @@ class PackProperties extends React.Component {
         data.width = data.width === undefined ? 2048 : data.width;
         data.height = data.height === undefined ? 2048 : data.height;
         data.fixedSize = data.fixedSize === undefined ? false : data.fixedSize;
+        data.powerOfTwo = data.powerOfTwo === undefined ? false : data.powerOfTwo;
         data.padding = data.padding === undefined ? 1 : data.padding;
         data.allowRotation = data.allowRotation === undefined ? true : data.allowRotation;
         data.allowTrim = data.allowTrim === undefined ? true : data.allowTrim;
@@ -112,6 +113,7 @@ class PackProperties extends React.Component {
         data.width = Number(ReactDOM.findDOMNode(this.refs.width).value) || 0;
         data.height = Number(ReactDOM.findDOMNode(this.refs.height).value) || 0;
         data.fixedSize = ReactDOM.findDOMNode(this.refs.fixedSize).checked;
+        data.powerOfTwo = ReactDOM.findDOMNode(this.refs.powerOfTwo).checked;
         data.padding = Number(ReactDOM.findDOMNode(this.refs.padding).value) || 0;
         data.allowRotation = ReactDOM.findDOMNode(this.refs.allowRotation).checked;
         data.allowTrim = ReactDOM.findDOMNode(this.refs.allowTrim).checked;
@@ -295,6 +297,11 @@ class PackProperties extends React.Component {
                             <tr title={I18.f("FIXED_SIZE_TITLE")}>
                                 <td>{I18.f("FIXED_SIZE")}</td>
                                 <td><input ref="fixedSize" type="checkbox" className="border-color-gray" onChange={this.onPropChanged} defaultChecked={this.packOptions.fixedSize ? "checked" : ""} /></td>
+                                <td></td>
+                            </tr>
+                            <tr title={I18.f("POWER_OF_TWO_TITLE")}>
+                                <td>{I18.f("POWER_OF_TWO")}</td>
+                                <td><input ref="powerOfTwo" type="checkbox" className="border-color-gray" onChange={this.onPropChanged} defaultChecked={this.packOptions.powerOfTwo ? "checked" : ""} /></td>
                                 <td></td>
                             </tr>
                             <tr title={I18.f("PADDING_TITLE")}>
