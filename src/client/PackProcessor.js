@@ -76,7 +76,7 @@ class PackProcessor {
         for(let key of names) {
             let img = images[key];
 
-            let name = key.split(".").pop();
+            let name = key.split(".")[0];
 
             maxWidth += img.width;
             maxHeight += img.height;
