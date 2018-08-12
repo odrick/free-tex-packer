@@ -1,5 +1,5 @@
 
-{{config.imageName}}
+{{config.imageFile}}
 size: {{config.imageWidth}},{{config.imageHeight}}
 format: {{config.format}}
 filter: Nearest,Nearest
