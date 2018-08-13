@@ -26,16 +26,17 @@ There are 3 objects passed to template:
 
 **config** (Object) current export config
 
-| prop           | type    | description              |
-| ---            | ---     | ---                      |
-| imageWidth     | Number  | texture width            |
-| imageHeight    | Number  | texture height           |
-| scale          | Number  | texture scale            |
-| format         | String  | texture format           |
-| imageName      | String  | texture name             |
-| base64Export   | Boolean | base64 export flag       |
-| base64Prefix   | String  | prefix for base64 string |
-| imageData      | String  | base64 image data        |
+| prop           | type    | description                        |
+| ---            | ---     | ---                                |
+| imageWidth     | Number  | texture width                      |
+| imageHeight    | Number  | texture height                     |
+| scale          | Number  | texture scale                      |
+| format         | String  | texture format                     |
+| imageName      | String  | texture name                       |
+| imageFile      | String  | texture file (name with extension) |
+| base64Export   | Boolean | base64 export flag                 |
+| base64Prefix   | String  | prefix for base64 string           |
+| imageData      | String  | base64 image data                  |
 
 **appInfo** (Object) application info
 
@@ -79,7 +80,7 @@ There are 3 objects passed to template:
   "meta": {
     "app": "{{{appInfo.url}}}",
     "version": "{{appInfo.version}}",
-    "image": "{{config.imageName}}",
+    "image": "{{config.imageFile}}",
     "format": "{{config.format}}",
     "size": {
       "w": {{config.imageWidth}},

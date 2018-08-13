@@ -5,5 +5,5 @@
    ---------------------------
 */
 {{#rects}}
-.{{{name}}} { display:inline-block;overflow:hidden;background:url({{config.imageName}}) no-repeat -{{frame.x}}px -{{frame.y}}px;width:{{frame.w}}px;height:{{frame.h}}px }
+.{{{name}}} { display:inline-block;overflow:hidden;background:url({{config.imageFile}}) no-repeat -{{frame.x}}px -{{frame.y}}px;width:{{frame.w}}px;height:{{frame.h}}px }
 {{/rects}}

@@ -128,7 +128,8 @@ class APP {
             let pixelFormat = this.packOptions.textureFormat == "png" ? "RGBA8888" : "RGB888";
 
             let options = {
-                imageName: `${fName}.${this.packOptions.textureFormat}`,
+                imageName: `${fName}`,
+                imageFile: `${fName}.${this.packOptions.textureFormat}`,
                 imageData: imageData,
                 format: pixelFormat,
                 textureFormat: this.packOptions.textureFormat,

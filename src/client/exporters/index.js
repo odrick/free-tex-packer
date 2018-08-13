@@ -16,7 +16,8 @@ function prepareData(data, options) {
 
     let opt = Object.assign({}, options);
 
-    opt.imageName = opt.imageName || "texture.png";
+    opt.imageName = opt.imageName || "texture";
+    opt.imageFile = opt.imageFile || (opt.imageName + "." + options.textureFormat);
     opt.format = opt.format || "RGBA8888";
     opt.scale = opt.scale || 1;
     opt.base64Prefix = options.textureFormat == "png" ? "data:image/png;base64," : "data:image/jpeg;base64,";

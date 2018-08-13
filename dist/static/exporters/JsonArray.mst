@@ -31,7 +31,7 @@
   "meta": {
     "app": "{{{appInfo.url}}}",
     "version": "{{appInfo.version}}",
-    "image": "{{^config.base64Export}}{{config.imageName}}{{/config.base64Export}}{{#config.base64Export}}{{{config.base64Prefix}}}{{{config.imageData}}}{{/config.base64Export}}",
+    "image": "{{^config.base64Export}}{{config.imageFile}}{{/config.base64Export}}{{#config.base64Export}}{{{config.base64Prefix}}}{{{config.imageData}}}{{/config.base64Export}}",
     "format": "{{config.format}}",
     "size": {
       "w": {{config.imageWidth}},

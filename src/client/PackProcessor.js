@@ -76,6 +76,8 @@ class PackProcessor {
         for(let key of names) {
             let img = images[key];
 
+            let name = key.split(".")[0];
+
             maxWidth += img.width;
             maxHeight += img.height;
 
@@ -88,7 +90,8 @@ class PackProcessor {
                 trimmed: false,
                 spriteSourceSize: {x: 0, y: 0, w: img.width, h: img.height},
                 sourceSize: {w: img.width, h: img.height},
-                name: key,
+                name: name,
+                file: key,
                 image: img
             });
         }

@@ -42,6 +42,14 @@ class TextureRenderer {
             width += padding;
             height += padding;
 
+            if (options.powerOfTwo) {
+                width = Math.pow(2, Math.round(Math.log(width)/Math.log(2))); // nearest power of two
+                height = Math.pow(2, Math.round(Math.log(height)/Math.log(2))); // nearest power of two
+
+                // Unify
+                if (width > height) height = width;
+                else width = height;
+            }
         }
 
         this.width = width;
