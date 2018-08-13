@@ -102,6 +102,11 @@ class PackProcessor {
         if(!width) width = maxWidth;
         if(!height) height = maxHeight;
 
+        if (options.powerOfTwo) {
+            width = Math.pow(2, Math.round(Math.log(width)/Math.log(2)));
+            height = Math.pow(2, Math.round(Math.log(height)/Math.log(2)));
+        }
+
         if(width < minWidth || height < minHeight) {
             if(onError) onError({
                 description: I18.f("INVALID_SIZE_ERROR", minWidth, minHeight)

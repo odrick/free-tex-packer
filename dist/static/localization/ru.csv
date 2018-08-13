@@ -45,8 +45,9 @@ WIDTH_TITLE;Максимальная ширина текстуры
 HEIGHT;Высота:
 HEIGHT_TITLE;Максимальная высота текстуры
 FIXED_SIZE;Фиксированный размер:
-FIXED_SIZE;Power of two:
 FIXED_SIZE_TITLE;Фиксированный размер текстуры
+POWER_OF_TWO;Степень двойки:
+POWER_OF_TWO_TITLE;Размер текстуры в степени двойки
 PADDING;Отступы:
 PADDING_TITLE;Отступы между спрайтами в текстуре
 ALLOW_ROTATION;Разрешить поворот:
