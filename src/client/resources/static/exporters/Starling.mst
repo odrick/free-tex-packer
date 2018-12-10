@@ -1,0 +1,9 @@
+<!--
+Created with {{appInfo.displayName}} v{{appInfo.version}} {{{appInfo.url}}}
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="{{{config.imageFile}}}" width="{{config.imageWidth}}" height="{{config.imageHeight}}">
+  {{#rects}}
+  <SubTexture name="{{{name}}}" x="{{frame.x}}" y="{{frame.y}}" {{#rotated}}width="{{frame.h}}" height="{{frame.w}}" rotated="true"{{/rotated}} {{^rotated}}width="{{frame.w}}" height="{{frame.h}}"{{/rotated}} frameX="-{{spriteSourceSize.x}}" frameY="-{{spriteSourceSize.y}}" frameWidth="{{sourceSize.w}}" frameHeight="{{sourceSize.h}}"/>
+  {{/rects}}
+</TextureAtlas>

@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var argv = require('optimist').argv;
 
 var entry = [
@@ -10,15 +10,19 @@ var entry = [
 
 var plugins = [];
 
-var devtool = "eval-source-map";
-var output = "static/js/index.js";
+var devtool = 'eval-source-map';
+var output = 'static/js/index.js';
 var debug = true;
 
-if(argv.p) {
-    plugins.push(new webpack.DefinePlugin({
-        'process.env.NODE_ENV': '"production"'
-    }));
-    
+var PLATFORM = argv.platform || 'web';
+var NODE_ENV = argv.build ? 'production': 'development';
+
+plugins.push(new webpack.DefinePlugin({
+	'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+	'PLATFORM': JSON.stringify(PLATFORM)
+}));
+
+if(argv.build) {
     plugins.push(new webpack.optimize.UglifyJsPlugin({
         minimize: true,
         mangle: true,
@@ -26,17 +30,16 @@ if(argv.p) {
             warnings: false
         }
     }));
+	
+	plugins.push(new CopyWebpackPlugin([{from: 'src/client/resources', to: 'dist/' + PLATFORM + '/'}]));
 
     devtool = null;
-    output = "dist/static/js/index.js";
+    output = 'dist/' + PLATFORM + '/static/js/index.js';
     debug = false;
 }
 else {
     entry.push('webpack-dev-server/client?http://localhost:4000');
-    
-    plugins.push(new webpack.DefinePlugin({
-        'process.env.NODE_ENV': '"development"'
-    }));
+	plugins.push(new CopyWebpackPlugin([{from: 'src/client/resources', to: './'}]));
 }
 
 module.exports = {
@@ -49,24 +52,23 @@ module.exports = {
             {
                 test: /.jsx?$/,
                 include: [
-                    path.resolve(__dirname, "src")
+                    path.resolve(__dirname, 'src')
                 ],
                 loader: 'babel-loader',
-                query: {presets: ["react", "es2015", "stage-0"]}
+                query: {presets: ['react', 'es2015', 'stage-0']}
             },
             {
                 test: /\.js$/,
                 include: [
-                    path.resolve(__dirname, "src")
+                    path.resolve(__dirname, 'src')
                 ],
                 loader: 'babel-loader',
-                query: { presets: ["es2015", "stage-0"] }
+                query: { presets: ['es2015', 'stage-0'] }
             },
             { test: /\.json$/, loader: 'json' },
             { test: /\.(html|htm)$/, loader: 'dom' }
         ],
         noParse: /.*[\/\\]bin[\/\\].+\.js/
     },
-    devServer: { contentBase: path.resolve(__dirname, "dist") },
     plugins: plugins
 };

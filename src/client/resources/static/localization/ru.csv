@@ -1,0 +1,81 @@
+OK;OK
+YES;ДА
+NO;НЕТ
+CANCEL;ОТМЕНА
+SAVE;СОХРАНИТЬ
+LANGUAGE;язык:
+LANGUAGE_en;english
+LANGUAGE_ru;русский
+ADD_IMAGES;Добавить
+ADD_IMAGES_TITLE;Добавить изображения
+ADD_ZIP;Добавить ZIP
+ADD_ZIP_TITLE;Добавить упакованные изображения
+IMAGE_DROP_HELP;или перетяните изображения сюда
+CLEAR;Очистить
+CLEAR_TITLE;Очистить все изображения
+DISPLAY_OUTLINES;Контуры:
+SCALE;Масштаб:
+SHOW_SPRITES;Показать спрайты
+SPRITE_NAME;Название спрайта:
+ANIMATION_SPEED;Скорость анимации:
+TEXTURE_NAME;Имя текстуры:
+TEXTURE_NAME_TITLE;Имя, которое будет использоваться для именования отдельных файлов
+TEXTURE_FORMAT;Формат текстуры:
+TEXTURE_FORMAT_TITLE;Формат, в котором будет сохранена текстура
+REMOVE_FILE_EXT;Удалить расширение:
+REMOVE_FILE_EXT_TITLE;Удаляет расширения файла при экспорте
+PREPEND_FOLDER;Добавить путь:
+PREPEND_FOLDER_TITLE;Добавить путь к имени файла
+BASE64_EXPORT_TITLE;Экспортировать в формате base64 (при возможности)
+BASE64_EXPORT;Экспортировать в base64
+TINIFY_TITLE;Оптимизировать, используя TinyPNG https://tinypng.com
+TINIFY;Оптимизировать TinyPNG
+TINIFY_KEY_TITLE;Ключ TinyPNG https://tinypng.com/developers 
+TINIFY_KEY;Ключ TinyPNG
+SCALE;Масштаб:
+SCALE_TITLE;Текущий масштаб текстуры. Влияет на пересчет размеров и координат при экспорте
+FILTER;Фильтр:
+FILTER_TITLE;Фильтр, который будет применен к текстуре
+FORMAT;Формат:
+FORMAT_TITLE;Формат экспорта
+FILE_NAME;Имя файла:
+FILE_NAME_TITLE;Имя результирующего файла 
+WIDTH;Ширина:
+WIDTH_TITLE;Максимальная ширина текстуры
+HEIGHT;Высота:
+HEIGHT_TITLE;Максимальная высота текстуры
+FIXED_SIZE;Фиксированный размер:
+FIXED_SIZE_TITLE;Фиксированный размер текстуры
+POWER_OF_TWO;Степень двойки:
+POWER_OF_TWO_TITLE;Размер текстуры в степени двойки
+PADDING;Отступы:
+PADDING_TITLE;Отступы между спрайтами в текстуре
+ALLOW_ROTATION;Разрешить поворот:
+ALLOW_ROTATION_TITLE;Разрешает поворот спрайта в текстуре
+ALLOW_TRIM;Разрешить обрезку:
+ALLOW_TRIM_TITLE;Разрешает обрезку незначимых пикселей спрайта в текстуре
+DETECT_IDENTICAL;Определять идентичные:
+DETECT_IDENTICAL_TITLE;Разрешает определять идентичные спрайты и не дублировать их в текстуре
+PACKER;Упаковщик:
+PACKER_TITLE;Упаковщик
+PACKER_METHOD;Метод:
+PACKER_METHOD_TITLE;Метод упаковщика
+EXPORT;Экспорт
+PLEASE_WAIT;Пожалуйста, подождите...
+INVALID_SIZE_ERROR;Неверный размер. Минимально возможный: %sx%s
+NO_IMAGES_ERROR;Добавьте сначала изображения
+CLEAR_WARNING;Дейстивтельно удалить все изображения?
+INVALID_ZIP_ERROR;Неверный zip файл
+NO_TINIFY_KEY_ERROR;Пожалуйста, укажите Ваш ключ TinyPNG https://tinypng.com/developers
+TINIFY_ERROR;Ошибка при оптимизации: %s
+TINIFY_ERROR_COMMON;Ошибка при оптимизации...
+OLD_BROWSER_MESSAGE1;Извините, но Ваш браузер устарел...
+OLD_BROWSER_MESSAGE2;Пожалуйста, установите и используйте один из современных браузеров:
+ABOUT_SOURCES;Исходники:
+ABOUT_BUGS;Сообщить об ошибке:
+ABOUT_LIBS;Используемые библиотеки:
+ABOUT_GULP_VERSION;Модуль для gulp:
+EXPORTER_ERROR;Ошибка при экспортировании: %s
+CUSTOM_EXPORTER_ERROR;Ошибка в шаблоне: %s
+FILE_EXT;Расширение файла:
+DOCUMENTATION;документация
