@@ -23,7 +23,7 @@ class TextureView extends React.Component {
             let highLightItem = null;
             if(this.props.selectedImage) {
                 for (let item of this.props.data.data) {
-                    if (item.name === this.props.selectedImage) {
+                    if (item.file === this.props.selectedImage) {
                         highLightItem = item;
                         break;
                     }
@@ -130,7 +130,7 @@ class TextureView extends React.Component {
             }
         }
 
-        Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, selectedItem ? selectedItem.name : null);
+        Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, selectedItem ? selectedItem.file : null);
 
         e.preventDefault();
         e.stopPropagation();
