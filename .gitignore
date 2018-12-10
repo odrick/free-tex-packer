@@ -8,3 +8,4 @@ node_modules/*
 /index.js
 /index.js.map
 /package-lock.json
+/src/electron/package-lock.json
