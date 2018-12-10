@@ -64,7 +64,7 @@ EXPORT;Экспорт
 PLEASE_WAIT;Пожалуйста, подождите...
 INVALID_SIZE_ERROR;Неверный размер. Минимально возможный: %sx%s
 NO_IMAGES_ERROR;Добавьте сначала изображения
-CLEAR_WARNING;Дейстивтельно удалить все изображения?
+CLEAR_WARNING;Действительно удалить все изображения?
 INVALID_ZIP_ERROR;Неверный zip файл
 NO_TINIFY_KEY_ERROR;Пожалуйста, укажите Ваш ключ TinyPNG https://tinypng.com/developers
 TINIFY_ERROR;Ошибка при оптимизации: %s
