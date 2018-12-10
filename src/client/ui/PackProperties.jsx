@@ -266,7 +266,7 @@ class PackProperties extends React.Component {
                                     </select>
                                 </td>
                                 <td>
-                                    <div className="edit-btn back-600" ref="editCustomFormat" onClick={this.editCustomExporter}></div>
+                                    <div className="edit-btn back-800" ref="editCustomFormat" onClick={this.editCustomExporter}></div>
                                 </td>
                             </tr>
                             <tr title={I18.f("FILE_NAME_TITLE")}>
@@ -276,7 +276,7 @@ class PackProperties extends React.Component {
                             </tr>
                             <tr>
                                 <td colSpan="3" className="center-align">
-                                    <div className="btn back-600 border-color-gray color-white" onClick={this.startExport}>{I18.f("EXPORT")}</div>
+                                    <div className="btn back-800 border-color-gray color-white" onClick={this.startExport}>{I18.f("EXPORT")}</div>
                                 </td>
                             </tr>
                             

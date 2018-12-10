@@ -115,7 +115,7 @@ class PackResults extends React.Component {
                                         <input type="range" min="0.1" max="1" step="0.01" defaultValue="1" onChange={this.changeScale}/>
                                     </td>
                                     <td>
-                                        <div className="btn back-600 border-color-gray color-white" onClick={this.toggleSpritesPlayer}>{I18.f("SHOW_SPRITES")}</div>
+                                        <div className="btn back-800 border-color-gray color-white" onClick={this.toggleSpritesPlayer}>{I18.f("SHOW_SPRITES")}</div>
                                     </td>
                                 </tr>
                                 </tbody>

@@ -22,7 +22,7 @@ class About extends React.Component {
                     <div className="about-logo"></div>
                     
                     <div className="about-author">
-                        <a href={appInfo.authorSite} target="_blank" className="color-300">{appInfo.author}</a>
+                        <a href={appInfo.authorSite} target="_blank" className="color-800">{appInfo.author}</a>
                     </div>
                     <div className="about-app-info">
                         <span className="about-app-name">{appInfo.displayName}</span>
@@ -34,33 +34,33 @@ class About extends React.Component {
                             <tbody>
                                 <tr>
                                     <td>{I18.f("ABOUT_SOURCES")}</td>
-                                    <td><a href={appInfo.homepage} target="_blank" className="color-300">{appInfo.homepage}</a></td>
+                                    <td><a href={appInfo.homepage} target="_blank" className="color-800">{appInfo.homepage}</a></td>
                                 </tr>
                                 <tr>
                                     <td>{I18.f("ABOUT_BUGS")}</td>
-                                    <td><a href={appInfo.bugs.url} target="_blank" className="color-300">{appInfo.bugs.url}</a></td>
+                                    <td><a href={appInfo.bugs.url} target="_blank" className="color-800">{appInfo.bugs.url}</a></td>
                                 </tr>
                                 <tr>
                                     <td>{I18.f("ABOUT_GULP_VERSION")}</td>
-                                    <td><a href="https://github.com/odrick/gulp-free-tex-packer" target="_blank" className="color-300">https://github.com/odrick/gulp-free-tex-packer</a></td>
+                                    <td><a href="https://github.com/odrick/gulp-free-tex-packer" target="_blank" className="color-800">https://github.com/odrick/gulp-free-tex-packer</a></td>
                                 </tr>
                                 <tr>
                                     <td>{I18.f("ABOUT_LIBS")}</td>
                                     <td>
                                         <div>
-                                            <a href="https://facebook.github.io/react" target="_blank" className="color-300">React</a>
+                                            <a href="https://facebook.github.io/react" target="_blank" className="color-800">React</a>
                                         </div>
                                         <div>
-                                            <a href="https://stuk.github.io/jszip" target="_blank" className="color-300">JSZip</a>
+                                            <a href="https://stuk.github.io/jszip" target="_blank" className="color-800">JSZip</a>
                                         </div>
                                         <div>
-                                            <a href="https://github.com/eligrey/FileSaver.js" target="_blank" className="color-300">FileSaver.js</a>
+                                            <a href="https://github.com/eligrey/FileSaver.js" target="_blank" className="color-800">FileSaver.js</a>
                                         </div>
                                         <div>
-                                            <a href="https://github.com/janl/mustache.js" target="_blank" className="color-300">mustache.js</a>
+                                            <a href="https://github.com/janl/mustache.js" target="_blank" className="color-800">mustache.js</a>
                                         </div>
                                         <div>
-                                            <a href="https://github.com/06wj/MaxRectsBinPack" target="_blank" className="color-300">MaxRectsBinPack</a>
+                                            <a href="https://github.com/06wj/MaxRectsBinPack" target="_blank" className="color-800">MaxRectsBinPack</a>
                                         </div>
                                     </td>
                                 </tr>

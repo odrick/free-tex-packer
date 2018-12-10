@@ -79,7 +79,7 @@ class TreeItem extends React.Component {
 
     render() {
         return (
-            <div className={"image-list-item" + (this.state.selected ? " back-300 color-white" : "")} onClick={this.onSelect} >
+            <div className={"image-list-item" + (this.state.selected ? " back-400" : "")} onClick={this.onSelect} >
                 <div className="image-list-image-container">
                     <img src={this.props.data.img.src} className="image-list-image" />
                 </div>

@@ -253,6 +253,10 @@ html, body {
     white-space: nowrap;
 }
 
+.btn:active {
+    transform: scale(0.95);
+}
+
 .edit-btn {
     border-width: 1px;
     border-style: solid;
@@ -278,6 +282,10 @@ html, body {
     background-size: 16px 16px;
     width: 16px;
     height: 16px;
+}
+
+.edit-btn:active {
+    transform: scale(0.9);
 }
 
 .file-upload {

@@ -53,7 +53,7 @@ class EditCustomExporter extends React.Component {
                 <div className="edit-custom-exporter-content">
 
                     <div>
-                        <a href={appInfo.homepage} className="color-300" target="_blank">{I18.f("DOCUMENTATION")}</a>
+                        <a href={appInfo.homepage} className="color-800" target="_blank">{I18.f("DOCUMENTATION")}</a>
                     </div>
                     
                     <div>
@@ -72,7 +72,7 @@ class EditCustomExporter extends React.Component {
                     </div>
                     
                     <div className="edit-custom-exporter-controls">
-                        <div className="btn back-600 border-color-gray color-white" onClick={this.save}>{I18.f("SAVE")}</div>
+                        <div className="btn back-800 border-color-gray color-white" onClick={this.save}>{I18.f("SAVE")}</div>
                         &nbsp;&nbsp;&nbsp;
                         <div className="btn back-black border-color-gray color-white" onClick={this.close}>{I18.f("CANCEL")}</div>
                     </div>
