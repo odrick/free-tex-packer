@@ -5,8 +5,18 @@ class SelectableTree extends React.Component {
     
     constructor(props) {
         super(props);
+
+        Observer.on(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onItemSelect, this);
     }
-    
+
+    componentWillUnmount() {
+        Observer.off(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onItemSelect, this);
+    }
+
+    onItemSelect(e) {
+        console.log("SELECT", e);
+    }
+
     render() {
         return (
             <TreePart data={this.props.data} />
@@ -57,11 +67,11 @@ class TreeItem extends React.Component {
         this.state = {selected: false};
 
         this.onSelect = this.onSelect.bind(this);
-        Observer.on(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onOtherSelected, this);
+        //Observer.on(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onOtherSelected, this);
     }
 
     componentWillUnmount() {
-        Observer.off(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onOtherSelected, this);
+        //Observer.off(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onOtherSelected, this);
     }
 
     onOtherSelected(path) {
@@ -73,8 +83,15 @@ class TreeItem extends React.Component {
         }
     }
 
-    onSelect() {
-        Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, !this.state.selected ? this.props.data.path : null);
+    onSelect(e) {
+        //Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, !this.state.selected ? this.props.data.path : null);
+
+        Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, {
+            isFolder: false,
+            path: this.props.data.path,
+            ctrlKey: e.ctrlKey,
+            shiftKey: e.shiftKey
+        });
     }
 
     render() {
