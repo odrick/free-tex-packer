@@ -14,7 +14,7 @@ class PackResults extends React.Component {
             packResult: null,
             textureBack: this.textureBackColors[0],
             displayOutline: false,
-            selectedImage: null,
+            selectedImages: [],
             playerVisible: false,
             scale: 1
         };
@@ -25,11 +25,11 @@ class PackResults extends React.Component {
         this.toggleSpritesPlayer = this.toggleSpritesPlayer.bind(this);
 
         Observer.on(GLOBAL_EVENT.PACK_COMPLETE, this.updatePackResult, this);
-        Observer.on(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onImageSelected, this);
+        Observer.on(GLOBAL_EVENT.IMAGES_LIST_SELECTED_CHANGED, this.onImagesSelected, this);
     }
     
-    onImageSelected(data) {
-        this.setState({selectedImage: data});
+    onImagesSelected(data) {
+        this.setState({selectedImages: data});
     }
     
     updatePackResult(data) {
@@ -47,7 +47,7 @@ class PackResults extends React.Component {
     }
 
     clearSelection() {
-        Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, null);
+        Observer.emit(GLOBAL_EVENT.IMAGE_CLEAR_SELECTION, null);
     }
 
     changeOutlines(e) {
@@ -68,7 +68,7 @@ class PackResults extends React.Component {
         if(this.state.packResult) {
             for (let item of this.state.packResult) {
                 views.push((
-                    <TextureView key={"tex-view-" + ix} data={item} scale={this.state.scale} textureBack={this.state.textureBack} selectedImage={this.state.selectedImage} displayOutline={this.state.displayOutline} />
+                    <TextureView key={"tex-view-" + ix} data={item} scale={this.state.scale} textureBack={this.state.textureBack} selectedImages={this.state.selectedImages} displayOutline={this.state.displayOutline} />
                 ));
                 ix++;
             }

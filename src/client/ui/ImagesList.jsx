@@ -6,7 +6,7 @@ import ZipLoader from '../utils/ZipLoader';
 import I18 from '../utils/I18';
 
 import {Observer, GLOBAL_EVENT} from '../Observer';
-import SelectableTree from "./SelectableTree.jsx";
+import ImagesTree from "./ImagesTree.jsx";
 
 class ImagesList extends React.Component {
     constructor(props) {
@@ -15,10 +15,21 @@ class ImagesList extends React.Component {
         this.addImages = this.addImages.bind(this);
         this.addZip = this.addZip.bind(this);
         this.clear = this.clear.bind(this);
+        this.deleteSelectedImages = this.deleteSelectedImages.bind(this);
         this.doClear = this.doClear.bind(this);
         this.onFilesDrop = this.onFilesDrop.bind(this);
+        this.handleImageItemSelected = this.handleImageItemSelected.bind(this);
+        this.handleImageClearSelection = this.handleImageClearSelection.bind(this);
+        
+        Observer.on(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.handleImageItemSelected, this);
+        Observer.on(GLOBAL_EVENT.IMAGE_CLEAR_SELECTION, this.handleImageClearSelection, this);
 
         this.state = {images: {}};
+    }
+
+    componentWillUnmount() {
+        Observer.off(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.handleImageItemSelected, this);
+        Observer.off(GLOBAL_EVENT.IMAGE_CLEAR_SELECTION, this.handleImageClearSelection, this);
     }
     
     componentDidMount() {
@@ -84,9 +95,24 @@ class ImagesList extends React.Component {
         for(let name of names) {
             images[name] = data[name];
         }
+
+        images = this.sortImages(images);
         
         this.setState({images: images});
         Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, images);
+    }
+    
+    sortImages(images) {
+        let names = Object.keys(images);
+        names.sort();
+
+        let sorted = {};
+        
+        for(let name of names) {
+            sorted[name] = images[name];
+        }
+        
+        return sorted;
     }
 
     clear() {
@@ -103,13 +129,172 @@ class ImagesList extends React.Component {
     
     doClear() {
         Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, {});
-        Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, null);
+        Observer.emit(GLOBAL_EVENT.IMAGES_LIST_SELECTED_CHANGED, []);
         this.setState({images: {}});
+    }
+    
+    removeImagesSelect() {
+        let images = this.state.images;
+        for(let key in images) {
+            images[key].selected = false;
+        }
+    }
+    
+    getCurrentImage() {
+        let images = this.state.images;
+        for(let key in images) {
+            if(images[key].current) return images[key];
+        }
+        
+        return null;
+    }
+    
+    getImageIx(image) {
+        let ix = 0;
+        
+        let images = this.state.images;
+        for(let key in images) {
+            if(images[key] === image) return ix;
+            ix++;
+        }
+        
+        return -1;
+    }
+    
+    bulkSelectImages(to) {
+        let current = this.getCurrentImage();
+        if(!current) {
+            to.selected = true;
+            return;
+        }
+        
+        let fromIx = this.getImageIx(current);
+        let toIx = this.getImageIx(to);
+
+        let images = this.state.images;
+        let ix = 0;
+        for(let key in images) {
+            if(fromIx < toIx && ix >= fromIx && ix <= toIx) images[key].selected = true;
+            if(fromIx > toIx && ix <= fromIx && ix >= toIx) images[key].selected = true;
+            ix++;
+        }
+    }
+    
+    selectImagesFolder(path, selected) {
+        let images = this.state.images;
+        
+        let first = false;
+        for(let key in images) {
+            if(key.substr(0, path.length + 1) === path + "/") {
+                if(!first) {
+                    first = true;
+                    this.clearCurrentImage();
+                    images[key].current = true;
+                }
+                images[key].selected = selected;
+            }
+        }
+    }
+    
+    clearCurrentImage() {
+        let images = this.state.images;
+        for(let key in images) {
+            images[key].current = false;
+        }
+    }
+    
+    getFirstImageInFolder(path) {
+        let images = this.state.images;
+
+        for(let key in images) {
+            if (key.substr(0, path.length + 1) === path + "/") return images[key];
+        }
+        
+        return null;
+    }
+
+    getLastImageInFolder(path) {
+        let images = this.state.images;
+        
+        let ret = null;
+        for(let key in images) {
+            if (key.substr(0, path.length + 1) === path + "/") ret = images[key];
+        }
+
+        return ret;
+    }
+    
+    handleImageItemSelected(e) {
+        let path = e.path;
+        let images = this.state.images;
+
+        if(e.isFolder) {
+            if(e.ctrlKey) {
+                this.selectImagesFolder(path, true);
+            }
+            else if(e.shiftKey) {
+                let to = this.getLastImageInFolder(path);
+                if(to) this.bulkSelectImages(to);
+                
+                to = this.getFirstImageInFolder(path);
+                if(to) {
+                    this.bulkSelectImages(to);
+                    this.clearCurrentImage();
+                    to.current = true;
+                }
+            }
+            else {
+                this.removeImagesSelect();
+                this.selectImagesFolder(path, true);
+            }
+        }
+        else {
+            let image = images[path];
+            if(image) {
+                if(e.ctrlKey) {
+                    image.selected = !image.selected;
+                }
+                else if(e.shiftKey) {
+                    this.bulkSelectImages(image);
+                }
+                else {
+                    this.removeImagesSelect();
+                    image.selected = true;
+                }
+
+                this.clearCurrentImage();
+                image.current = true;
+            }
+        }
+
+        this.setState({images: images});
+        
+        this.emitSelectedChanges();
+    }
+
+    handleImageClearSelection() {
+        this.removeImagesSelect();
+        this.clearCurrentImage();
+        this.setState({images: this.state.images});
+        this.emitSelectedChanges();
+    }
+    
+    emitSelectedChanges() {
+        let selected = [];
+
+        let images = this.state.images;
+        
+        for(let key in images) {
+            if(images[key].selected) selected.push(key);
+        }
+        
+        Observer.emit(GLOBAL_EVENT.IMAGES_LIST_SELECTED_CHANGED, selected);
     }
     
     createImagesFolder(name="", path="") {
         return {
             isFolder: true,
+            selected: false,
             name: name,
             path: path,
             items: []
@@ -134,7 +319,11 @@ class ImagesList extends React.Component {
             }
 
             if (!folder) {
-                folder = this.createImagesFolder(name, parts.join("/") + "/" + name);
+                let p = [];
+                if(root.path) p.unshift(root.path);
+                p.push(name);
+                
+                folder = this.createImagesFolder(name, p.join("/"));
                 root.items.push(folder);
             }
 
@@ -159,13 +348,30 @@ class ImagesList extends React.Component {
                 path: key,
                 name: name
             });
+            
+            if(this.state.images[key].selected) folder.selected = true;
         }
 
         return res;
     }
+
+    deleteSelectedImages() {
+        let images = this.state.images;
+        
+        let keys = Object.keys(images);
+        for(let key of keys) {
+            if(images[key].selected) {
+                delete images[key];
+            }
+        }
+
+        images = this.sortImages(images);
+        
+        this.setState({images: images});
+        Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, images);
+    }
     
     render() {
-
         let data = this.getImagesTree(this.state.images);
         
         let dropHelp = Object.keys(this.state.images).length > 0 ? null : (<div ref="dropHelp" className="image-drop-help">{I18.f("IMAGE_DROP_HELP")}</div>);
@@ -185,8 +391,8 @@ class ImagesList extends React.Component {
                         <input type="file" ref="addZipInput" accept=".zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" onChange={this.addZip} />
                     </div>
 
-                    <div className="btn back-800 border-color-gray color-white" onClick={this.clear} title={I18.f("CLEAR_TITLE")}>
-                        {I18.f("CLEAR")}
+                    <div className="btn back-800 border-color-gray color-white" onClick={this.deleteSelectedImages} title={I18.f("DELETE_TITLE")}>
+                        {I18.f("DELETE")}
                     </div>
                     
                     <hr/>
@@ -194,7 +400,7 @@ class ImagesList extends React.Component {
                 </div>
                 
                 <div ref="imagesTree" className="images-tree">
-                    <SelectableTree data={data} />
+                    <ImagesTree data={data} />
                     {dropHelp}
                 </div>
                 

@@ -1,20 +1,10 @@
 import React from 'react';
 import {GLOBAL_EVENT, Observer} from "../Observer";
 
-class SelectableTree extends React.Component {
+class ImagesTree extends React.Component {
     
     constructor(props) {
         super(props);
-
-        Observer.on(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onItemSelect, this);
-    }
-
-    componentWillUnmount() {
-        Observer.off(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onItemSelect, this);
-    }
-
-    onItemSelect(e) {
-        console.log("SELECT", e);
     }
 
     render() {
@@ -44,7 +34,7 @@ class TreePart extends React.Component {
                     if(item.isFolder) {
 
                         return (
-                            <TreeView key={"tree-folder-" + key} label={item.name}>
+                            <TreeView key={"tree-folder-" + key} data={item}>
                                 <TreePart data={item}/>
                             </TreeView>
                         );
@@ -63,40 +53,26 @@ class TreeItem extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {selected: false};
-
+        
         this.onSelect = this.onSelect.bind(this);
-        //Observer.on(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onOtherSelected, this);
-    }
-
-    componentWillUnmount() {
-        //Observer.off(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.onOtherSelected, this);
-    }
-
-    onOtherSelected(path) {
-        let currentState = this.state.selected;
-        let newState = path === this.props.data.path;
-
-        if(currentState !== newState) {
-            this.setState({selected: newState});
-        }
     }
 
     onSelect(e) {
-        //Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, !this.state.selected ? this.props.data.path : null);
-
         Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, {
             isFolder: false,
             path: this.props.data.path,
             ctrlKey: e.ctrlKey,
             shiftKey: e.shiftKey
         });
+        
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
     }
 
     render() {
         return (
-            <div className={"image-list-item" + (this.state.selected ? " back-400" : "")} onClick={this.onSelect} >
+            <div className={"image-list-item" + (this.props.data.img.selected ? " back-400" : "") + (this.props.data.img.current ? " image-list-item-current" : "")} onClick={this.onSelect} >
                 <div className="image-list-image-container">
                     <img src={this.props.data.img.src} className="image-list-image" />
                 </div>
@@ -114,22 +90,37 @@ class TreeView extends React.Component {
         super(props);
 
         this.handleClick = this.handleClick.bind(this);
+        this.handleCollapse = this.handleCollapse.bind(this);
 
         this.state = {
             collapsed: this.props.defaultCollapsed
         };
     }
 
-    handleClick() {
+    handleCollapse(e) {
         this.setState({collapsed: !this.state.collapsed});
-        if (this.props.onClick) {
-            this.props.onClick();
-        }
+        
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+
+    handleClick(e) {
+        Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, {
+            isFolder: true,
+            path: this.props.data.path,
+            ctrlKey: e.ctrlKey,
+            shiftKey: e.shiftKey
+        });
+
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
     }
 
     render() {
         let collapsed = this.state.collapsed;
-        let label = this.props.label;
+        let label = this.props.data.name;
         let children = this.props.children;
 
         let arrowClass = 'tree-view-arrow';
@@ -139,12 +130,12 @@ class TreeView extends React.Component {
             containerClass += ' tree-view-children-collapsed';
         }
 
-        let arrow = (<div className={arrowClass} onClick={this.handleClick}/>);
+        let arrow = (<div className={arrowClass} onClick={this.handleCollapse}/>);
         let folderIcon = (<div className="tree-view-folder"></div>);
 
         return (
-            <div className="tree-view">
-                <div className={'tree-view-item'}>
+            <div className="tree-view" onClick={this.handleClick}>
+                <div className={'tree-view-item' + (this.props.data.selected ? " back-400" : "")}>
                     {arrow}
                     {folderIcon}
                     {label}
@@ -157,4 +148,4 @@ class TreeView extends React.Component {
     }
 }
 
-export default SelectableTree;
+export default ImagesTree;

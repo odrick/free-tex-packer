@@ -20,16 +20,6 @@ class TextureView extends React.Component {
     updateView() {
         let view = ReactDOM.findDOMNode(this.refs.view);
         if(view) {
-            let highLightItem = null;
-            if(this.props.selectedImage) {
-                for (let item of this.props.data.data) {
-                    if (item.file === this.props.selectedImage) {
-                        highLightItem = item;
-                        break;
-                    }
-                }
-            }
-
             view.width = this.props.data.buffer.width;
             view.height = this.props.data.buffer.height;
             
@@ -40,7 +30,7 @@ class TextureView extends React.Component {
 
             ctx.clearRect(0, 0, view.width, view.height);
 
-            if(this.props.selectedImage) {
+            if(this.props.selectedImages.length) {
                 ctx.globalAlpha = 0.35;
             }
 
@@ -56,28 +46,30 @@ class TextureView extends React.Component {
 
             ctx.globalAlpha = 1;
 
-            if(highLightItem) {
-                let frame = highLightItem.frame;
+            for (let item of this.props.data.data) {
+                if(this.props.selectedImages.indexOf(item.file) >= 0) {
+                    let frame = item.frame;
 
-                let w = frame.w, h = frame.h;
-                if(highLightItem.rotated) {
-                    w = frame.h;
-                    h = frame.w;
+                    let w = frame.w, h = frame.h;
+                    if(item.rotated) {
+                        w = frame.h;
+                        h = frame.w;
+                    }
+
+                    ctx.clearRect(frame.x, frame.y, w, h);
+                    ctx.drawImage(this.props.data.buffer, frame.x, frame.y, w, h, frame.x, frame.y, w, h);
+
+                    if(this.props.displayOutline) this.drawOutline(ctx, item);
+
+                    ctx.beginPath();
+
+                    if(ctx.setLineDash) ctx.setLineDash([4, 2]);
+                    ctx.strokeStyle = "#000";
+                    ctx.lineWidth = 1;
+                    ctx.rect(frame.x, frame.y, w, h);
+
+                    ctx.stroke();
                 }
-
-                ctx.clearRect(frame.x, frame.y, w, h);
-                ctx.drawImage(this.props.data.buffer, frame.x, frame.y, w, h, frame.x, frame.y, w, h);
-
-                if(this.props.displayOutline) this.drawOutline(ctx, highLightItem);
-
-                ctx.beginPath();
-
-                if(ctx.setLineDash) ctx.setLineDash([4, 2]);
-                ctx.strokeStyle = "#000";
-                ctx.lineWidth = 1;
-                ctx.rect(frame.x, frame.y, w, h);
-
-                ctx.stroke();
             }
 
             view.className = this.props.textureBack;
@@ -130,7 +122,14 @@ class TextureView extends React.Component {
             }
         }
 
-        Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, selectedItem ? selectedItem.file : null);
+        if(selectedItem) {
+            Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, {
+                isFolder: false,
+                path: selectedItem.file,
+                ctrlKey: e.ctrlKey || e.shiftKey,
+                shiftKey: false
+            });
+        }
 
         e.preventDefault();
         e.stopPropagation();
