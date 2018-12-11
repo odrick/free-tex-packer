@@ -3,11 +3,14 @@ YES;YES
 NO;NO
 CANCEL;CANCEL
 SAVE;SAVE
+IMAGES;Images
 LANGUAGE;language:
 LANGUAGE_en;english
 LANGUAGE_ru;русский
 ADD_IMAGES;Add images
 ADD_IMAGES_TITLE;Add images
+ADD_FOLDER;Add folder
+ADD_FOLDER_TITLE;Add folder
 ADD_ZIP;Add ZIP
 ADD_ZIP_TITLE;Add zipped images
 IMAGE_DROP_HELP;or drag'n'drop images here

@@ -78,10 +78,10 @@ let config = {
 };
 
 if(target === 'electron-renderer') {
-    config.resolve = {alias: {'provider': path.resolve('./src/client/provider/electron')}};
+    config.resolve = {alias: {'provider': path.resolve(__dirname, './src/client/provider/electron')}};
 }
 else {
-    config.resolve = {alias: {'provider': path.resolve('./src/client/provider/web')}};
+    config.resolve = {alias: {'provider': path.resolve(__dirname, './src/client/provider/web')}};
 }
 
 module.exports = config;

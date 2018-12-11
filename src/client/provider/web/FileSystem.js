@@ -1,5 +1,5 @@
 class FileSystem {
-    static openFiles() {
+    static addImages() {
     }
 }
 

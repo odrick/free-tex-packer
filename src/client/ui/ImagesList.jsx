@@ -8,12 +8,16 @@ import I18 from '../utils/I18';
 import {Observer, GLOBAL_EVENT} from '../Observer';
 import ImagesTree from "./ImagesTree.jsx";
 
+import FileSystem from 'provider/FileSystem';
+
 class ImagesList extends React.Component {
     constructor(props) {
         super(props);
         
         this.addImages = this.addImages.bind(this);
         this.addZip = this.addZip.bind(this);
+        this.addImagesFs = this.addImagesFs.bind(this);
+        this.loadImagesComplete = this.loadImagesComplete.bind(this);
         this.clear = this.clear.bind(this);
         this.deleteSelectedImages = this.deleteSelectedImages.bind(this);
         this.doClear = this.doClear.bind(this);
@@ -80,13 +84,20 @@ class ImagesList extends React.Component {
             loader.load(file, null, data => this.loadImagesComplete(data));
         }
     }
-
-    loadImagesComplete(data) {
+    
+    addImagesFs() {
+        Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
+        FileSystem.addImages(this.loadImagesComplete);
+    }
+    
+    loadImagesComplete(data=[]) {
 
         Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
         
-        ReactDOM.findDOMNode(this.refs.addImagesInput).value = "";
-        ReactDOM.findDOMNode(this.refs.addZipInput).value = "";
+        if(PLATFORM === "web") {
+            ReactDOM.findDOMNode(this.refs.addImagesInput).value = "";
+            ReactDOM.findDOMNode(this.refs.addZipInput).value = "";
+        }
         
         let images = this.state.images;
         
@@ -371,6 +382,36 @@ class ImagesList extends React.Component {
         Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, images);
     }
     
+    renderWebButtons() {
+        return (
+            <span>
+                <div className="btn back-800 border-color-gray color-white file-upload" title={I18.f("ADD_IMAGES_TITLE")}>
+                    {I18.f("ADD_IMAGES")}
+                    <input type="file" ref="addImagesInput" multiple accept="image/png,image/jpg,image/jpeg,image/gif" onChange={this.addImages} />
+                </div>
+    
+                <div className="btn back-800 border-color-gray color-white file-upload" title={I18.f("ADD_ZIP_TITLE")}>
+                    {I18.f("ADD_ZIP")}
+                    <input type="file" ref="addZipInput" accept=".zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" onChange={this.addZip} />
+                </div>
+            </span>
+        );
+    }
+    
+    renderElectronButtons() {
+        return (
+            <span>
+                <div className="btn back-800 border-color-gray color-white" onClick={this.addImagesFs} title={I18.f("ADD_IMAGES_TITLE")}>
+                    {I18.f("ADD_IMAGES")}
+                </div>
+    
+                <div className="btn back-800 border-color-gray color-white" onClick={this.deleteSelectedImages} title={I18.f("ADD_FOLDER_TITLE")}>
+                    {I18.f("ADD_FOLDER")}
+                </div>
+            </span>
+        );
+    }
+    
     render() {
         let data = this.getImagesTree(this.state.images);
         
@@ -381,15 +422,9 @@ class ImagesList extends React.Component {
                 
                 <div className="images-controllers border-color-gray">
                     
-                    <div className="btn back-800 border-color-gray color-white file-upload" title={I18.f("ADD_IMAGES_TITLE")}>
-                        {I18.f("ADD_IMAGES")}
-                        <input type="file" ref="addImagesInput" multiple accept="image/png,image/jpg,image/jpeg,image/gif" onChange={this.addImages} />
-                    </div>
-    
-                    <div className="btn back-800 border-color-gray color-white file-upload" title={I18.f("ADD_ZIP_TITLE")}>
-                        {I18.f("ADD_ZIP")}
-                        <input type="file" ref="addZipInput" accept=".zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" onChange={this.addZip} />
-                    </div>
+                    {
+                        PLATFORM === "web" ? (this.renderWebButtons()) : (this.renderElectronButtons())
+                    }
 
                     <div className="btn back-800 border-color-gray color-white" onClick={this.deleteSelectedImages} title={I18.f("DELETE_TITLE")}>
                         {I18.f("DELETE")}
