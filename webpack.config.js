@@ -1,21 +1,24 @@
-var path = require('path');
-var webpack = require('webpack');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var argv = require('optimist').argv;
+const path = require('path');
+const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const argv = require('optimist').argv;
 
-var entry = [
+let entry = [
     'babel-polyfill',
     './src/client/index'
 ];
 
-var plugins = [];
+let plugins = [];
 
-var devtool = 'eval-source-map';
-var output = 'static/js/index.js';
-var debug = true;
+let devtool = 'eval-source-map';
+let output = 'static/js/index.js';
+let debug = true;
 
-var PLATFORM = argv.platform || 'web';
-var NODE_ENV = argv.build ? 'production': 'development';
+let PLATFORM = argv.platform || 'web';
+let NODE_ENV = argv.build ? 'production': 'development';
+
+let target = 'web';
+if(PLATFORM === 'electron') target = 'electron-renderer';
 
 plugins.push(new webpack.DefinePlugin({
 	'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
@@ -42,11 +45,12 @@ else {
 	plugins.push(new CopyWebpackPlugin([{from: 'src/client/resources', to: './'}]));
 }
 
-module.exports = {
+let config = {
     entry: entry,
     output: { filename: output },
     debug: debug,
     devtool: devtool,
+    target: target,
     module: {
         loaders: [
             {
@@ -72,3 +76,12 @@ module.exports = {
     },
     plugins: plugins
 };
+
+if(target === 'electron-renderer') {
+    config.resolve = {alias: {'provider': path.resolve('./src/client/provider/electron')}};
+}
+else {
+    config.resolve = {alias: {'provider': path.resolve('./src/client/provider/web')}};
+}
+
+module.exports = config;
