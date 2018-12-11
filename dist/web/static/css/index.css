@@ -9,11 +9,11 @@ html, body {
 }
 
 * {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }
 
@@ -205,6 +205,11 @@ html, body {
 
 .image-list-item {
     cursor: pointer;
+    border: 1px dotted transparent;
+}
+
+.image-list-item-current {
+    border: 1px dotted #000;
 }
 
 .image-list-image-container {

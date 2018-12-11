@@ -13,6 +13,8 @@ ADD_ZIP_TITLE;Добавить упакованные изображения
 IMAGE_DROP_HELP;или перетяните изображения сюда
 CLEAR;Очистить
 CLEAR_TITLE;Очистить все изображения
+DELETE;Удалить
+DELETE_TITLE;Удалить выбранные изображения
 DISPLAY_OUTLINES;Контуры:
 SCALE;Масштаб:
 SHOW_SPRITES;Показать спрайты
