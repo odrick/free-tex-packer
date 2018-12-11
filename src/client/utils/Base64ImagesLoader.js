@@ -18,6 +18,7 @@ class Base64ImagesLoader {
             let img = new Image();
             img.src = item.url;
             img._base64 = item.url;
+            img.fsPath = item.fsPath;
 
             this.loaded[item.name] = img;
         }

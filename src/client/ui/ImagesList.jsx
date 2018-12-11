@@ -8,7 +8,7 @@ import I18 from '../utils/I18';
 import {Observer, GLOBAL_EVENT} from '../Observer';
 import ImagesTree from "./ImagesTree.jsx";
 
-import FileSystem from 'provider/FileSystem';
+import FileSystem from 'platform/FileSystem';
 
 class ImagesList extends React.Component {
     constructor(props) {
@@ -17,6 +17,7 @@ class ImagesList extends React.Component {
         this.addImages = this.addImages.bind(this);
         this.addZip = this.addZip.bind(this);
         this.addImagesFs = this.addImagesFs.bind(this);
+        this.addFolderFs = this.addFolderFs.bind(this);
         this.loadImagesComplete = this.loadImagesComplete.bind(this);
         this.clear = this.clear.bind(this);
         this.deleteSelectedImages = this.deleteSelectedImages.bind(this);
@@ -88,6 +89,11 @@ class ImagesList extends React.Component {
     addImagesFs() {
         Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
         FileSystem.addImages(this.loadImagesComplete);
+    }
+
+    addFolderFs() {
+        Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
+        FileSystem.addFolder(this.loadImagesComplete);
     }
     
     loadImagesComplete(data=[]) {
@@ -405,7 +411,7 @@ class ImagesList extends React.Component {
                     {I18.f("ADD_IMAGES")}
                 </div>
     
-                <div className="btn back-800 border-color-gray color-white" onClick={this.deleteSelectedImages} title={I18.f("ADD_FOLDER_TITLE")}>
+                <div className="btn back-800 border-color-gray color-white" onClick={this.addFolderFs} title={I18.f("ADD_FOLDER_TITLE")}>
                     {I18.f("ADD_FOLDER")}
                 </div>
             </span>
