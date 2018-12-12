@@ -84,3 +84,8 @@ EXPORTER_ERROR;Ошибка при экспортировании: %s
 CUSTOM_EXPORTER_ERROR;Ошибка в шаблоне: %s
 FILE_EXT;Расширение файла:
 DOCUMENTATION;документация
+MENU_FILE;Файл
+MENU_FILE_EXIT;Выход
+MENU_LANGUAGE;Язык
+MENU_HELP;Помощь
+MENU_HELP_ABOUT;О программе

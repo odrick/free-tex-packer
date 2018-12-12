@@ -1,0 +1,19 @@
+html, body {
+    overflow: hidden;
+}
+
+.main-header {
+    display: none;
+}
+
+.main-layout {
+    clear: both;
+    height: -webkit-calc(100% - 20px);
+    height: -moz-calc(100% - 20px);
+    height: -o-calc(100% - 20px);
+    height: calc(100% - 20px);
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}

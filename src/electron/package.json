@@ -4,7 +4,8 @@
   "description": "Desktop free texture packer",
   "main": "main.js",
   "scripts": {
-    "start": "electron . --env development"
+    "start": "electron . --env development",
+    "start-prod": "electron ."
   },
   "keywords": [],
   "author": "Alexander Norinchak",

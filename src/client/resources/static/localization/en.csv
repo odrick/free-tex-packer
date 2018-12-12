@@ -84,3 +84,8 @@ EXPORTER_ERROR;Export error: %s
 CUSTOM_EXPORTER_ERROR;Template error: %s
 FILE_EXT;File extension:
 DOCUMENTATION;documentation
+MENU_FILE;File
+MENU_FILE_EXIT;Exit
+MENU_LANGUAGE;Language
+MENU_HELP;Help
+MENU_HELP_ABOUT;About
