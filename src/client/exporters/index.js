@@ -26,7 +26,7 @@ function prepareData(data, options) {
 
     for(let item of data) {
 
-        let name = item.name;
+        let name = item.file;
 
         if(options.trimSpriteNames) {
             name.trim();
@@ -34,7 +34,7 @@ function prepareData(data, options) {
 
         if(options.removeFileExtension) {
             let parts = name.split(".");
-            parts.pop();
+            if(parts.length > 1) parts.pop();
             name = parts.join(".");
         }
 
