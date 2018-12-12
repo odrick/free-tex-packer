@@ -1,11 +1,11 @@
 import {Observer, GLOBAL_EVENT} from './Observer';
 import PackProcessor from './PackProcessor';
 import TextureRenderer from './utils/TextureRenderer';
-import Downloader from './utils/Downloader';
 import {getFilterByType} from './filters';
 import I18 from './utils/I18';
 import {startExporter} from './exporters';
 import Tinifyer from 'platform/Tinifyer';
+import Downloader from 'platform/Downloader';
 
 class APP {
     
