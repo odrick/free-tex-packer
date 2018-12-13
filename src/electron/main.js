@@ -1,11 +1,32 @@
 const tinify = require('tinify');
 const argv = require('optimist').argv;
+const windowStateKeeper = require('electron-window-state');
 const {app, BrowserWindow, ipcMain, Menu} = require('electron');
 
 let mainWindow;
 
 function createWindow() {
-    mainWindow = new BrowserWindow({width: 1280, height: 800, minWidth: 1280, minHeight: 800});
+    let mainWindowState = windowStateKeeper({
+        defaultWidth: 1280,
+        defaultHeight: 800
+    });
+    
+    mainWindow = new BrowserWindow({
+        x: mainWindowState.x,
+        y: mainWindowState.y,
+        width: mainWindowState.width,
+        height: mainWindowState.height,
+        minWidth: 1280,
+        minHeight: 800,
+        title: "Free texture packer",
+        icon: "./resources/icons/main.png"
+    });
+
+    mainWindowState.manage(mainWindow);
+
+    mainWindow.on('page-title-updated', function(e) {
+        e.preventDefault();
+    });
 
     if (argv.env === 'development') {
         mainWindow.loadURL('http://localhost:4000/');
