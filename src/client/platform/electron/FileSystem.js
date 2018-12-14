@@ -46,7 +46,8 @@ class FileSystem {
 
                 files.push({
                     name: name,
-                    path: path
+                    path: path,
+                    folder: ""
                 });
             }
 
@@ -70,6 +71,11 @@ class FileSystem {
             while(parts.length && !name) name = parts.pop();
             
             let list = FileSystem.getFolderFilesList(path + "/", name + "/");
+            
+            for(let item of list) {
+                item.folder = path;
+            }
+            
             FileSystem.loadImages(list, cb);
         }
         else {
@@ -96,6 +102,36 @@ class FileSystem {
         loader.load(files, null, (res) => {
             if(cb) cb(res);
         });
+    }
+    
+    static saveProject(data, path="") {
+        let options = {
+            filters: [{name: "Free texture packer", extensions: ['ftpp']}]
+        };
+        if(path) options.defaultPath = path;
+
+        let savePath = dialog.showSaveDialog(options);
+        
+        if(savePath) {
+            fs.writeFileSync(savePath, JSON.stringify(data, null, 2));
+        }
+    }
+    
+    static loadProject() {
+        let path = dialog.showOpenDialog({
+            filters: [{name: "Free texture packer", extensions: ['ftpp']}],
+            properties: ['openFile']
+        });
+
+        let data = null;
+        
+        if(path && path[0]) {
+            data = fs.readFileSync(path[0]);
+            try {data = JSON.parse(data)}
+            catch(e) {data = null}
+        }
+        
+        return data;
     }
 }
 

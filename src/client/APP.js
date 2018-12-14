@@ -7,9 +7,12 @@ import {startExporter} from './exporters';
 import Tinifyer from 'platform/Tinifyer';
 import Downloader from 'platform/Downloader';
 
+let INSTANCE = null;
+
 class APP {
     
     constructor() {
+        INSTANCE = this;
         
         this.images = {};
         this.packOptions = {};
@@ -22,6 +25,10 @@ class APP {
         Observer.on(GLOBAL_EVENT.PACK_OPTIONS_CHANGED, this.onPackOptionsChanged, this);
         Observer.on(GLOBAL_EVENT.PACK_EXPORTER_CHANGED, this.onPackExporterOptionsChanged, this);
         Observer.on(GLOBAL_EVENT.START_EXPORT, this.startExport, this);
+    }
+    
+    static get i() {
+        return INSTANCE;
     }
     
     onImagesListChanged(data) {

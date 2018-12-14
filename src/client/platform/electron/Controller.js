@@ -1,8 +1,10 @@
-import {GLOBAL_EVENT, Observer} from "../../Observer";
-
 const {ipcRenderer} = require('electron');
+
+import {GLOBAL_EVENT, Observer} from "../../Observer";
 import I18 from '../../utils/I18';
 import appInfo from '../../../../package.json';
+
+import Project from 'platform/Project';
 
 class Controller {
     static init() {
@@ -12,6 +14,14 @@ class Controller {
 
         ipcRenderer.on("show-about", (e, data) => {
             Observer.emit(GLOBAL_EVENT.SHOW_ABOUT);
+        });
+
+        ipcRenderer.on("project-load", (e, data) => {
+            Project.load();
+        });
+        
+        ipcRenderer.on("project-save", (e, data) => {
+            Project.save();
         });
     }
     

@@ -52,6 +52,8 @@ function buildMenu(data) {
     template.push({
         label: data.strings.MENU_FILE,
         submenu: [
+            {label: data.strings.MENU_FILE_PROJECT_LOAD, click: loadProject},
+            {label: data.strings.MENU_FILE_PROJECT_SAVE, click: saveProject},
             {label: data.strings.MENU_FILE_EXIT, click: quit}
         ]
     });
@@ -82,6 +84,14 @@ function buildMenu(data) {
     
     let menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
+}
+
+function loadProject() {
+    mainWindow.send('project-load');
+}
+
+function saveProject() {
+    mainWindow.send('project-save');
 }
 
 function changeLang(e) {
