@@ -75,6 +75,11 @@ class Project {
             });
         }
     }
+
+    static create() {
+        PackProperties.i.setOptions(PackProperties.i.loadOptions());
+        ImagesList.i.setImages({});
+    }
 }
 
 export default Project;

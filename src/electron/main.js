@@ -3,6 +3,8 @@ const argv = require('optimist').argv;
 const windowStateKeeper = require('electron-window-state');
 const {app, BrowserWindow, ipcMain, Menu} = require('electron');
 
+const APP_NAME = 'Free texture packer';
+
 let mainWindow;
 
 function createWindow() {
@@ -18,8 +20,8 @@ function createWindow() {
         height: mainWindowState.height,
         minWidth: 1280,
         minHeight: 800,
-        title: "Free texture packer",
-        icon: "./resources/icons/main.png"
+        title: APP_NAME,
+        icon: './resources/icons/main.png'
     });
 
     mainWindowState.manage(mainWindow);
@@ -52,15 +54,22 @@ function buildMenu(data) {
     template.push({
         label: data.strings.MENU_FILE,
         submenu: [
+            {label: data.strings.MENU_FILE_PROJECT_NEW, click: newProject},
             {label: data.strings.MENU_FILE_PROJECT_LOAD, click: loadProject},
+            {label: data.strings.MENU_FILE_PROJECT_LOAD_RECENT},
+            {type: 'separator'},
             {label: data.strings.MENU_FILE_PROJECT_SAVE, click: saveProject},
+            {label: data.strings.MENU_FILE_PROJECT_SAVE_AS, click: saveProjectAs},
+            {type: 'separator'},
+            {label: data.strings.MENU_FILE_PREFERENCES_SAVE, click: savePreferences},
+            {type: 'separator'},
             {label: data.strings.MENU_FILE_EXIT, click: quit}
         ]
     });
     
     let langs = [];
     for(let lang of data.appInfo.localizations) {
-        langs.push({label: data.strings["LANGUAGE_" + lang], click: changeLang, custom: lang, checked: data.currentLocale === lang, type: 'checkbox'});
+        langs.push({label: data.strings['LANGUAGE_' + lang], click: changeLang, custom: lang, checked: data.currentLocale === lang, type: 'checkbox'});
     }
 
     template.push({
@@ -75,15 +84,19 @@ function buildMenu(data) {
         ]
     });
     
-    if(data.env === "development") {
-        template.push({label: "Dev", submenu: [
-            {label: "Console", click: () => mainWindow.webContents.openDevTools()},
-            {label: "Reload", click: () => mainWindow.webContents.reload()}
+    if(data.env === 'development') {
+        template.push({label: 'Dev', submenu: [
+            {label: 'Console', click: () => mainWindow.webContents.openDevTools()},
+            {label: 'Reload', click: () => mainWindow.webContents.reload()}
         ]});
     }
     
     let menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
+}
+
+function newProject() {
+    mainWindow.send('project-new');
 }
 
 function loadProject() {
@@ -94,12 +107,25 @@ function saveProject() {
     mainWindow.send('project-save');
 }
 
+function saveProjectAs() {
+    
+}
+
+function savePreferences() {
+    mainWindow.send('preferences-save');
+}
+
 function changeLang(e) {
     mainWindow.send('change-locale', {locale: e.custom});
 }
 
 function showAbout() {
     mainWindow.send('show-about');
+}
+
+function onProjectLoaded(data) {
+    let name = data.path.split('/').pop();
+    mainWindow.setTitle(name + ' - ' + APP_NAME);
 }
 
 app.on('ready', createWindow);
@@ -138,4 +164,8 @@ ipcMain.on('tinify', (e, data) => {
 
 ipcMain.on('update-locale', (e, data) => {
     buildMenu(data);
+});
+
+ipcMain.on('project-loaded', (e, data) => {
+    onProjectLoaded(data);
 });

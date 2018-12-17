@@ -6,6 +6,8 @@ import appInfo from '../../../../package.json';
 
 import Project from 'platform/Project';
 
+import PackProperties from '../../ui/PackProperties.jsx';
+
 class Controller {
     static init() {
         ipcRenderer.on("change-locale", (e, data) => {
@@ -23,6 +25,18 @@ class Controller {
         ipcRenderer.on("project-save", (e, data) => {
             Project.save();
         });
+
+        ipcRenderer.on("project-new", (e, data) => {
+            Project.create();
+        });
+        
+        ipcRenderer.on("preferences-save", (e, data) => {
+            PackProperties.i.saveOptions(true);
+        });
+    }
+    
+    static onProjectLoaded(path) {
+        ipcRenderer.send('project-loaded', {path: path});
     }
     
     static updateLocale() {

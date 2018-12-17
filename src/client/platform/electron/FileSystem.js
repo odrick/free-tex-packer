@@ -1,6 +1,7 @@
 const fs = require('fs');
 const {dialog} = require('electron').remote;
 
+import Controller from 'platform/Controller';
 import I18 from '../../utils/I18';
 import Base64ImagesLoader from '../../utils/Base64ImagesLoader';
 
@@ -123,6 +124,7 @@ class FileSystem {
         let savePath = dialog.showSaveDialog(options);
         
         if(savePath) {
+            savePath = FileSystem.fixPath(savePath);
             fs.writeFileSync(savePath, JSON.stringify(data, null, 2));
         }
     }
@@ -136,8 +138,12 @@ class FileSystem {
         let data = null;
         
         if(path && path[0]) {
-            data = fs.readFileSync(path[0]);
-            try {data = JSON.parse(data)}
+            path = FileSystem.fixPath(path[0]);
+            data = fs.readFileSync(path);
+            try {
+                data = JSON.parse(data);
+                Controller.onProjectLoaded(path);
+            }
             catch(e) {data = null}
         }
         

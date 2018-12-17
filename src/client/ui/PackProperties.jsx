@@ -102,8 +102,10 @@ class PackProperties extends React.Component {
         return data;
     }
     
-    saveOptions() {
-        Storage.save(STORAGE_OPTIONS_KEY, this.packOptions);
+    saveOptions(force=false) {
+        if(PLATFORM === "web" || force) {
+            Storage.save(STORAGE_OPTIONS_KEY, this.packOptions);
+        }
     }
 
     componentDidMount() {
