@@ -18,7 +18,7 @@ class FileSystem {
     static getFolderFilesList(dir, base="", list=[]) {
         let files = fs.readdirSync(dir);
         for(let file of files) {
-            if (fs.statSync(dir + file).isDirectory()) {
+            if (fs.statSync(dir + file).isDirectory() && (dir + file).toUpperCase().indexOf("__MACOSX") < 0) {
                 list = FileSystem.getFolderFilesList(dir + file + '/', base + file + "/", list);
             }
             else {
@@ -65,18 +65,7 @@ class FileSystem {
 
         if(dir && dir.length) {
             let path = FileSystem.fixPath(dir[0]);
-            
-            let parts = path.split("/");
-            let name = "";
-            while(parts.length && !name) name = parts.pop();
-            
-            let list = FileSystem.getFolderFilesList(path + "/", name + "/");
-            
-            for(let item of list) {
-                item.folder = path;
-            }
-            
-            FileSystem.loadImages(list, cb);
+            FileSystem.loadFolder(path, cb);
         }
         else {
             if(cb) cb();
@@ -91,10 +80,12 @@ class FileSystem {
             let ext = FileSystem.getExtFromPath(path);
             
             if(IMAGES_EXT.indexOf(ext) >= 0) {
-                let content = fs.readFileSync(path, 'base64');
-                content = "data:image/" + ext + ";base64," + content;
-
-                files.push({name: item.name, url: content, fsPath: item});
+                try {
+                    let content = fs.readFileSync(path, 'base64');
+                    content = "data:image/" + ext + ";base64," + content;
+                    files.push({name: item.name, url: content, fsPath: item});
+                }
+                catch(e){}
             }
         }
 
@@ -102,6 +93,25 @@ class FileSystem {
         loader.load(files, null, (res) => {
             if(cb) cb(res);
         });
+    }
+    
+    static loadFolder(path, cb) {
+        if(fs.existsSync(path)) {
+            let parts = path.split("/");
+            let name = "";
+            while (parts.length && !name) name = parts.pop();
+
+            let list = FileSystem.getFolderFilesList(path + "/", name + "/");
+
+            for (let item of list) {
+                item.folder = path;
+            }
+
+            FileSystem.loadImages(list, cb);
+        }
+        else {
+            cb({});
+        }
     }
     
     static saveProject(data, path="") {

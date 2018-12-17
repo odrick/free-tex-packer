@@ -17,9 +17,13 @@ import {Observer, GLOBAL_EVENT} from '../Observer';
 const STORAGE_OPTIONS_KEY = "pack-options";
 const STORAGE_CUSTOM_EXPORTER_KEY = "custom-exporter";
 
+let INSTANCE = null;
+
 class PackProperties extends React.Component {
     constructor(props) {
         super(props);
+
+        INSTANCE = this;
 
         this.onPackerChange = this.onPackerChange.bind(this);
         this.onPropChanged = this.onPropChanged.bind(this);
@@ -31,6 +35,17 @@ class PackProperties extends React.Component {
         this.loadCustomExporter();
         
         this.state = {packer: this.packOptions.packer};
+    }
+    
+    static get i() {
+        return INSTANCE;
+    }
+    
+    setOptions(data) {
+        this.packOptions = this.applyOptionsDefaults(data);
+        this.saveOptions();
+        this.refreshPackOptions();
+        this.emitChanges();
     }
     
     loadCustomExporter() {
@@ -123,6 +138,30 @@ class PackProperties extends React.Component {
 
         this.packOptions = this.applyOptionsDefaults(data);
     }
+    
+    refreshPackOptions() {
+        ReactDOM.findDOMNode(this.refs.textureName).value = this.packOptions.textureName;
+        ReactDOM.findDOMNode(this.refs.textureFormat).value = this.packOptions.textureFormat;
+        ReactDOM.findDOMNode(this.refs.removeFileExtension).checked = this.packOptions.removeFileExtension;
+        ReactDOM.findDOMNode(this.refs.prependFolderName).checked = this.packOptions.prependFolderName;
+        ReactDOM.findDOMNode(this.refs.base64Export).checked = this.packOptions.base64Export;
+        ReactDOM.findDOMNode(this.refs.tinify).checked = this.packOptions.tinify;
+        ReactDOM.findDOMNode(this.refs.tinifyKey).value = this.packOptions.tinifyKey;
+        ReactDOM.findDOMNode(this.refs.scale).value = Number(this.packOptions.scale);
+        ReactDOM.findDOMNode(this.refs.filter).value = this.packOptions.filter;
+        ReactDOM.findDOMNode(this.refs.exporter).value = this.packOptions.exporter;
+        ReactDOM.findDOMNode(this.refs.fileName).value = this.packOptions.fileName;
+        ReactDOM.findDOMNode(this.refs.width).value = Number(this.packOptions.width) || 0;
+        ReactDOM.findDOMNode(this.refs.height).value = Number(this.packOptions.height) || 0;
+        ReactDOM.findDOMNode(this.refs.fixedSize).checked = this.packOptions.fixedSize;
+        ReactDOM.findDOMNode(this.refs.powerOfTwo).checked = this.packOptions.powerOfTwo;
+        ReactDOM.findDOMNode(this.refs.padding).value = Number(this.packOptions.padding) || 0;
+        ReactDOM.findDOMNode(this.refs.allowRotation).checked = this.packOptions.allowRotation;
+        ReactDOM.findDOMNode(this.refs.allowTrim).checked = this.packOptions.allowTrim;
+        ReactDOM.findDOMNode(this.refs.detectIdentical).checked = this.packOptions.detectIdentical;
+        ReactDOM.findDOMNode(this.refs.packer).value = this.packOptions.packer;
+        ReactDOM.findDOMNode(this.refs.packerMethod).value = this.packOptions.packerMethod;
+    }
 
     getPackOptions() {
         let data = Object.assign({}, this.packOptions);
@@ -177,8 +216,10 @@ class PackProperties extends React.Component {
     }
 
     forceUpdate(e) {
-        let key = e.keyCode || e.which;
-        if(key == 13) this.onPropChanged();
+        if(e) {
+            let key = e.keyCode || e.which;
+            if (key === 13) this.onPropChanged();
+        }
     }
     
     startExport() {

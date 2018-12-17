@@ -10,9 +10,13 @@ import ImagesTree from "./ImagesTree.jsx";
 
 import FileSystem from 'platform/FileSystem';
 
+let INSTANCE = null;
+
 class ImagesList extends React.Component {
     constructor(props) {
         super(props);
+
+        INSTANCE = this;
         
         this.addImages = this.addImages.bind(this);
         this.addZip = this.addZip.bind(this);
@@ -30,6 +34,10 @@ class ImagesList extends React.Component {
         Observer.on(GLOBAL_EVENT.IMAGE_CLEAR_SELECTION, this.handleImageClearSelection, this);
 
         this.state = {images: {}};
+    }
+    
+    static get i() {
+        return INSTANCE;
     }
 
     componentWillUnmount() {
@@ -54,6 +62,11 @@ class ImagesList extends React.Component {
                 return false;
             };
         }
+    }
+    
+    setImages(images) {
+        this.setState({images: images});
+        Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, images);
     }
     
     onFilesDrop(e) {
