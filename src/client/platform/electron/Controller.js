@@ -37,6 +37,8 @@ class Controller {
             PackProperties.i.saveOptions(true);
         });
 
+        ipcRenderer.send('update-app-info', appInfo);
+        
         Controller.updateRecentProjects();
     }
     
@@ -51,9 +53,7 @@ class Controller {
     static updateLocale() {
         ipcRenderer.send('update-locale', {
             currentLocale: I18.currentLocale,
-            strings: I18.strings,
-            appInfo: appInfo,
-            env: process.env.NODE_ENV
+            strings: I18.strings
         });
     }
 }

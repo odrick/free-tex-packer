@@ -190,20 +190,22 @@ ipcMain.on('tinify', (e, data) => {
     });
 });
 
+ipcMain.on('update-app-info', (e, data) => {
+    APP_INFO = data;
+    buildMenu();
+});
+
 ipcMain.on('update-locale', (e, data) => {
-    console.log(data);
-    
-    APP_INFO = data.appInfo;
     CURRENT_LOCALE = data.currentLocale;
     LOCALE_STRINGS = data.strings;
     buildMenu();
 });
 
-ipcMain.on('project-loaded', (e, data) => {
-    onProjectLoaded(data);
-});
-
 ipcMain.on('project-recent-update', (e, data) => {
     RECENT_PROJECTS = data.projects;
     buildMenu();
+});
+
+ipcMain.on('project-loaded', (e, data) => {
+    onProjectLoaded(data);
 });
