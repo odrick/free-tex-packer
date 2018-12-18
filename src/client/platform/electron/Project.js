@@ -2,7 +2,10 @@ import APP from '../../APP';
 import PackProperties from '../../ui/PackProperties.jsx';
 import ImagesList from '../../ui/ImagesList.jsx';
 import FileSystem from 'platform/FileSystem';
+import Controller from 'platform/Controller';
 import appInfo from '../../../../package.json';
+
+const RECENT_PROJECTS_KEY = "recent-projects";
 
 class Project {
     static getData() {
@@ -38,14 +41,48 @@ class Project {
         }
     }
     
-    static save() {
-        FileSystem.saveProject(Project.getData());
+    static getRecentProjects() {
+        let recentProjects = localStorage.getItem(RECENT_PROJECTS_KEY);
+        if(recentProjects) {
+            try {recentProjects = JSON.parse(recentProjects)}
+            catch(e) {recentProjects = []}
+        }
+        else {
+            recentProjects = [];
+        }
+        
+        return recentProjects;
     }
     
-    static load() {
-        let data = FileSystem.loadProject();
+    static updateRecentProjects(path) {
+        let recentProjects = Project.getRecentProjects();
+
+        let res = [];
+
+        for(let i=0; i<recentProjects.length; i++) {
+            if(recentProjects[i] !== path) res.push(recentProjects[i]);
+        }
+
+        res.unshift(path);
+
+        if(res.length > 10) res = res.slice(0, 10);
+
+        localStorage.setItem(RECENT_PROJECTS_KEY, JSON.stringify(res));
+        
+        Controller.updateRecentProjects();
+    }
+    
+    static save() {
+        let path = FileSystem.saveProject(Project.getData());
+        Project.updateRecentProjects(path);
+    }
+    
+    static load(pathToLoad="") {
+        let {path, data} = FileSystem.loadProject(pathToLoad);
         
         if(data) {
+            Project.updateRecentProjects(path);
+            
             PackProperties.i.setOptions(data.packOptions);
             
             let images;

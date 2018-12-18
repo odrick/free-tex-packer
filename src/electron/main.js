@@ -6,6 +6,10 @@ const {app, BrowserWindow, ipcMain, Menu} = require('electron');
 const APP_NAME = 'Free texture packer';
 
 let mainWindow;
+let RECENT_PROJECTS = [];
+let CURRENT_LOCALE = "";
+let LOCALE_STRINGS = {};
+let APP_INFO = {};
 
 function createWindow() {
     let mainWindowState = windowStateKeeper({
@@ -48,43 +52,63 @@ function quit() {
     app.quit();
 }
 
-function buildMenu(data) {
+function buildMenu() {
     let template = [];
     
+    let recentProjects = [];
+    
+    if(RECENT_PROJECTS.length) {
+        for(let path of RECENT_PROJECTS) {
+            let name = path.split("/").pop();
+            recentProjects.push({label: name, click: openRecentProject, custom: path});
+        }
+    }
+    else {
+        recentProjects.push({label: "...", enabled: false});
+    }
+    
     template.push({
-        label: data.strings.MENU_FILE,
+        label: LOCALE_STRINGS.MENU_FILE,
         submenu: [
-            {label: data.strings.MENU_FILE_PROJECT_NEW, click: newProject},
-            {label: data.strings.MENU_FILE_PROJECT_LOAD, click: loadProject},
-            {label: data.strings.MENU_FILE_PROJECT_LOAD_RECENT},
+            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_NEW, click: newProject},
+            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_LOAD, click: loadProject},
+            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_LOAD_RECENT, id: "recentProjects", submenu: recentProjects},
             {type: 'separator'},
-            {label: data.strings.MENU_FILE_PROJECT_SAVE, click: saveProject},
-            {label: data.strings.MENU_FILE_PROJECT_SAVE_AS, click: saveProjectAs},
+            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_SAVE, click: saveProject},
+            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_SAVE_AS, click: saveProjectAs},
             {type: 'separator'},
-            {label: data.strings.MENU_FILE_PREFERENCES_SAVE, click: savePreferences},
+            {label: LOCALE_STRINGS.MENU_FILE_PREFERENCES_SAVE, click: savePreferences},
             {type: 'separator'},
-            {label: data.strings.MENU_FILE_EXIT, click: quit}
+            {label: LOCALE_STRINGS.MENU_FILE_EXIT, click: quit}
         ]
     });
     
     let langs = [];
-    for(let lang of data.appInfo.localizations) {
-        langs.push({label: data.strings['LANGUAGE_' + lang], click: changeLang, custom: lang, checked: data.currentLocale === lang, type: 'checkbox'});
+    if(APP_INFO.localizations) {
+        for (let lang of APP_INFO.localizations) {
+            langs.push({
+                label: LOCALE_STRINGS['LANGUAGE_' + lang],
+                click: changeLang,
+                custom: lang,
+                checked: CURRENT_LOCALE === lang,
+                type: 'checkbox'
+            });
+        }
     }
 
     template.push({
-        label: data.strings.MENU_LANGUAGE,
+        label: LOCALE_STRINGS.MENU_LANGUAGE,
         submenu: langs
     });
 
     template.push({
-        label: data.strings.MENU_HELP,
+        label: LOCALE_STRINGS.MENU_HELP,
         submenu: [
-            {label: data.strings.MENU_HELP_ABOUT, click: showAbout}
+            {label: LOCALE_STRINGS.MENU_HELP_ABOUT, click: showAbout}
         ]
     });
     
-    if(data.env === 'development') {
+    if(argv.env === 'development') {
         template.push({label: 'Dev', submenu: [
             {label: 'Console', click: () => mainWindow.webContents.openDevTools()},
             {label: 'Reload', click: () => mainWindow.webContents.reload()}
@@ -109,6 +133,10 @@ function saveProject() {
 
 function saveProjectAs() {
     
+}
+
+function openRecentProject(e) {
+    mainWindow.send('project-load', {path: e.custom});
 }
 
 function savePreferences() {
@@ -163,9 +191,19 @@ ipcMain.on('tinify', (e, data) => {
 });
 
 ipcMain.on('update-locale', (e, data) => {
-    buildMenu(data);
+    console.log(data);
+    
+    APP_INFO = data.appInfo;
+    CURRENT_LOCALE = data.currentLocale;
+    LOCALE_STRINGS = data.strings;
+    buildMenu();
 });
 
 ipcMain.on('project-loaded', (e, data) => {
     onProjectLoaded(data);
+});
+
+ipcMain.on('project-recent-update', (e, data) => {
+    RECENT_PROJECTS = data.projects;
+    buildMenu();
 });

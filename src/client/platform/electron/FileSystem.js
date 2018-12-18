@@ -127,27 +127,39 @@ class FileSystem {
             savePath = FileSystem.fixPath(savePath);
             fs.writeFileSync(savePath, JSON.stringify(data, null, 2));
         }
+
+        return savePath;
     }
     
-    static loadProject() {
-        let path = dialog.showOpenDialog({
-            filters: [{name: "Free texture packer", extensions: ['ftpp']}],
-            properties: ['openFile']
-        });
+    static loadProject(pathToLoad="") {
+        let path;
+        
+        if(pathToLoad) {
+            path = pathToLoad;
+        }
+        else {
+            path = dialog.showOpenDialog({
+                filters: [{name: "Free texture packer", extensions: ['ftpp']}],
+                properties: ['openFile']
+            });
+
+            if(path && path[0]) {
+                path = FileSystem.fixPath(path[0]);
+            }
+        }
 
         let data = null;
         
-        if(path && path[0]) {
-            path = FileSystem.fixPath(path[0]);
-            data = fs.readFileSync(path);
+        if(path) {
             try {
+                data = fs.readFileSync(path);
                 data = JSON.parse(data);
                 Controller.onProjectLoaded(path);
             }
             catch(e) {data = null}
         }
         
-        return data;
+        return {path, data};
     }
 }
 

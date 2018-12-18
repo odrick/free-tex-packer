@@ -19,7 +19,10 @@ class Controller {
         });
 
         ipcRenderer.on("project-load", (e, data) => {
-            Project.load();
+            let path = "";
+            if(data) path = data.path;
+            
+            Project.load(path);
         });
         
         ipcRenderer.on("project-save", (e, data) => {
@@ -33,10 +36,16 @@ class Controller {
         ipcRenderer.on("preferences-save", (e, data) => {
             PackProperties.i.saveOptions(true);
         });
+
+        Controller.updateRecentProjects();
     }
     
     static onProjectLoaded(path) {
         ipcRenderer.send('project-loaded', {path: path});
+    }
+    
+    static updateRecentProjects() {
+        ipcRenderer.send('project-recent-update', {projects: Project.getRecentProjects()});
     }
     
     static updateLocale() {
