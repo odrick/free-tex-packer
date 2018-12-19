@@ -7,42 +7,63 @@ import appInfo from '../../../../package.json';
 import Project from 'platform/Project';
 
 import PackProperties from '../../ui/PackProperties.jsx';
+import ImagesList from "../../ui/ImagesList.jsx";
 
 class Controller {
     static init() {
-        ipcRenderer.on("change-locale", (e, data) => {
-            Observer.emit(GLOBAL_EVENT.CHANGE_LANG, data.locale);
+        ipcRenderer.on("change-locale", (e, payload) => {
+            Observer.emit(GLOBAL_EVENT.CHANGE_LANG, payload.data);
         });
 
-        ipcRenderer.on("show-about", (e, data) => {
+        ipcRenderer.on("show-about", (e, payload) => {
             Observer.emit(GLOBAL_EVENT.SHOW_ABOUT);
         });
 
-        ipcRenderer.on("project-load", (e, data) => {
+        ipcRenderer.on("project-load", (e, payload) => {
             let path = "";
-            if(data) path = data.path;
+            if(payload) path = payload.data;
             
             Project.load(path);
         });
         
-        ipcRenderer.on("project-save", (e, data) => {
+        ipcRenderer.on("project-save", (e, payload) => {
             Project.save();
         });
 
-        ipcRenderer.on("project-save-as", (e, data) => {
+        ipcRenderer.on("project-save-as", (e, payload) => {
             Project.saveAs();
         });
 
-        ipcRenderer.on("project-new", (e, data) => {
+        ipcRenderer.on("project-new", (e, payload) => {
             Project.create();
         });
         
-        ipcRenderer.on("preferences-save", (e, data) => {
+        ipcRenderer.on("preferences-save", (e, payload) => {
             PackProperties.i.saveOptions(true);
         });
 
-        ipcRenderer.on("quit", (e, data) => {
+        ipcRenderer.on("quit", (e, payload) => {
             Controller.quit();
+        });
+        
+        ipcRenderer.on("action-add-images", (e, payload) => {
+            ImagesList.i.addImagesFs();
+        });
+
+        ipcRenderer.on("action-add-folder", (e, payload) => {
+            ImagesList.i.addFolderFs();
+        });
+
+        ipcRenderer.on("action-delete", (e, payload) => {
+            ImagesList.i.deleteSelectedImages();
+        });
+
+        ipcRenderer.on("action-clear", (e, payload) => {
+            ImagesList.i.clear();
+        });
+
+        ipcRenderer.on("action-export", (e, payload) => {
+            Observer.emit(GLOBAL_EVENT.START_EXPORT);
         });
 
         ipcRenderer.send('update-app-info', appInfo);

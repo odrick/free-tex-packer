@@ -3,8 +3,6 @@ const argv = require('optimist').argv;
 const windowStateKeeper = require('electron-window-state');
 const {app, BrowserWindow, ipcMain, Menu} = require('electron');
 
-const APP_NAME = 'Free texture packer';
-
 let mainWindow;
 let RECENT_PROJECTS = [];
 let CURRENT_LOCALE = "";
@@ -26,7 +24,7 @@ function createWindow() {
         height: mainWindowState.height,
         minWidth: 1280,
         minHeight: 800,
-        title: APP_NAME,
+        title: "",
         icon: './resources/icons/main.png'
     });
 
@@ -47,7 +45,7 @@ function createWindow() {
 
     mainWindow.on('close', function(e) {
         if(CURRENT_PROJECT_M0DIFIED) {
-            sendQuit();
+            sendMessage({actionName: 'quit'});
             e.preventDefault();
         }
     });
@@ -73,7 +71,7 @@ function buildMenu() {
     if(RECENT_PROJECTS.length) {
         for(let path of RECENT_PROJECTS) {
             let name = path.split("/").pop();
-            recentProjects.push({label: name, click: openRecentProject, custom: path});
+            recentProjects.push({label: name, actionName: 'project-load', click: sendMessage, custom: path});
         }
     }
     else {
@@ -83,16 +81,28 @@ function buildMenu() {
     template.push({
         label: LOCALE_STRINGS.MENU_FILE,
         submenu: [
-            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_NEW, click: newProject},
-            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_LOAD, click: loadProject},
-            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_LOAD_RECENT, id: "recentProjects", submenu: recentProjects},
+            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_NEW, actionName: 'project-new', click: sendMessage, accelerator: 'CmdOrCtrl+N'},
+            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_LOAD, actionName: 'project-load', click: sendMessage, accelerator: 'CmdOrCtrl+O'},
+            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_LOAD_RECENT, submenu: recentProjects},
             {type: 'separator'},
-            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_SAVE, click: saveProject},
-            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_SAVE_AS, click: saveProjectAs},
+            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_SAVE, actionName: 'project-save', click: sendMessage, accelerator: 'CmdOrCtrl+S'},
+            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_SAVE_AS, actionName: 'project-save-as', click: sendMessage, accelerator: 'CmdOrCtrl+Shift+N'},
             {type: 'separator'},
-            {label: LOCALE_STRINGS.MENU_FILE_PREFERENCES_SAVE, click: savePreferences},
+            {label: LOCALE_STRINGS.MENU_FILE_PREFERENCES_SAVE, actionName: 'preferences-save', click: sendMessage},
             {type: 'separator'},
-            {label: LOCALE_STRINGS.MENU_FILE_EXIT, click: sendQuit}
+            {label: LOCALE_STRINGS.MENU_FILE_EXIT, actionName: 'quit', click: sendMessage, accelerator: 'CmdOrCtrl+F4'}
+        ]
+    });
+
+    template.push({
+        label: LOCALE_STRINGS.MENU_ACTIONS,
+        submenu: [
+            {label: LOCALE_STRINGS.MENU_ACTIONS_ADD_IMAGES, actionName: 'action-add-images', click: sendMessage, accelerator: 'Shift+A'},
+            {label: LOCALE_STRINGS.MENU_ACTIONS_ADD_FOLDER, actionName: 'action-add-folder', click: sendMessage, accelerator: 'Shift+F'},
+            {label: LOCALE_STRINGS.MENU_ACTIONS_DELETE, actionName: 'action-delete', click: sendMessage, accelerator: 'Delete'},
+            {label: LOCALE_STRINGS.MENU_ACTIONS_CLEAR, actionName: 'action-clear', click: sendMessage, accelerator: 'CmdOrCtrl+Shift+C'},
+            {type: 'separator'},
+            {label: LOCALE_STRINGS.MENU_ACTIONS_EXPORT, actionName: 'action-export', click: sendMessage, accelerator: 'CmdOrCtrl+E'}
         ]
     });
     
@@ -101,10 +111,11 @@ function buildMenu() {
         for (let lang of APP_INFO.localizations) {
             langs.push({
                 label: LOCALE_STRINGS['LANGUAGE_' + lang],
-                click: changeLang,
                 custom: lang,
                 checked: CURRENT_LOCALE === lang,
-                type: 'checkbox'
+                type: 'checkbox',
+                actionName: 'change-locale',
+                click: sendMessage
             });
         }
     }
@@ -117,7 +128,7 @@ function buildMenu() {
     template.push({
         label: LOCALE_STRINGS.MENU_HELP,
         submenu: [
-            {label: LOCALE_STRINGS.MENU_HELP_ABOUT, click: showAbout}
+            {label: LOCALE_STRINGS.MENU_HELP_ABOUT, actionName: 'show-about', click: sendMessage, accelerator: 'F1'}
         ]
     });
     
@@ -137,40 +148,13 @@ function quit() {
     app.quit();
 }
 
-function sendQuit() {
-    mainWindow.send('quit');
-}
-
-function newProject() {
-    mainWindow.send('project-new');
-}
-
-function loadProject() {
-    mainWindow.send('project-load');
-}
-
-function saveProject() {
-    mainWindow.send('project-save');
-}
-
-function saveProjectAs() {
-    mainWindow.send('project-save-as');
-}
-
-function openRecentProject(e) {
-    mainWindow.send('project-load', {path: e.custom});
-}
-
-function savePreferences() {
-    mainWindow.send('preferences-save');
-}
-
-function changeLang(e) {
-    mainWindow.send('change-locale', {locale: e.custom});
-}
-
-function showAbout() {
-    mainWindow.send('show-about');
+function sendMessage(e) {
+    let payload = null;
+    if(e.custom) {
+        payload = {data: e.custom};
+    }
+    
+    mainWindow.send(e.actionName, payload);
 }
 
 function onProjectLoaded(data=null) {
@@ -185,12 +169,17 @@ function onProjectModified(data=null) {
 }
 
 function updateWindowTitle() {
+    if(!APP_INFO.displayName) {
+        mainWindow.setTitle("");
+        return;
+    }
+    
     let name;
 
     if(!CURRENT_PROJECT) name = "untitled.ftpp";
     else name = CURRENT_PROJECT.split('/').pop();
 
-    mainWindow.setTitle((CURRENT_PROJECT_M0DIFIED ? "* " : "") + name + ' - ' + APP_NAME);
+    mainWindow.setTitle((CURRENT_PROJECT_M0DIFIED ? "* " : "") + name + ' - ' + APP_INFO.displayName);
 }
 
 app.on('ready', createWindow);
@@ -230,6 +219,7 @@ ipcMain.on('tinify', (e, data) => {
 ipcMain.on('update-app-info', (e, data) => {
     APP_INFO = data;
     buildMenu();
+    updateWindowTitle();
 });
 
 ipcMain.on('update-locale', (e, data) => {

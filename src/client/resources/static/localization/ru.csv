@@ -93,6 +93,12 @@ MENU_FILE_PROJECT_SAVE;Сохранить проект
 MENU_FILE_PROJECT_SAVE_AS;Сохранить проект как...
 MENU_FILE_PREFERENCES_SAVE;Сохранить настройки
 MENU_FILE_EXIT;Выход
+MENU_ACTIONS;Действия
+MENU_ACTIONS_ADD_IMAGES;Добавить изображения
+MENU_ACTIONS_ADD_FOLDER;Добавить папку
+MENU_ACTIONS_DELETE;Удалить
+MENU_ACTIONS_CLEAR;Очистить
+MENU_ACTIONS_EXPORT;Экспорт
 MENU_LANGUAGE;Язык
 MENU_HELP;Помощь
 MENU_HELP_ABOUT;О программе
