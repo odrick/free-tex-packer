@@ -32,6 +32,7 @@ class ImagesList extends React.Component {
         
         Observer.on(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.handleImageItemSelected, this);
         Observer.on(GLOBAL_EVENT.IMAGE_CLEAR_SELECTION, this.handleImageClearSelection, this);
+        Observer.on(GLOBAL_EVENT.FS_CHANGES, this.handleFsChanges, this);
 
         this.state = {images: {}};
     }
@@ -43,6 +44,7 @@ class ImagesList extends React.Component {
     componentWillUnmount() {
         Observer.off(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.handleImageItemSelected, this);
         Observer.off(GLOBAL_EVENT.IMAGE_CLEAR_SELECTION, this.handleImageClearSelection, this);
+        Observer.off(GLOBAL_EVENT.FS_CHANGES, this.handleFsChanges, this);
     }
     
     componentDidMount() {
@@ -107,6 +109,52 @@ class ImagesList extends React.Component {
     addFolderFs() {
         Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
         FileSystem.addFolder(this.loadImagesComplete);
+    }
+
+    handleFsChanges(data) {
+        let image = null;
+        let images = this.state.images;
+        let imageKey = "";
+        
+        let keys = Object.keys(images);
+        for(let key of keys) {
+            let item = images[key];
+            if(item.fsPath.path === data.path) {
+                image = item;
+                imageKey = key;
+                break;
+            }
+        }
+        
+        if(data.event === "unlink" && image) {
+            delete images[imageKey];
+            this.setState({images: images});
+            Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, images);
+        }
+
+        if(data.event === "add" || data.event === "change") {
+            let folder = "";
+            let addPath = "";
+            
+            for(let key of keys) {
+                let item = images[key];
+                
+                if(item.fsPath.folder && data.path.substr(0, item.fsPath.folder.length) === item.fsPath.folder) {
+                    folder = item.fsPath.folder;
+                    addPath = folder.split("/").pop();
+                }
+            }
+            
+            let name = "";
+            if(folder) {
+                name = addPath + data.path.substr(folder.length);
+            }
+            else {
+                name = data.path.split("/").pop();
+            }
+            
+            FileSystem.loadImages([{name: name, path: data.path, folder: folder}], this.loadImagesComplete);
+        }
     }
     
     loadImagesComplete(data=[]) {

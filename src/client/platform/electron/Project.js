@@ -145,6 +145,8 @@ class Project {
             if(data) {
                 Project.stopObserv();
 
+                FileSystem.terminateWatch();
+
                 Project.updateRecentProjects(path);
 
                 PackProperties.i.setOptions(data.packOptions);
@@ -162,8 +164,11 @@ class Project {
                             Project.startObserv();
                             return;
                         }
+                        
+                        let path = data.folders[cf];
+                        FileSystem.startWatch(path);
 
-                        FileSystem.loadFolder(data.folders[cf], (res) => {
+                        FileSystem.loadFolder(path, (res) => {
                             let keys = Object.keys(res);
                             for(let key of keys) {
                                 images[key] = res[key];
@@ -184,6 +189,8 @@ class Project {
 
     static create() {
         Project.saveChanges(() => {
+            FileSystem.terminateWatch();
+            
             PackProperties.i.setOptions(PackProperties.i.loadOptions());
             ImagesList.i.setImages({});
             CURRENT_PROJECT_PATH = "";

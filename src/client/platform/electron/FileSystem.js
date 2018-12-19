@@ -1,11 +1,15 @@
 const fs = require('fs');
+const chokidar = require('chokidar');
 const {dialog} = require('electron').remote;
 
 import Controller from 'platform/Controller';
 import I18 from '../../utils/I18';
 import Base64ImagesLoader from '../../utils/Base64ImagesLoader';
+import {Observer, GLOBAL_EVENT} from '../../Observer';
 
 const IMAGES_EXT = ['jpg', 'png', 'gif'];
+
+let watcher = null;
 
 class FileSystem {
     static fixPath(path) {
@@ -72,7 +76,34 @@ class FileSystem {
             if(cb) cb();
         }
     }
-
+    
+    static startWatch(path) {
+        if(!watcher) {
+            watcher = chokidar.watch(path, {ignoreInitial: true});
+            watcher.on('all', FileSystem.onWatchEvent);
+        }
+        else {
+            watcher.add(path);
+        }
+    }
+    
+    static stopWatch(path) {
+        if(watcher) {
+            watcher.unwatch(path);
+        }
+    }
+    
+    static terminateWatch() {
+        if(watcher) {
+            watcher.close();
+            watcher = null;
+        }
+    }
+    
+    static onWatchEvent(event, path) {
+        Observer.emit(GLOBAL_EVENT.FS_CHANGES, {event: event, path: FileSystem.fixPath(path)});
+    }
+    
     static loadImages(list, cb) {
         let files = [];
 
@@ -81,6 +112,8 @@ class FileSystem {
             let ext = FileSystem.getExtFromPath(path);
             
             if(IMAGES_EXT.indexOf(ext) >= 0) {
+                if(!item.folder) FileSystem.startWatch(path);
+                
                 try {
                     let content = fs.readFileSync(path, 'base64');
                     content = "data:image/" + ext + ";base64," + content;
@@ -98,6 +131,8 @@ class FileSystem {
     
     static loadFolder(path, cb) {
         if(fs.existsSync(path)) {
+            FileSystem.startWatch(path);
+            
             let parts = path.split("/");
             let name = "";
             while (parts.length && !name) name = parts.pop();
