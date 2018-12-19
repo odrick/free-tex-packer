@@ -70,7 +70,7 @@ class Controller {
         
         Controller.updateRecentProjects();
         
-        setTimeout(Project.startObserv, 500);
+        setTimeout(Project.startObserv, 1000);
     }
     
     static onProjectLoaded(path="") {

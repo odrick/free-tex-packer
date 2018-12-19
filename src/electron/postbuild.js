@@ -26,5 +26,6 @@ function deleteFolder(path) {
 
 deleteFile("../../dist/builder-effective-config.yaml");
 deleteFile("../../dist/win/FreeTexturePacker.exe.blockmap");
+deleteFile("../../dist/win/latest.yml");
 deleteFolder("../../dist/${os}");
 deleteFolder("../../dist/win/win-unpacked");

@@ -2,6 +2,7 @@ const tinify = require('tinify');
 const argv = require('optimist').argv;
 const windowStateKeeper = require('electron-window-state');
 const {app, BrowserWindow, ipcMain, Menu} = require('electron');
+const {autoUpdater} = require("electron-updater");
 
 let mainWindow;
 let RECENT_PROJECTS = [];
@@ -62,6 +63,8 @@ function createWindow() {
 		if(argv.env !== 'development' && process.argv.length > 1) {
 			sendMessage({actionName: 'project-load', custom: process.argv[1]});
 		}
+
+        autoUpdater.checkForUpdatesAndNotify();
     });
 
     onProjectLoaded();
