@@ -84,6 +84,7 @@ EXPORTER_ERROR;Ошибка при экспортировании: %s
 CUSTOM_EXPORTER_ERROR;Ошибка в шаблоне: %s
 FILE_EXT;Расширение файла:
 DOCUMENTATION;документация
+SAVE_CHANGES_CONFIRM;Сохранить изменения в проекте?
 MENU_FILE;Файл
 MENU_FILE_PROJECT_NEW;Новый проект
 MENU_FILE_PROJECT_LOAD;Открыть проект

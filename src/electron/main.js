@@ -10,6 +10,8 @@ let RECENT_PROJECTS = [];
 let CURRENT_LOCALE = "";
 let LOCALE_STRINGS = {};
 let APP_INFO = {};
+let CURRENT_PROJECT = "";
+let CURRENT_PROJECT_M0DIFIED = false;
 
 function createWindow() {
     let mainWindowState = windowStateKeeper({
@@ -43,13 +45,24 @@ function createWindow() {
 
     Menu.setApplicationMenu(null);
 
-    mainWindow.on('closed', function () {
+    mainWindow.on('close', function(e) {
+        if(CURRENT_PROJECT_M0DIFIED) {
+            sendQuit();
+            e.preventDefault();
+        }
+    });
+    
+    mainWindow.on('closed', function() {
         mainWindow = null;
     });
-}
 
-function quit() {
-    app.quit();
+    mainWindow.webContents.on('did-finish-load', function() {
+        CURRENT_PROJECT = "";
+        CURRENT_PROJECT_M0DIFIED = false;
+        updateWindowTitle();
+    });
+
+    onProjectLoaded();
 }
 
 function buildMenu() {
@@ -79,7 +92,7 @@ function buildMenu() {
             {type: 'separator'},
             {label: LOCALE_STRINGS.MENU_FILE_PREFERENCES_SAVE, click: savePreferences},
             {type: 'separator'},
-            {label: LOCALE_STRINGS.MENU_FILE_EXIT, click: quit}
+            {label: LOCALE_STRINGS.MENU_FILE_EXIT, click: sendQuit}
         ]
     });
     
@@ -119,6 +132,15 @@ function buildMenu() {
     Menu.setApplicationMenu(menu);
 }
 
+function quit() {
+    CURRENT_PROJECT_M0DIFIED = false;
+    app.quit();
+}
+
+function sendQuit() {
+    mainWindow.send('quit');
+}
+
 function newProject() {
     mainWindow.send('project-new');
 }
@@ -132,7 +154,7 @@ function saveProject() {
 }
 
 function saveProjectAs() {
-    
+    mainWindow.send('project-save-as');
 }
 
 function openRecentProject(e) {
@@ -151,9 +173,24 @@ function showAbout() {
     mainWindow.send('show-about');
 }
 
-function onProjectLoaded(data) {
-    let name = data.path.split('/').pop();
-    mainWindow.setTitle(name + ' - ' + APP_NAME);
+function onProjectLoaded(data=null) {
+    CURRENT_PROJECT = data ? data.path : "";
+    CURRENT_PROJECT_M0DIFIED = false;
+    updateWindowTitle();
+}
+
+function onProjectModified(data=null) {
+    CURRENT_PROJECT_M0DIFIED = data ? data.val : false;
+    updateWindowTitle();
+}
+
+function updateWindowTitle() {
+    let name;
+
+    if(!CURRENT_PROJECT) name = "untitled.ftpp";
+    else name = CURRENT_PROJECT.split('/').pop();
+
+    mainWindow.setTitle((CURRENT_PROJECT_M0DIFIED ? "* " : "") + name + ' - ' + APP_NAME);
 }
 
 app.on('ready', createWindow);
@@ -208,4 +245,12 @@ ipcMain.on('project-recent-update', (e, data) => {
 
 ipcMain.on('project-loaded', (e, data) => {
     onProjectLoaded(data);
+});
+
+ipcMain.on('project-modified', (e, data) => {
+    onProjectModified(data);
+});
+
+ipcMain.on('quit', (e, data) => {
+    quit();
 });

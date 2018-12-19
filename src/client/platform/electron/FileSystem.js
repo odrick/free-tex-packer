@@ -119,16 +119,23 @@ class FileSystem {
         let options = {
             filters: [{name: "Free texture packer", extensions: ['ftpp']}]
         };
-        if(path) options.defaultPath = path;
-
-        let savePath = dialog.showSaveDialog(options);
         
-        if(savePath) {
-            savePath = FileSystem.fixPath(savePath);
-            fs.writeFileSync(savePath, JSON.stringify(data, null, 2));
+        if(!path) {
+            path = dialog.showSaveDialog(options);
+        }
+        
+        if(path) {
+            path = FileSystem.fixPath(path);
+            
+            try {
+                fs.writeFileSync(path, JSON.stringify(data, null, 2));
+            }
+            catch(e) {
+                
+            }
         }
 
-        return savePath;
+        return path;
     }
     
     static loadProject(pathToLoad="") {

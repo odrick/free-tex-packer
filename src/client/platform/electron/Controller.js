@@ -29,6 +29,10 @@ class Controller {
             Project.save();
         });
 
+        ipcRenderer.on("project-save-as", (e, data) => {
+            Project.saveAs();
+        });
+
         ipcRenderer.on("project-new", (e, data) => {
             Project.create();
         });
@@ -37,13 +41,23 @@ class Controller {
             PackProperties.i.saveOptions(true);
         });
 
+        ipcRenderer.on("quit", (e, data) => {
+            Controller.quit();
+        });
+
         ipcRenderer.send('update-app-info', appInfo);
         
         Controller.updateRecentProjects();
+        
+        setTimeout(Project.startObserv, 500);
     }
     
-    static onProjectLoaded(path) {
+    static onProjectLoaded(path="") {
         ipcRenderer.send('project-loaded', {path: path});
+    }
+
+    static updateProjectModified(val) {
+        ipcRenderer.send('project-modified', {val: val});
     }
     
     static updateRecentProjects() {
@@ -54,6 +68,12 @@ class Controller {
         ipcRenderer.send('update-locale', {
             currentLocale: I18.currentLocale,
             strings: I18.strings
+        });
+    }
+    
+    static quit() {
+        Project.saveChanges(() => {
+            ipcRenderer.send('quit');
         });
     }
 }
