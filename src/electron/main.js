@@ -12,7 +12,7 @@ let CURRENT_PROJECT = "";
 let CURRENT_PROJECT_M0DIFIED = false;
 
 function createWindow() {
-    let mainWindowState = windowStateKeeper({
+	let mainWindowState = windowStateKeeper({
         defaultWidth: 1280,
         defaultHeight: 800
     });
@@ -58,6 +58,10 @@ function createWindow() {
         CURRENT_PROJECT = "";
         CURRENT_PROJECT_M0DIFIED = false;
         updateWindowTitle();
+		
+		if(argv.env !== 'development' && process.argv.length > 1) {
+			sendMessage({actionName: 'project-load', custom: process.argv[1]});
+		}
     });
 
     onProjectLoaded();

@@ -33,11 +33,21 @@ if(argv.build) {
             warnings: false
         }
     }));
+    
+    let outputDir;
+    
+    if(PLATFORM === 'web') {
+        outputDir = 'dist/web/';
+    }
+
+    if(PLATFORM === 'electron') {
+        outputDir = 'src/electron/www/';
+    }
 	
-	plugins.push(new CopyWebpackPlugin([{from: 'src/client/resources', to: 'dist/' + PLATFORM + '/'}]));
+	plugins.push(new CopyWebpackPlugin([{from: 'src/client/resources', to: outputDir}]));
 
     devtool = null;
-    output = 'dist/' + PLATFORM + '/static/js/index.js';
+    output = outputDir + 'static/js/index.js';
     debug = false;
 }
 else {

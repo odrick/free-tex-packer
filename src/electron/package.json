@@ -1,21 +1,39 @@
 {
-  "name": "desktop-free-tex-packer",
-  "version": "0.0.1",
-  "description": "Desktop free texture packer",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron . --env development",
-    "start-prod": "electron ."
-  },
-  "keywords": [],
-  "author": "Alexander Norinchak",
-  "license": "ISC",
-  "devDependencies": {
-    "electron": "^3.0.7"
-  },
-  "dependencies": {
-    "electron-window-state": "^5.0.3",
-    "optimist": "^0.6.1",
-    "tinify": "^1.3.0"
-  }
+    "name": "desktop-free-tex-packer",
+    "version": "0.4.1",
+    "description": "Desktop free texture packer (beta)",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron . --env development",
+        "start-prod": "electron .",
+        "build": "electron-builder && node ./postbuild.js"
+    },
+    "build": {
+        "appId": "com.free.tex.packer",
+        "productName": "Free texture packer",
+        "artifactName": "FreeTexturePacker.${ext}",
+        "win": {
+            "target": "nsis",
+            "icon": "./resources/icons/medium.png"
+        },
+        "directories": {
+            "output": "../../dist/${os}"
+        },
+        "fileAssociations": {
+            "ext": "ftpp",
+            "name": "Free texture packer project"
+        }
+    },
+    "keywords": [],
+    "author": "Alexander Norinchak",
+    "license": "ISC",
+    "devDependencies": {
+        "electron": "^3.0.7",
+        "electron-builder": "^20.38.4"
+    },
+    "dependencies": {
+        "electron-window-state": "^5.0.3",
+        "optimist": "^0.6.1",
+        "tinify": "^1.3.0"
+    }
 }

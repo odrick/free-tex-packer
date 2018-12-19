@@ -177,7 +177,7 @@ class FileSystem {
         let path;
         
         if(pathToLoad) {
-            path = pathToLoad;
+            path = FileSystem.fixPath(pathToLoad);
         }
         else {
             path = dialog.showOpenDialog({
