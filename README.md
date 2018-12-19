@@ -4,6 +4,8 @@ Free texture packer creates sprite sheets for you game or site. Rotation, trimmi
 
 Live version: [http://free-tex-packer.com](http://free-tex-packer.com)
 
+Desktop versions: [https://github.com/odrick/free-tex-packer/releases](https://github.com/odrick/free-tex-packer/releases)
+
 Gulp module: [https://github.com/odrick/gulp-free-tex-packer](https://github.com/odrick/gulp-free-tex-packer)
 
 # Custom templates
