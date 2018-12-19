@@ -1,5 +1,3 @@
-const {dialog} = require('electron').remote;
-
 import APP from '../../APP';
 import PackProperties from '../../ui/PackProperties.jsx';
 import ImagesList from '../../ui/ImagesList.jsx';
@@ -127,20 +125,13 @@ class Project {
     
     static saveChanges(cb=null) {
         if(CURRENT_PROJECT_MODIFIED) {
-            let choise = dialog.showMessageBox({
-                    type: 'question',
-                    buttons: ['Yes', 'No', 'Cancel'],
-                    title: appInfo.displayName,
-                    message: I18.f("SAVE_CHANGES_CONFIRM")
-                });
-            
-            if(choise === 0) {
-                Project.save();
-                if(cb) cb();
-            }
-            if(choise === 1) {
-                if(cb) cb();
-            }
+            let buttons = {
+                "yes": {caption: I18.f("YES"), callback: () => { Project.save(); if(cb) cb(); }},
+                "no": {caption: I18.f("NO"), callback: () => { if(cb) cb(); }},
+                "cancel": {caption: I18.f("CANCEL")}
+            };
+
+            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("SAVE_CHANGES_CONFIRM"), buttons);
         }
         else {
             if(cb) cb();

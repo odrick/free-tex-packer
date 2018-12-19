@@ -498,9 +498,9 @@ html, body {
 
 .message-box-window {
     width: 340px;
-    height: 200px;
+    height: 130px;
     margin: auto;
-    margin-top: 86px;
+    margin-top: 180px;
     font-size: 14px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -516,7 +516,7 @@ html, body {
 }
 
 .message-box-content {
-    height: 170px;
+    height: 100px;
     overflow: auto;
 }
 
@@ -526,7 +526,8 @@ html, body {
 }
 
 .message-box-buttons .btn {
-    margin-left: 8px;
+    margin-left: 12px;
+    min-width: 50px;
 }
 
 .processing-shader {
