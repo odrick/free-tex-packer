@@ -6,8 +6,8 @@
     "scripts": {
         "start": "electron . --env development",
         "start-prod": "electron .",
-        "build": "electron-builder && node ./postbuild.js",
-        "publish": "build -p always && node ./postbuild.js"
+		"build-test": "electron-builder --ia32 --x64",
+        "build": "electron-builder --ia32 --x64 && node ./postbuild.js"
     },
     "build": {
         "appId": "com.free.tex.packer",
@@ -17,6 +17,11 @@
             "target": "nsis",
             "icon": "./resources/icons/medium.png"
         },
+		"linux": {
+			"target": "tar.gz",
+			"executableName": "FreeTexturePacker",
+			"icon": "./resources/icons/128x128.png"
+		},
         "directories": {
             "output": "../../dist/${os}"
         },
@@ -24,11 +29,13 @@
             "ext": "ftpp",
             "name": "Free texture packer project"
         },
-        "publish": [{
-            "provider": "github",
-            "owner": "odrick",
-            "repo": "free-tex-packer"
-        }]
+        "publish": [
+            {
+                "provider": "github",
+                "owner": "odrick",
+                "repo": "free-tex-packer"
+            }
+        ]
     },
     "keywords": [],
     "author": "Alexander Norinchak",
