@@ -14,8 +14,8 @@ let CURRENT_PROJECT_M0DIFIED = false;
 
 function createWindow() {
 	let mainWindowState = windowStateKeeper({
-        defaultWidth: 1280,
-        defaultHeight: 800
+        defaultWidth: 1220,
+        defaultHeight: 680
     });
     
     mainWindow = new BrowserWindow({
@@ -23,8 +23,8 @@ function createWindow() {
         y: mainWindowState.y,
         width: mainWindowState.width,
         height: mainWindowState.height,
-        minWidth: 1280,
-        minHeight: 800,
+        minWidth: 1220,
+        minHeight: 680,
         title: "",
         icon: './resources/icons/main.png'
     });

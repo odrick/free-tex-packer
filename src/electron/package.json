@@ -1,7 +1,9 @@
 {
     "name": "desktop-free-tex-packer",
     "version": "0.4.1",
-    "description": "Desktop free texture packer (beta)",
+    "description": "Desktop free texture packer",
+    "homepage": "https://github.com/odrick/free-tex-packer",
+    "author": "Alexander Norinchak <norinchak@gmail.com>",
     "main": "main.js",
     "scripts": {
         "start": "electron . --env development",
@@ -12,15 +14,16 @@
     "build": {
         "appId": "com.free.tex.packer",
         "productName": "Free texture packer",
-        "artifactName": "FreeTexturePacker.${ext}",
+        "artifactName": "FreeTexturePacker ${arch}.${ext}",
         "win": {
-            "target": "nsis",
+            "target": ["nsis", "msi"],
             "icon": "./resources/icons/medium.png"
         },
 		"linux": {
-			"target": "tar.gz",
+			"target": ["deb", "rpm"],
+            "category": "Graphics",
 			"executableName": "FreeTexturePacker",
-			"icon": "./resources/icons/128x128.png"
+			"icon": "./resources/icons/icons.icns"
 		},
         "directories": {
             "output": "../../dist/${os}"
@@ -38,7 +41,6 @@
         ]
     },
     "keywords": [],
-    "author": "Alexander Norinchak",
     "license": "ISC",
     "devDependencies": {
         "electron": "^3.0.7",
