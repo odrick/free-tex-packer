@@ -8,7 +8,6 @@
     "scripts": {
         "start": "electron . --env development",
         "start-prod": "electron .",
-		"build-test": "electron-builder --ia32 --x64",
         "build": "electron-builder --ia32 --x64"
     },
     "build": {

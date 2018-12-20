@@ -1,3 +1,4 @@
+const path = require('path');
 const tinify = require('tinify');
 const argv = require('optimist').argv;
 const windowStateKeeper = require('electron-window-state');
@@ -26,7 +27,7 @@ function createWindow() {
         minWidth: 1220,
         minHeight: 680,
         title: "",
-        icon: './resources/icons/256x256.png'
+        icon: path.join(__dirname, '/resources/icons/64x64.png')
     });
 
     mainWindowState.manage(mainWindow);
