@@ -9,7 +9,7 @@
         "start": "electron . --env development",
         "start-prod": "electron .",
 		"build-test": "electron-builder --ia32 --x64",
-        "build": "electron-builder --ia32 --x64 && node ./postbuild.js"
+        "build": "electron-builder --ia32 --x64"
     },
     "build": {
         "appId": "com.free.tex.packer",
@@ -17,16 +17,16 @@
         "artifactName": "FreeTexturePacker-${arch}.${ext}",
         "win": {
             "target": ["nsis"],
-            "icon": "./resources/icons/256x256.png"
+            "icon": "resources/icons/256x256.png"
         },
 		"linux": {
 			"target": ["deb"],
             "category": "Graphics",
 			"executableName": "FreeTexturePacker",
-			"icon": "./resources/icons/icons.icns"
+			"icon": "resources/icons/icons.icns"
 		},
         "directories": {
-            "output": "../../dist/${os}"
+            "output": "dist/${os}"
         },
         "fileAssociations": {
             "ext": "ftpp",
