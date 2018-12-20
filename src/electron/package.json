@@ -14,9 +14,9 @@
     "build": {
         "appId": "com.free.tex.packer",
         "productName": "Free texture packer",
-        "artifactName": "FreeTexturePacker ${arch}.${ext}",
+        "artifactName": "FreeTexturePacker-${arch}.${ext}",
         "win": {
-            "target": ["nsis", "msi"],
+            "target": ["msi"],
             "icon": "./resources/icons/256x256.png"
         },
 		"linux": {
