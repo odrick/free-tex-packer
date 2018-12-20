@@ -24,9 +24,15 @@ function deleteFolder(path) {
     catch(e) {}
 }
 
+deleteFolder("../../dist/${os}");
 deleteFile("../../dist/builder-effective-config.yaml");
+
 deleteFile("../../dist/win/FreeTexturePacker.exe.blockmap");
 deleteFile("../../dist/win/latest.yml");
-deleteFolder("../../dist/${os}");
 deleteFolder("../../dist/win/win-unpacked");
 deleteFolder("../../dist/win/win-ia32-unpacked");
+
+deleteFile("../../dist/linux/latest-linux.yml");
+deleteFile("../../dist/linux/latest-linux-ia32.yml");
+deleteFolder("../../dist/linux/linux-unpacked");
+deleteFolder("../../dist/linux/linux-ia32-unpacked");
