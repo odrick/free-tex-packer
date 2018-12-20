@@ -16,7 +16,7 @@
         "productName": "Free texture packer",
         "artifactName": "FreeTexturePacker-${arch}.${ext}",
         "win": {
-            "target": ["msi"],
+            "target": ["nsis"],
             "icon": "./resources/icons/256x256.png"
         },
 		"linux": {
