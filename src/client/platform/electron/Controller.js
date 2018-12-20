@@ -73,8 +73,8 @@ class Controller {
         setTimeout(Project.startObserv, 1000);
     }
     
-    static onProjectLoaded(path="") {
-        ipcRenderer.send('project-loaded', {path: path});
+    static updateProject(path="") {
+        ipcRenderer.send('project-update', {path: path});
     }
 
     static updateProjectModified(val) {

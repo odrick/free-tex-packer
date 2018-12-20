@@ -196,7 +196,7 @@ class Project {
             CURRENT_PROJECT_PATH = "";
             Project.setProjectChanged(false);
 
-            Controller.onProjectLoaded();
+            Controller.updateProject();
         });
     }
 }

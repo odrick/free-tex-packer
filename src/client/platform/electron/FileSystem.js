@@ -164,6 +164,7 @@ class FileSystem {
             
             try {
                 fs.writeFileSync(path, JSON.stringify(data, null, 2));
+                Controller.updateProject(path);
             }
             catch(e) {
                 
@@ -196,7 +197,7 @@ class FileSystem {
             try {
                 data = fs.readFileSync(path);
                 data = JSON.parse(data);
-                Controller.onProjectLoaded(path);
+                Controller.updateProject(path);
             }
             catch(e) {data = null}
         }

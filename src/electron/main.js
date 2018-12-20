@@ -67,7 +67,7 @@ function createWindow() {
         autoUpdater.checkForUpdatesAndNotify();
     });
 
-    onProjectLoaded();
+    onProjectUpdated();
 }
 
 function buildMenu() {
@@ -164,7 +164,7 @@ function sendMessage(e) {
     mainWindow.send(e.actionName, payload);
 }
 
-function onProjectLoaded(data=null) {
+function onProjectUpdated(data=null) {
     CURRENT_PROJECT = data ? data.path : "";
     CURRENT_PROJECT_M0DIFIED = false;
     updateWindowTitle();
@@ -240,8 +240,8 @@ ipcMain.on('project-recent-update', (e, data) => {
     buildMenu();
 });
 
-ipcMain.on('project-loaded', (e, data) => {
-    onProjectLoaded(data);
+ipcMain.on('project-update', (e, data) => {
+    onProjectUpdated(data);
 });
 
 ipcMain.on('project-modified', (e, data) => {

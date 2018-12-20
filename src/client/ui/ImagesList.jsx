@@ -166,18 +166,20 @@ class ImagesList extends React.Component {
             ReactDOM.findDOMNode(this.refs.addZipInput).value = "";
         }
         
-        let images = this.state.images;
-        
         let names = Object.keys(data);
         
-        for(let name of names) {
-            images[name] = data[name];
-        }
+        if(names.length) {
+            let images = this.state.images;
+            
+            for (let name of names) {
+                images[name] = data[name];
+            }
 
-        images = this.sortImages(images);
-        
-        this.setState({images: images});
-        Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, images);
+            images = this.sortImages(images);
+
+            this.setState({images: images});
+            Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, images);
+        }
     }
     
     sortImages(images) {
@@ -436,17 +438,22 @@ class ImagesList extends React.Component {
     deleteSelectedImages() {
         let images = this.state.images;
         
+        let deletedCount = 0;
+        
         let keys = Object.keys(images);
         for(let key of keys) {
             if(images[key].selected) {
+                deletedCount++;
                 delete images[key];
             }
         }
-
-        images = this.sortImages(images);
         
-        this.setState({images: images});
-        Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, images);
+        if(deletedCount > 0) {
+            images = this.sortImages(images);
+
+            this.setState({images: images});
+            Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, images);
+        }
     }
     
     renderWebButtons() {
