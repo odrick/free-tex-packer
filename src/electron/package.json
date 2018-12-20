@@ -1,7 +1,7 @@
 {
-    "name": "desktop-free-tex-packer",
-    "version": "0.4.1",
-    "description": "Desktop free texture packer",
+    "name": "free-tex-packer",
+    "version": "0.4.2",
+    "description": "Free texture packer",
     "homepage": "https://github.com/odrick/free-tex-packer",
     "author": "Alexander Norinchak <norinchak@gmail.com>",
     "main": "main.js",
