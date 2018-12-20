@@ -26,7 +26,7 @@ function createWindow() {
         minWidth: 1220,
         minHeight: 680,
         title: "",
-        icon: './resources/icons/main.png'
+        icon: './resources/icons/256x256.png'
     });
 
     mainWindowState.manage(mainWindow);

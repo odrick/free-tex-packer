@@ -17,10 +17,10 @@
         "artifactName": "FreeTexturePacker ${arch}.${ext}",
         "win": {
             "target": ["nsis", "msi"],
-            "icon": "./resources/icons/medium.png"
+            "icon": "./resources/icons/256x256.png"
         },
 		"linux": {
-			"target": ["deb", "rpm"],
+			"target": ["deb"],
             "category": "Graphics",
 			"executableName": "FreeTexturePacker",
 			"icon": "./resources/icons/icons.icns"
