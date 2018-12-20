@@ -27,7 +27,7 @@ function createWindow() {
         minWidth: 1220,
         minHeight: 680,
         title: "",
-        icon: path.join(__dirname, '/resources/icons/64x64.png')
+        icon: path.join(__dirname, 'resources/icons/64x64.png')
     });
 
     mainWindowState.manage(mainWindow);
