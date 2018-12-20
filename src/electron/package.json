@@ -26,7 +26,8 @@
 			"icon": "resources/icons/icons.icns"
 		},
         "directories": {
-            "output": "dist/${os}"
+            "output": "dist/${os}",
+			"buildResources": "resources"
         },
         "fileAssociations": {
             "ext": "ftpp",
@@ -39,6 +40,10 @@
                 "repo": "free-tex-packer"
             }
         ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/odrick/free-tex-packer.git"
     },
     "keywords": [],
     "license": "ISC",
