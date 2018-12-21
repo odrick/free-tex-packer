@@ -33,6 +33,10 @@ class ImagesList extends React.Component {
         Observer.on(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.handleImageItemSelected, this);
         Observer.on(GLOBAL_EVENT.IMAGE_CLEAR_SELECTION, this.handleImageClearSelection, this);
         Observer.on(GLOBAL_EVENT.FS_CHANGES, this.handleFsChanges, this);
+		
+		this.handleKeys = this.handleKeys.bind(this);
+		
+		window.addEventListener("keydown", this.handleKeys, false);
 
         this.state = {images: {}};
     }
@@ -45,7 +49,16 @@ class ImagesList extends React.Component {
         Observer.off(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, this.handleImageItemSelected, this);
         Observer.off(GLOBAL_EVENT.IMAGE_CLEAR_SELECTION, this.handleImageClearSelection, this);
         Observer.off(GLOBAL_EVENT.FS_CHANGES, this.handleFsChanges, this);
+		
+		window.removeEventListener("keydown", this.handleKeys, false);
     }
+	
+	handleKeys(e) {
+		if(e) {
+            let key = e.keyCode || e.which;
+            if(key === 65 && e.ctrlKey) this.selectAllImages();
+        }
+	}
     
     componentDidMount() {
         let dropZone = ReactDOM.findDOMNode(this.refs.imagesTree);
