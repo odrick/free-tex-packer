@@ -14,9 +14,17 @@ let CURRENT_PROJECT = "";
 let CURRENT_PROJECT_M0DIFIED = false;
 
 function createWindow() {
+	let w = 1220;
+	let h = 680;
+	
+	if(process.platform === "win32") {
+		w = 1240;
+		h = 720;
+	}
+	
 	let mainWindowState = windowStateKeeper({
-        defaultWidth: 1220,
-        defaultHeight: 680
+        defaultWidth: w,
+        defaultHeight: h
     });
     
     mainWindow = new BrowserWindow({
@@ -24,8 +32,8 @@ function createWindow() {
         y: mainWindowState.y,
         width: mainWindowState.width,
         height: mainWindowState.height,
-        minWidth: 1220,
-        minHeight: 680,
+        minWidth: w,
+        minHeight: h,
         title: "",
         icon: path.join(__dirname, 'resources/icons/64x64.png')
     });
