@@ -58,6 +58,10 @@ class Controller {
             ImagesList.i.deleteSelectedImages();
         });
 
+        ipcRenderer.on("action-select-all", (e, payload) => {
+            ImagesList.i.selectAllImages();
+        });
+
         ipcRenderer.on("action-clear", (e, payload) => {
             ImagesList.i.clear();
         });

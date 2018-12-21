@@ -1,3 +1,4 @@
+const path = require('path');
 const tinify = require('tinify');
 const argv = require('optimist').argv;
 const windowStateKeeper = require('electron-window-state');
@@ -34,7 +35,7 @@ function createWindow() {
         minWidth: w,
         minHeight: h,
         title: "",
-        icon: './www/static/images/icon.png'
+        icon: path.resolve(__dirname, 'www/static/images/icon.png')
     });
 
     mainWindowState.manage(mainWindow);
@@ -114,6 +115,8 @@ function buildMenu() {
         submenu: [
             {label: LOCALE_STRINGS.MENU_ACTIONS_ADD_IMAGES, actionName: 'action-add-images', click: sendMessage, accelerator: 'Shift+A'},
             {label: LOCALE_STRINGS.MENU_ACTIONS_ADD_FOLDER, actionName: 'action-add-folder', click: sendMessage, accelerator: 'Shift+F'},
+            {type: 'separator'},
+            {label: LOCALE_STRINGS.MENU_ACTIONS_SELECT_ALL, actionName: 'action-select-all', click: sendMessage, accelerator: 'CmdOrCtrl+A'},
             {label: LOCALE_STRINGS.MENU_ACTIONS_DELETE, actionName: 'action-delete', click: sendMessage, accelerator: 'Delete'},
             {label: LOCALE_STRINGS.MENU_ACTIONS_CLEAR, actionName: 'action-clear', click: sendMessage, accelerator: 'CmdOrCtrl+Shift+C'},
             {type: 'separator'},

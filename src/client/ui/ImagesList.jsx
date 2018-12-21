@@ -212,6 +212,16 @@ class ImagesList extends React.Component {
         Observer.emit(GLOBAL_EVENT.IMAGES_LIST_SELECTED_CHANGED, []);
         this.setState({images: {}});
     }
+
+    selectAllImages() {
+        let images = this.state.images;
+        for(let key in images) {
+            images[key].selected = true;
+        }
+
+        this.setState({images: this.state.images});
+        this.emitSelectedChanges();
+    }
     
     removeImagesSelect() {
         let images = this.state.images;
