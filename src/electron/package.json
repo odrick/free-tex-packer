@@ -30,7 +30,7 @@
 			"icon": "resources/icons/icons.icns"
 		},
         "directories": {
-            "output": "../../dist/app/${os}",
+            "output": "../../dist/app",
 			"buildResources": "resources"
         },
         "fileAssociations": {
