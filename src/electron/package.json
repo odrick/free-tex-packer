@@ -24,6 +24,11 @@
 			"executableName": "FreeTexturePacker",
 			"icon": "resources/icons/icons.icns"
 		},
+		"mac": {
+			"category": "public.app-category.graphics-design",
+			"target": "dmg",
+			"icon": "resources/icons/icons.icns"
+		},
         "directories": {
             "output": "dist/${os}",
 			"buildResources": "resources"
