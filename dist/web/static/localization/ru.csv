@@ -78,6 +78,8 @@ OLD_BROWSER_MESSAGE1;Извините, но Ваш браузер устарел
 OLD_BROWSER_MESSAGE2;Пожалуйста, установите и используйте один из современных браузеров:
 ABOUT_SOURCES;Исходники:
 ABOUT_BUGS;Сообщить об ошибке:
+ABOUT_APPS;Скачать приложение:
+ABOUT_WEB;Web-версия:
 ABOUT_LIBS;Используемые библиотеки:
 ABOUT_GULP_VERSION;Модуль для gulp:
 EXPORTER_ERROR;Ошибка при экспортировании: %s

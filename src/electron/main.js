@@ -2,7 +2,7 @@ const path = require('path');
 const tinify = require('tinify');
 const argv = require('optimist').argv;
 const windowStateKeeper = require('electron-window-state');
-const {app, BrowserWindow, ipcMain, Menu} = require('electron');
+const {app, BrowserWindow, ipcMain, Menu, shell} = require('electron');
 const {autoUpdater} = require("electron-updater");
 
 let mainWindow;
@@ -63,6 +63,9 @@ function createWindow() {
     mainWindow.on('closed', function() {
         mainWindow = null;
     });
+	
+	mainWindow.webContents.on('will-navigate', handleRedirect);
+	mainWindow.webContents.on('new-window', handleRedirect);
 
     mainWindow.webContents.on('did-finish-load', function() {
         CURRENT_PROJECT = "";
@@ -77,6 +80,13 @@ function createWindow() {
     });
 
     onProjectUpdated();
+}
+
+function handleRedirect(e, url) {
+	if(url !== mainWindow.getURL()) {
+        e.preventDefault();
+        shell.openExternal(url);
+    }
 }
 
 function buildMenu() {

@@ -1,9 +1,10 @@
 {
   "name": "free-tex-packer",
   "displayName": "Free texture packer",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Free online texture packer",
   "url": "http://free-tex-packer.com/",
+  "download": "https://github.com/odrick/free-tex-packer/releases", 
   "main": "src/index.js",
   "tinifyUrl": "http://free-tex-packer.com/server/tinify.php",
   "localizations": [

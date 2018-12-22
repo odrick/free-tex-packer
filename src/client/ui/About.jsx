@@ -13,6 +13,24 @@ class About extends React.Component {
     close() {
         Observer.emit(GLOBAL_EVENT.HIDE_ABOUT);
     }
+	
+	renderDownload() {
+		return (
+			<tr>
+				<td>{I18.f("ABOUT_APPS")}</td>
+				<td><a href={appInfo.download} target="_blank" className="color-800">{appInfo.download}</a></td>
+			</tr>
+		)
+	}
+	
+	renderWebVersion() {
+		return (
+			<tr>
+				<td>{I18.f("ABOUT_WEB")}</td>
+				<td><a href={appInfo.url} target="_blank" className="color-800">{appInfo.url}</a></td>
+			</tr>
+		)
+	}
 
     render() {
         return (
@@ -36,10 +54,14 @@ class About extends React.Component {
                                     <td>{I18.f("ABOUT_SOURCES")}</td>
                                     <td><a href={appInfo.homepage} target="_blank" className="color-800">{appInfo.homepage}</a></td>
                                 </tr>
-                                <tr>
-                                    <td>{I18.f("ABOUT_BUGS")}</td>
-                                    <td><a href={appInfo.bugs.url} target="_blank" className="color-800">{appInfo.bugs.url}</a></td>
-                                </tr>
+								
+								<tr>
+									<td>{I18.f("ABOUT_BUGS")}</td>
+									<td><a href={appInfo.bugs.url} target="_blank" className="color-800">{appInfo.bugs.url}</a></td>
+								</tr>
+                                
+								{PLATFORM === "web" ? this.renderDownload() : this.renderWebVersion()}
+								
                                 <tr>
                                     <td>{I18.f("ABOUT_GULP_VERSION")}</td>
                                     <td><a href="https://github.com/odrick/gulp-free-tex-packer" target="_blank" className="color-800">https://github.com/odrick/gulp-free-tex-packer</a></td>
