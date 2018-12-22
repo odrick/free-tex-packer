@@ -16,7 +16,7 @@ let CURRENT_PROJECT_M0DIFIED = false;
 function createWindow() {
 	let w = 1220;
 	let h = 680;
-	
+
 	if(process.platform === "win32") {
 		w = 1240;
 		h = 720;
@@ -103,6 +103,9 @@ function buildMenu() {
     else {
         recentProjects.push({label: "...", enabled: false});
     }
+
+    let quitAcc = "CmdOrCtrl+F4";
+    if(process.platform === "darwin") quitAcc = "CmdOrCtrl+Q";
     
     template.push({
         label: LOCALE_STRINGS.MENU_FILE,
@@ -116,7 +119,7 @@ function buildMenu() {
             {type: 'separator'},
             {label: LOCALE_STRINGS.MENU_FILE_PREFERENCES_SAVE, actionName: 'preferences-save', click: sendMessage},
             {type: 'separator'},
-            {label: LOCALE_STRINGS.MENU_FILE_EXIT, actionName: 'quit', click: sendMessage, accelerator: 'CmdOrCtrl+F4'}
+            {label: LOCALE_STRINGS.MENU_FILE_EXIT, actionName: 'quit', click: sendMessage, accelerator: quitAcc}
         ]
     });
 

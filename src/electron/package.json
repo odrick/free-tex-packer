@@ -15,20 +15,24 @@
         "productName": "Free texture packer",
         "artifactName": "FreeTexturePacker-${arch}.${ext}",
         "win": {
-            "target": ["nsis"],
+            "target": [
+                "nsis"
+            ],
             "icon": "build/icons/256x256.png"
         },
-		"linux": {
-			"target": ["deb"],
+        "linux": {
+            "target": [
+                "deb"
+            ],
             "category": "Graphics",
-			"executableName": "FreeTexturePacker",
-			"icon": "build/icons/icons.icns"
-		},
-		"mac": {
-			"category": "public.app-category.graphics-design",
-			"target": "dmg",
-			"icon": "build/icons/icons.icns"
-		},
+            "executableName": "FreeTexturePacker",
+            "icon": "build/icons/icons.icns"
+        },
+        "mac": {
+            "category": "public.app-category.graphics-design",
+            "target": "dmg",
+            "icon": "build/icons/icons.icns"
+        },
         "directories": {
             "output": "../../dist/app"
         },
