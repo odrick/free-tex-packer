@@ -82,6 +82,7 @@ ABOUT_APPS;Скачать приложение:
 ABOUT_WEB;Web-версия:
 ABOUT_LIBS;Используемые библиотеки:
 ABOUT_GULP_VERSION;Модуль для gulp:
+ABOUT_WEBPACK_VERSION;Плагин для webpack:
 EXPORTER_ERROR;Ошибка при экспортировании: %s
 CUSTOM_EXPORTER_ERROR;Ошибка в шаблоне: %s
 FILE_EXT;Расширение файла:

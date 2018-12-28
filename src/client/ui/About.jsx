@@ -67,6 +67,10 @@ class About extends React.Component {
                                     <td><a href="https://github.com/odrick/gulp-free-tex-packer" target="_blank" className="color-800">https://github.com/odrick/gulp-free-tex-packer</a></td>
                                 </tr>
                                 <tr>
+                                    <td>{I18.f("ABOUT_WEBPACK_VERSION")}</td>
+                                    <td><a href="https://github.com/odrick/webpack-free-tex-packer" target="_blank" className="color-800">https://github.com/odrick/webpack-free-tex-packer</a></td>
+                                </tr>
+                                <tr>
                                     <td>{I18.f("ABOUT_LIBS")}</td>
                                     <td>
                                         <div>
