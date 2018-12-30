@@ -12,6 +12,8 @@ Gulp module: [https://github.com/odrick/gulp-free-tex-packer](https://github.com
 
 Webpack plugin: [https://github.com/odrick/webpack-free-tex-packer](https://github.com/odrick/webpack-free-tex-packer)
 
+CLI: [https://github.com/odrick/free-tex-packer-cli](https://github.com/odrick/free-tex-packer-cli)
+
 # Custom templates
 Free texture packer uses [mustache](http://mustache.github.io/) template engine.
 
