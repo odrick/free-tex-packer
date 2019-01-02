@@ -119,6 +119,8 @@ function buildMenu() {
             {type: 'separator'},
             {label: LOCALE_STRINGS.MENU_FILE_PREFERENCES_SAVE, actionName: 'preferences-save', click: sendMessage},
             {type: 'separator'},
+            {label: LOCALE_STRINGS.MENU_FILE_INSTALL_CLI, click: installCLI},
+            {type: 'separator'},
             {label: LOCALE_STRINGS.MENU_FILE_EXIT, actionName: 'quit', click: sendMessage, accelerator: quitAcc}
         ]
     });
@@ -172,6 +174,10 @@ function buildMenu() {
     
     let menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
+}
+
+function installCLI() {
+    shell.openExternal('https://github.com/odrick/free-tex-packer-cli');
 }
 
 function quit() {

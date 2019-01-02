@@ -27,7 +27,7 @@ class About extends React.Component {
 		return (
 			<tr>
 				<td>{I18.f("ABOUT_WEB")}</td>
-				<td><a href={appInfo.url} target="_blank" className="color-800">{appInfo.url}</a></td>
+				<td><a href={appInfo.webApp} target="_blank" className="color-800">{appInfo.webApp}</a></td>
 			</tr>
 		)
 	}
@@ -51,6 +51,11 @@ class About extends React.Component {
                         <table>
                             <tbody>
                                 <tr>
+									<td>{I18.f("ABOUT_HOMEPAGE")}</td>
+									<td><a href={appInfo.url} target="_blank" className="color-800">{appInfo.url}</a></td>
+								</tr>
+                                
+                                <tr>
                                     <td>{I18.f("ABOUT_SOURCES")}</td>
                                     <td><a href={appInfo.homepage} target="_blank" className="color-800">{appInfo.homepage}</a></td>
                                 </tr>
@@ -62,14 +67,6 @@ class About extends React.Component {
                                 
 								{PLATFORM === "web" ? this.renderDownload() : this.renderWebVersion()}
 								
-                                <tr>
-                                    <td>{I18.f("ABOUT_GULP_VERSION")}</td>
-                                    <td><a href="https://github.com/odrick/gulp-free-tex-packer" target="_blank" className="color-800">https://github.com/odrick/gulp-free-tex-packer</a></td>
-                                </tr>
-                                <tr>
-                                    <td>{I18.f("ABOUT_WEBPACK_VERSION")}</td>
-                                    <td><a href="https://github.com/odrick/webpack-free-tex-packer" target="_blank" className="color-800">https://github.com/odrick/webpack-free-tex-packer</a></td>
-                                </tr>
                                 <tr>
                                     <td>{I18.f("ABOUT_LIBS")}</td>
                                     <td>

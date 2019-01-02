@@ -599,7 +599,7 @@ html, body {
 
 .about-content {
     width: 490px;
-    height: 280px;
+    height: 300px;
     background: #fff;
     margin: auto;
     margin-top: 86px;
@@ -613,6 +613,10 @@ html, body {
     padding: 16px;
     text-align: left;
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
+}
+
+.about-content .btn {
+    min-width: 50px
 }
 
 .about-logo {

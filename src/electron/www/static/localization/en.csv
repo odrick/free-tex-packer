@@ -76,12 +76,14 @@ TINIFY_ERROR;Tinify error: %s
 TINIFY_ERROR_COMMON;Tinify error...
 OLD_BROWSER_MESSAGE1;Sorry, but your browser is too old for this application...
 OLD_BROWSER_MESSAGE2;Please, use one of modern browsers:
+ABOUT_HOMEPAGE;Home page:
 ABOUT_SOURCES;Sources:
 ABOUT_BUGS;Bugtracker:
 ABOUT_APPS;Download app:
 ABOUT_WEB;Web version:
 ABOUT_LIBS;Used libs:
 ABOUT_GULP_VERSION;Gulp module:
+ABOUT_WEBPACK_VERSION;Webpack plugin:
 EXPORTER_ERROR;Export error: %s
 CUSTOM_EXPORTER_ERROR;Template error: %s
 FILE_EXT;File extension:
@@ -94,6 +96,7 @@ MENU_FILE_PROJECT_LOAD_RECENT;Open recent
 MENU_FILE_PROJECT_SAVE;Save project
 MENU_FILE_PROJECT_SAVE_AS;Save project as...
 MENU_FILE_PREFERENCES_SAVE;Save preferences
+MENU_FILE_INSTALL_CLI;Install CLI
 MENU_FILE_EXIT;Exit
 MENU_ACTIONS;Actions
 MENU_ACTIONS_ADD_IMAGES;Add images
