@@ -76,6 +76,7 @@ TINIFY_ERROR;Ошибка при оптимизации: %s
 TINIFY_ERROR_COMMON;Ошибка при оптимизации...
 OLD_BROWSER_MESSAGE1;Извините, но Ваш браузер устарел...
 OLD_BROWSER_MESSAGE2;Пожалуйста, установите и используйте один из современных браузеров:
+ABOUT_HOMEPAGE;Домашняя страница:
 ABOUT_SOURCES;Исходники:
 ABOUT_BUGS;Сообщить об ошибке:
 ABOUT_APPS;Скачать приложение:
@@ -95,6 +96,7 @@ MENU_FILE_PROJECT_LOAD_RECENT;Открыть последний
 MENU_FILE_PROJECT_SAVE;Сохранить проект
 MENU_FILE_PROJECT_SAVE_AS;Сохранить проект как...
 MENU_FILE_PREFERENCES_SAVE;Сохранить настройки
+MENU_FILE_INSTALL_CLI;Установить CLI
 MENU_FILE_EXIT;Выход
 MENU_ACTIONS;Действия
 MENU_ACTIONS_ADD_IMAGES;Добавить изображения
