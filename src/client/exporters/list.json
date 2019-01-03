@@ -96,6 +96,15 @@
     "fileExt": "xml"
   },
   {
+    "type": "UIKit",
+    "description": "UIKit sprite sheet",
+    "allowTrim": true,
+    "allowRotation": false,
+    "template": "UIKit.mst",
+    "fileExt": "plist",
+    "predefined": true
+  },
+  {
     "type": "custom",
     "description": "Custom format",
     "allowTrim": true,
