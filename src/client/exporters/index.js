@@ -20,7 +20,7 @@ function prepareData(data, options) {
     opt.imageFile = opt.imageFile || (opt.imageName + "." + options.textureFormat);
     opt.format = opt.format || "RGBA8888";
     opt.scale = opt.scale || 1;
-    opt.base64Prefix = options.textureFormat == "png" ? "data:image/png;base64," : "data:image/jpeg;base64,";
+    opt.base64Prefix = options.textureFormat === "png" ? "data:image/png;base64," : "data:image/jpeg;base64,";
 
     let ret = [];
 

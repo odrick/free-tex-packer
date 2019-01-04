@@ -43,6 +43,7 @@ class PackProcessor {
                 
                 clone.name = item.name;
                 clone.image = item.image;
+                clone.originalFile = item.file;
                 clone.skipRender = true;
 
                 removeIdentical.push(item);
@@ -175,7 +176,7 @@ class PackProcessor {
 
     static removeRect(rects, name) {
         for(let i=0; i<rects.length; i++) {
-            if(rects[i].name == name) {
+            if(rects[i].name === name) {
                 rects.splice(i, 1);
                 return;
             }

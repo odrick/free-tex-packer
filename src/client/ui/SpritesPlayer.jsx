@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import I18 from '../utils/I18';
+import {GLOBAL_EVENT, Observer} from "../Observer";
 
 class SpritesPlayer extends React.Component {
     
@@ -16,12 +17,21 @@ class SpritesPlayer extends React.Component {
         this.height = 0;
         
         this.updateTimer = null;
+        
+        this.selectedImages = [];
 
         this.update = this.update.bind(this);
         this.forceUpdate = this.forceUpdate.bind(this);
         this.updateCurrentTextures = this.updateCurrentTextures.bind(this);
+
+        Observer.on(GLOBAL_EVENT.IMAGES_LIST_SELECTED_CHANGED, this.onImagesSelected, this);
     }
 
+    onImagesSelected(list=[]) {
+        this.selectedImages = list;
+        this.updateCurrentTextures();
+    }
+    
     componentDidMount() {
         if(this.props.start) this.setup();
         else this.stop();
@@ -69,24 +79,22 @@ class SpritesPlayer extends React.Component {
 
     forceUpdate(e) {
         let key = e.keyCode || e.which;
-        if(key == 13) this.updateCurrentTextures();
+        if(key === 13) this.updateCurrentTextures();
     }
 
     updateCurrentTextures() {
         let textures = [];
-        let pattern = ReactDOM.findDOMNode(this.refs.spriteName).value;
 
         for(let tex of this.textures) {
-            if(pattern.length > 0) {
-                if(tex.config.name.substr(0, pattern.length) == pattern) {
-                    textures.push(tex);
-                }
+            if(!tex.config.cloned && this.selectedImages.indexOf(tex.config.file) >= 0) {
+                textures.push(tex);
             }
-            else {
+
+            if(tex.config.cloned && this.selectedImages.indexOf(tex.config.originalFile) >= 0) {
                 textures.push(tex);
             }
         }
-
+        
         textures = textures.sort((a, b) => {
             let name1 = a.config.name.toUpperCase();
             let name2 = b.config.name.toUpperCase();
@@ -173,9 +181,6 @@ class SpritesPlayer extends React.Component {
         return (
             <div ref="container" className="player-container">
                 <div className="player-window border-color-gray">
-                    <div>
-                        {I18.f("SPRITE_NAME")} <input type="text" ref="spriteName" onBlur={this.updateCurrentTextures} onKeyDown={this.forceUpdate} />
-                    </div>
                     <div ref="playerContainer">
                         <canvas ref="view"> </canvas>
                         <canvas ref="buffer" className="player-buffer"> </canvas>

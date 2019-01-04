@@ -23,6 +23,7 @@ class PackResults extends React.Component {
         this.changeOutlines = this.changeOutlines.bind(this);
         this.changeScale = this.changeScale.bind(this);
         this.toggleSpritesPlayer = this.toggleSpritesPlayer.bind(this);
+        this.clearSelection = this.clearSelection.bind(this);
 
         Observer.on(GLOBAL_EVENT.PACK_COMPLETE, this.updatePackResult, this);
         Observer.on(GLOBAL_EVENT.IMAGES_LIST_SELECTED_CHANGED, this.onImagesSelected, this);
@@ -47,6 +48,8 @@ class PackResults extends React.Component {
     }
 
     clearSelection() {
+        if(this.state.playerVisible) return;
+        
         Observer.emit(GLOBAL_EVENT.IMAGE_CLEAR_SELECTION, null);
     }
 
