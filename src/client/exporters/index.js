@@ -5,7 +5,7 @@ import mustache from 'mustache';
 
 function getExporterByType(type) {
     for(let item of list) {
-        if(item.type == type) {
+        if(item.type === type) {
             return item;
         }
     }

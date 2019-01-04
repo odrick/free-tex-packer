@@ -84,6 +84,7 @@ class PackProperties extends React.Component {
         data.padding = data.padding === undefined ? 1 : data.padding;
         data.allowRotation = data.allowRotation === undefined ? true : data.allowRotation;
         data.allowTrim = data.allowTrim === undefined ? true : data.allowTrim;
+        data.trimMode = data.trimMode === undefined ? "trim" : data.trimMode;
         data.detectIdentical = data.detectIdentical === undefined ? true : data.detectIdentical;
         data.packer = getPackerByType(data.packer) ? data.packer : packers[0].type;
         
@@ -134,6 +135,7 @@ class PackProperties extends React.Component {
         data.padding = Number(ReactDOM.findDOMNode(this.refs.padding).value) || 0;
         data.allowRotation = ReactDOM.findDOMNode(this.refs.allowRotation).checked;
         data.allowTrim = ReactDOM.findDOMNode(this.refs.allowTrim).checked;
+        data.trimMode = ReactDOM.findDOMNode(this.refs.trimMode).value;
         data.detectIdentical = ReactDOM.findDOMNode(this.refs.detectIdentical).checked;
         data.packer = ReactDOM.findDOMNode(this.refs.packer).value;
         data.packerMethod = ReactDOM.findDOMNode(this.refs.packerMethod).value;
@@ -160,6 +162,7 @@ class PackProperties extends React.Component {
         ReactDOM.findDOMNode(this.refs.padding).value = Number(this.packOptions.padding) || 0;
         ReactDOM.findDOMNode(this.refs.allowRotation).checked = this.packOptions.allowRotation;
         ReactDOM.findDOMNode(this.refs.allowTrim).checked = this.packOptions.allowTrim;
+        ReactDOM.findDOMNode(this.refs.trimMode).value = this.packOptions.trimMode;
         ReactDOM.findDOMNode(this.refs.detectIdentical).checked = this.packOptions.detectIdentical;
         ReactDOM.findDOMNode(this.refs.packer).value = this.packOptions.packer;
         ReactDOM.findDOMNode(this.refs.packerMethod).value = this.packOptions.packerMethod;
@@ -193,8 +196,8 @@ class PackProperties extends React.Component {
         let allowTrimInput = ReactDOM.findDOMNode(this.refs.allowTrim);
         let allowRotationInput = ReactDOM.findDOMNode(this.refs.allowRotation);
         
-        let doRefresh = (allowTrimInput.checked != exporter.allowTrim) || 
-                        (allowRotationInput.checked != exporter.allowRotation);
+        let doRefresh = (allowTrimInput.checked !== exporter.allowTrim) || 
+                        (allowRotationInput.checked !== exporter.allowRotation);
         
         allowTrimInput.checked = exporter.allowTrim;
         allowRotationInput.checked = exporter.allowRotation;
@@ -207,7 +210,7 @@ class PackProperties extends React.Component {
     
     updateEditCustomTemplateButton() {
         let exporter = getExporterByType(ReactDOM.findDOMNode(this.refs.exporter).value);
-        ReactDOM.findDOMNode(this.refs.editCustomFormat).style.visibility = exporter.type == "custom" ? "visible" : "hidden";
+        ReactDOM.findDOMNode(this.refs.editCustomFormat).style.visibility = exporter.type === "custom" ? "visible" : "hidden";
     }
     
     onExporterPropChanged() {
@@ -323,10 +326,6 @@ class PackProperties extends React.Component {
                                 </td>
                             </tr>
                             
-                            <tr>
-                                <td colSpan="3">&nbsp;</td>
-                            </tr>
-                            
                             <tr title={I18.f("WIDTH_TITLE")}>
                                 <td>{I18.f("WIDTH")}</td>
                                 <td><input ref="width" type="number" min="0" className="border-color-gray" defaultValue={this.packOptions.width} onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
@@ -360,6 +359,17 @@ class PackProperties extends React.Component {
                             <tr title={I18.f("ALLOW_TRIM_TITLE")}>
                                 <td>{I18.f("ALLOW_TRIM")}</td>
                                 <td><input ref="allowTrim" type="checkbox" className="border-color-gray" onChange={this.onPropChanged} defaultChecked={this.packOptions.allowTrim ? "checked" : ""}  disabled={exporterTrimDisabled} /></td>
+                                <td></td>
+                            </tr>
+                            <tr title={I18.f("TRIM_MODE_TITLE")}>
+                                <td>{I18.f("TRIM_MODE")}</td>
+                                <td>
+                                    <select ref="trimMode" className="border-color-gray" onChange={this.onPropChanged} defaultValue={this.packOptions.trimMode}  disabled={exporterTrimDisabled}>
+                                        <option value="trim">trim</option>
+                                        <option value="crop-flush-position">crop, flush position</option>
+                                        <option value="crop-keep-position">crop, keep position</option>
+                                    </select>
+                                </td>
                                 <td></td>
                             </tr>
                             <tr title={I18.f("DETECT_IDENTICAL_TITLE")}>
