@@ -144,7 +144,9 @@ class APP {
                 removeFileExtension: this.packOptions.removeFileExtension,
                 prependFolderName: this.packOptions.prependFolderName,
                 base64Export: this.packOptions.base64Export,
-                scale: this.packOptions.scale
+                scale: this.packOptions.scale,
+                allowTrim: this.packOptions.allowTrim,
+                trimMode: this.packOptions.trimMode
             };
 
             try {

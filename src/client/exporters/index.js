@@ -45,6 +45,16 @@ function prepareData(data, options) {
         let frame = {x: item.frame.x, y: item.frame.y, w: item.frame.w, h: item.frame.h, hw: item.frame.w/2, hh: item.frame.h/2};
         let spriteSourceSize = {x: item.spriteSourceSize.x, y: item.spriteSourceSize.y, w: item.spriteSourceSize.w, h: item.spriteSourceSize.h};
         let sourceSize = {w: item.sourceSize.w, h: item.sourceSize.h};
+        
+        let trimmed = item.trimmed;
+        
+        if(options.allowTrim && options.trimMode === 'crop') {
+            trimmed = false;
+            spriteSourceSize.x = 0;
+            spriteSourceSize.y = 0;
+            sourceSize.w = spriteSourceSize.w;
+            sourceSize.h = spriteSourceSize.h;
+        }
 
         ret.push({
             name: name,
@@ -52,7 +62,7 @@ function prepareData(data, options) {
             spriteSourceSize: spriteSourceSize,
             sourceSize: sourceSize,
             rotated: item.rotated,
-            trimmed: item.trimmed
+            trimmed: trimmed
         });
 
     }

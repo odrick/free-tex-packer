@@ -366,8 +366,7 @@ class PackProperties extends React.Component {
                                 <td>
                                     <select ref="trimMode" className="border-color-gray" onChange={this.onPropChanged} defaultValue={this.packOptions.trimMode}  disabled={exporterTrimDisabled}>
                                         <option value="trim">trim</option>
-                                        <option value="crop-flush-position">crop, flush position</option>
-                                        <option value="crop-keep-position">crop, keep position</option>
+                                        <option value="crop">crop</option>
                                     </select>
                                 </td>
                                 <td></td>
