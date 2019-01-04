@@ -364,7 +364,7 @@ class PackProperties extends React.Component {
                             <tr title={I18.f("TRIM_MODE_TITLE")}>
                                 <td>{I18.f("TRIM_MODE")}</td>
                                 <td>
-                                    <select ref="trimMode" className="border-color-gray" onChange={this.onPropChanged} defaultValue={this.packOptions.trimMode}  disabled={exporterTrimDisabled}>
+                                    <select ref="trimMode" className="border-color-gray" onChange={this.onPropChanged} defaultValue={this.packOptions.trimMode}  disabled={exporterTrimDisabled || !this.packOptions.allowTrim}>
                                         <option value="trim">trim</option>
                                         <option value="crop">crop</option>
                                     </select>

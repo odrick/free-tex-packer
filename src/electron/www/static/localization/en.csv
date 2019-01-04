@@ -59,6 +59,8 @@ ALLOW_ROTATION;Allow rotation:
 ALLOW_ROTATION_TITLE;Allow sprites rotation
 ALLOW_TRIM;Allow trim:
 ALLOW_TRIM_TITLE;Allow sprites trim
+TRIM_MODE;Trim mode:
+TRIM_MODE_TITLE;Trim mode variants
 DETECT_IDENTICAL;Detect identical:
 DETECT_IDENTICAL_TITLE;Detect identical sprites
 PACKER;Packer:

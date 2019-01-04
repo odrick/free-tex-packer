@@ -8,7 +8,8 @@
     "scripts": {
         "start": "electron . --env development",
         "start-prod": "electron .",
-        "build": "electron-builder --ia32 --x64"
+        "build": "electron-builder --ia32 --x64",
+        "build-publish": "electron-builder --ia32 --x64 --publish always"
     },
     "build": {
         "appId": "com.free.tex.packer",
@@ -32,6 +33,10 @@
             "category": "public.app-category.graphics-design",
             "target": "dmg",
             "icon": "build/icons/icons.icns"
+        },
+        "nsis": {
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": true
         },
         "directories": {
             "output": "../../dist/app"
