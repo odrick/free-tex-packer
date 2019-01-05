@@ -48,7 +48,7 @@ function prepareData(data, options) {
         
         let trimmed = item.trimmed;
         
-        if(options.allowTrim && options.trimMode === 'crop') {
+        if(item.trimmed && options.trimMode === 'crop') {
             trimmed = false;
             spriteSourceSize.x = 0;
             spriteSourceSize.y = 0;
