@@ -69,6 +69,18 @@ class Controller {
         ipcRenderer.on("action-export", (e, payload) => {
             Observer.emit(GLOBAL_EVENT.START_EXPORT);
         });
+        
+        ipcRenderer.on("update-available", (e, payload) => {
+            Observer.emit(GLOBAL_EVENT.UPDATE_AVAILABLE, payload);
+        });
+        
+        ipcRenderer.on("download-progress", (e, payload) => {
+            Observer.emit(GLOBAL_EVENT.DOWNLOAD_PROGRESS_CHANGED, payload);
+        });
+        
+        Observer.on(GLOBAL_EVENT.INSTALL_UPDATE, function() {
+            ipcRenderer.send('install-update');
+        });
 
         ipcRenderer.send('update-app-info', appInfo);
         

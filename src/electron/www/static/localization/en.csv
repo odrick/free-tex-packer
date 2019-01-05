@@ -110,3 +110,8 @@ MENU_ACTIONS_EXPORT;Export
 MENU_LANGUAGE;Language
 MENU_HELP;Help
 MENU_HELP_ABOUT;About
+UPDATER_TITLE;New version is available: %s
+CLOSE;Close
+INSTALL;Install
+SKIP_VERSION;Skip
+SKIP_VERSION_CONFIRM;Really skip this version and not remind about it anymore?

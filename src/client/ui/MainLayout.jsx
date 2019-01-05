@@ -8,6 +8,7 @@ import MessageBox from './MessageBox.jsx';
 import ProcessingShader from './ProcessingShader.jsx';
 import OldBrowserBlocker from './OldBrowserBlocker.jsx';
 import About from './About.jsx';
+import Updater from './Updater.jsx';
 import EditCustomExporter from './EditCustomExporter.jsx';
 
 import {Observer, GLOBAL_EVENT} from '../Observer';
@@ -20,7 +21,8 @@ class MainLayout extends React.Component {
             messageBox: null,
             shader: false,
             about: false,
-            editCustomExporter: false
+            editCustomExporter: false,
+            updater: null
         };
 
         this.closeMessage = this.closeMessage.bind(this);
@@ -32,6 +34,16 @@ class MainLayout extends React.Component {
         Observer.on(GLOBAL_EVENT.HIDE_ABOUT, this.hideAbout, this);
         Observer.on(GLOBAL_EVENT.SHOW_EDIT_CUSTOM_EXPORTER, this.showEditCustomExporter, this);
         Observer.on(GLOBAL_EVENT.HIDE_EDIT_CUSTOM_EXPORTER, this.hideEditCustomExporter, this);
+        Observer.on(GLOBAL_EVENT.UPDATE_AVAILABLE, this.onUpdateAvailable, this);
+        Observer.on(GLOBAL_EVENT.HIDE_UPDATER, this.hideUpdater, this);
+    }
+
+    onUpdateAvailable(info) {
+        this.setState({updater: info});
+    }
+
+    hideUpdater() {
+        this.setState({updater: null});
     }
 
     showMessage(content, buttons=null) {
@@ -73,6 +85,7 @@ class MainLayout extends React.Component {
         let shader = this.state.shader ? (<ProcessingShader/>) : null;
         let about = this.state.about ? (<About/>) : null;
         let editCustomExporter = this.state.editCustomExporter ? (<EditCustomExporter/>) : null;
+        let updater = this.state.updater ? (<Updater data={this.state.updater}/>) : null;
         
         return (
             
@@ -87,6 +100,7 @@ class MainLayout extends React.Component {
                     <OldBrowserBlocker/>
                     {about}
                     {editCustomExporter}
+                    {updater}
                     {this.state.messageBox}
                 </div>
             </div>

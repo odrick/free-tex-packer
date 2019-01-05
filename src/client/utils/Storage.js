@@ -5,7 +5,7 @@ class Storage {
     static save(key, value) {
         key = PREFIX + key;
         
-        if(typeof value != "string") {
+        if(typeof value !== "string") {
             value = JSON.stringify(value);
         }
         

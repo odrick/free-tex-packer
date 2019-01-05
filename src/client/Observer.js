@@ -16,10 +16,15 @@ let GLOBAL_EVENT = {
     HIDE_SHADER                  : "HIDE_SHADER",
     SHOW_ABOUT                   : "SHOW_ABOUT",
     HIDE_ABOUT                   : "HIDE_ABOUT",
+    SHOW_UPDATER                 : "SHOW_UPDATER",
+    HIDE_UPDATER                 : "HIDE_UPDATER",
     CHANGE_LANG                  : "CHANGE_LANG",
     SHOW_EDIT_CUSTOM_EXPORTER    : "SHOW_EDIT_CUSTOM_EXPORTER",
     HIDE_EDIT_CUSTOM_EXPORTER    : "HIDE_EDIT_CUSTOM_EXPORTER",
     FS_CHANGES                   : "FS_CHANGES",
+    UPDATE_AVAILABLE             : "UPDATE_AVAILABLE",
+    DOWNLOAD_PROGRESS_CHANGED    : "DOWNLOAD_PROGRESS_CHANGED",
+    INSTALL_UPDATE               : "INSTALL_UPDATE"
 };
 
 export {

@@ -76,10 +76,42 @@ function createWindow() {
 			sendMessage({actionName: 'project-load', custom: process.argv[1]});
 		}
 
-        autoUpdater.checkForUpdatesAndNotify();
+        autoUpdater.checkForUpdates();
     });
 
+    startAutoUpdater();
+
     onProjectUpdated();
+}
+
+function startAutoUpdater() {
+    autoUpdater.autoDownload = false;
+    autoUpdater.autoInstallOnAppQuit = false;
+
+    autoUpdater.on('checking-for-update', () => {
+    });
+
+    autoUpdater.on('update-available', (info) => {
+        mainWindow.send('update-available', info);
+    });
+
+    autoUpdater.on('update-not-available', (info) => {
+    });
+
+    autoUpdater.on('error', (err) => {
+    });
+
+    autoUpdater.on('download-progress', (progressObj) => {
+        mainWindow.send('download-progress', progressObj.percent);
+    });
+
+    autoUpdater.on('update-downloaded', (info) => {
+        autoUpdater.quitAndInstall(true, true);
+    });
+
+    ipcMain.on('install-update', (e, data) => {
+        autoUpdater.downloadUpdate();
+    });
 }
 
 function handleRedirect(e, url) {

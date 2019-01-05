@@ -64,6 +64,7 @@
         "electron-builder": "^20.38.4"
     },
     "dependencies": {
+        "electron-log": "^2.2.17",
         "electron-updater": "^4.0.6",
         "electron-window-state": "^5.0.3",
         "optimist": "^0.6.1",
