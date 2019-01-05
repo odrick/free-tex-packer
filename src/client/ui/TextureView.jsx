@@ -47,7 +47,7 @@ class TextureView extends React.Component {
             ctx.globalAlpha = 1;
 
             for (let item of this.props.data.data) {
-                if(this.props.selectedImages.indexOf(item.file) >= 0) {
+                if(this.props.selectedImages.indexOf(item.file) >= 0 || this.props.selectedImages.indexOf(item.originalFile) >= 0) {
                     let frame = item.frame;
 
                     let w = frame.w, h = frame.h;
@@ -129,11 +129,26 @@ class TextureView extends React.Component {
                 ctrlKey: e.ctrlKey || e.shiftKey,
                 shiftKey: false
             });
+            
+            this.selectCloned(selectedItem);
         }
 
         e.preventDefault();
         e.stopPropagation();
         return false;
+    }
+    
+    selectCloned(selectedItem) {
+        for (let item of this.props.data.data) {
+            if(item.cloned && item.file === selectedItem.file) {
+                Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, {
+                    isFolder: false,
+                    path: item.originalFile,
+                    ctrlKey: true,
+                    shiftKey: false
+                });
+            }
+        }
     }
 
     render() {
