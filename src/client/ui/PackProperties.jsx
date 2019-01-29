@@ -14,6 +14,8 @@ import I18 from '../utils/I18';
 
 import {Observer, GLOBAL_EVENT} from '../Observer';
 
+import FileSystem from 'platform/FileSystem';
+
 const STORAGE_OPTIONS_KEY = "pack-options";
 const STORAGE_CUSTOM_EXPORTER_KEY = "custom-exporter";
 
@@ -30,6 +32,7 @@ class PackProperties extends React.Component {
         this.onExporterChanged = this.onExporterChanged.bind(this);
         this.onExporterPropChanged = this.onExporterPropChanged.bind(this);
         this.forceUpdate = this.forceUpdate.bind(this);
+        this.selectSavePath = this.selectSavePath.bind(this);
         
         this.packOptions = this.loadOptions();
         this.loadCustomExporter();
@@ -77,6 +80,7 @@ class PackProperties extends React.Component {
         data.tinify = data.tinify === undefined ? false : data.tinify;
         data.tinifyKey = data.tinifyKey === undefined ? "" : data.tinifyKey;
         data.fileName = data.fileName || "pack-result";
+        data.savePath = data.savePath || "";
         data.width = data.width === undefined ? 2048 : data.width;
         data.height = data.height === undefined ? 2048 : data.height;
         data.fixedSize = data.fixedSize === undefined ? false : data.fixedSize;
@@ -128,6 +132,7 @@ class PackProperties extends React.Component {
         data.filter = ReactDOM.findDOMNode(this.refs.filter).value;
         data.exporter = ReactDOM.findDOMNode(this.refs.exporter).value;
         data.fileName = ReactDOM.findDOMNode(this.refs.fileName).value;
+        data.savePath = ReactDOM.findDOMNode(this.refs.savePath).value;
         data.width = Number(ReactDOM.findDOMNode(this.refs.width).value) || 0;
         data.height = Number(ReactDOM.findDOMNode(this.refs.height).value) || 0;
         data.fixedSize = ReactDOM.findDOMNode(this.refs.fixedSize).checked;
@@ -155,6 +160,7 @@ class PackProperties extends React.Component {
         ReactDOM.findDOMNode(this.refs.filter).value = this.packOptions.filter;
         ReactDOM.findDOMNode(this.refs.exporter).value = this.packOptions.exporter;
         ReactDOM.findDOMNode(this.refs.fileName).value = this.packOptions.fileName;
+        ReactDOM.findDOMNode(this.refs.savePath).value = this.packOptions.savePath;
         ReactDOM.findDOMNode(this.refs.width).value = Number(this.packOptions.width) || 0;
         ReactDOM.findDOMNode(this.refs.height).value = Number(this.packOptions.height) || 0;
         ReactDOM.findDOMNode(this.refs.fixedSize).checked = this.packOptions.fixedSize;
@@ -233,6 +239,14 @@ class PackProperties extends React.Component {
 
     editCustomExporter() {
         Observer.emit(GLOBAL_EVENT.SHOW_EDIT_CUSTOM_EXPORTER);
+    }
+
+    selectSavePath() {
+        let dir = FileSystem.selectFolder();
+        if(dir) {
+            ReactDOM.findDOMNode(this.refs.savePath).value = dir;
+            this.onExporterPropChanged();
+        }
     }
     
     render() {
@@ -315,10 +329,17 @@ class PackProperties extends React.Component {
                                     <div className="edit-btn back-800" ref="editCustomFormat" onClick={this.editCustomExporter}></div>
                                 </td>
                             </tr>
-                            <tr title={I18.f("FILE_NAME_TITLE")}>
+                            <tr title={I18.f("FILE_NAME_TITLE")} style={{display: PLATFORM === 'web' ? '' : 'none'}}>
                                 <td>{I18.f("FILE_NAME")}</td>
                                 <td><input ref="fileName" className="border-color-gray" type="text" defaultValue={this.packOptions.fileName} onBlur={this.onExporterPropChanged} /></td>
                                 <td></td>
+                            </tr>
+                            <tr title={I18.f("SAVE_PATH_TITLE")} style={{display: PLATFORM === 'electron' ? '' : 'none'}}>
+                                <td>{I18.f("SAVE_PATH")}</td>
+                                <td><input ref="savePath" className="border-color-gray" type="text" defaultValue={this.packOptions.savePath} onBlur={this.onExporterPropChanged} /></td>
+                                <td>
+                                    <div className="folder-btn back-800" onClick={this.selectSavePath}></div>
+                                </td>
                             </tr>
                             <tr>
                                 <td colSpan="3" className="center-align">

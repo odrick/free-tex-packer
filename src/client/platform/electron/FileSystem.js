@@ -20,6 +20,13 @@ class FileSystem {
         return path.split(".").pop().toLowerCase();
     }
     
+    static selectFolder() {
+        let dir = dialog.showOpenDialog({
+            properties: ['openDirectory']
+        });
+        return dir;
+    }
+    
     static getFolderFilesList(dir, base="", list=[]) {
         let files = fs.readdirSync(dir);
         for(let file of files) {

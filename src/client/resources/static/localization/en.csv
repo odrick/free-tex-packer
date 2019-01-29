@@ -45,6 +45,8 @@ FORMAT;Format:
 FORMAT_TITLE;Export format
 FILE_NAME;File name:
 FILE_NAME_TITLE;Result file name
+SAVE_PATH;Save path
+SAVE_PATH_TITLE;Path to save pack results
 WIDTH;Width:
 WIDTH_TITLE;Max texture width
 HEIGHT;Height:

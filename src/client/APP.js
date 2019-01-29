@@ -163,7 +163,7 @@ class APP {
             ix++;
         }
 
-        Downloader.run(files, this.packOptions.fileName);
+        Downloader.run(files, this.packOptions.fileName, this.packOptions.savePath);
         Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
     }
 }

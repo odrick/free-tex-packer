@@ -63,6 +63,7 @@ class Project {
         
         return {
             meta: meta,
+            savePath: APP.i.packOptions.savePath || '',
             images: images,
             folders: folders,
             packOptions: packOptions
