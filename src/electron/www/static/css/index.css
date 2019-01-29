@@ -298,6 +298,33 @@ html, body {
     height: 16px;
 }
 
+.folder-btn {
+    border-width: 1px;
+    border-style: solid;
+    line-height: 1;
+    padding: 2px;
+    display: inline-block;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    background-image: url("../images/folder_icon.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 16px 16px;
+    width: 16px;
+    height: 16px;
+}
+
 .edit-btn:active {
     transform: scale(0.9);
 }
