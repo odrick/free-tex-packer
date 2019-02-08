@@ -26,7 +26,7 @@ function prepareData(data, options) {
 
     for(let item of data) {
 
-        let name = item.file;
+        let name = item.originalFile || item.file;
 
         if(options.trimSpriteNames) {
             name.trim();
