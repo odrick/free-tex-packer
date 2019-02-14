@@ -121,8 +121,7 @@ html, body {
 }
 
 .images-list {
-    display: block;
-    width: 300px;
+    display: block;    
     height: 100%;
     float: left;
     text-align: left;
@@ -170,8 +169,7 @@ html, body {
 }
 
 .images-tree {
-    position: absolute;
-    width: 280px;
+    position: absolute;    
     left: 0;
     top: 47px;
     bottom: 0;
