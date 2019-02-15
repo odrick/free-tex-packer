@@ -25,6 +25,7 @@ class ImagesList extends React.Component {
         this.loadImagesComplete = this.loadImagesComplete.bind(this);
         this.clear = this.clear.bind(this);
         this.deleteSelectedImages = this.deleteSelectedImages.bind(this);
+        this.deleteAllImages = this.deleteAllImages.bind(this);
         this.doClear = this.doClear.bind(this);
         this.onFilesDrop = this.onFilesDrop.bind(this);
         this.handleImageItemSelected = this.handleImageItemSelected.bind(this);
@@ -478,6 +479,21 @@ class ImagesList extends React.Component {
             Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, images);
         }
     }
+
+    deleteAllImages()
+    {
+        let images = this.state.images;
+
+        let keys = Object.keys(images);
+        for(let key of keys)
+        {
+            delete images[key];
+        }
+
+        this.state = {images: {}};
+        this.setState({images: images});
+        Observer.emit(GLOBAL_EVENT.IMAGES_LIST_CHANGED, images);
+    }
     
     renderWebButtons() {
         return (
@@ -525,6 +541,9 @@ class ImagesList extends React.Component {
 
                     <div className="btn back-800 border-color-gray color-white" onClick={this.deleteSelectedImages} title={I18.f("DELETE_TITLE")}>
                         {I18.f("DELETE")}
+                    </div>
+                    <div className="btn back-800 border-color-gray color-white" onClick={this.deleteAllImages} title={I18.f("DELETE_ALL_TITLE")}>
+                        {I18.f("DELETE_ALL")}
                     </div>
                     
                     <hr/>

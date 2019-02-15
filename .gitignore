@@ -12,4 +12,5 @@ node_modules/*
 /package-lock.json
 /src/electron/package-lock.json
 /src/electron/test
-/dist/app
+/dist/web
+/electron/www

@@ -17,7 +17,9 @@ IMAGE_DROP_HELP;или перетяните изображения сюда
 CLEAR;Очистить
 CLEAR_TITLE;Очистить все изображения
 DELETE;Удалить
+DELETE_ALL;удалить все
 DELETE_TITLE;Удалить выбранные изображения
+DELETE_ALL_TITLE;удалить все изображения
 DISPLAY_OUTLINES;Контуры:
 SCALE;Масштаб:
 SHOW_SPRITES;Показать спрайты
