@@ -15,93 +15,63 @@ let output = 'static/js/index.js';
 let debug = true;
 
 let PLATFORM = argv.platform || 'web';
-let NODE_ENV = argv.build ? 'production': 'development';
+let NODE_ENV = argv.build ? 'production' : 'development';
 
 let target = 'web';
-if(PLATFORM === 'electron') target = 'electron-renderer';
+if (PLATFORM === 'electron') target = 'electron-renderer';
 
 plugins.push(new webpack.DefinePlugin({
-	'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-	'PLATFORM': JSON.stringify(PLATFORM)
+    'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+    'PLATFORM': JSON.stringify(PLATFORM)
 }));
 
-if (argv.build) 
-{    
+if (argv.build) {
     let outputDir;
-    
-    if (PLATFORM === 'web') 
-    {
+
+    if (PLATFORM === 'web') {
         outputDir = 'web/';
     }
 
-    if (PLATFORM === 'electron') 
-    {
+    if (PLATFORM === 'electron') {
         outputDir = '../electron/www/';
     }
-	
-	plugins.push(new CopyWebpackPlugin([{from: 'src/client/resources', to: outputDir}]));
+
+    plugins.push(new CopyWebpackPlugin([{from: 'src/client/resources', to: outputDir}]));
 
     devtool = false;
     output = outputDir + 'static/js/index.js';
     debug = false;
 }
-else 
-{
+else {
     entry.push('webpack-dev-server/client?http://localhost:4000');
-	plugins.push(new CopyWebpackPlugin([{from: 'src/client/resources', to: './'}]));
+    plugins.push(new CopyWebpackPlugin([{from: 'src/client/resources', to: './'}]));
 }
 
-let config = 
-{
+let config = {
     entry: entry,
-    output: 
-    {
+    output: {
         path: __dirname + "/dist",
         filename: output
-    },    
+    },
     devtool: devtool,
     target: target,
-    module:
-    {
+    mode: NODE_ENV,
+    module: {
         noParse: /.*[\/\\]bin[\/\\].+\.js/,
-        rules:
-        [
+        rules: [
             {
                 test: /.jsx?$/,
-                include: [ path.resolve(__dirname, 'src') ],
-                use:
-                [
-                    {
-                        loader: 'babel-loader',
-                        options:
-                        {
-                            presets: ['@babel/preset-react', '@babel/preset-env']
-                        }
-                    }
-                ]
+                include: [path.resolve(__dirname, 'src')],
+                use: [{loader: 'babel-loader', options: {presets: ['@babel/preset-react', '@babel/preset-env']}}]
             },
             {
                 test: /\.js$/,
-                include: [ path.resolve(__dirname, 'src') ],
-                use:
-                [
-                    {
-                        loader: 'babel-loader',
-                        options:
-                        {
-                            presets: ['@babel/preset-env']
-                        }
-                    }
-                ]
+                include: [path.resolve(__dirname, 'src')],
+                use: [{loader: 'babel-loader', options: {presets: ['@babel/preset-env']}}]
             },
             {
                 test: /\.(html|htm)$/,
-                use:
-                [
-                    {
-                        loader: 'dom'
-                    }
-                ]
+                use: [{loader: 'dom'}]
             }
         ]
     },
@@ -111,10 +81,9 @@ let config =
     plugins: plugins
 };
 
-if(target === 'electron-renderer') {
+if (target === 'electron-renderer') {
     config.resolve = {alias: {'platform': path.resolve(__dirname, './src/client/platform/electron')}};
-}
-else {
+} else {
     config.resolve = {alias: {'platform': path.resolve(__dirname, './src/client/platform/web')}};
 }
 

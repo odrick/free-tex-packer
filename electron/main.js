@@ -14,11 +14,11 @@ let CURRENT_PROJECT = "";
 let CURRENT_PROJECT_M0DIFIED = false;
 
 function createWindow() {
-	let w = 1220;
+	let w = 1300;
 	let h = 680;
 
 	if(process.platform === "win32") {
-		w = 1240;
+		w = 1320;
 		h = 720;
 	}
 	
