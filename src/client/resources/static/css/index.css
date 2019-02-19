@@ -30,7 +30,7 @@ html, body {
 
 .main-wrapper {
     height: 100%;
-    min-width: 1220px;
+    min-width: 1300px;
     min-height: 440px;
 }
 
@@ -121,7 +121,8 @@ html, body {
 }
 
 .images-list {
-    display: block;    
+    display: block;
+    width: 380px;
     height: 100%;
     float: left;
     text-align: left;
@@ -134,7 +135,7 @@ html, body {
 .results-view {
     display: block;
     height: 100%;
-    min-width: 600px;
+    min-width: 640px;
 }
 
 .props-list {
@@ -381,7 +382,7 @@ html, body {
     width: -o-calc(100% - 640px);
     width: calc(100% - 640px);
     margin: auto;
-    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
+    box-shadow: 1px 0px 0px 0px rgba(0,0,0,.2);
 }
 
 .results-view-container {
@@ -395,11 +396,13 @@ html, body {
 .results-view-footer {
     display: block;
     height: 50px;
+    margin-left: 80px;
     box-sizing: border-box;
     padding: 8px;
     vertical-align: bottom;
     text-align: center;
     font-weight: bold;
+    box-shadow: 0px 1px 0px 0px rgba(0,0,0,.2);
 }
 
 .results-view-footer hr {
