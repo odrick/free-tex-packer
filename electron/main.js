@@ -11,7 +11,7 @@ let CURRENT_LOCALE = "";
 let LOCALE_STRINGS = {};
 let APP_INFO = {};
 let CURRENT_PROJECT = "";
-let CURRENT_PROJECT_M0DIFIED = false;
+let CURRENT_PROJECT_MODIFIED = false;
 
 function createWindow() {
 	let w = 1300;
@@ -54,7 +54,7 @@ function createWindow() {
     Menu.setApplicationMenu(null);
 
     mainWindow.on('close', function(e) {
-        if(CURRENT_PROJECT_M0DIFIED) {
+        if(CURRENT_PROJECT_MODIFIED) {
             sendMessage({actionName: 'quit'});
             e.preventDefault();
         }
@@ -69,7 +69,7 @@ function createWindow() {
 
     mainWindow.webContents.on('did-finish-load', function() {
         CURRENT_PROJECT = "";
-        CURRENT_PROJECT_M0DIFIED = false;
+        CURRENT_PROJECT_MODIFIED = false;
         updateWindowTitle();
 		
 		if(argv.env !== 'development' && process.argv.length > 1) {
@@ -79,9 +79,68 @@ function createWindow() {
         autoUpdater.checkForUpdates();
     });
 
+    mainWindow.webContents.on('context-menu', showInputContextMenu);
+
     startAutoUpdater();
 
     onProjectUpdated();
+}
+
+function showInputContextMenu(e, props) {
+    if(!props.isEditable) return;
+    
+    const menu = Menu.buildFromTemplate([
+        {
+            label: LOCALE_STRINGS.CONTEXT_MENU_UNDO,
+            role: 'undo',
+            enabled: props.editFlags.canUndo,
+            accelerator: 'CmdOrCtrl+Z'
+        },
+        {
+            label: LOCALE_STRINGS.CONTEXT_MENU_REDO,
+            role: 'redo',
+            enabled: props.editFlags.canRedo,
+            accelerator: 'CmdOrCtrl+Shift+Z'
+        },
+        {
+            type: 'separator',
+        },
+        {
+            label: LOCALE_STRINGS.CONTEXT_MENU_CUT,
+            role: 'cut',
+            enabled: props.editFlags.canCut,
+            accelerator: 'CmdOrCtrl+X'
+        },
+        {
+            label: LOCALE_STRINGS.CONTEXT_MENU_COPY,
+            role: 'copy',
+            enabled: props.editFlags.canCopy,
+            accelerator: 'CmdOrCtrl+C'
+        },
+        {
+            label: LOCALE_STRINGS.CONTEXT_MENU_PASTE,
+            role: 'paste',
+            enabled: props.editFlags.canPaste,
+            accelerator: 'CmdOrCtrl+V'
+        },
+        {
+            label: LOCALE_STRINGS.CONTEXT_MENU_DELETE,
+            role: 'delete',
+            enabled: props.editFlags.canDelete,
+            accelerator: 'Del'
+        },
+        {
+            type: 'separator',
+        },
+        {
+            label: LOCALE_STRINGS.CONTEXT_MENU_SELECT_ALL,
+            role: 'selectall',
+            enabled: props.editFlags.canSelectAll,
+            accelerator: 'CmdOrCtrl+A'
+        }
+    ]);
+
+    menu.popup(mainWindow);
 }
 
 function startAutoUpdater() {
@@ -213,7 +272,7 @@ function installCLI() {
 }
 
 function quit() {
-    CURRENT_PROJECT_M0DIFIED = false;
+    CURRENT_PROJECT_MODIFIED = false;
     app.quit();
 }
 
@@ -228,12 +287,12 @@ function sendMessage(e) {
 
 function onProjectUpdated(data=null) {
     CURRENT_PROJECT = data ? data.path : "";
-    CURRENT_PROJECT_M0DIFIED = false;
+    CURRENT_PROJECT_MODIFIED = false;
     updateWindowTitle();
 }
 
 function onProjectModified(data=null) {
-    CURRENT_PROJECT_M0DIFIED = data ? data.val : false;
+    CURRENT_PROJECT_MODIFIED = data ? data.val : false;
     updateWindowTitle();
 }
 
@@ -248,7 +307,7 @@ function updateWindowTitle() {
     if(!CURRENT_PROJECT) name = "untitled.ftpp";
     else name = CURRENT_PROJECT.split('/').pop();
 
-    mainWindow.setTitle((CURRENT_PROJECT_M0DIFIED ? "* " : "") + name + ' - ' + APP_INFO.displayName);
+    mainWindow.setTitle((CURRENT_PROJECT_MODIFIED ? "* " : "") + name + ' - ' + APP_INFO.displayName);
 }
 
 app.on('ready', createWindow);

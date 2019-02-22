@@ -117,3 +117,10 @@ CLOSE;Закрыть
 INSTALL;Установить
 SKIP_VERSION;Пропустить
 SKIP_VERSION_CONFIRM;Действительно пропустить эту версию и не напоминать о ней больше?
+CONTEXT_MENU_UNDO;Отменить
+CONTEXT_MENU_REDO;Повторить
+CONTEXT_MENU_CUT;Вырезать
+CONTEXT_MENU_COPY;Копировать
+CONTEXT_MENU_PASTE;Вставить
+CONTEXT_MENU_DELETE;Удалить
+CONTEXT_MENU_SELECT_ALL;Выделить все
