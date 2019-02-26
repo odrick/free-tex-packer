@@ -1,7 +1,9 @@
+import MaxRectsPacker from "./MaxRectsPacker";
 import MaxRectsBin from "./MaxRectsBin";
 
 const list = [
-    MaxRectsBin
+    MaxRectsBin,
+    MaxRectsPacker,
 ];
 
 function getPackerByType(type) {

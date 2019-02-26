@@ -25,8 +25,11 @@ class MaxRectsBin extends Packer {
     }
 
     pack(data, method) {
-        return this.insert2(data, method);
-
+        console.log(data);
+        debugger
+        let res = this.insert2(data, method);
+        console.log(res);
+        return res;
     }
 
     insert(width, height, method=METHOD.BestShortSideFit) {
@@ -467,7 +470,7 @@ class MaxRectsBin extends Packer {
         return METHOD;
     }
 
-    static getMethodProps(id=0) {
+    static getMethodProps(id='') {
         switch(id) {
             case METHOD.BestShortSideFit:
                 return {name: "Best short side fit", description: "Positions the Rectangle against the short side of a free Rectangle into which it fits the best."};
