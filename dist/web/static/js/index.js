@@ -35702,7 +35702,11 @@ function (_React$Component) {
         href: "https://github.com/06wj/MaxRectsBinPack",
         target: "_blank",
         className: "color-800"
-      }, "MaxRectsBinPack")))))), react_default.a.createElement("div", {
+      }, "MaxRectsBinPack")), react_default.a.createElement("div", null, react_default.a.createElement("a", {
+        href: "https://www.npmjs.com/package/maxrects-packer",
+        target: "_blank",
+        className: "color-800"
+      }, "MaxRectsPacker")))))), react_default.a.createElement("div", {
         className: "about-controls"
       }, react_default.a.createElement("div", {
         className: "btn back-600 border-color-gray color-white",

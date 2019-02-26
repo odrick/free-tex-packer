@@ -85,6 +85,9 @@ class About extends React.Component {
                                         <div>
                                             <a href="https://github.com/06wj/MaxRectsBinPack" target="_blank" className="color-800">MaxRectsBinPack</a>
                                         </div>
+                                        <div>
+                                            <a href="https://www.npmjs.com/package/maxrects-packer" target="_blank" className="color-800">MaxRectsPacker</a>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
