@@ -6,9 +6,11 @@ import ZipLoader from '../utils/ZipLoader';
 import I18 from '../utils/I18';
 
 import {Observer, GLOBAL_EVENT} from '../Observer';
-import ImagesTree from "./ImagesTree.jsx";
+import ImagesTree from './ImagesTree.jsx';
 
 import FileSystem from 'platform/FileSystem';
+
+import {smartSortImages} from '../utils/common';
 
 let INSTANCE = null;
 
@@ -197,7 +199,7 @@ class ImagesList extends React.Component {
     
     sortImages(images) {
         let names = Object.keys(images);
-        names.sort();
+        names.sort(smartSortImages);
 
         let sorted = {};
         

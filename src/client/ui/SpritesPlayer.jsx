@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import I18 from '../utils/I18';
 import {GLOBAL_EVENT, Observer} from "../Observer";
+import {smartSortImages} from '../utils/common';
 
 class SpritesPlayer extends React.Component {
     
@@ -96,16 +97,7 @@ class SpritesPlayer extends React.Component {
         }
         
         textures = textures.sort((a, b) => {
-            let name1 = a.config.name.toUpperCase();
-            let name2 = b.config.name.toUpperCase();
-            if (name1 < name2) {
-                return -1;
-            }
-            if (name1 > name2) {
-                return 1;
-            }
-
-            return 0;
+            return smartSortImages(a.config.name, b.config.name);
         });
 
         this.currentTextures = textures;
