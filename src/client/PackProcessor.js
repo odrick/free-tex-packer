@@ -68,6 +68,7 @@ class PackProcessor {
         let rects = [];
 
         let padding = options.padding || 0;
+        let extrude = options.extrude || 0;
 
         let maxWidth = 0, maxHeight = 0;
         let minWidth = 0, minHeight = 0;
@@ -82,8 +83,8 @@ class PackProcessor {
             maxWidth += img.width;
             maxHeight += img.height;
 
-            if(img.width > minWidth) minWidth = img.width + padding*2;
-            if(img.height > minHeight) minHeight = img.height + padding*2;
+            if(img.width > minWidth) minWidth = img.width + padding*2 + extrude*2;
+            if(img.height > minHeight) minHeight = img.height + padding*2 + extrude*2;
 
             rects.push({
                 frame: {x: 0, y: 0, w: img.width, h: img.height},
@@ -129,8 +130,8 @@ class PackProcessor {
         }
 
         for(let item of rects) {
-            item.frame.w += padding*2;
-            item.frame.h += padding*2;
+            item.frame.w += padding*2 + extrude*2;
+            item.frame.h += padding*2 + extrude*2;
         }
         
         let identical = [];
@@ -152,10 +153,10 @@ class PackProcessor {
             let result = packer.pack(rects, packerMethod);
 
             for(let item of result) {
-                item.frame.x += padding;
-                item.frame.y += padding;
-                item.frame.w -= padding*2;
-                item.frame.h -= padding*2;
+                item.frame.x += padding + extrude;
+                item.frame.y += padding + extrude;
+                item.frame.w -= padding*2 + extrude*2;
+                item.frame.h -= padding*2 + extrude*2;
             }
 
             if(options.detectIdentical) {

@@ -57,6 +57,8 @@ POWER_OF_TWO_TITLE;Power of two texture size
 FIXED_SIZE_TITLE;Fixed texture size
 PADDING;Padding:
 PADDING_TITLE;Sprites padding
+EXTRUDE;Extrude:
+EXTRUDE_TITLE;Sprites border pixels extrude size
 ALLOW_ROTATION;Allow rotation:
 ALLOW_ROTATION_TITLE;Allow sprites rotation
 ALLOW_TRIM;Allow trim:

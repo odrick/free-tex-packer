@@ -14,7 +14,9 @@ class TextureRenderer {
 
         let width = options.width || 0;
         let height = options.height || 0;
+        
         let padding = options.padding || 0;
+        let extrude = options.extrude || 0;
 
         if(!options.fixedSize) {
             width = 0;
@@ -39,8 +41,8 @@ class TextureRenderer {
                 }
             }
 
-            width += padding;
-            height += padding;
+            width += padding + extrude;
+            height += padding + extrude;
         }
 
         if (options.powerOfTwo) {
@@ -65,11 +67,49 @@ class TextureRenderer {
         ctx.clearRect(0, 0, width, height);
 
         for(let item of data) {
-            this.renderItem(ctx, item);
+            this.renderItem(ctx, item, options);
         }
     }
     
-    renderItem(ctx, item) {
+    renderExtrude(ctx, item, options) {
+        if(!options.extrude) return;
+        
+        let dx = item.frame.x;
+        let dy = item.frame.y;
+        
+        if(item.rotated) {
+            dx = 0;
+            dy = 0;
+        }
+
+        let img = item.image;
+
+        ctx.drawImage(img,
+            item.spriteSourceSize.x, item.spriteSourceSize.y,
+            1, item.spriteSourceSize.h,
+            dx - options.extrude, dy - options.extrude,
+            options.extrude, item.frame.h + options.extrude * 2);
+
+        ctx.drawImage(img,
+            item.spriteSourceSize.x + item.spriteSourceSize.w - 1, item.spriteSourceSize.y,
+            1, item.spriteSourceSize.h,
+            dx + item.frame.w, dy - options.extrude,
+            options.extrude, item.frame.h + options.extrude * 2);
+
+        ctx.drawImage(img,
+            item.spriteSourceSize.x, item.spriteSourceSize.y,
+            item.spriteSourceSize.w, 1,
+            dx, dy - options.extrude,
+            item.frame.w, options.extrude);
+
+        ctx.drawImage(img,
+            item.spriteSourceSize.x, item.spriteSourceSize.y + item.spriteSourceSize.h - 1,
+            item.spriteSourceSize.w, 1,
+            dx, dy + item.frame.h,
+            item.frame.w, options.extrude);
+    }
+    
+    renderItem(ctx, item, options) {
         if(!item.skipRender) {
 
             let img = item.image;
@@ -80,22 +120,23 @@ class TextureRenderer {
 
                 ctx.rotate(Math.PI / 2);
                 ctx.drawImage(img,
-                    item.spriteSourceSize.x,
-                    item.spriteSourceSize.y,
-                    item.spriteSourceSize.w,
-                    item.spriteSourceSize.h,
-                    0, 0,
-                    item.frame.w, item.frame.h);
+                              item.spriteSourceSize.x, item.spriteSourceSize.y,
+                              item.spriteSourceSize.w, item.spriteSourceSize.h,
+                              0, 0,
+                              item.frame.w, item.frame.h);
+                
+                this.renderExtrude(ctx, item, options);
+                
                 ctx.restore();
             }
             else {
                 ctx.drawImage(img,
-                    item.spriteSourceSize.x,
-                    item.spriteSourceSize.y,
-                    item.spriteSourceSize.w,
-                    item.spriteSourceSize.h,
-                    item.frame.x, item.frame.y,
-                    item.frame.w, item.frame.h);
+                              item.spriteSourceSize.x, item.spriteSourceSize.y,
+                              item.spriteSourceSize.w, item.spriteSourceSize.h,
+                              item.frame.x, item.frame.y,
+                              item.frame.w, item.frame.h);
+
+                this.renderExtrude(ctx, item, options);
             }
         }
     }
