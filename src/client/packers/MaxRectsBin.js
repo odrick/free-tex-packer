@@ -25,10 +25,7 @@ class MaxRectsBin extends Packer {
     }
 
     pack(data, method) {
-        console.log(data);
-        debugger
         let res = this.insert2(data, method);
-        console.log(res);
         return res;
     }
 
@@ -96,8 +93,6 @@ class MaxRectsBin extends Packer {
 
             if(rect.frame.w != bestNode.width || rect.frame.h != bestNode.height) {
                 rect.rotated = true;
-                //rect.frame.w = bestNode.width;
-                //rect.frame.h = bestNode.height;
             }
 
             res.push(rect);

@@ -83,27 +83,53 @@ class TextureRenderer {
         }
 
         let img = item.image;
-
+        
+        //Draw corners
         ctx.drawImage(img,
-            item.spriteSourceSize.x, item.spriteSourceSize.y,
-            1, item.spriteSourceSize.h,
+            0, 0,
+            1, 1,
             dx - options.extrude, dy - options.extrude,
-            options.extrude, item.frame.h + options.extrude * 2);
+            options.extrude, options.extrude);
 
         ctx.drawImage(img,
-            item.spriteSourceSize.x + item.spriteSourceSize.w - 1, item.spriteSourceSize.y,
-            1, item.spriteSourceSize.h,
+            0, item.sourceSize.h-1,
+            1, 1,
+            dx - options.extrude, dy + item.frame.h,
+            options.extrude, options.extrude);
+
+        ctx.drawImage(img,
+            item.sourceSize.w-1, 0,
+            1, 1,
             dx + item.frame.w, dy - options.extrude,
-            options.extrude, item.frame.h + options.extrude * 2);
+            options.extrude, options.extrude);
 
         ctx.drawImage(img,
-            item.spriteSourceSize.x, item.spriteSourceSize.y,
+            item.sourceSize.w-1, item.sourceSize.h-1,
+            1, 1,
+            dx + item.frame.w, dy + item.frame.h,
+            options.extrude, options.extrude);
+        
+        //Draw borders
+        ctx.drawImage(img,
+            0, item.spriteSourceSize.y,
+            1, item.spriteSourceSize.h,
+            dx - options.extrude, dy,
+            options.extrude, item.frame.h);
+
+        ctx.drawImage(img,
+            item.sourceSize.w - 1, item.spriteSourceSize.y,
+            1, item.spriteSourceSize.h,
+            dx + item.frame.w, dy,
+            options.extrude, item.frame.h);
+
+        ctx.drawImage(img,
+            item.spriteSourceSize.x, 0,
             item.spriteSourceSize.w, 1,
             dx, dy - options.extrude,
             item.frame.w, options.extrude);
 
         ctx.drawImage(img,
-            item.spriteSourceSize.x, item.spriteSourceSize.y + item.spriteSourceSize.h - 1,
+            item.spriteSourceSize.x, item.sourceSize.h - 1,
             item.spriteSourceSize.w, 1,
             dx, dy + item.frame.h,
             item.frame.w, options.extrude);
@@ -115,28 +141,31 @@ class TextureRenderer {
             let img = item.image;
 
             if (item.rotated) {
+                console.log('ROTATED');
+                
                 ctx.save();
                 ctx.translate(item.frame.x + item.frame.h, item.frame.y);
 
                 ctx.rotate(Math.PI / 2);
+
+                this.renderExtrude(ctx, item, options);
+                
                 ctx.drawImage(img,
                               item.spriteSourceSize.x, item.spriteSourceSize.y,
                               item.spriteSourceSize.w, item.spriteSourceSize.h,
                               0, 0,
                               item.frame.w, item.frame.h);
                 
-                this.renderExtrude(ctx, item, options);
-                
                 ctx.restore();
             }
             else {
+                this.renderExtrude(ctx, item, options);
+                
                 ctx.drawImage(img,
                               item.spriteSourceSize.x, item.spriteSourceSize.y,
                               item.spriteSourceSize.w, item.spriteSourceSize.h,
                               item.frame.x, item.frame.y,
                               item.frame.w, item.frame.h);
-
-                this.renderExtrude(ctx, item, options);
             }
         }
     }
