@@ -30297,10 +30297,7 @@ function (_Packer) {
   MaxRectsBin_createClass(MaxRectsBin, [{
     key: "pack",
     value: function pack(data, method) {
-      console.log(data);
-      debugger;
       var res = this.insert2(data, method);
-      console.log(res);
       return res;
     }
   }, {
@@ -30385,8 +30382,7 @@ function (_Packer) {
         rect.frame.y = bestNode.y;
 
         if (rect.frame.w != bestNode.width || rect.frame.h != bestNode.height) {
-          rect.rotated = true; //rect.frame.w = bestNode.width;
-          //rect.frame.h = bestNode.height;
+          rect.rotated = true;
         }
 
         res.push(rect);
@@ -31111,6 +31107,7 @@ function () {
       var onError = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var rects = [];
       var padding = options.padding || 0;
+      var extrude = options.extrude || 0;
       var maxWidth = 0,
           maxHeight = 0;
       var minWidth = 0,
@@ -31123,8 +31120,8 @@ function () {
         var name = key.split(".")[0];
         maxWidth += img.width;
         maxHeight += img.height;
-        if (img.width > minWidth) minWidth = img.width + padding * 2;
-        if (img.height > minHeight) minHeight = img.height + padding * 2;
+        if (img.width > minWidth) minWidth = img.width + padding * 2 + extrude * 2;
+        if (img.height > minHeight) minHeight = img.height + padding * 2 + extrude * 2;
         rects.push({
           frame: {
             x: 0,
@@ -31179,8 +31176,8 @@ function () {
 
       for (var _i5 = 0; _i5 < rects.length; _i5++) {
         var _item4 = rects[_i5];
-        _item4.frame.w += padding * 2;
-        _item4.frame.h += padding * 2;
+        _item4.frame.w += padding * 2 + extrude * 2;
+        _item4.frame.h += padding * 2 + extrude * 2;
       }
 
       var identical = [];
@@ -31206,10 +31203,10 @@ function () {
         try {
           for (var _iterator2 = result[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
             var item = _step2.value;
-            item.frame.x += padding;
-            item.frame.y += padding;
-            item.frame.w -= padding * 2;
-            item.frame.h -= padding * 2;
+            item.frame.x += padding + extrude;
+            item.frame.y += padding + extrude;
+            item.frame.w -= padding * 2 + extrude * 2;
+            item.frame.h -= padding * 2 + extrude * 2;
           }
         } catch (err) {
           _didIteratorError2 = true;
@@ -31321,6 +31318,7 @@ function () {
       var width = options.width || 0;
       var height = options.height || 0;
       var padding = options.padding || 0;
+      var extrude = options.extrude || 0;
 
       if (!options.fixedSize) {
         width = 0;
@@ -31363,8 +31361,8 @@ function () {
           }
         }
 
-        width += padding;
-        height += padding;
+        width += padding + extrude;
+        height += padding + extrude;
       }
 
       if (options.powerOfTwo) {
@@ -31390,7 +31388,7 @@ function () {
       try {
         for (var _iterator2 = data[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var _item = _step2.value;
-          this.renderItem(ctx, _item);
+          this.renderItem(ctx, _item, options);
         }
       } catch (err) {
         _didIteratorError2 = true;
@@ -31408,8 +31406,32 @@ function () {
       }
     }
   }, {
+    key: "renderExtrude",
+    value: function renderExtrude(ctx, item, options) {
+      if (!options.extrude) return;
+      var dx = item.frame.x;
+      var dy = item.frame.y;
+
+      if (item.rotated) {
+        dx = 0;
+        dy = 0;
+      }
+
+      var img = item.image; //Draw corners
+
+      ctx.drawImage(img, 0, 0, 1, 1, dx - options.extrude, dy - options.extrude, options.extrude, options.extrude);
+      ctx.drawImage(img, 0, item.sourceSize.h - 1, 1, 1, dx - options.extrude, dy + item.frame.h, options.extrude, options.extrude);
+      ctx.drawImage(img, item.sourceSize.w - 1, 0, 1, 1, dx + item.frame.w, dy - options.extrude, options.extrude, options.extrude);
+      ctx.drawImage(img, item.sourceSize.w - 1, item.sourceSize.h - 1, 1, 1, dx + item.frame.w, dy + item.frame.h, options.extrude, options.extrude); //Draw borders
+
+      ctx.drawImage(img, 0, item.spriteSourceSize.y, 1, item.spriteSourceSize.h, dx - options.extrude, dy, options.extrude, item.frame.h);
+      ctx.drawImage(img, item.sourceSize.w - 1, item.spriteSourceSize.y, 1, item.spriteSourceSize.h, dx + item.frame.w, dy, options.extrude, item.frame.h);
+      ctx.drawImage(img, item.spriteSourceSize.x, 0, item.spriteSourceSize.w, 1, dx, dy - options.extrude, item.frame.w, options.extrude);
+      ctx.drawImage(img, item.spriteSourceSize.x, item.sourceSize.h - 1, item.spriteSourceSize.w, 1, dx, dy + item.frame.h, item.frame.w, options.extrude);
+    }
+  }, {
     key: "renderItem",
-    value: function renderItem(ctx, item) {
+    value: function renderItem(ctx, item, options) {
       if (!item.skipRender) {
         var img = item.image;
 
@@ -31417,9 +31439,11 @@ function () {
           ctx.save();
           ctx.translate(item.frame.x + item.frame.h, item.frame.y);
           ctx.rotate(Math.PI / 2);
+          this.renderExtrude(ctx, item, options);
           ctx.drawImage(img, item.spriteSourceSize.x, item.spriteSourceSize.y, item.spriteSourceSize.w, item.spriteSourceSize.h, 0, 0, item.frame.w, item.frame.h);
           ctx.restore();
         } else {
+          this.renderExtrude(ctx, item, options);
           ctx.drawImage(img, item.spriteSourceSize.x, item.spriteSourceSize.y, item.spriteSourceSize.w, item.spriteSourceSize.h, item.frame.x, item.frame.y, item.frame.w, item.frame.h);
         }
       }
@@ -34117,7 +34141,8 @@ function (_React$Component) {
       data.height = data.height === undefined ? 2048 : data.height;
       data.fixedSize = data.fixedSize === undefined ? false : data.fixedSize;
       data.powerOfTwo = data.powerOfTwo === undefined ? false : data.powerOfTwo;
-      data.padding = data.padding === undefined ? 1 : data.padding;
+      data.padding = data.padding === undefined ? 0 : data.padding;
+      data.extrude = data.extrude === undefined ? 0 : data.extrude;
       data.allowRotation = data.allowRotation === undefined ? true : data.allowRotation;
       data.allowTrim = data.allowTrim === undefined ? true : data.allowTrim;
       data.trimMode = data.trimMode === undefined ? "trim" : data.trimMode;
@@ -34175,6 +34200,7 @@ function (_React$Component) {
       data.fixedSize = react_dom_default.a.findDOMNode(this.refs.fixedSize).checked;
       data.powerOfTwo = react_dom_default.a.findDOMNode(this.refs.powerOfTwo).checked;
       data.padding = Number(react_dom_default.a.findDOMNode(this.refs.padding).value) || 0;
+      data.extrude = Number(react_dom_default.a.findDOMNode(this.refs.extrude).value) || 0;
       data.allowRotation = react_dom_default.a.findDOMNode(this.refs.allowRotation).checked;
       data.allowTrim = react_dom_default.a.findDOMNode(this.refs.allowTrim).checked;
       data.trimMode = react_dom_default.a.findDOMNode(this.refs.trimMode).value;
@@ -34203,6 +34229,7 @@ function (_React$Component) {
       react_dom_default.a.findDOMNode(this.refs.fixedSize).checked = this.packOptions.fixedSize;
       react_dom_default.a.findDOMNode(this.refs.powerOfTwo).checked = this.packOptions.powerOfTwo;
       react_dom_default.a.findDOMNode(this.refs.padding).value = Number(this.packOptions.padding) || 0;
+      react_dom_default.a.findDOMNode(this.refs.extrude).value = Number(this.packOptions.extrude) || 0;
       react_dom_default.a.findDOMNode(this.refs.allowRotation).checked = this.packOptions.allowRotation;
       react_dom_default.a.findDOMNode(this.refs.allowTrim).checked = this.packOptions.allowTrim;
       react_dom_default.a.findDOMNode(this.refs.trimMode).value = this.packOptions.trimMode;
@@ -34472,6 +34499,16 @@ function (_React$Component) {
         type: "number",
         className: "border-color-gray",
         defaultValue: this.packOptions.padding,
+        min: "0",
+        onBlur: this.onPropChanged,
+        onKeyDown: this.forceUpdate
+      })), react_default.a.createElement("td", null)), react_default.a.createElement("tr", {
+        title: utils_I18.f("EXTRUDE_TITLE")
+      }, react_default.a.createElement("td", null, utils_I18.f("EXTRUDE")), react_default.a.createElement("td", null, react_default.a.createElement("input", {
+        ref: "extrude",
+        type: "number",
+        className: "border-color-gray",
+        defaultValue: this.packOptions.extrude,
         min: "0",
         onBlur: this.onPropChanged,
         onKeyDown: this.forceUpdate
