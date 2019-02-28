@@ -141,8 +141,6 @@ class TextureRenderer {
             let img = item.image;
 
             if (item.rotated) {
-                console.log('ROTATED');
-                
                 ctx.save();
                 ctx.translate(item.frame.x + item.frame.h, item.frame.y);
 
