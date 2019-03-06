@@ -15,11 +15,11 @@ let CURRENT_PROJECT_MODIFIED = false;
 
 function createWindow() {
 	let w = 1300;
-	let h = 680;
+	let h = 700;
 
 	if(process.platform === "win32") {
 		w = 1320;
-		h = 720;
+		h = 740;
 	}
 	
 	let mainWindowState = windowStateKeeper({
