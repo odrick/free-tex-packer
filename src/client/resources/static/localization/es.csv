@@ -21,7 +21,7 @@ DELETE;Borrar
 DELETE_TITLE;borrar imágenes seleccionadas
 DISPLAY_OUTLINES;Outlines:
 SCALE;Escala:
-SHOW_SPRITES;Animación de sprites
+SHOW_SPRITES;Animaciones
 SPRITE_NAME;Nombre de sprite:
 ANIMATION_SPEED;Velocidad Animación:
 TEXTURE_NAME;Nombre de textura:

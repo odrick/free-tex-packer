@@ -21,7 +21,7 @@ DELETE;Удалить
 DELETE_TITLE;Удалить выбранные изображения
 DISPLAY_OUTLINES;Контуры:
 SCALE;Масштаб:
-SHOW_SPRITES;Показать спрайты
+SHOW_SPRITES;Анимации
 SPRITE_NAME;Название спрайта:
 ANIMATION_SPEED;Скорость анимации:
 TEXTURE_NAME;Имя текстуры:

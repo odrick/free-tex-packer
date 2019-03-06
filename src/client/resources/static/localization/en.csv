@@ -21,7 +21,7 @@ DELETE;Delete
 DELETE_TITLE;Delete selected images
 DISPLAY_OUTLINES;Outlines:
 SCALE;Scale:
-SHOW_SPRITES;Show sprites
+SHOW_SPRITES;Animations
 SPRITE_NAME;Sprite name:
 ANIMATION_SPEED;Animation speed:
 TEXTURE_NAME;Texture name:

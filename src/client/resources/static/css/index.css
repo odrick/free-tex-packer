@@ -122,7 +122,7 @@ html, body {
 
 .images-list {
     display: block;
-    width: 380px;
+    width: 400px;
     height: 100%;
     float: left;
     text-align: left;
@@ -130,12 +130,6 @@ html, body {
     margin-left: 10px;
     margin-right: 10px;
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
-}
-
-.results-view {
-    display: block;
-    height: 100%;
-    min-width: 640px;
 }
 
 .props-list {
@@ -375,13 +369,20 @@ html, body {
     border-style: solid;
 }
 
+.results-view {
+    display: block;
+    height: 100%;
+    min-width: 640px;
+}
+
 .results-view-wrapper {
     height: 100%;
-    width: -webkit-calc(100% - 640px);
-    width: -moz-calc(100% - 640px);
-    width: -o-calc(100% - 640px);
-    width: calc(100% - 640px);
+    width: -webkit-calc(100% - 720px);
+    width: -moz-calc(100% - 720px);
+    width: -o-calc(100% - 720px);
+    width: calc(100% - 720px);
     margin: auto;
+    margin-left: 410px;
     box-shadow: 1px 0px 0px 0px rgba(0,0,0,.2);
 }
 
@@ -394,9 +395,13 @@ html, body {
 }
 
 .results-view-footer {
-    display: block;
+    display: inline-block;
+    width: -webkit-calc(100% - 20px);
+    width: -moz-calc(100% - 20px);
+    width: -o-calc(100% - 20px);
+    width: calc(100% - 20px);
+    min-width: 560px;
     height: 50px;
-    margin-left: 80px;
     box-sizing: border-box;
     padding: 8px;
     vertical-align: bottom;
