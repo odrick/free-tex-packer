@@ -15,11 +15,11 @@ let CURRENT_PROJECT_MODIFIED = false;
 
 function createWindow() {
 	let w = 1300;
-	let h = 680;
+	let h = 700;
 
 	if(process.platform === "win32") {
 		w = 1320;
-		h = 720;
+		h = 740;
 	}
 	
 	let mainWindowState = windowStateKeeper({
@@ -227,6 +227,13 @@ function buildMenu() {
             {label: LOCALE_STRINGS.MENU_ACTIONS_CLEAR, actionName: 'action-clear', click: sendMessage, accelerator: 'CmdOrCtrl+Shift+C'},
             {type: 'separator'},
             {label: LOCALE_STRINGS.MENU_ACTIONS_EXPORT, actionName: 'action-export', click: sendMessage, accelerator: 'CmdOrCtrl+E'}
+        ]
+    });
+
+    template.push({
+        label: LOCALE_STRINGS.MENU_TOOLS,
+        submenu: [
+            {label: LOCALE_STRINGS.MENU_TOOLS_SPLITTER, actionName: 'action-show-splitter', click: sendMessage,}
         ]
     });
     
