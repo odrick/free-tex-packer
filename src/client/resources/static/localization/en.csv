@@ -21,7 +21,7 @@ DELETE;Delete
 DELETE_TITLE;Delete selected images
 DISPLAY_OUTLINES;Outlines:
 SCALE;Scale:
-SHOW_SPRITES;Show sprites
+SHOW_SPRITES;Animations
 SPRITE_NAME;Sprite name:
 ANIMATION_SPEED;Animation speed:
 TEXTURE_NAME;Texture name:
@@ -112,6 +112,8 @@ MENU_ACTIONS_SELECT_ALL;Select all
 MENU_ACTIONS_DELETE;Delete
 MENU_ACTIONS_CLEAR;Clear
 MENU_ACTIONS_EXPORT;Export
+MENU_TOOLS;Tools
+MENU_TOOLS_SPLITTER;Split sheet
 MENU_LANGUAGE;Language
 MENU_HELP;Help
 MENU_HELP_ABOUT;About
@@ -127,3 +129,8 @@ CONTEXT_MENU_COPY;Copy
 CONTEXT_MENU_PASTE;Paste
 CONTEXT_MENU_DELETE;Delete
 CONTEXT_MENU_SELECT_ALL;Select all
+SPLIT;Split
+SELECT_TEXTURE;Texture
+SELECT_DATA_FILE;Data file
+SPLITTER;Split sheet
+SPLITTER_ERROR_NO_FRAMES;Sprites not found. Probably, atlas format is incorrect.

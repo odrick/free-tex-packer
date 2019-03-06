@@ -21,7 +21,7 @@ DELETE;Удалить
 DELETE_TITLE;Удалить выбранные изображения
 DISPLAY_OUTLINES;Контуры:
 SCALE;Масштаб:
-SHOW_SPRITES;Показать спрайты
+SHOW_SPRITES;Анимации
 SPRITE_NAME;Название спрайта:
 ANIMATION_SPEED;Скорость анимации:
 TEXTURE_NAME;Имя текстуры:
@@ -112,6 +112,8 @@ MENU_ACTIONS_SELECT_ALL;Выделить все
 MENU_ACTIONS_DELETE;Удалить
 MENU_ACTIONS_CLEAR;Очистить
 MENU_ACTIONS_EXPORT;Экспорт
+MENU_TOOLS;Инструменты
+MENU_TOOLS_SPLITTER;Распаковка атласа
 MENU_LANGUAGE;Язык
 MENU_HELP;Помощь
 MENU_HELP_ABOUT;О программе
@@ -127,3 +129,8 @@ CONTEXT_MENU_COPY;Копировать
 CONTEXT_MENU_PASTE;Вставить
 CONTEXT_MENU_DELETE;Удалить
 CONTEXT_MENU_SELECT_ALL;Выделить все
+SPLIT;Распаковать
+SELECT_TEXTURE;Текстура
+SELECT_DATA_FILE;Данные
+SPLITTER;Распаковка атласа
+SPLITTER_ERROR_NO_FRAMES;Не найдено ни одного спрайта. Возможно, формат атласа неверен.
