@@ -65,36 +65,9 @@ html, body {
     width: 100px;
 }
 
-.main-header-donate {
-    padding-top: 10px;
-    position: absolute;
-    left: 50%;
-    top: 0;
-    margin-left: -46px;
-}
-
-.main-header-donate img {
-    visibility: hidden;
-}
-
-.main-header-fb {
+.main-header-controls {
     float: right;
-    padding-right: 8px;
-}
-
-.main-header-fb > div {
-    line-height: 20px;
-}
-
-.main-header-twitter {
-    float: right;
-    padding-right: 8px;
-    line-height: 20px;
-    padding-top: 25px;
-}
-
-.main-header-twitter a {
-    visibility: hidden;
+    margin-right: 16px;
 }
 
 .main-header-about {
@@ -122,7 +95,7 @@ html, body {
 
 .images-list {
     display: block;
-    width: 380px;
+    width: 400px;
     height: 100%;
     float: left;
     text-align: left;
@@ -130,12 +103,6 @@ html, body {
     margin-left: 10px;
     margin-right: 10px;
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
-}
-
-.results-view {
-    display: block;
-    height: 100%;
-    min-width: 640px;
 }
 
 .props-list {
@@ -375,13 +342,20 @@ html, body {
     border-style: solid;
 }
 
+.results-view {
+    display: block;
+    height: 100%;
+    min-width: 640px;
+}
+
 .results-view-wrapper {
     height: 100%;
-    width: -webkit-calc(100% - 640px);
-    width: -moz-calc(100% - 640px);
-    width: -o-calc(100% - 640px);
-    width: calc(100% - 640px);
+    width: -webkit-calc(100% - 720px);
+    width: -moz-calc(100% - 720px);
+    width: -o-calc(100% - 720px);
+    width: calc(100% - 720px);
     margin: auto;
+    margin-left: 410px;
     box-shadow: 1px 0px 0px 0px rgba(0,0,0,.2);
 }
 
@@ -394,15 +368,23 @@ html, body {
 }
 
 .results-view-footer {
-    display: block;
+    display: inline-block;
+    width: -webkit-calc(100% - 20px);
+    width: -moz-calc(100% - 20px);
+    width: -o-calc(100% - 20px);
+    width: calc(100% - 20px);
+    min-width: 560px;
     height: 50px;
-    margin-left: 80px;
     box-sizing: border-box;
     padding: 8px;
     vertical-align: bottom;
     text-align: center;
     font-weight: bold;
     box-shadow: 0px 1px 0px 0px rgba(0,0,0,.2);
+}
+
+.results-view-footer .btn {
+    margin-left: 4px;
 }
 
 .results-view-footer hr {
@@ -880,4 +862,106 @@ html, body {
     border-style: solid;
     margin-left: 8px;
     margin-right: 8px;
+}
+
+.sheet-splitter-shader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.35);
+}
+
+.sheet-splitter-content {
+    width: 700px;
+    height: 500px;
+    background: #fff;
+    margin: auto;
+    margin-top: 86px;
+    font-size: 14px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 16px;
+    text-align: left;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
+}
+
+.sheet-splitter-content .btn {
+    min-width: 50px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.sheet-splitter-top {
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+.sheet-splitter-top table {
+    margin: auto;
+}
+
+.sheet-splitter-info-text {
+    width: 200px;
+    height: 20px;
+    display: inline-block;
+    padding: 4px;
+    padding-top: 1px;
+    overflow: hidden;
+    box-sizing: border-box;
+    font-size: 14px;
+    text-align: left;
+}
+
+.sheet-splitter-view {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #333;
+    width: 500px;
+    height: 420px;
+    float: left;
+    overflow: auto;
+}
+
+.sheet-splitter-view canvas {
+    border: 1px dotted #333;
+    margin: 4px;
+}
+
+.sheet-splitter-controls {
+    float: right;
+    width: 175px;
+    height: 420px;
+    padding-right: 10px;
+}
+
+.sheet-splitter-controls select {
+    width: 104px;
+}
+
+.sheet-splitter-controls input {
+    width: 100px;
+}
+
+.sheet-splitter-controls td {
+    font-weight: bold;
+    padding: 2px;
+    min-width: 70px;
+    white-space: nowrap;
+    text-align: left;
+    font-size: 12px;
+}
+
+.sheet-splitter-bottom {
+    clear: both;
+    text-align: center;
+    padding: 8px;
+    margin-top: 10px;
 }

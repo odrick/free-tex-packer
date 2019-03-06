@@ -228,7 +228,7 @@ module.exports = function (it) {
 /* 7 */
 /***/ (function(module) {
 
-module.exports = {"name":"free-tex-packer","displayName":"Free texture packer","version":"0.5.3","description":"Free online texture packer","url":"http://free-tex-packer.com","download":"http://free-tex-packer.com/download","webApp":"http://free-tex-packer.com/app","main":"src/index.js","tinifyUrl":"http://free-tex-packer.com/server/tinify.php","localizations":["en","ru"],"scripts":{"start":"webpack-dev-server --host 127.0.0.1 --port 4000","start-electron":"webpack-dev-server --host 0.0.0.0 --port 4000 --platform electron","build-web":"webpack --build --platform web","build-electron":"webpack --build --platform electron"},"repository":{"type":"git","url":"git+https://github.com/odrick/free-tex-packer.git"},"keywords":["texture","packer","texturepacker","texture-packer","sprites","spritesheet","export","sprite","2d"],"author":"Alexander Norinchak","authorSite":"https://github.com/odrick/","authorEmail":"norinchak@gmail.com","license":"ISC","bugs":{"url":"https://github.com/odrick/free-tex-packer/issues"},"homepage":"https://github.com/odrick/free-tex-packer","devDependencies":{"@babel/core":"^7.2.2","@babel/preset-env":"^7.3.1","@babel/preset-react":"^7.0.0","babel-loader":"^8.0.5","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.23.0","babel-preset-es2015":"^6.24.0","babel-preset-stage-0":"^6.22.0","babel-runtime":"^6.23.0","chokidar":"^2.0.4","copy-webpack-plugin":"^4.6.0","electron":"^4.0.4","eventemitter3":"^3.0.1","file-saver":"^2.0.0","glob":"^7.1.1","json-loader":"^0.5.4","jszip":"^3.1.3","mustache":"^3.0.1","optimist":"^0.6.1","react":"^16.8.1","react-dom":"^16.8.1","webpack":"^4.29.3","webpack-cli":"^3.2.3","webpack-dev-server":"^3.1.14"},"dependencies":{"maxrects-packer":"^2.0.0"}};
+module.exports = {"name":"free-tex-packer","displayName":"Free texture packer","version":"0.5.4","description":"Free online texture packer","url":"http://free-tex-packer.com","download":"http://free-tex-packer.com/download","webApp":"http://free-tex-packer.com/app","main":"src/index.js","tinifyUrl":"http://free-tex-packer.com/server/tinify.php","localizations":["en","es","ru"],"scripts":{"start":"webpack-dev-server --host 127.0.0.1 --port 4000","start-electron":"webpack-dev-server --host 127.0.0.1 --port 4000 --platform electron","build-web":"webpack --build --platform web","build-electron":"webpack --build --platform electron"},"repository":{"type":"git","url":"git+https://github.com/odrick/free-tex-packer.git"},"keywords":["texture","packer","texturepacker","texture-packer","sprites","spritesheet","export","sprite","2d"],"author":"Alexander Norinchak","authorSite":"https://github.com/odrick/","authorEmail":"norinchak@gmail.com","license":"ISC","bugs":{"url":"https://github.com/odrick/free-tex-packer/issues"},"homepage":"https://github.com/odrick/free-tex-packer","devDependencies":{"@babel/core":"^7.2.2","@babel/preset-env":"^7.3.1","@babel/preset-react":"^7.0.0","babel-loader":"^8.0.5","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.23.0","babel-preset-es2015":"^6.24.0","babel-preset-stage-0":"^6.22.0","babel-runtime":"^6.23.0","chokidar":"^2.0.4","copy-webpack-plugin":"^4.6.0","electron":"^4.0.4","eventemitter3":"^3.0.1","file-saver":"^2.0.0","glob":"^7.1.1","json-loader":"^0.5.4","jszip":"^3.1.3","mustache":"^3.0.1","optimist":"^0.6.1","react":"^16.8.1","react-dom":"^16.8.1","webpack":"^4.29.3","webpack-cli":"^3.2.3","webpack-dev-server":"^3.1.14"},"dependencies":{"maxrects-packer":"^2.0.0"}};
 
 /***/ }),
 /* 8 */
@@ -30047,7 +30047,9 @@ var GLOBAL_EVENT = {
   FS_CHANGES: "FS_CHANGES",
   UPDATE_AVAILABLE: "UPDATE_AVAILABLE",
   DOWNLOAD_PROGRESS_CHANGED: "DOWNLOAD_PROGRESS_CHANGED",
-  INSTALL_UPDATE: "INSTALL_UPDATE"
+  INSTALL_UPDATE: "INSTALL_UPDATE",
+  SHOW_SHEET_SPLITTER: "SHOW_SHEET_SPLITTER",
+  HIDE_SHEET_SPLITTER: "HIDE_SHEET_SPLITTER"
 };
 
 // CONCATENATED MODULE: ./src/client/packers/Packer.js
@@ -33689,6 +33691,11 @@ function (_React$Component) {
       Observer.emit(GLOBAL_EVENT.CHANGE_LANG, e.target.value);
     }
   }, {
+    key: "showSplitter",
+    value: function showSplitter() {
+      Observer.emit(GLOBAL_EVENT.SHOW_SHEET_SPLITTER);
+    }
+  }, {
     key: "render",
     value: function render() {
       return react_default.a.createElement("div", {
@@ -33710,7 +33717,12 @@ function (_React$Component) {
           key: "localization_" + item,
           value: item
         }, utils_I18.f("LANGUAGE_" + item));
-      }))));
+      }))), react_default.a.createElement("div", {
+        className: "main-header-controls"
+      }, react_default.a.createElement("div", {
+        className: "btn back-700 border-color-gray color-white",
+        onClick: this.showSplitter
+      }, utils_I18.f("SPLITTER"))));
     }
   }]);
 
@@ -36035,6 +36047,903 @@ function (_React$Component) {
 }(react_default.a.Component);
 
 /* harmony default export */ var ui_EditCustomExporter = (EditCustomExporter_EditCustomExporter);
+// CONCATENATED MODULE: ./src/client/splitters/Splitter.js
+function Splitter_classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function Splitter_defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function Splitter_createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) Splitter_defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) Splitter_defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+var Splitter =
+/*#__PURE__*/
+function () {
+  function Splitter() {
+    Splitter_classCallCheck(this, Splitter);
+  }
+
+  Splitter_createClass(Splitter, null, [{
+    key: "check",
+    value: function check(data) {}
+  }, {
+    key: "split",
+    value: function split(data, options) {}
+  }, {
+    key: "type",
+    get: function get() {
+      return 'Default';
+    }
+  }]);
+
+  return Splitter;
+}();
+
+/* harmony default export */ var splitters_Splitter = (Splitter);
+// CONCATENATED MODULE: ./src/client/splitters/Grid.js
+function Grid_typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Grid_typeof2 = function _typeof2(obj) { return typeof obj; }; } else { Grid_typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Grid_typeof2(obj); }
+
+function Grid_typeof(obj) {
+  if (typeof Symbol === "function" && Grid_typeof2(Symbol.iterator) === "symbol") {
+    Grid_typeof = function _typeof(obj) {
+      return Grid_typeof2(obj);
+    };
+  } else {
+    Grid_typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : Grid_typeof2(obj);
+    };
+  }
+
+  return Grid_typeof(obj);
+}
+
+function Grid_classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function Grid_defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function Grid_createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) Grid_defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) Grid_defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function Grid_possibleConstructorReturn(self, call) {
+  if (call && (Grid_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return Grid_assertThisInitialized(self);
+}
+
+function Grid_assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function Grid_getPrototypeOf(o) {
+  Grid_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return Grid_getPrototypeOf(o);
+}
+
+function Grid_inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) Grid_setPrototypeOf(subClass, superClass);
+}
+
+function Grid_setPrototypeOf(o, p) {
+  Grid_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return Grid_setPrototypeOf(o, p);
+}
+
+
+
+var Grid =
+/*#__PURE__*/
+function (_Splitter) {
+  Grid_inherits(Grid, _Splitter);
+
+  function Grid() {
+    Grid_classCallCheck(this, Grid);
+
+    return Grid_possibleConstructorReturn(this, Grid_getPrototypeOf(Grid).apply(this, arguments));
+  }
+
+  Grid_createClass(Grid, null, [{
+    key: "check",
+    value: function check() {
+      return true;
+    }
+  }, {
+    key: "split",
+    value: function split(data, options) {
+      var res = [];
+      var fw = options.width + options.padding * 2;
+      var fh = options.height + options.padding * 2;
+      var cols = Math.floor(options.textureWidth / fw);
+      var rows = Math.floor(options.textureHeight / fh);
+      var nc = cols * rows + '';
+      var ix = 0;
+
+      for (var y = 0; y < rows; y++) {
+        for (var x = 0; x < cols; x++) {
+          var name = ix + '';
+
+          while (name.length < nc.length) {
+            name = '0' + name;
+          }
+
+          res.push({
+            name: name + '.png',
+            frame: {
+              x: x * fw + options.padding,
+              y: y * fh + options.padding,
+              w: options.width,
+              h: options.height
+            },
+            spriteSourceSize: {
+              x: x * fw + options.padding,
+              y: y * fh + options.padding,
+              w: options.width,
+              h: options.height
+            },
+            sourceSize: {
+              w: options.width,
+              h: options.height
+            }
+          });
+          ix++;
+        }
+      }
+
+      return res;
+    }
+  }, {
+    key: "type",
+    get: function get() {
+      return 'Grid';
+    }
+  }]);
+
+  return Grid;
+}(splitters_Splitter);
+
+/* harmony default export */ var splitters_Grid = (Grid);
+// CONCATENATED MODULE: ./src/client/splitters/JsonHash.js
+function JsonHash_typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { JsonHash_typeof2 = function _typeof2(obj) { return typeof obj; }; } else { JsonHash_typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return JsonHash_typeof2(obj); }
+
+function JsonHash_typeof(obj) {
+  if (typeof Symbol === "function" && JsonHash_typeof2(Symbol.iterator) === "symbol") {
+    JsonHash_typeof = function _typeof(obj) {
+      return JsonHash_typeof2(obj);
+    };
+  } else {
+    JsonHash_typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : JsonHash_typeof2(obj);
+    };
+  }
+
+  return JsonHash_typeof(obj);
+}
+
+function JsonHash_classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function JsonHash_defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function JsonHash_createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) JsonHash_defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) JsonHash_defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function JsonHash_possibleConstructorReturn(self, call) {
+  if (call && (JsonHash_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return JsonHash_assertThisInitialized(self);
+}
+
+function JsonHash_assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function JsonHash_getPrototypeOf(o) {
+  JsonHash_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return JsonHash_getPrototypeOf(o);
+}
+
+function JsonHash_inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) JsonHash_setPrototypeOf(subClass, superClass);
+}
+
+function JsonHash_setPrototypeOf(o, p) {
+  JsonHash_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return JsonHash_setPrototypeOf(o, p);
+}
+
+
+
+var JsonHash =
+/*#__PURE__*/
+function (_Splitter) {
+  JsonHash_inherits(JsonHash, _Splitter);
+
+  function JsonHash() {
+    JsonHash_classCallCheck(this, JsonHash);
+
+    return JsonHash_possibleConstructorReturn(this, JsonHash_getPrototypeOf(JsonHash).apply(this, arguments));
+  }
+
+  JsonHash_createClass(JsonHash, null, [{
+    key: "check",
+    value: function check(data) {
+      try {
+        var json = JSON.parse(data);
+        if (json && json.frames && !Array.isArray(json.frames)) return true;
+      } catch (e) {}
+
+      return false;
+    }
+  }, {
+    key: "split",
+    value: function split(data, options) {
+      var res = [];
+
+      try {
+        var json = JSON.parse(data);
+        var names = Object.keys(json.frames);
+
+        for (var _i = 0; _i < names.length; _i++) {
+          var name = names[_i];
+          var item = json.frames[name];
+          var ext = name.split('.').pop();
+          if (!ext) name = name + '.' + 'png';
+          item.name = name;
+          res.push(item);
+        }
+      } catch (e) {}
+
+      return res;
+    }
+  }, {
+    key: "type",
+    get: function get() {
+      return 'JSON (hash)';
+    }
+  }]);
+
+  return JsonHash;
+}(splitters_Splitter);
+
+/* harmony default export */ var splitters_JsonHash = (JsonHash);
+// CONCATENATED MODULE: ./src/client/splitters/JsonArray.js
+function JsonArray_typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { JsonArray_typeof2 = function _typeof2(obj) { return typeof obj; }; } else { JsonArray_typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return JsonArray_typeof2(obj); }
+
+function JsonArray_typeof(obj) {
+  if (typeof Symbol === "function" && JsonArray_typeof2(Symbol.iterator) === "symbol") {
+    JsonArray_typeof = function _typeof(obj) {
+      return JsonArray_typeof2(obj);
+    };
+  } else {
+    JsonArray_typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : JsonArray_typeof2(obj);
+    };
+  }
+
+  return JsonArray_typeof(obj);
+}
+
+function JsonArray_classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function JsonArray_defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function JsonArray_createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) JsonArray_defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) JsonArray_defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function JsonArray_possibleConstructorReturn(self, call) {
+  if (call && (JsonArray_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return JsonArray_assertThisInitialized(self);
+}
+
+function JsonArray_assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function JsonArray_getPrototypeOf(o) {
+  JsonArray_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return JsonArray_getPrototypeOf(o);
+}
+
+function JsonArray_inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) JsonArray_setPrototypeOf(subClass, superClass);
+}
+
+function JsonArray_setPrototypeOf(o, p) {
+  JsonArray_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return JsonArray_setPrototypeOf(o, p);
+}
+
+
+
+var JsonArray =
+/*#__PURE__*/
+function (_Splitter) {
+  JsonArray_inherits(JsonArray, _Splitter);
+
+  function JsonArray() {
+    JsonArray_classCallCheck(this, JsonArray);
+
+    return JsonArray_possibleConstructorReturn(this, JsonArray_getPrototypeOf(JsonArray).apply(this, arguments));
+  }
+
+  JsonArray_createClass(JsonArray, null, [{
+    key: "check",
+    value: function check(data) {
+      try {
+        var json = JSON.parse(data);
+        if (json && json.frames && Array.isArray(json.frames)) return true;
+      } catch (e) {}
+
+      return false;
+    }
+  }, {
+    key: "split",
+    value: function split(data, options) {
+      var res = [];
+
+      try {
+        var json = JSON.parse(data);
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = json.frames[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var item = _step.value;
+            var name = item.filename;
+            var ext = name.split('.').pop();
+            if (!ext) name = name + '.' + 'png';
+            item.name = name;
+            res.push(item);
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+      } catch (e) {}
+
+      return res;
+    }
+  }, {
+    key: "type",
+    get: function get() {
+      return 'JSON (array)';
+    }
+  }]);
+
+  return JsonArray;
+}(splitters_Splitter);
+
+/* harmony default export */ var splitters_JsonArray = (JsonArray);
+// CONCATENATED MODULE: ./src/client/splitters/index.js
+
+
+
+var splitters_list = [splitters_Grid, splitters_JsonHash, splitters_JsonArray];
+
+function getSplitterByType(type) {
+  for (var _i = 0; _i < splitters_list.length; _i++) {
+    var item = splitters_list[_i];
+
+    if (item.type === type) {
+      return item;
+    }
+  }
+
+  return null;
+}
+
+function getSplitterByData(data) {
+  for (var _i2 = 0; _i2 < splitters_list.length; _i2++) {
+    var item = splitters_list[_i2];
+
+    if (item.type !== splitters_Grid.type && item.check(data)) {
+      return item;
+    }
+  }
+
+  return getDefaultSplitter();
+}
+
+function getDefaultSplitter() {
+  return splitters_Grid;
+}
+
+
+/* harmony default export */ var splitters = (splitters_list);
+// CONCATENATED MODULE: ./src/client/ui/SheetSplitter.jsx
+function SheetSplitter_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SheetSplitter_typeof = function _typeof(obj) { return typeof obj; }; } else { SheetSplitter_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SheetSplitter_typeof(obj); }
+
+function SheetSplitter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function SheetSplitter_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function SheetSplitter_createClass(Constructor, protoProps, staticProps) { if (protoProps) SheetSplitter_defineProperties(Constructor.prototype, protoProps); if (staticProps) SheetSplitter_defineProperties(Constructor, staticProps); return Constructor; }
+
+function SheetSplitter_possibleConstructorReturn(self, call) { if (call && (SheetSplitter_typeof(call) === "object" || typeof call === "function")) { return call; } return SheetSplitter_assertThisInitialized(self); }
+
+function SheetSplitter_getPrototypeOf(o) { SheetSplitter_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return SheetSplitter_getPrototypeOf(o); }
+
+function SheetSplitter_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) SheetSplitter_setPrototypeOf(subClass, superClass); }
+
+function SheetSplitter_setPrototypeOf(o, p) { SheetSplitter_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return SheetSplitter_setPrototypeOf(o, p); }
+
+function SheetSplitter_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+
+
+
+
+
+
+
+var SheetSplitter_SheetSplitter =
+/*#__PURE__*/
+function (_React$Component) {
+  SheetSplitter_inherits(SheetSplitter, _React$Component);
+
+  function SheetSplitter(props) {
+    var _this;
+
+    SheetSplitter_classCallCheck(this, SheetSplitter);
+
+    _this = SheetSplitter_possibleConstructorReturn(this, SheetSplitter_getPrototypeOf(SheetSplitter).call(this, props));
+    _this.state = {
+      splitter: getDefaultSplitter()
+    };
+    _this.texture = null;
+    _this.data = null;
+    _this.frames = null;
+    _this.buffer = document.createElement('canvas');
+    _this.doSplit = _this.doSplit.bind(SheetSplitter_assertThisInitialized(SheetSplitter_assertThisInitialized(_this)));
+    _this.selectTexture = _this.selectTexture.bind(SheetSplitter_assertThisInitialized(SheetSplitter_assertThisInitialized(_this)));
+    _this.selectDataFile = _this.selectDataFile.bind(SheetSplitter_assertThisInitialized(SheetSplitter_assertThisInitialized(_this)));
+    _this.updateFrames = _this.updateFrames.bind(SheetSplitter_assertThisInitialized(SheetSplitter_assertThisInitialized(_this)));
+    _this.updateView = _this.updateView.bind(SheetSplitter_assertThisInitialized(SheetSplitter_assertThisInitialized(_this)));
+    _this.changeSplitter = _this.changeSplitter.bind(SheetSplitter_assertThisInitialized(SheetSplitter_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  SheetSplitter_createClass(SheetSplitter, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.updateTexture();
+    }
+  }, {
+    key: "doSplit",
+    value: function doSplit() {
+      Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
+
+      if (!this.frames || !this.frames.length) {
+        Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+        Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, utils_I18.f('SPLITTER_ERROR_NO_FRAMES'));
+        return;
+      }
+
+      var ctx = this.buffer.getContext('2d');
+      var files = [];
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = this.frames[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var item = _step.value;
+          this.buffer.width = item.sourceSize.w;
+          this.buffer.height = item.sourceSize.h;
+
+          if (item.rotated) {
+            ctx.save();
+            ctx.translate(item.spriteSourceSize.x + item.spriteSourceSize.w / 2, item.spriteSourceSize.y + item.spriteSourceSize.h / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.drawImage(this.texture, item.frame.x, item.frame.y, item.frame.h, item.frame.w, -item.spriteSourceSize.h / 2, -item.spriteSourceSize.w / 2, item.spriteSourceSize.h, item.spriteSourceSize.w);
+            ctx.restore();
+          } else {
+            ctx.drawImage(this.texture, item.frame.x, item.frame.y, item.frame.w, item.frame.h, item.spriteSourceSize.x, item.spriteSourceSize.y, item.spriteSourceSize.w, item.spriteSourceSize.h);
+          }
+
+          var ext = item.name.split('.').pop();
+
+          if (!ext) {
+            ext = 'png';
+            item.name += '.' + ext;
+          }
+
+          var base64 = this.buffer.toDataURL(ext === 'png' ? 'image/png' : 'image/jpeg');
+          base64 = base64.split(',').pop();
+          files.push({
+            name: item.name,
+            content: base64,
+            base64: base64
+          });
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      web_Downloader.run(files, 'atlas.zip');
+      Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+    }
+  }, {
+    key: "selectTexture",
+    value: function selectTexture(e) {
+      var _this2 = this;
+
+      if (e.target.files.length) {
+        Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
+        var loader = new utils_LocalImagesLoader();
+        loader.load(e.target.files, null, function (data) {
+          var keys = Object.keys(data);
+          _this2.texture = data[keys[0]];
+          react_dom_default.a.findDOMNode(_this2.refs.textureName).innerHTML = keys[0];
+
+          _this2.updateView();
+
+          Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+        });
+      }
+    }
+  }, {
+    key: "updateTexture",
+    value: function updateTexture() {
+      var canvas = react_dom_default.a.findDOMNode(this.refs.view);
+
+      if (this.texture) {
+        canvas.width = this.texture.width;
+        canvas.height = this.texture.height;
+        canvas.style.display = '';
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(this.texture, 0, 0);
+      } else {
+        canvas.style.display = 'none';
+      }
+    }
+  }, {
+    key: "selectDataFile",
+    value: function selectDataFile(e) {
+      var _this3 = this;
+
+      if (e.target.files.length) {
+        var item = e.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          var content = e.target.result;
+          content = content.split(',');
+          content.shift();
+          content = atob(content);
+          _this3.data = content;
+          react_dom_default.a.findDOMNode(_this3.refs.dataFileName).innerHTML = item.name;
+          var splitter = getSplitterByData(_this3.data);
+
+          _this3.setState({
+            splitter: splitter
+          });
+
+          _this3.updateView();
+        };
+
+        reader.readAsDataURL(item);
+      }
+    }
+  }, {
+    key: "updateFrames",
+    value: function updateFrames() {
+      if (!this.texture) return;
+      var frames = this.state.splitter.split(this.data, {
+        textureWidth: this.texture.width,
+        textureHeight: this.texture.height,
+        width: react_dom_default.a.findDOMNode(this.refs.width).value * 1 || 32,
+        height: react_dom_default.a.findDOMNode(this.refs.height).value * 1 || 32,
+        padding: react_dom_default.a.findDOMNode(this.refs.padding).value * 1 || 0
+      });
+
+      if (frames) {
+        this.frames = frames;
+        var canvas = react_dom_default.a.findDOMNode(this.refs.view);
+        var ctx = canvas.getContext('2d');
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+          for (var _iterator2 = this.frames[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var item = _step2.value;
+            var frame = item.frame;
+            var w = frame.w,
+                h = frame.h;
+
+            if (item.rotated) {
+              w = frame.h;
+              h = frame.w;
+            }
+
+            ctx.strokeStyle = "#00F";
+            ctx.fillStyle = "rgba(0,0,255,0.25)";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.fillRect(frame.x, frame.y, w, h);
+            ctx.rect(frame.x, frame.y, w, h);
+            ctx.moveTo(frame.x, frame.y);
+            ctx.lineTo(frame.x + w, frame.y + h);
+            ctx.stroke();
+          }
+        } catch (err) {
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+              _iterator2.return();
+            }
+          } finally {
+            if (_didIteratorError2) {
+              throw _iteratorError2;
+            }
+          }
+        }
+      }
+    }
+  }, {
+    key: "updateView",
+    value: function updateView() {
+      this.updateTexture();
+      this.updateFrames();
+    }
+  }, {
+    key: "changeSplitter",
+    value: function changeSplitter(e) {
+      var splitter = getSplitterByType(e.target.value);
+      this.state.splitter = splitter;
+      this.setState({
+        splitter: splitter
+      });
+      this.updateView();
+    }
+  }, {
+    key: "close",
+    value: function close() {
+      Observer.emit(GLOBAL_EVENT.HIDE_SHEET_SPLITTER);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var displayGridProperties = this.state.splitter.type === 'Grid' ? '' : 'none';
+      return react_default.a.createElement("div", {
+        className: "sheet-splitter-shader"
+      }, react_default.a.createElement("div", {
+        className: "sheet-splitter-content"
+      }, react_default.a.createElement("div", {
+        className: "sheet-splitter-top"
+      }, react_default.a.createElement("table", null, react_default.a.createElement("tbody", null, react_default.a.createElement("tr", null, react_default.a.createElement("td", null, react_default.a.createElement("div", {
+        className: "btn back-800 border-color-gray color-white file-upload"
+      }, utils_I18.f("SELECT_TEXTURE"), react_default.a.createElement("input", {
+        type: "file",
+        ref: "selectTextureInput",
+        accept: "image/png,image/jpg,image/jpeg,image/gif",
+        onChange: this.selectTexture
+      }))), react_default.a.createElement("td", null, react_default.a.createElement("div", {
+        className: "back-400 border-color-gray color-black sheet-splitter-info-text",
+        ref: "textureName"
+      }, "\xA0")), react_default.a.createElement("td", null, react_default.a.createElement("div", {
+        className: "btn back-800 border-color-gray color-white file-upload"
+      }, utils_I18.f("SELECT_DATA_FILE"), react_default.a.createElement("input", {
+        type: "file",
+        ref: "selectTextureInput",
+        onChange: this.selectDataFile
+      }))), react_default.a.createElement("td", null, react_default.a.createElement("div", {
+        className: "back-400 border-color-gray color-black sheet-splitter-info-text",
+        ref: "dataFileName"
+      }, "\xA0")))))), react_default.a.createElement("div", {
+        className: "sheet-splitter-view"
+      }, react_default.a.createElement("canvas", {
+        ref: "view"
+      })), react_default.a.createElement("div", {
+        className: "sheet-splitter-controls"
+      }, react_default.a.createElement("table", null, react_default.a.createElement("tbody", null, react_default.a.createElement("tr", null, react_default.a.createElement("td", null, utils_I18.f('FORMAT')), react_default.a.createElement("td", null, react_default.a.createElement("select", {
+        ref: "dataFormat",
+        className: "border-color-gray",
+        value: this.state.splitter.type,
+        onChange: this.changeSplitter
+      }, splitters.map(function (node) {
+        return react_default.a.createElement("option", {
+          key: "data-format-" + node.type,
+          defaultValue: node.type
+        }, node.type);
+      })))), react_default.a.createElement("tr", {
+        style: {
+          display: displayGridProperties
+        }
+      }, react_default.a.createElement("td", null, utils_I18.f('WIDTH')), react_default.a.createElement("td", null, react_default.a.createElement("input", {
+        type: "number",
+        ref: "width",
+        defaultValue: "128",
+        onChange: this.updateView
+      }))), react_default.a.createElement("tr", {
+        style: {
+          display: displayGridProperties
+        }
+      }, react_default.a.createElement("td", null, utils_I18.f('HEIGHT')), react_default.a.createElement("td", null, react_default.a.createElement("input", {
+        type: "number",
+        ref: "height",
+        defaultValue: "108",
+        onChange: this.updateView
+      }))), react_default.a.createElement("tr", {
+        style: {
+          display: displayGridProperties
+        }
+      }, react_default.a.createElement("td", null, utils_I18.f('PADDING')), react_default.a.createElement("td", null, react_default.a.createElement("input", {
+        type: "number",
+        ref: "padding",
+        defaultValue: "0",
+        onChange: this.updateView
+      })))))), react_default.a.createElement("div", {
+        className: "sheet-splitter-bottom"
+      }, react_default.a.createElement("div", {
+        className: "btn back-800 border-color-gray color-white",
+        onClick: this.doSplit
+      }, utils_I18.f("SPLIT")), react_default.a.createElement("div", {
+        className: "btn back-800 border-color-gray color-white",
+        onClick: this.close
+      }, utils_I18.f("CLOSE")))));
+    }
+  }]);
+
+  return SheetSplitter;
+}(react_default.a.Component);
+
+/* harmony default export */ var ui_SheetSplitter = (SheetSplitter_SheetSplitter);
 // CONCATENATED MODULE: ./src/client/ui/MainLayout.jsx
 function MainLayout_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { MainLayout_typeof = function _typeof(obj) { return typeof obj; }; } else { MainLayout_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return MainLayout_typeof(obj); }
 
@@ -36067,6 +36976,7 @@ function MainLayout_assertThisInitialized(self) { if (self === void 0) { throw n
 
 
 
+
 var MainLayout_MainLayout =
 /*#__PURE__*/
 function (_React$Component) {
@@ -36079,11 +36989,12 @@ function (_React$Component) {
 
     _this = MainLayout_possibleConstructorReturn(this, MainLayout_getPrototypeOf(MainLayout).call(this, props));
     _this.state = {
-      messageBox: null,
+      messageBox: false,
       shader: false,
       about: false,
       editCustomExporter: false,
-      updater: null
+      updater: false,
+      sheetSplitter: false
     };
     _this.closeMessage = _this.closeMessage.bind(MainLayout_assertThisInitialized(MainLayout_assertThisInitialized(_this)));
     Observer.on(GLOBAL_EVENT.SHOW_MESSAGE, _this.showMessage, MainLayout_assertThisInitialized(MainLayout_assertThisInitialized(_this)));
@@ -36095,6 +37006,8 @@ function (_React$Component) {
     Observer.on(GLOBAL_EVENT.HIDE_EDIT_CUSTOM_EXPORTER, _this.hideEditCustomExporter, MainLayout_assertThisInitialized(MainLayout_assertThisInitialized(_this)));
     Observer.on(GLOBAL_EVENT.UPDATE_AVAILABLE, _this.onUpdateAvailable, MainLayout_assertThisInitialized(MainLayout_assertThisInitialized(_this)));
     Observer.on(GLOBAL_EVENT.HIDE_UPDATER, _this.hideUpdater, MainLayout_assertThisInitialized(MainLayout_assertThisInitialized(_this)));
+    Observer.on(GLOBAL_EVENT.SHOW_SHEET_SPLITTER, _this.showSheetSplitter, MainLayout_assertThisInitialized(MainLayout_assertThisInitialized(_this)));
+    Observer.on(GLOBAL_EVENT.HIDE_SHEET_SPLITTER, _this.hideSheetSplitter, MainLayout_assertThisInitialized(MainLayout_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -36176,6 +37089,20 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "showSheetSplitter",
+    value: function showSheetSplitter() {
+      this.setState({
+        sheetSplitter: true
+      });
+    }
+  }, {
+    key: "hideSheetSplitter",
+    value: function hideSheetSplitter() {
+      this.setState({
+        sheetSplitter: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var shader = this.state.shader ? react_default.a.createElement(ui_ProcessingShader, null) : null;
@@ -36184,11 +37111,12 @@ function (_React$Component) {
       var updater = this.state.updater ? react_default.a.createElement(ui_Updater, {
         data: this.state.updater
       }) : null;
+      var sheetSplitter = this.state.sheetSplitter ? react_default.a.createElement(ui_SheetSplitter, null) : null;
       return react_default.a.createElement("div", {
         className: "main-wrapper"
       }, react_default.a.createElement(ui_MainHeader, null), react_default.a.createElement("div", {
         className: "main-layout border-color-gray"
-      }, react_default.a.createElement(ui_ImagesList, null), react_default.a.createElement(ui_PackProperties, null), react_default.a.createElement(ui_PackResults, null), shader, react_default.a.createElement(ui_OldBrowserBlocker, null), about, editCustomExporter, updater, this.state.messageBox));
+      }, react_default.a.createElement(ui_ImagesList, null), react_default.a.createElement(ui_PackProperties, null), react_default.a.createElement(ui_PackResults, null), react_default.a.createElement(ui_OldBrowserBlocker, null), about, editCustomExporter, sheetSplitter, updater, shader, this.state.messageBox));
     }
   }]);
 
