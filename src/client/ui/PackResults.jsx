@@ -65,10 +65,6 @@ class PackResults extends React.Component {
         this.setState({playerVisible: !this.state.playerVisible});
     }
 
-    showSplitter() {
-        Observer.emit(GLOBAL_EVENT.SHOW_SHEET_SPLITTER);
-    }
-
     render() {
        
         let views = [], ix=0;
@@ -123,7 +119,6 @@ class PackResults extends React.Component {
                                     </td>
                                     <td>
                                         <div className="btn back-800 border-color-gray color-white" onClick={this.toggleSpritesPlayer}>{I18.f("SHOW_SPRITES")}</div>
-                                        <div className="btn back-800 border-color-gray color-white" onClick={this.showSplitter}>{I18.f("SPLITTER")}</div>
                                     </td>
                                 </tr>
                                 </tbody>

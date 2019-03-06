@@ -65,36 +65,9 @@ html, body {
     width: 100px;
 }
 
-.main-header-donate {
-    padding-top: 10px;
-    position: absolute;
-    left: 50%;
-    top: 0;
-    margin-left: -46px;
-}
-
-.main-header-donate img {
-    visibility: hidden;
-}
-
-.main-header-fb {
+.main-header-controls {
     float: right;
-    padding-right: 8px;
-}
-
-.main-header-fb > div {
-    line-height: 20px;
-}
-
-.main-header-twitter {
-    float: right;
-    padding-right: 8px;
-    line-height: 20px;
-    padding-top: 25px;
-}
-
-.main-header-twitter a {
-    visibility: hidden;
+    margin-right: 16px;
 }
 
 .main-header-about {
@@ -419,7 +392,6 @@ html, body {
 
 .results-view-footer table {
     margin: auto;
-    width: 600px;
 }
 
 .texture-view {
@@ -960,7 +932,7 @@ html, body {
 
 .sheet-splitter-controls {
     float: right;
-    width: 150px;
+    width: 155px;
     height: 420px;
     padding-right: 10px;
 }

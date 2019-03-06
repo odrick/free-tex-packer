@@ -130,3 +130,4 @@ SPLIT;Split
 SELECT_TEXTURE;Texture
 SELECT_DATA_FILE;Data file
 SPLITTER;Split sheet
+SPLITTER_ERROR_NO_FRAMES;Sprites not found. Probably, atlas format is incorrect.

@@ -38,7 +38,14 @@ class SheetSplitter extends React.Component {
     }
     
     doSplit() {
-        if(!this.frames || !this.frames.length) return;
+        Observer.emit(GLOBAL_EVENT.SHOW_SHADER);
+        
+        if(!this.frames || !this.frames.length) {
+            Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+            Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f('SPLITTER_ERROR_NO_FRAMES'));
+            
+            return;
+        }
         
         let ctx = this.buffer.getContext('2d');
         let files = [];
@@ -86,6 +93,8 @@ class SheetSplitter extends React.Component {
         }
         
         Downloader.run(files, 'atlas.zip');
+
+        Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
     }
 
     selectTexture(e) {
@@ -195,7 +204,11 @@ class SheetSplitter extends React.Component {
     }
 
     changeSplitter(e) {
-        this.setState({splitter: getSplitterByType(e.target.value)});
+        let splitter = getSplitterByType(e.target.value);
+        
+        this.state.splitter = splitter;
+        
+        this.setState({splitter: splitter});
         this.updateView();
     }
 

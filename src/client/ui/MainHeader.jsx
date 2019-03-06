@@ -18,6 +18,10 @@ class MainHeader extends React.Component {
     changeLanguage(e) {
         Observer.emit(GLOBAL_EVENT.CHANGE_LANG, e.target.value);
     }
+
+    showSplitter() {
+        Observer.emit(GLOBAL_EVENT.SHOW_SHEET_SPLITTER);
+    }
     
     render() {
         return (
@@ -44,6 +48,10 @@ class MainHeader extends React.Component {
                             })
                         }
                     </select>
+                </div>
+
+                <div className="main-header-controls">
+                    <div className="btn back-700 border-color-gray color-white" onClick={this.showSplitter}>{I18.f("SPLITTER")}</div>
                 </div>
             </div>
         );
