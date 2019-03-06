@@ -2,7 +2,7 @@
 
 ![logo](https://raw.githubusercontent.com/odrick/free-tex-packer/master/electron/build/icons/96x96.png)
 
-Free texture packer creates sprite sheets for you game or site. Rotation, trimming, multipacking, various export formats (json, xml, css, pixi.js, phaser, cocos2d). Zip support. TinyPNG support.
+Free texture packer creates sprite sheets for you game or site. Rotation, trimming, multipacking, various export formats (json, xml, css, pixi.js, phaser, cocos2d). Zip support. TinyPNG support. Split sheet tool.
 
 ![screenshot](http://free-tex-packer.com/wp-content/uploads/2019/01/screenshot.png)
 
