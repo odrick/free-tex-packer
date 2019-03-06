@@ -76,7 +76,7 @@ class SheetSplitter extends React.Component {
                     item.spriteSourceSize.w, item.spriteSourceSize.h);
             }
 
-            let ext = item.name.split('.').pop();
+            let ext = item.name.split('.').pop().toLowerCase();
             if(!ext) {
                 ext = 'png';
                 item.name += '.' + ext;
