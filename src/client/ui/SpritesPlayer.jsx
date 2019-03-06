@@ -8,7 +8,7 @@ class SpritesPlayer extends React.Component {
     
     constructor(props) {
         super(props);
-        
+                
         this.textures = [];
 
         this.currentTextures = [];
@@ -24,6 +24,7 @@ class SpritesPlayer extends React.Component {
         this.update = this.update.bind(this);
         this.forceUpdate = this.forceUpdate.bind(this);
         this.updateCurrentTextures = this.updateCurrentTextures.bind(this);
+        this.onSpeedChange = this.onSpeedChange.bind(this);
 
         Observer.on(GLOBAL_EVENT.IMAGES_LIST_SELECTED_CHANGED, this.onImagesSelected, this);
     }
@@ -81,6 +82,11 @@ class SpritesPlayer extends React.Component {
     forceUpdate(e) {
         let key = e.keyCode || e.which;
         if(key === 13) this.updateCurrentTextures();
+    }
+
+    onSpeedChange(e)
+    {
+        this.refs.fps.innerHTML = e.target.value + " fps";
     }
 
     updateCurrentTextures() {
@@ -178,7 +184,22 @@ class SpritesPlayer extends React.Component {
                         <canvas ref="buffer" className="player-buffer"> </canvas>
                     </div>
                     <div>
-                        {I18.f("ANIMATION_SPEED")} <input type="range" ref="speed" max="60" min="1" defaultValue="10"/>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    {I18.f("ANIMATION_SPEED")}
+                                </td>
+                                <td>
+                                    <input type="range" ref="speed" max="60" min="1" defaultValue="10" onChange={this.onSpeedChange}/>                                    
+                                </td>
+                                <td>                                    
+                                    <div ref="fps">10 fps</div>                                    
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        
                     </div>
                 </div>
             </div>
