@@ -1,7 +1,7 @@
 {
   "name": "free-tex-packer",
   "displayName": "Free texture packer",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "Free online texture packer",
   "url": "http://free-tex-packer.com",
   "download": "http://free-tex-packer.com/download",
@@ -69,6 +69,7 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
-    "maxrects-packer": "^2.0.0"
+    "maxrects-packer": "^2.0.0",
+    "plist": "^3.0.1"
   }
 }

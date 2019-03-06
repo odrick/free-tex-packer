@@ -15,6 +15,8 @@ class JsonHash extends Splitter {
     static split(data, options) {
         let res = [];
 
+        if(!JsonHash.check(data)) return res;
+
         try {
             let json = JSON.parse(data);
             

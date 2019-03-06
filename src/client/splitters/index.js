@@ -1,11 +1,13 @@
 import Grid from './Grid';
 import JsonHash from './JsonHash';
 import JsonArray from './JsonArray';
+import UIKit from './UIKit';
 
 const list = [
     Grid,
     JsonHash,
-    JsonArray
+    JsonArray,
+    UIKit
 ];
 
 function getSplitterByType(type) {

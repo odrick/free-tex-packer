@@ -14,6 +14,8 @@ class JsonArray extends Splitter {
 
     static split(data, options) {
         let res = [];
+        
+        if(!JsonArray.check(data)) return res;
 
         try {
             let json = JSON.parse(data);

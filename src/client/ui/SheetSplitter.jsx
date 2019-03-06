@@ -22,6 +22,9 @@ class SheetSplitter extends React.Component {
         this.texture = null;
         this.data = null;
         this.frames = null;
+        
+        this.textureName = '';
+        this.dataName = '';
 
         this.buffer = document.createElement('canvas');
         
@@ -92,7 +95,7 @@ class SheetSplitter extends React.Component {
             });
         }
         
-        Downloader.run(files, 'atlas.zip');
+        Downloader.run(files, this.textureName + '.zip');
 
         Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
     }
@@ -104,8 +107,11 @@ class SheetSplitter extends React.Component {
             let loader = new LocalImagesLoader();
             loader.load(e.target.files, null, data => {
                 let keys = Object.keys(data);
-                this.texture = data[keys[0]];
-                ReactDOM.findDOMNode(this.refs.textureName).innerHTML = keys[0];
+                
+                this.textureName = keys[0]; 
+                
+                this.texture = data[this.textureName];
+                ReactDOM.findDOMNode(this.refs.textureName).innerHTML = this.textureName;
                 
                 this.updateView();
 
@@ -144,7 +150,8 @@ class SheetSplitter extends React.Component {
                 
                 this.data = content;
 
-                ReactDOM.findDOMNode(this.refs.dataFileName).innerHTML = item.name;
+                this.dataName = item.name;
+                ReactDOM.findDOMNode(this.refs.dataFileName).innerHTML = this.dataName;
                 
                 let splitter = getSplitterByData(this.data);
                 this.setState({splitter: splitter});
