@@ -10,6 +10,7 @@ import OldBrowserBlocker from './OldBrowserBlocker.jsx';
 import About from './About.jsx';
 import Updater from './Updater.jsx';
 import EditCustomExporter from './EditCustomExporter.jsx';
+import SheetSplitter from './SheetSplitter.jsx';
 
 import {Observer, GLOBAL_EVENT} from '../Observer';
 
@@ -18,11 +19,12 @@ class MainLayout extends React.Component {
         super(props);
 
         this.state = {
-            messageBox: null,
+            messageBox: false,
             shader: false,
             about: false,
             editCustomExporter: false,
-            updater: null
+            updater: false,
+            sheetSplitter: false
         };
 
         this.closeMessage = this.closeMessage.bind(this);
@@ -36,6 +38,8 @@ class MainLayout extends React.Component {
         Observer.on(GLOBAL_EVENT.HIDE_EDIT_CUSTOM_EXPORTER, this.hideEditCustomExporter, this);
         Observer.on(GLOBAL_EVENT.UPDATE_AVAILABLE, this.onUpdateAvailable, this);
         Observer.on(GLOBAL_EVENT.HIDE_UPDATER, this.hideUpdater, this);
+        Observer.on(GLOBAL_EVENT.SHOW_SHEET_SPLITTER, this.showSheetSplitter, this);
+        Observer.on(GLOBAL_EVENT.HIDE_SHEET_SPLITTER, this.hideSheetSplitter, this);
     }
 
     onUpdateAvailable(info) {
@@ -80,12 +84,21 @@ class MainLayout extends React.Component {
     hideEditCustomExporter() {
         this.setState({editCustomExporter: false});
     }
+
+    showSheetSplitter() {
+        this.setState({sheetSplitter: true});    
+    }
+
+    hideSheetSplitter() {
+        this.setState({sheetSplitter: false});
+    }
     
     render() {
         let shader = this.state.shader ? (<ProcessingShader/>) : null;
         let about = this.state.about ? (<About/>) : null;
         let editCustomExporter = this.state.editCustomExporter ? (<EditCustomExporter/>) : null;
         let updater = this.state.updater ? (<Updater data={this.state.updater}/>) : null;
+        let sheetSplitter = this.state.sheetSplitter ? (<SheetSplitter/>) : null;
         
         return (
             
@@ -96,11 +109,12 @@ class MainLayout extends React.Component {
                     <ImagesList/>
                     <PackProperties/>
                     <PackResults/>
-                    {shader}
                     <OldBrowserBlocker/>
                     {about}
                     {editCustomExporter}
+                    {sheetSplitter}
                     {updater}
+                    {shader}
                     {this.state.messageBox}
                 </div>
             </div>

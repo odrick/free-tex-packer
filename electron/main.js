@@ -229,6 +229,13 @@ function buildMenu() {
             {label: LOCALE_STRINGS.MENU_ACTIONS_EXPORT, actionName: 'action-export', click: sendMessage, accelerator: 'CmdOrCtrl+E'}
         ]
     });
+
+    template.push({
+        label: LOCALE_STRINGS.MENU_TOOLS,
+        submenu: [
+            {label: LOCALE_STRINGS.MENU_TOOLS_SPLITTER, actionName: 'action-show-splitter', click: sendMessage,}
+        ]
+    });
     
     let langs = [];
     if(APP_INFO.localizations) {
