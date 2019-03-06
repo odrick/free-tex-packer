@@ -20,7 +20,7 @@ DELETE;Удалить
 DELETE_TITLE;Удалить выбранные изображения
 DISPLAY_OUTLINES;Контуры:
 SCALE;Масштаб:
-SHOW_SPRITES;Показать спрайты
+SHOW_SPRITES;Анимации
 SPRITE_NAME;Название спрайта:
 ANIMATION_SPEED;Скорость анимации:
 TEXTURE_NAME;Имя текстуры:
@@ -126,3 +126,7 @@ CONTEXT_MENU_COPY;Копировать
 CONTEXT_MENU_PASTE;Вставить
 CONTEXT_MENU_DELETE;Удалить
 CONTEXT_MENU_SELECT_ALL;Выделить все
+SPLIT;Разделить
+SELECT_TEXTURE;Текстура
+SELECT_DATA_FILE;Данные
+SPLITTER;Разделить
