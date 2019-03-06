@@ -112,6 +112,8 @@ MENU_ACTIONS_SELECT_ALL;Seleccionar todo
 MENU_ACTIONS_DELETE;Borrar
 MENU_ACTIONS_CLEAR;Limpiar
 MENU_ACTIONS_EXPORT;Exportar
+MENU_TOOLS;Instrumentos
+MENU_TOOLS_SPLITTER;Desembalaje atlas
 MENU_LANGUAGE;Idioma
 MENU_HELP;Ayuda
 MENU_HELP_ABOUT;Sobre
@@ -126,4 +128,9 @@ CONTEXT_MENU_CUT;Cortar
 CONTEXT_MENU_COPY;Copiar
 CONTEXT_MENU_PASTE;Pegar
 CONTEXT_MENU_DELETE;Borrar
-CONTEXT_MENU_SELECT_ALL;Selecionar todo
+Desembalaje;Selecionar todo
+SPLIT;Desembalaje
+SELECT_TEXTURE;Textura
+SELECT_DATA_FILE;Datos
+SPLITTER;Desembalaje atlas
+SPLITTER_ERROR_NO_FRAMES;No se ha encontrado ningún sprite. Quizás el formato del atlas sea incorrecto.
