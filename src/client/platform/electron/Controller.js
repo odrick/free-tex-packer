@@ -70,6 +70,10 @@ class Controller {
             Observer.emit(GLOBAL_EVENT.START_EXPORT);
         });
         
+        ipcRenderer.on("action-show-splitter", (e, payload) => {
+            Observer.emit(GLOBAL_EVENT.SHOW_SHEET_SPLITTER);
+        });
+        
         ipcRenderer.on("update-available", (e, payload) => {
             Observer.emit(GLOBAL_EVENT.UPDATE_AVAILABLE, payload);
         });

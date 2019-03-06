@@ -111,6 +111,8 @@ MENU_ACTIONS_SELECT_ALL;Выделить все
 MENU_ACTIONS_DELETE;Удалить
 MENU_ACTIONS_CLEAR;Очистить
 MENU_ACTIONS_EXPORT;Экспорт
+MENU_TOOLS;Инструменты
+MENU_TOOLS_SPLITTER;Распаковка атласа
 MENU_LANGUAGE;Язык
 MENU_HELP;Помощь
 MENU_HELP_ABOUT;О программе
