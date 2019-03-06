@@ -23,7 +23,7 @@ class Grid extends Splitter {
                 while(name.length < nc.length) name = '0' + name;
                 
                 res.push({
-                    name: name + '.png',
+                    name: Splitter.fixFileName(name),
                     frame: {
                         x: x * fw + options.padding,
                         y: y * fh + options.padding,

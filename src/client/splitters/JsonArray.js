@@ -19,11 +19,7 @@ class JsonArray extends Splitter {
             let json = JSON.parse(data);
 
             for(let item of json.frames) {
-                let name = item.filename;
-                let ext = name.split('.').pop();
-                if(!ext) name = name + '.' + 'png';
-
-                item.name = name;
+                item.name = Splitter.fixFileName(item.filename);
                 res.push(item);
             }
         }

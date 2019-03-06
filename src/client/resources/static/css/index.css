@@ -480,6 +480,10 @@ html, body {
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
 }
 
+.player-fps {
+    min-width: 40px;
+}
+
 .player-buffer {
     width: 1px;
     height: 1px;

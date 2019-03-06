@@ -34957,6 +34957,7 @@ function (_React$Component) {
     _this.update = _this.update.bind(SpritesPlayer_assertThisInitialized(SpritesPlayer_assertThisInitialized(_this)));
     _this.forceUpdate = _this.forceUpdate.bind(SpritesPlayer_assertThisInitialized(SpritesPlayer_assertThisInitialized(_this)));
     _this.updateCurrentTextures = _this.updateCurrentTextures.bind(SpritesPlayer_assertThisInitialized(SpritesPlayer_assertThisInitialized(_this)));
+    _this.onSpeedChange = _this.onSpeedChange.bind(SpritesPlayer_assertThisInitialized(SpritesPlayer_assertThisInitialized(_this)));
     Observer.on(GLOBAL_EVENT.IMAGES_LIST_SELECTED_CHANGED, _this.onImagesSelected, SpritesPlayer_assertThisInitialized(SpritesPlayer_assertThisInitialized(_this)));
     return _this;
   }
@@ -35050,6 +35051,11 @@ function (_React$Component) {
     value: function forceUpdate(e) {
       var key = e.keyCode || e.which;
       if (key === 13) this.updateCurrentTextures();
+    }
+  }, {
+    key: "onSpeedChange",
+    value: function onSpeedChange(e) {
+      this.refs.fps.innerHTML = e.target.value + " fps";
     }
   }, {
     key: "updateCurrentTextures",
@@ -35156,13 +35162,17 @@ function (_React$Component) {
       }, " "), react_default.a.createElement("canvas", {
         ref: "buffer",
         className: "player-buffer"
-      }, " ")), react_default.a.createElement("div", null, utils_I18.f("ANIMATION_SPEED"), " ", react_default.a.createElement("input", {
+      }, " ")), react_default.a.createElement("div", null, react_default.a.createElement("table", null, react_default.a.createElement("tbody", null, react_default.a.createElement("tr", null, react_default.a.createElement("td", null, utils_I18.f("ANIMATION_SPEED")), react_default.a.createElement("td", null, react_default.a.createElement("input", {
         type: "range",
         ref: "speed",
         max: "60",
         min: "1",
-        defaultValue: "10"
-      }))));
+        defaultValue: "10",
+        onChange: this.onSpeedChange
+      })), react_default.a.createElement("td", null, react_default.a.createElement("div", {
+        ref: "fps",
+        className: "player-fps"
+      }, "10 fps"))))))));
     }
   }]);
 
@@ -36084,6 +36094,14 @@ function () {
     key: "split",
     value: function split(data, options) {}
   }, {
+    key: "fixFileName",
+    value: function fixFileName(name) {
+      var validExts = ['png', 'jpg', 'jpeg'];
+      var ext = name.split('.').pop().toLowerCase();
+      if (validExts.indexOf(ext) < 0) name += '.png';
+      return name;
+    }
+  }, {
     key: "type",
     get: function get() {
       return 'Default';
@@ -36182,7 +36200,7 @@ function Grid_setPrototypeOf(o, p) {
 
 
 
-var Grid =
+var Grid_Grid =
 /*#__PURE__*/
 function (_Splitter) {
   Grid_inherits(Grid, _Splitter);
@@ -36218,7 +36236,7 @@ function (_Splitter) {
           }
 
           res.push({
-            name: name + '.png',
+            name: splitters_Splitter.fixFileName(name),
             frame: {
               x: x * fw + options.padding,
               y: y * fh + options.padding,
@@ -36252,7 +36270,7 @@ function (_Splitter) {
   return Grid;
 }(splitters_Splitter);
 
-/* harmony default export */ var splitters_Grid = (Grid);
+/* harmony default export */ var splitters_Grid = (Grid_Grid);
 // CONCATENATED MODULE: ./src/client/splitters/JsonHash.js
 function JsonHash_typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { JsonHash_typeof2 = function _typeof2(obj) { return typeof obj; }; } else { JsonHash_typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return JsonHash_typeof2(obj); }
 
@@ -36341,7 +36359,7 @@ function JsonHash_setPrototypeOf(o, p) {
 
 
 
-var JsonHash =
+var JsonHash_JsonHash =
 /*#__PURE__*/
 function (_Splitter) {
   JsonHash_inherits(JsonHash, _Splitter);
@@ -36374,9 +36392,7 @@ function (_Splitter) {
         for (var _i = 0; _i < names.length; _i++) {
           var name = names[_i];
           var item = json.frames[name];
-          var ext = name.split('.').pop();
-          if (!ext) name = name + '.' + 'png';
-          item.name = name;
+          item.name = splitters_Splitter.fixFileName(name);
           res.push(item);
         }
       } catch (e) {}
@@ -36393,7 +36409,7 @@ function (_Splitter) {
   return JsonHash;
 }(splitters_Splitter);
 
-/* harmony default export */ var splitters_JsonHash = (JsonHash);
+/* harmony default export */ var splitters_JsonHash = (JsonHash_JsonHash);
 // CONCATENATED MODULE: ./src/client/splitters/JsonArray.js
 function JsonArray_typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { JsonArray_typeof2 = function _typeof2(obj) { return typeof obj; }; } else { JsonArray_typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return JsonArray_typeof2(obj); }
 
@@ -36482,7 +36498,7 @@ function JsonArray_setPrototypeOf(o, p) {
 
 
 
-var JsonArray =
+var JsonArray_JsonArray =
 /*#__PURE__*/
 function (_Splitter) {
   JsonArray_inherits(JsonArray, _Splitter);
@@ -36517,10 +36533,7 @@ function (_Splitter) {
         try {
           for (var _iterator = json.frames[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var item = _step.value;
-            var name = item.filename;
-            var ext = name.split('.').pop();
-            if (!ext) name = name + '.' + 'png';
-            item.name = name;
+            item.name = splitters_Splitter.fixFileName(item.filename);
             res.push(item);
           }
         } catch (err) {
@@ -36551,7 +36564,7 @@ function (_Splitter) {
   return JsonArray;
 }(splitters_Splitter);
 
-/* harmony default export */ var splitters_JsonArray = (JsonArray);
+/* harmony default export */ var splitters_JsonArray = (JsonArray_JsonArray);
 // CONCATENATED MODULE: ./src/client/splitters/index.js
 
 

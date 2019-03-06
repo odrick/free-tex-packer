@@ -22,10 +22,8 @@ class JsonHash extends Splitter {
             
             for(let name of names) {
                 let item = json.frames[name];
-                let ext = name.split('.').pop();
-                if(!ext) name = name + '.' + 'png';
 
-                item.name = name;
+                item.name = Splitter.fixFileName(name);
                 res.push(item);
             }
         }
