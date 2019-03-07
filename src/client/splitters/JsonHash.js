@@ -15,6 +15,8 @@ class JsonHash extends Splitter {
     static split(data, options) {
         let res = [];
 
+        if(!JsonHash.check(data)) return res;
+
         try {
             let json = JSON.parse(data);
             
@@ -22,10 +24,8 @@ class JsonHash extends Splitter {
             
             for(let name of names) {
                 let item = json.frames[name];
-                let ext = name.split('.').pop();
-                if(!ext) name = name + '.' + 'png';
 
-                item.name = name;
+                item.name = Splitter.fixFileName(name);
                 res.push(item);
             }
         }

@@ -194,7 +194,7 @@ class SpritesPlayer extends React.Component {
                                     <input type="range" ref="speed" max="60" min="1" defaultValue="10" onChange={this.onSpeedChange}/>                                    
                                 </td>
                                 <td>                                    
-                                    <div ref="fps">10 fps</div>                                    
+                                    <div ref="fps" className="player-fps">10 fps</div>                                    
                                 </td>
                             </tr>
                             </tbody>
