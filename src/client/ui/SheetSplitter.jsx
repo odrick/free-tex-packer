@@ -239,7 +239,7 @@ class SheetSplitter extends React.Component {
         let displayType = this.state.splitter.type;
         
         let displayGridProperties = 'none';
-        let displayJsonHashProperties = 'none';
+        let displayJsonProperties = 'none';
         
         switch (displayType) {
             case "Grid": {
@@ -247,7 +247,11 @@ class SheetSplitter extends React.Component {
                 break;
             }            
             case "JSON (hash)": {
-                displayJsonHashProperties = '';
+                displayJsonProperties = '';
+                break;
+            }
+            case "JSON (array)": {
+                displayJsonProperties = '';
                 break;
             }
         }
@@ -299,10 +303,10 @@ class SheetSplitter extends React.Component {
                                         </select>
                                     </td>
                                 </tr>
-                                <tr style={{display: displayJsonHashProperties}}>
-                                    <td title={I18.f("HOLD_TRIM_TITLE")}>{I18.f('HOLD_TRIM')}</td>
+                                <tr style={{display: displayJsonProperties}}>
+                                    <td>{I18.f('HOLD_TRIM')}</td>
                                     <td>
-                                        <input ref="holdtrim" type="checkbox" className="border-color-gray" defaultChecked={"checked"}/>
+                                        <input ref="holdtrim" type="checkbox" className="border-color-gray"/>
                                     </td>
                                 </tr>
                                 <tr style={{display: displayGridProperties}}>

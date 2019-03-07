@@ -881,7 +881,7 @@ html, body {
 }
 
 .sheet-splitter-content {
-    width: 700px;
+    width: 720px;
     height: 500px;
     background: #fff;
     margin: auto;
@@ -942,7 +942,7 @@ html, body {
 
 .sheet-splitter-controls {
     float: right;
-    width: 175px;
+    width: 195px;
     height: 420px;
     padding-right: 10px;
 }
@@ -951,14 +951,14 @@ html, body {
     width: 104px;
 }
 
-.sheet-splitter-controls input {
+.sheet-splitter-controls input[type=number] {
     width: 100px;
 }
 
 .sheet-splitter-controls td {
     font-weight: bold;
     padding: 2px;
-    min-width: 70px;
+    min-width: 90px;
     white-space: nowrap;
     text-align: left;
     font-size: 12px;
