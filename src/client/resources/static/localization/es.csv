@@ -91,6 +91,7 @@ ABOUT_WEB;Web version:
 ABOUT_LIBS;Used libs:
 ABOUT_GULP_VERSION;Gulp module:
 ABOUT_WEBPACK_VERSION;Webpack plugin:
+ABOUT_CONTRIBUTORS;Contribuyentes:
 EXPORTER_ERROR;Error de exportación: %s
 CUSTOM_EXPORTER_ERROR;Error de plantilla: %s
 FILE_EXT;Extensión de fichero:

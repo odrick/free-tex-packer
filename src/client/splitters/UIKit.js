@@ -3,7 +3,7 @@ import Splitter from './Splitter';
 import plist from 'plist';
 
 class UIKit extends Splitter {
-    static check(data) {
+    static check(data, cb) {
         try {
             let atlas = plist.parse(data);
             
@@ -11,28 +11,30 @@ class UIKit extends Splitter {
                 let names = Object.keys(atlas.frames);
                 let frame = atlas.frames[names[0]];
                 
-                if(!frame) return false;
+                if(!frame) {
+                    cb(false);
+                    return;
+                }
                 
-                return frame.x !== undefined &&
-                       frame.y !== undefined &&
-                       frame.w !== undefined &&
-                       frame.h !== undefined &&
-                       frame.oX !== undefined &&
-                       frame.oY !== undefined &&
-                       frame.oW !== undefined &&
-                       frame.oH !== undefined;
+                cb(frame.x !== undefined &&
+                   frame.y !== undefined &&
+                   frame.w !== undefined &&
+                   frame.h !== undefined &&
+                   frame.oX !== undefined &&
+                   frame.oY !== undefined &&
+                   frame.oW !== undefined &&
+                   frame.oH !== undefined);
             }
-            return false;
+            
+            cb(false);
         }
         catch(e) {
-            return false;
+            cb(false);
         }
     }
     
-    static split(data, options) {
+    static split(data, options, cb) {
         let res = [];
-        
-        if(!UIKit.check(data)) return res;
 
         try {
             let atlas = plist.parse(data);
@@ -65,7 +67,7 @@ class UIKit extends Splitter {
         catch(e) {
         }
         
-        return res;
+        cb(res);
     }
 
     static get type() {

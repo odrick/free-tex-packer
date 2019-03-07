@@ -4,6 +4,7 @@ import {Observer, GLOBAL_EVENT} from '../Observer';
 import I18 from '../utils/I18';
 
 import appInfo from '../../../package.json';
+import exporters from "../exporters";
 
 class About extends React.Component {
     constructor(props) {
@@ -39,9 +40,6 @@ class About extends React.Component {
                     
                     <div className="about-logo"></div>
                     
-                    <div className="about-author">
-                        <a href={appInfo.authorSite} target="_blank" className="color-800">{appInfo.author}</a>
-                    </div>
                     <div className="about-app-info">
                         <span className="about-app-name">{appInfo.displayName}</span>
                         <span className="about-app-version">{appInfo.version}</span>
@@ -88,6 +86,21 @@ class About extends React.Component {
                                         <div>
                                             <a href="https://www.npmjs.com/package/maxrects-packer" target="_blank" className="color-800">MaxRectsPacker</a>
                                         </div>
+                                    </td>
+                                </tr>
+                            
+                                <tr>
+                                    <td>{I18.f("ABOUT_CONTRIBUTORS")}</td>
+                                    <td>
+                                        {
+                                            appInfo.contributors.map(contributor => {
+                                                return (
+                                                    <div key={'contributor-' + contributor.name}>
+                                                        <a href={contributor.homepage} target="_blank" className="color-800">{contributor.name}</a>
+                                                    </div>
+                                                )
+                                            })
+                                        }
                                     </td>
                                 </tr>
                             </tbody>

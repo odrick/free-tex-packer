@@ -1,11 +1,11 @@
 import Splitter from './Splitter';
 
 class Grid extends Splitter {
-    static check() {
-        return true;
+    static check(data, cb) {
+        cb(true);
     }
 
-    static split(data, options) {
+    static split(data, options, cb) {
         let res = [];
         
         let fw = (options.width + options.padding * 2);
@@ -31,8 +31,8 @@ class Grid extends Splitter {
                         h: options.height
                     },
                     spriteSourceSize: {
-                        x: x * fw + options.padding,
-                        y: y * fh + options.padding,
+                        x: 0,
+                        y: 0,
                         w: options.width,
                         h: options.height
                     },
@@ -46,7 +46,7 @@ class Grid extends Splitter {
             }
         }
         
-        return res;
+        cb(res);
     }
 
     static get type() {
