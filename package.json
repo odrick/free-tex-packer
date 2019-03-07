@@ -1,7 +1,7 @@
 {
   "name": "free-tex-packer",
   "displayName": "Free texture packer",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "description": "Free online texture packer",
   "url": "http://free-tex-packer.com",
   "download": "http://free-tex-packer.com/download",
@@ -12,6 +12,11 @@
     "en",
     "es",
     "ru"
+  ],
+  "contributors": [
+      {"name": "Alexander Norinchak aka Odrick", "homepage": "https://github.com/odrick"},  
+      {"name": "Rubén aka rtalon83", "homepage": "https://github.com/rtalon83"},  
+      {"name": "Querijn Heijmans aka Querijn", "homepage": "https://github.com/Querijn"}  
   ],
   "scripts": {
     "start": "webpack-dev-server --host 127.0.0.1 --port 4000",
