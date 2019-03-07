@@ -135,3 +135,5 @@ SELECT_TEXTURE;Textura
 SELECT_DATA_FILE;Datos
 SPLITTER;Desembalaje atlas
 SPLITTER_ERROR_NO_FRAMES;No se ha encontrado ningún sprite. Quizás el formato del atlas sea incorrecto.
+HOLD_TRIM;Mantener corte
+HOLD_TRIM_TITLE;Mantener la opción de corte
