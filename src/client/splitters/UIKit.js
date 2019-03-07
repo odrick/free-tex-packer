@@ -43,6 +43,8 @@ class UIKit extends Splitter {
             for(let name of names) {
                 let item = atlas.frames[name];
                 
+                let trimmed = item.w < item.oW || item.h < item.oH;
+                
                 res.push({
                     name: Splitter.fixFileName(name),
                     frame: {
@@ -60,7 +62,9 @@ class UIKit extends Splitter {
                     sourceSize: {
                         w: item.oW,
                         h: item.oH
-                    }
+                    },
+                    trimmed: trimmed,
+                    rotated: false
                 });
             }
         }

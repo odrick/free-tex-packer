@@ -39,7 +39,9 @@ class Grid extends Splitter {
                     sourceSize: {
                         w: options.width,
                         h: options.height
-                    }
+                    },
+                    trimmed: false,
+                    rotated: false
                 });
 
                 ix++;
