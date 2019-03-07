@@ -1,12 +1,14 @@
 import Grid from './Grid';
 import JsonHash from './JsonHash';
 import JsonArray from './JsonArray';
+import XML from './XML';
 import UIKit from './UIKit';
 
 const list = [
     Grid,
     JsonHash,
     JsonArray,
+    XML,
     UIKit
 ];
 
@@ -19,10 +21,17 @@ function getSplitterByType(type) {
     return null;
 }
 
-function getSplitterByData(data) {
+function getSplitterByData(data, cb) {
     for(let item of list) {
-        if(item.type !== Grid.type && item.check(data)) {
-            return item;
+        if(item.type !== Grid.type) {
+            item.check(data, (checked) => {
+                if(checked) {
+                    if(cb) {
+                        cb(item);
+                        cb = null;
+                    }
+                }
+            });
         }
     }
     

@@ -3,8 +3,6 @@ import React from 'react';
 import {Observer, GLOBAL_EVENT} from '../Observer';
 import I18 from '../utils/I18';
 
-import FileSystem from 'platform/FileSystem';
-
 import splitters, {getSplitterByData, getSplitterByType} from '../splitters';
 import {getDefaultSplitter} from '../splitters';
 import LocalImagesLoader from "../utils/LocalImagesLoader";
@@ -56,6 +54,8 @@ class SheetSplitter extends React.Component {
         for(let item of this.frames) {
             this.buffer.width = item.sourceSize.w;
             this.buffer.height = item.sourceSize.h;
+            
+            ctx.clearRect(0, 0, this.buffer.width, this.buffer.height);
             
             if(item.rotated) {
                 ctx.save();
@@ -129,6 +129,7 @@ class SheetSplitter extends React.Component {
             canvas.style.display = '';
             
             let ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(this.texture, 0, 0);
         }
         else {
@@ -153,10 +154,10 @@ class SheetSplitter extends React.Component {
                 this.dataName = item.name;
                 ReactDOM.findDOMNode(this.refs.dataFileName).innerHTML = this.dataName;
                 
-                let splitter = getSplitterByData(this.data);
-                this.setState({splitter: splitter});
-                
-                this.updateView();
+                getSplitterByData(this.data, (splitter) => {
+                    this.setState({splitter: splitter});
+                    this.updateView();
+                });
             };
 
             reader.readAsDataURL(item);
@@ -166,43 +167,43 @@ class SheetSplitter extends React.Component {
     updateFrames() {
         if(!this.texture) return;
         
-        let frames = this.state.splitter.split(this.data, {
+        this.state.splitter.split(this.data, {
             textureWidth: this.texture.width,
             textureHeight: this.texture.height,
             width: ReactDOM.findDOMNode(this.refs.width).value * 1 || 32,
             height: ReactDOM.findDOMNode(this.refs.height).value * 1 || 32,
             padding: ReactDOM.findDOMNode(this.refs.padding).value * 1 || 0
-        });
-        
-        if(frames) {
-            this.frames = frames;
-            
-            let canvas = ReactDOM.findDOMNode(this.refs.view);
-            let ctx = canvas.getContext('2d');
-            
-            for(let item of this.frames) {
-                let frame = item.frame;
-                
-                let w = frame.w, h = frame.h;
-                if(item.rotated) {
-                    w = frame.h;
-                    h = frame.w;
+        }, frames => {
+            if(frames) {
+                this.frames = frames;
+
+                let canvas = ReactDOM.findDOMNode(this.refs.view);
+                let ctx = canvas.getContext('2d');
+
+                for(let item of this.frames) {
+                    let frame = item.frame;
+
+                    let w = frame.w, h = frame.h;
+                    if(item.rotated) {
+                        w = frame.h;
+                        h = frame.w;
+                    }
+
+                    ctx.strokeStyle = "#00F";
+                    ctx.fillStyle = "rgba(0,0,255,0.25)";
+                    ctx.lineWidth = 1;
+
+                    ctx.beginPath();
+                    ctx.fillRect(frame.x, frame.y, w, h);
+                    ctx.rect(frame.x, frame.y, w, h);
+                    ctx.moveTo(frame.x, frame.y);
+                    ctx.lineTo(frame.x + w, frame.y + h);
+                    ctx.stroke();
+
                 }
 
-                ctx.strokeStyle = "#00F";
-                ctx.fillStyle = "rgba(0,0,255,0.25)";
-                ctx.lineWidth = 1;
-
-                ctx.beginPath();
-                ctx.fillRect(frame.x, frame.y, w, h);
-                ctx.rect(frame.x, frame.y, w, h);
-                ctx.moveTo(frame.x, frame.y);
-                ctx.lineTo(frame.x + w, frame.y + h);
-                ctx.stroke();
-                
             }
-            
-        }
+        });
     }
     
     updateView() {
@@ -276,13 +277,13 @@ class SheetSplitter extends React.Component {
                                 <tr style={{display: displayGridProperties}}>
                                     <td>{I18.f('WIDTH')}</td>
                                     <td>
-                                        <input type="number" ref='width' defaultValue='128' onChange={this.updateView}/>
+                                        <input type="number" ref='width' defaultValue='64' onChange={this.updateView}/>
                                     </td>
                                 </tr>
                                 <tr style={{display: displayGridProperties}}>
                                     <td>{I18.f('HEIGHT')}</td>
                                     <td>
-                                        <input type="number" ref='height' defaultValue='108' onChange={this.updateView}/>
+                                        <input type="number" ref='height' defaultValue='64' onChange={this.updateView}/>
                                     </td>
                                 </tr>
                                 <tr style={{display: displayGridProperties}}>

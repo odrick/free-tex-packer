@@ -1,21 +1,18 @@
 import Splitter from './Splitter';
 
 class JsonHash extends Splitter {
-    static check(data) {
+    static check(data, cb) {
         try {
             let json = JSON.parse(data);
-            if(json && json.frames && !Array.isArray(json.frames)) return true;
+            cb(json && json.frames && !Array.isArray(json.frames));
         }
         catch(e) {
+            cb(false);
         }
-        
-        return false;
     }
     
-    static split(data, options) {
+    static split(data, options, cb) {
         let res = [];
-
-        if(!JsonHash.check(data)) return res;
 
         try {
             let json = JSON.parse(data);
@@ -31,8 +28,8 @@ class JsonHash extends Splitter {
         }
         catch(e) {
         }
-        
-        return res;
+
+        cb(res);
     }
 
     static get type() {

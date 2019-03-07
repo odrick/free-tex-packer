@@ -613,7 +613,7 @@ html, body {
 
 .about-content {
     width: 490px;
-    height: 300px;
+    height: 340px;
     background: #fff;
     margin: auto;
     margin-top: 86px;
@@ -655,6 +655,7 @@ html, body {
 }
 
 .about-app-info {
+    margin-top: 8px;
     text-align: center;
 }
 
