@@ -31,7 +31,7 @@ class SheetSplitter extends React.Component {
         this.selectDataFile = this.selectDataFile.bind(this);
         this.updateFrames = this.updateFrames.bind(this);
         this.updateView = this.updateView.bind(this);
-        this.changeSplitter = this.changeSplitter.bind(this);
+        this.changeSplitter = this.changeSplitter.bind(this);       
     }
     
     componentDidMount() {
@@ -51,9 +51,13 @@ class SheetSplitter extends React.Component {
         let ctx = this.buffer.getContext('2d');
         let files = [];
         
-        for(let item of this.frames) {
-            this.buffer.width = item.sourceSize.w;
-            this.buffer.height = item.sourceSize.h;
+        let holdTrim = ReactDOM.findDOMNode(this.refs.holdtrim).checked;
+        
+        for(let item of this.frames) {            
+            let trimmed = item.trimmed ? holdTrim : false;            
+            
+            this.buffer.width = (holdTrim && trimmed) ? item.spriteSourceSize.w : item.sourceSize.w;
+            this.buffer.height = (holdTrim && trimmed) ? item.spriteSourceSize.h : item.sourceSize.h;
             
             ctx.clearRect(0, 0, this.buffer.width, this.buffer.height);
             
@@ -61,21 +65,28 @@ class SheetSplitter extends React.Component {
                 ctx.save();
 
                 ctx.translate(item.spriteSourceSize.x + item.spriteSourceSize.w/2, item.spriteSourceSize.y + item.spriteSourceSize.h/2);
-                ctx.rotate(-Math.PI/2);
+                ctx.rotate(-Math.PI/2);                
+
+                let dx = trimmed ? item.spriteSourceSize.y - item.spriteSourceSize.h/2 : -item.spriteSourceSize.h/2;
+                let dy = trimmed ? -(item.spriteSourceSize.x + item.spriteSourceSize.w/2) : -item.spriteSourceSize.w/2;
 
                 ctx.drawImage(this.texture,
                     item.frame.x, item.frame.y,
                     item.frame.h, item.frame.w,
-                    -item.spriteSourceSize.h/2, -item.spriteSourceSize.w/2,
+                    dx, dy,
                     item.spriteSourceSize.h, item.spriteSourceSize.w);
                 
                 ctx.restore();
             }
             else {
+                
+                let dx = trimmed ? 0 : item.spriteSourceSize.x;
+                let dy = trimmed ? 0 : item.spriteSourceSize.y;
+                
                 ctx.drawImage(this.texture,
                     item.frame.x, item.frame.y,
                     item.frame.w, item.frame.h,
-                    item.spriteSourceSize.x, item.spriteSourceSize.y,
+                    dx, dy,
                     item.spriteSourceSize.w, item.spriteSourceSize.h);
             }
 
@@ -224,8 +235,22 @@ class SheetSplitter extends React.Component {
         Observer.emit(GLOBAL_EVENT.HIDE_SHEET_SPLITTER);
     }
 
-    render() {
-        let displayGridProperties = this.state.splitter.type === 'Grid' ? '' : 'none';
+    render() {        
+        let displayType = this.state.splitter.type;
+        
+        let displayGridProperties = 'none';
+        let displayJsonHashProperties = 'none';
+        
+        switch (displayType) {
+            case "Grid": {
+                displayGridProperties = '';
+                break;
+            }            
+            case "JSON (hash)": {
+                displayJsonHashProperties = '';
+                break;
+            }
+        }
         
         return (
             <div className="sheet-splitter-shader">
@@ -272,6 +297,12 @@ class SheetSplitter extends React.Component {
                                                 return (<option key={"data-format-" + node.type} defaultValue={node.type}>{node.type}</option>)
                                             })}
                                         </select>
+                                    </td>
+                                </tr>
+                                <tr style={{display: displayJsonHashProperties}}>
+                                    <td title={I18.f("HOLD_TRIM_TITLE")}>{I18.f('HOLD_TRIM')}</td>
+                                    <td>
+                                        <input ref="holdtrim" type="checkbox" className="border-color-gray" defaultChecked={"checked"}/>
                                     </td>
                                 </tr>
                                 <tr style={{display: displayGridProperties}}>
