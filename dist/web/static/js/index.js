@@ -43669,7 +43669,9 @@ function (_Splitter) {
             sourceSize: {
               w: options.width,
               h: options.height
-            }
+            },
+            trimmed: false,
+            rotated: false
           });
           ix++;
         }
@@ -44123,25 +44125,35 @@ function (_Splitter) {
             for (var _iterator = list[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
               var item = _step.value;
               item = item['$'];
+              item.x *= 1;
+              item.y *= 1;
+              item.w *= 1;
+              item.h *= 1;
+              item.oX *= 1;
+              item.oY *= 1;
+              item.oW *= 1;
+              item.oH *= 1;
+              var trimmed = item.w < item.oW || item.h < item.oH;
               res.push({
                 name: splitters_Splitter.fixFileName(item.n),
                 frame: {
-                  x: item.x * 1,
-                  y: item.y * 1,
-                  w: item.w * 1,
-                  h: item.h * 1
+                  x: item.x,
+                  y: item.y,
+                  w: item.w,
+                  h: item.h
                 },
                 spriteSourceSize: {
-                  x: item.oX * 1,
-                  y: item.oY * 1,
-                  w: item.w * 1,
-                  h: item.h * 1
+                  x: item.oX,
+                  y: item.oY,
+                  w: item.w,
+                  h: item.h
                 },
                 sourceSize: {
-                  w: item.oW * 1,
-                  h: item.oH * 1
+                  w: item.oW,
+                  h: item.oH
                 },
-                rotated: item.r === 'y'
+                rotated: item.r === 'y',
+                trimmed: trimmed
               });
             }
           } catch (err) {
@@ -44315,6 +44327,7 @@ function (_Splitter) {
         for (var _i = 0; _i < names.length; _i++) {
           var name = names[_i];
           var item = atlas.frames[name];
+          var trimmed = item.w < item.oW || item.h < item.oH;
           res.push({
             name: splitters_Splitter.fixFileName(name),
             frame: {
@@ -44332,7 +44345,9 @@ function (_Splitter) {
             sourceSize: {
               w: item.oW,
               h: item.oH
-            }
+            },
+            trimmed: trimmed,
+            rotated: false
           });
         }
       } catch (e) {}
@@ -44687,24 +44702,11 @@ function (_React$Component) {
     value: function render() {
       var displayType = this.state.splitter.type;
       var displayGridProperties = 'none';
-      var displayJsonProperties = 'none';
 
       switch (displayType) {
         case "Grid":
           {
             displayGridProperties = '';
-            break;
-          }
-
-        case "JSON (hash)":
-          {
-            displayJsonProperties = '';
-            break;
-          }
-
-        case "JSON (array)":
-          {
-            displayJsonProperties = '';
             break;
           }
       }
@@ -44750,11 +44752,7 @@ function (_React$Component) {
           key: "data-format-" + node.type,
           defaultValue: node.type
         }, node.type);
-      })))), react_default.a.createElement("tr", {
-        style: {
-          display: displayJsonProperties
-        }
-      }, react_default.a.createElement("td", null, utils_I18.f('HOLD_TRIM')), react_default.a.createElement("td", null, react_default.a.createElement("input", {
+      })))), react_default.a.createElement("tr", null, react_default.a.createElement("td", null, utils_I18.f('HOLD_TRIM')), react_default.a.createElement("td", null, react_default.a.createElement("input", {
         ref: "holdtrim",
         type: "checkbox",
         className: "border-color-gray"
