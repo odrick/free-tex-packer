@@ -228,7 +228,7 @@ module.exports = function (it) {
 /* 7 */
 /***/ (function(module) {
 
-module.exports = {"name":"free-tex-packer","displayName":"Free texture packer","version":"0.5.7","description":"Free online texture packer","url":"http://free-tex-packer.com","download":"http://free-tex-packer.com/download","webApp":"http://free-tex-packer.com/app","main":"src/index.js","tinifyUrl":"http://free-tex-packer.com/server/tinify.php","localizations":["en","es","ru"],"contributors":[{"name":"Alexander Norinchak aka Odrick","homepage":"https://github.com/odrick"},{"name":"Rubén aka rtalon83","homepage":"https://github.com/rtalon83"},{"name":"Querijn Heijmans aka Querijn","homepage":"https://github.com/Querijn"}],"scripts":{"start":"webpack-dev-server --host 127.0.0.1 --port 4000","start-electron":"webpack-dev-server --host 127.0.0.1 --port 4000 --platform electron","build-web":"webpack --build --platform web","build-electron":"webpack --build --platform electron"},"repository":{"type":"git","url":"git+https://github.com/odrick/free-tex-packer.git"},"keywords":["texture","packer","texturepacker","texture-packer","sprites","spritesheet","export","sprite","2d"],"author":"Alexander Norinchak","authorSite":"https://github.com/odrick/","authorEmail":"norinchak@gmail.com","license":"ISC","bugs":{"url":"https://github.com/odrick/free-tex-packer/issues"},"homepage":"https://github.com/odrick/free-tex-packer","devDependencies":{"@babel/core":"^7.2.2","@babel/preset-env":"^7.3.1","@babel/preset-react":"^7.0.0","babel-loader":"^8.0.5","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.23.0","babel-preset-es2015":"^6.24.0","babel-preset-stage-0":"^6.22.0","babel-runtime":"^6.23.0","chokidar":"^2.0.4","copy-webpack-plugin":"^4.6.0","electron":"^4.0.4","eventemitter3":"^3.0.1","file-saver":"^2.0.0","glob":"^7.1.1","json-loader":"^0.5.4","jszip":"^3.1.3","maxrects-packer":"^2.0.0","mustache":"^3.0.1","optimist":"^0.6.1","plist":"^3.0.1","react":"^16.8.1","react-dom":"^16.8.1","webpack":"^4.29.3","webpack-cli":"^3.2.3","webpack-dev-server":"^3.1.14","xml2js":"^0.4.19"}};
+module.exports = {"name":"free-tex-packer","displayName":"Free texture packer","version":"0.5.8","description":"Free online texture packer","url":"http://free-tex-packer.com","download":"http://free-tex-packer.com/download","webApp":"http://free-tex-packer.com/app","main":"src/index.js","tinifyUrl":"http://free-tex-packer.com/server/tinify.php","localizations":["en","es","ru"],"contributors":[{"name":"Alexander Norinchak aka Odrick","homepage":"https://github.com/odrick"},{"name":"Rubén aka rtalon83","homepage":"https://github.com/rtalon83"},{"name":"Querijn Heijmans aka Querijn","homepage":"https://github.com/Querijn"}],"scripts":{"start":"webpack-dev-server --host 127.0.0.1 --port 4000","start-electron":"webpack-dev-server --host 127.0.0.1 --port 4000 --platform electron","build-web":"webpack --build --platform web","build-electron":"webpack --build --platform electron"},"repository":{"type":"git","url":"git+https://github.com/odrick/free-tex-packer.git"},"keywords":["texture","packer","texturepacker","texture-packer","sprites","spritesheet","export","sprite","2d"],"author":"Alexander Norinchak","authorSite":"https://github.com/odrick/","authorEmail":"norinchak@gmail.com","license":"ISC","bugs":{"url":"https://github.com/odrick/free-tex-packer/issues"},"homepage":"https://github.com/odrick/free-tex-packer","devDependencies":{"@babel/core":"^7.2.2","@babel/preset-env":"^7.3.1","@babel/preset-react":"^7.0.0","babel-loader":"^8.0.5","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.23.0","babel-preset-es2015":"^6.24.0","babel-preset-stage-0":"^6.22.0","babel-runtime":"^6.23.0","chokidar":"^2.0.4","copy-webpack-plugin":"^4.6.0","electron":"^4.0.4","eventemitter3":"^3.0.1","file-saver":"^2.0.0","glob":"^7.1.1","json-loader":"^0.5.4","jszip":"^3.1.3","maxrects-packer":"^2.0.0","mustache":"^3.0.1","optimist":"^0.6.1","plist":"^3.0.1","react":"^16.8.1","react-dom":"^16.8.1","webpack":"^4.29.3","webpack-cli":"^3.2.3","webpack-dev-server":"^3.1.14","xml2js":"^0.4.19"}};
 
 /***/ }),
 /* 8 */
@@ -44453,8 +44453,11 @@ function (_React$Component) {
     SheetSplitter_classCallCheck(this, SheetSplitter);
 
     _this = SheetSplitter_possibleConstructorReturn(this, SheetSplitter_getPrototypeOf(SheetSplitter).call(this, props));
+    _this.textureBackColors = ["grid-back", "white-back", "pink-back", "black-back"];
     _this.state = {
-      splitter: getDefaultSplitter()
+      splitter: getDefaultSplitter(),
+      textureBack: _this.textureBackColors[0],
+      scale: 1
     };
     _this.texture = null;
     _this.data = null;
@@ -44468,6 +44471,8 @@ function (_React$Component) {
     _this.updateFrames = _this.updateFrames.bind(SheetSplitter_assertThisInitialized(SheetSplitter_assertThisInitialized(_this)));
     _this.updateView = _this.updateView.bind(SheetSplitter_assertThisInitialized(SheetSplitter_assertThisInitialized(_this)));
     _this.changeSplitter = _this.changeSplitter.bind(SheetSplitter_assertThisInitialized(SheetSplitter_assertThisInitialized(_this)));
+    _this.setBack = _this.setBack.bind(SheetSplitter_assertThisInitialized(SheetSplitter_assertThisInitialized(_this)));
+    _this.changeScale = _this.changeScale.bind(SheetSplitter_assertThisInitialized(SheetSplitter_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -44583,6 +44588,8 @@ function (_React$Component) {
         var ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(this.texture, 0, 0);
+        canvas.className = this.state.textureBack;
+        this.updateTextureScale();
       } else {
         canvas.style.display = 'none';
       }
@@ -44693,6 +44700,64 @@ function (_React$Component) {
       this.updateView();
     }
   }, {
+    key: "setBack",
+    value: function setBack(e) {
+      var classNames = e.target.className.split(" ");
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
+
+      try {
+        for (var _iterator3 = classNames[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var name = _step3.value;
+
+          if (this.textureBackColors.indexOf(name) >= 0) {
+            this.setState({
+              textureBack: name
+            });
+            var canvas = react_dom_default.a.findDOMNode(this.refs.view);
+            canvas.className = name;
+            return;
+          }
+        }
+      } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+            _iterator3.return();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
+      }
+    }
+  }, {
+    key: "updateTextureScale",
+    value: function updateTextureScale() {
+      var val = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.state.scale;
+
+      if (this.texture) {
+        var w = Math.floor(this.texture.width * val);
+        var h = Math.floor(this.texture.height * val);
+        var canvas = react_dom_default.a.findDOMNode(this.refs.view);
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+      }
+    }
+  }, {
+    key: "changeScale",
+    value: function changeScale(e) {
+      var val = e.target.value;
+      this.setState({
+        scale: val
+      });
+      this.updateTextureScale(val);
+    }
+  }, {
     key: "close",
     value: function close() {
       Observer.emit(GLOBAL_EVENT.HIDE_SHEET_SPLITTER);
@@ -44700,6 +44765,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this5 = this;
+
       var displayType = this.state.splitter.type;
       var displayGridProperties = 'none';
 
@@ -44785,13 +44852,27 @@ function (_React$Component) {
         onChange: this.updateView
       })))))), react_default.a.createElement("div", {
         className: "sheet-splitter-bottom"
-      }, react_default.a.createElement("div", {
+      }, react_default.a.createElement("table", null, react_default.a.createElement("tbody", null, react_default.a.createElement("tr", null, this.textureBackColors.map(function (name) {
+        return react_default.a.createElement("td", {
+          key: "back-color-btn-" + name
+        }, react_default.a.createElement("div", {
+          className: "btn-back-color " + name + (_this5.state.textureBack === name ? " selected" : ""),
+          onClick: _this5.setBack
+        }, "\xA0"));
+      }), react_default.a.createElement("td", null, utils_I18.f("SCALE")), react_default.a.createElement("td", null, react_default.a.createElement("input", {
+        type: "range",
+        min: "0.1",
+        max: "1",
+        step: "0.01",
+        defaultValue: "1",
+        onChange: this.changeScale
+      }))))), react_default.a.createElement("div", null, react_default.a.createElement("div", {
         className: "btn back-800 border-color-gray color-white",
         onClick: this.doSplit
       }, utils_I18.f("SPLIT")), react_default.a.createElement("div", {
         className: "btn back-800 border-color-gray color-white",
         onClick: this.close
-      }, utils_I18.f("CLOSE")))));
+      }, utils_I18.f("CLOSE"))))));
     }
   }]);
 
