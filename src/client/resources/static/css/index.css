@@ -882,7 +882,7 @@ html, body {
 
 .sheet-splitter-content {
     width: 720px;
-    height: 500px;
+    height: 530px;
     background: #fff;
     margin: auto;
     margin-top: 86px;
@@ -969,4 +969,32 @@ html, body {
     text-align: center;
     padding: 8px;
     margin-top: 10px;
+}
+
+.sheet-splitter-bottom .btn-back-color {
+    margin-right: 8px;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.sheet-splitter-bottom td {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.sheet-splitter-bottom .btn-back-color.selected {
+    border: 2px dotted #999;
+}
+
+.sheet-splitter-bottom table {
+    margin: auto;
+    margin-right: 300px;
 }

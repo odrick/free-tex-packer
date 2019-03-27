@@ -13,8 +13,12 @@ class SheetSplitter extends React.Component {
     constructor(props) {
         super(props);
         
+        this.textureBackColors = ["grid-back", "white-back", "pink-back", "black-back"];
+
         this.state = {
-            splitter: getDefaultSplitter()
+            splitter: getDefaultSplitter(),
+            textureBack: this.textureBackColors[0],
+            scale: 1
         };
         
         this.texture = null;
@@ -32,6 +36,8 @@ class SheetSplitter extends React.Component {
         this.updateFrames = this.updateFrames.bind(this);
         this.updateView = this.updateView.bind(this);
         this.changeSplitter = this.changeSplitter.bind(this);       
+        this.setBack = this.setBack.bind(this);       
+        this.changeScale = this.changeScale.bind(this);       
     }
     
     componentDidMount() {
@@ -142,6 +148,9 @@ class SheetSplitter extends React.Component {
             let ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(this.texture, 0, 0);
+
+            canvas.className = this.state.textureBack;
+            this.updateTextureScale();
         }
         else {
             canvas.style.display = 'none';
@@ -229,6 +238,37 @@ class SheetSplitter extends React.Component {
         
         this.setState({splitter: splitter});
         this.updateView();
+    }
+
+    setBack(e) {
+        let classNames = e.target.className.split(" ");
+        for(let name of classNames) {
+            if(this.textureBackColors.indexOf(name) >= 0) {
+                this.setState({textureBack: name});
+
+                let canvas = ReactDOM.findDOMNode(this.refs.view);
+                canvas.className = name;
+
+                return;
+            }
+        }
+    }
+
+    updateTextureScale(val=this.state.scale) {
+        if(this.texture) {
+            let w = Math.floor(this.texture.width * val);
+            let h = Math.floor(this.texture.height * val);
+
+            let canvas = ReactDOM.findDOMNode(this.refs.view);
+            canvas.style.width = w + 'px';
+            canvas.style.height = h + 'px';
+        }
+    }
+
+    changeScale(e) {
+        let val = e.target.value;
+        this.setState({scale: val});
+        this.updateTextureScale(val);
     }
 
     close() {
@@ -323,8 +363,31 @@ class SheetSplitter extends React.Component {
                     </div>
 
                     <div className="sheet-splitter-bottom">
-                        <div className="btn back-800 border-color-gray color-white" onClick={this.doSplit}>{I18.f("SPLIT")}</div>
-                        <div className="btn back-800 border-color-gray color-white" onClick={this.close}>{I18.f("CLOSE")}</div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    {this.textureBackColors.map(name => {
+                                        return (
+                                            <td key={"back-color-btn-" + name}>
+                                                <div className={"btn-back-color " + name + (this.state.textureBack === name ? " selected" : "")} onClick={this.setBack}>&nbsp;</div>
+                                            </td>
+                                        )
+                                    })}
+
+                                    <td>
+                                        {I18.f("SCALE")}
+                                    </td>
+                                    <td>
+                                        <input type="range" min="0.1" max="1" step="0.01" defaultValue="1" onChange={this.changeScale}/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div>
+                            <div className="btn back-800 border-color-gray color-white" onClick={this.doSplit}>{I18.f("SPLIT")}</div>
+                            <div className="btn back-800 border-color-gray color-white" onClick={this.close}>{I18.f("CLOSE")}</div>
+                        </div>
                     </div>
                 </div>
             </div>
