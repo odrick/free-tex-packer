@@ -64,6 +64,14 @@
     "fileExt": "json"
   },
   {
+    "type": "Phaser 3",
+    "description": "Phaser 3",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "Phaser3.mst",
+    "fileExt": "json"
+  },
+  {
     "type": "Spine",
     "description": "Spine atlas",
     "allowTrim": true,
