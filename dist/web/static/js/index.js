@@ -38555,6 +38555,7 @@ function () {
       var minWidth = 0,
           minHeight = 0;
       var alphaThreshold = options.alphaThreshold || 0;
+      alphaThreshold = Math.round(255 / 100 * alphaThreshold);
       var names = Object.keys(images);
 
       for (var _i4 = 0; _i4 < names.length; _i4++) {
@@ -41469,7 +41470,7 @@ function (_Packer) {
 // CONCATENATED MODULE: ./src/client/packers/index.js
 
 
-var packers_list = [packers_MaxRectsBin, packers_MaxRectsPacker];
+var packers_list = [packers_MaxRectsPacker, packers_MaxRectsBin];
 
 function getPackerByType(type) {
   for (var _i = 0; _i < packers_list.length; _i++) {
