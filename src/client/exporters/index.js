@@ -2,6 +2,29 @@ import list from './list.json';
 import appInfo from '../../../package.json';
 import {GET} from '../utils/ajax';
 import mustache from 'mustache';
+import wax from '@jvitela/mustache-wax';
+
+wax(mustache);
+
+mustache.Formatters = {
+    add: (v1, v2) => {
+        return v1 + v2;
+    },
+    subtract: (v1, v2) => {
+        return v1 - v2;
+    },
+    multiply: (v1, v2) => {
+        return v1 * v2;
+    },
+    divide: (v1, v2) => {
+        return v1 / v2;
+    },
+    offset: (size1, start, size2) => {
+        let x1 = size1 / 2;
+        let x2 = start + size2 / 2;
+        return x2 - x1;
+    }
+};
 
 function getExporterByType(type) {
     for(let item of list) {

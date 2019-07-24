@@ -11,9 +11,9 @@
         <key>aliases</key>
         <array/>
         <key>spriteOffset</key>
-        <string><%#trimmed%>{0,0}<%/trimmed%><%^trimmed%>{-1,0}<%/trimmed%></string>
+        <string>{<% sourceSize.w | offset : spriteSourceSize.x : spriteSourceSize.w %>,<% sourceSize.h | offset : spriteSourceSize.y : spriteSourceSize.h %>}</string>
         <key>spriteSize</key>
-        <string>{<%frame.w%>,<%frame.h%>}</string>
+        <string>{<%spriteSourceSize.w%>,<%spriteSourceSize.h%>}</string>
         <key>spriteSourceSize</key>
         <string>{<%sourceSize.w%>,<%sourceSize.h%>}</string>
         <key>textureRect</key>
