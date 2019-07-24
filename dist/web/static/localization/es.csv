@@ -66,6 +66,8 @@ ALLOW_TRIM;Permitir Recorte:
 ALLOW_TRIM_TITLE;Permite que los sprites se puedan recortar
 TRIM_MODE;Modo de recorte:
 TRIM_MODE_TITLE;Modos con los que podemos recortar
+ALPHA_THRESHOLD;Umbral alfa:
+ALPHA_THRESHOLD_TITLE;Valor umbral alfa
 DETECT_IDENTICAL;Detectar idénticos:
 DETECT_IDENTICAL_TITLE;Detecta idénticos sprites
 PACKER;Empaquetador:

@@ -228,7 +228,7 @@ module.exports = function (it) {
 /* 7 */
 /***/ (function(module) {
 
-module.exports = {"name":"free-tex-packer","displayName":"Free texture packer","version":"0.5.9","description":"Free online texture packer","url":"http://free-tex-packer.com","download":"http://free-tex-packer.com/download","webApp":"http://free-tex-packer.com/app","main":"src/index.js","tinifyUrl":"http://free-tex-packer.com/server/tinify.php","localizations":["en","es","ru"],"contributors":[{"name":"Alexander Norinchak aka Odrick","homepage":"https://github.com/odrick"},{"name":"Rubén aka rtalon83","homepage":"https://github.com/rtalon83"},{"name":"Querijn Heijmans aka Querijn","homepage":"https://github.com/Querijn"}],"scripts":{"start":"webpack-dev-server --host 127.0.0.1 --port 4000","start-electron":"webpack-dev-server --host 127.0.0.1 --port 4000 --platform electron","build-web":"webpack --build --platform web","build-electron":"webpack --build --platform electron"},"repository":{"type":"git","url":"git+https://github.com/odrick/free-tex-packer.git"},"keywords":["texture","packer","texturepacker","texture-packer","sprites","spritesheet","export","sprite","2d"],"author":"Alexander Norinchak","authorSite":"https://github.com/odrick/","authorEmail":"norinchak@gmail.com","license":"ISC","bugs":{"url":"https://github.com/odrick/free-tex-packer/issues"},"homepage":"https://github.com/odrick/free-tex-packer","devDependencies":{"@babel/core":"^7.2.2","@babel/preset-env":"^7.3.1","@babel/preset-react":"^7.0.0","babel-loader":"^8.0.5","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.23.0","babel-preset-es2015":"^6.24.0","babel-preset-stage-0":"^6.22.0","babel-runtime":"^6.23.0","chokidar":"^2.0.4","copy-webpack-plugin":"^4.6.0","electron":"^4.0.4","eventemitter3":"^3.0.1","file-saver":"^2.0.0","glob":"^7.1.1","json-loader":"^0.5.4","jszip":"^3.1.3","maxrects-packer":"^2.0.0","mustache":"^3.0.1","optimist":"^0.6.1","plist":"^3.0.1","react":"^16.8.1","react-dom":"^16.8.1","webpack":"^4.29.3","webpack-cli":"^3.2.3","webpack-dev-server":"^3.1.14","xml2js":"^0.4.19"}};
+module.exports = {"name":"free-tex-packer","displayName":"Free texture packer","version":"0.6.0","description":"Free online texture packer","url":"http://free-tex-packer.com","download":"http://free-tex-packer.com/download","webApp":"http://free-tex-packer.com/app","main":"src/index.js","tinifyUrl":"http://free-tex-packer.com/server/tinify.php","localizations":["en","es","ru"],"contributors":[{"name":"Alexander Norinchak aka Odrick","homepage":"https://github.com/odrick"},{"name":"Rubén aka rtalon83","homepage":"https://github.com/rtalon83"},{"name":"Querijn Heijmans aka Querijn","homepage":"https://github.com/Querijn"}],"scripts":{"start":"webpack-dev-server --host 127.0.0.1 --port 4000","start-electron":"webpack-dev-server --host 127.0.0.1 --port 4000 --platform electron","build-web":"webpack --build --platform web","build-electron":"webpack --build --platform electron"},"repository":{"type":"git","url":"git+https://github.com/odrick/free-tex-packer.git"},"keywords":["texture","packer","texturepacker","texture-packer","sprites","spritesheet","export","sprite","2d"],"author":"Alexander Norinchak","authorSite":"https://github.com/odrick/","authorEmail":"norinchak@gmail.com","license":"ISC","bugs":{"url":"https://github.com/odrick/free-tex-packer/issues"},"homepage":"https://github.com/odrick/free-tex-packer","devDependencies":{"@babel/core":"^7.2.2","@babel/preset-env":"^7.3.1","@babel/preset-react":"^7.0.0","babel-loader":"^8.0.5","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.23.0","babel-preset-es2015":"^6.24.0","babel-preset-stage-0":"^6.22.0","babel-runtime":"^6.23.0","chokidar":"^2.0.4","copy-webpack-plugin":"^4.6.0","electron":"^4.0.4","eventemitter3":"^3.0.1","file-saver":"^2.0.0","glob":"^7.1.1","json-loader":"^0.5.4","jszip":"^3.1.3","maxrects-packer":"^2.0.0","mustache":"^3.0.1","optimist":"^0.6.1","plist":"^3.0.1","react":"^16.8.1","react-dom":"^16.8.1","webpack":"^4.29.3","webpack-cli":"^3.2.3","webpack-dev-server":"^3.1.14","xml2js":"^0.4.19"}};
 
 /***/ }),
 /* 8 */
@@ -38291,11 +38291,12 @@ function () {
   }, {
     key: "getLeftSpace",
     value: function getLeftSpace(data, width, height) {
+      var threshold = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
       var x = 0;
 
       for (x = 0; x < width; x++) {
         for (var y = 0; y < height; y++) {
-          if (this.getAlpha(data, width, x, y)) {
+          if (this.getAlpha(data, width, x, y) > threshold) {
             return x;
           }
         }
@@ -38306,11 +38307,12 @@ function () {
   }, {
     key: "getRightSpace",
     value: function getRightSpace(data, width, height) {
+      var threshold = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
       var x = 0;
 
       for (x = width - 1; x >= 0; x--) {
         for (var y = 0; y < height; y++) {
-          if (this.getAlpha(data, width, x, y)) {
+          if (this.getAlpha(data, width, x, y) > threshold) {
             return width - x - 1;
           }
         }
@@ -38321,11 +38323,12 @@ function () {
   }, {
     key: "getTopSpace",
     value: function getTopSpace(data, width, height) {
+      var threshold = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
       var y = 0;
 
       for (y = 0; y < height; y++) {
         for (var x = 0; x < width; x++) {
-          if (this.getAlpha(data, width, x, y)) {
+          if (this.getAlpha(data, width, x, y) > threshold) {
             return y;
           }
         }
@@ -38336,11 +38339,12 @@ function () {
   }, {
     key: "getBottomSpace",
     value: function getBottomSpace(data, width, height) {
+      var threshold = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
       var y = 0;
 
       for (y = height - 1; y >= 0; y--) {
         for (var x = 0; x < width; x++) {
-          if (this.getAlpha(data, width, x, y)) {
+          if (this.getAlpha(data, width, x, y) > threshold) {
             return height - y - 1;
           }
         }
@@ -38351,6 +38355,7 @@ function () {
   }, {
     key: "trim",
     value: function trim(rects) {
+      var threshold = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var cns = document.createElement("canvas");
       var ctx = cns.getContext("2d");
       var _iteratorNormalCompletion = true;
@@ -38372,12 +38377,12 @@ function () {
             top: 0,
             bottom: 0
           };
-          spaces.left = this.getLeftSpace(data, img.width, img.height);
+          spaces.left = this.getLeftSpace(data, img.width, img.height, threshold);
 
-          if (spaces.left != img.width) {
-            spaces.right = this.getRightSpace(data, img.width, img.height);
-            spaces.top = this.getTopSpace(data, img.width, img.height);
-            spaces.bottom = this.getBottomSpace(data, img.width, img.height);
+          if (spaces.left !== img.width) {
+            spaces.right = this.getRightSpace(data, img.width, img.height, threshold);
+            spaces.top = this.getTopSpace(data, img.width, img.height, threshold);
+            spaces.bottom = this.getBottomSpace(data, img.width, img.height, threshold);
 
             if (spaces.left > 0 || spaces.right > 0 || spaces.top > 0 || spaces.bottom > 0) {
               item.trimmed = true;
@@ -38549,6 +38554,7 @@ function () {
           maxHeight = 0;
       var minWidth = 0,
           minHeight = 0;
+      var alphaThreshold = options.alphaThreshold || 0;
       var names = Object.keys(images);
 
       for (var _i4 = 0; _i4 < names.length; _i4++) {
@@ -38608,7 +38614,7 @@ function () {
       }
 
       if (options.allowTrim) {
-        utils_Trimmer.trim(rects);
+        utils_Trimmer.trim(rects, alphaThreshold);
       }
 
       for (var _i5 = 0; _i5 < rects.length; _i5++) {
@@ -41593,6 +41599,7 @@ function (_React$Component) {
       data.allowRotation = data.allowRotation === undefined ? true : data.allowRotation;
       data.allowTrim = data.allowTrim === undefined ? true : data.allowTrim;
       data.trimMode = data.trimMode === undefined ? "trim" : data.trimMode;
+      data.alphaThreshold = data.alphaThreshold || 0;
       data.detectIdentical = data.detectIdentical === undefined ? true : data.detectIdentical;
       data.packer = getPackerByType(data.packer) ? data.packer : packers[0].type;
       var methodValid = false;
@@ -41651,6 +41658,7 @@ function (_React$Component) {
       data.allowRotation = react_dom_default.a.findDOMNode(this.refs.allowRotation).checked;
       data.allowTrim = react_dom_default.a.findDOMNode(this.refs.allowTrim).checked;
       data.trimMode = react_dom_default.a.findDOMNode(this.refs.trimMode).value;
+      data.alphaThreshold = react_dom_default.a.findDOMNode(this.refs.alphaThreshold).value;
       data.detectIdentical = react_dom_default.a.findDOMNode(this.refs.detectIdentical).checked;
       data.packer = react_dom_default.a.findDOMNode(this.refs.packer).value;
       data.packerMethod = react_dom_default.a.findDOMNode(this.refs.packerMethod).value;
@@ -41680,6 +41688,7 @@ function (_React$Component) {
       react_dom_default.a.findDOMNode(this.refs.allowRotation).checked = this.packOptions.allowRotation;
       react_dom_default.a.findDOMNode(this.refs.allowTrim).checked = this.packOptions.allowTrim;
       react_dom_default.a.findDOMNode(this.refs.trimMode).value = this.packOptions.trimMode;
+      react_dom_default.a.findDOMNode(this.refs.alphaThreshold).value = this.packOptions.alphaThreshold || 0;
       react_dom_default.a.findDOMNode(this.refs.detectIdentical).checked = this.packOptions.detectIdentical;
       react_dom_default.a.findDOMNode(this.refs.packer).value = this.packOptions.packer;
       react_dom_default.a.findDOMNode(this.refs.packerMethod).value = this.packOptions.packerMethod;
@@ -41990,6 +41999,17 @@ function (_React$Component) {
       }, "trim"), react_default.a.createElement("option", {
         value: "crop"
       }, "crop"))), react_default.a.createElement("td", null)), react_default.a.createElement("tr", {
+        title: utils_I18.f("ALPHA_THRESHOLD_TITLE")
+      }, react_default.a.createElement("td", null, utils_I18.f("ALPHA_THRESHOLD")), react_default.a.createElement("td", null, react_default.a.createElement("input", {
+        ref: "alphaThreshold",
+        type: "number",
+        className: "border-color-gray",
+        defaultValue: this.packOptions.alphaThreshold,
+        min: "0",
+        max: "100",
+        onBlur: this.onPropChanged,
+        onKeyDown: this.forceUpdate
+      })), react_default.a.createElement("td", null)), react_default.a.createElement("tr", {
         title: utils_I18.f("DETECT_IDENTICAL_TITLE")
       }, react_default.a.createElement("td", null, utils_I18.f("DETECT_IDENTICAL")), react_default.a.createElement("td", null, react_default.a.createElement("input", {
         ref: "detectIdentical",
