@@ -113,6 +113,15 @@
     "predefined": true
   },
   {
+    "type": "Unity3D",
+    "description": "Unity3D sprite sheet",
+    "allowTrim": true,
+    "allowRotation": false,
+    "template": "Unity3D.mst",
+    "fileExt": "tpsheet",
+    "predefined": true
+  },
+  {
     "type": "custom",
     "description": "Custom format",
     "allowTrim": true,

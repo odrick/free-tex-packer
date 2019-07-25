@@ -405,7 +405,7 @@ class PackProperties extends React.Component {
                             </tr>
                             <tr title={I18.f("ALPHA_THRESHOLD_TITLE")}>
                                 <td>{I18.f("ALPHA_THRESHOLD")}</td>
-                                <td><input ref="alphaThreshold" type="number" className="border-color-gray" defaultValue={this.packOptions.alphaThreshold} min="0" max="100" onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
+                                <td><input ref="alphaThreshold" type="number" className="border-color-gray" defaultValue={this.packOptions.alphaThreshold} min="0" max="255" onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
                                 <td></td>
                             </tr>
                             <tr title={I18.f("DETECT_IDENTICAL_TITLE")}>

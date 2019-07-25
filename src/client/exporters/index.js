@@ -19,10 +19,21 @@ mustache.Formatters = {
     divide: (v1, v2) => {
         return v1 / v2;
     },
-    offset: (size1, start, size2) => {
-        let x1 = size1 / 2;
-        let x2 = start + size2 / 2;
-        return x2 - x1;
+    offset: (start, size1, size2) => {
+        let x1 = start + size1 / 2;
+        let x2 = size2 / 2;
+        return x1 - x2;
+    },
+    mirror: (start, size1, size2) => {
+        return size2 - start - size1;
+    },
+    escapeName: (name) => {
+        return name.replace(/%/g, "%25")
+            .replace(/#/g, "%23")
+            .replace(/:/g, "%3A")
+            .replace(/;/g, "%3B")
+            .replace(/\\/g, "-")
+            .replace(/\//g, "-");
     }
 };
 

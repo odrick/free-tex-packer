@@ -74,7 +74,7 @@ class PackProcessor {
         let minWidth = 0, minHeight = 0;
         
         let alphaThreshold = options.alphaThreshold || 0;
-        alphaThreshold = Math.round((255 / 100) * alphaThreshold);
+        if(alphaThreshold > 255) alphaThreshold = 255;
 
         let names = Object.keys(images);
         

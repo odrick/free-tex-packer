@@ -11,7 +11,7 @@
         <key>aliases</key>
         <array/>
         <key>spriteOffset</key>
-        <string>{<% sourceSize.w | offset : spriteSourceSize.x : spriteSourceSize.w %>,<% sourceSize.h | offset : spriteSourceSize.y : spriteSourceSize.h %>}</string>
+        <string>{<% spriteSourceSize.x | offset : spriteSourceSize.w  : sourceSize.w %>,<% spriteSourceSize.y | offset : spriteSourceSize.h  : sourceSize.h %>}</string>
         <key>spriteSize</key>
         <string>{<%spriteSourceSize.w%>,<%spriteSourceSize.h%>}</string>
         <key>spriteSourceSize</key>
