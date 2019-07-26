@@ -19,10 +19,15 @@ mustache.Formatters = {
     divide: (v1, v2) => {
         return v1 / v2;
     },
-    offset: (start, size1, size2) => {
+    offsetLeft: (start, size1, size2) => {
         let x1 = start + size1 / 2;
         let x2 = size2 / 2;
         return x1 - x2;
+    },
+    offsetRight: (start, size1, size2) => {
+        let x1 = start + size1 / 2;
+        let x2 = size2 / 2;
+        return x2 - x1;
     },
     mirror: (start, size1, size2) => {
         return size2 - start - size1;
