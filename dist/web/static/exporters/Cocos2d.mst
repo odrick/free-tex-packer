@@ -8,18 +8,16 @@
       <%#rects%>
       <key><%&name%></key>
       <dict>
-        <key>aliases</key>
-        <array/>
-        <key>spriteOffset</key>
-        <string>{<% spriteSourceSize.x | offset : spriteSourceSize.w  : sourceSize.w %>,<% spriteSourceSize.y | offset : spriteSourceSize.h  : sourceSize.h %>}</string>
-        <key>spriteSize</key>
-        <string>{<%spriteSourceSize.w%>,<%spriteSourceSize.h%>}</string>
-        <key>spriteSourceSize</key>
-        <string>{<%sourceSize.w%>,<%sourceSize.h%>}</string>
-        <key>textureRect</key>
+        <key>frame</key>
         <string>{{<%frame.x%>,<%frame.y%>},{<%frame.w%>,<%frame.h%>}}</string>
-        <key>textureRotated</key>
+        <key>offset</key>
+        <string>{<% spriteSourceSize.x | offsetLeft : spriteSourceSize.w : sourceSize.w %>,<% spriteSourceSize.y | offsetRight : spriteSourceSize.h : sourceSize.h %>}</string>
+        <key>rotated</key>
         <<%rotated%>/>
+        <key>sourceColorRect</key>
+        <string>{{<%spriteSourceSize.x%>,<%spriteSourceSize.y%>},{<%spriteSourceSize.w%>,<%spriteSourceSize.h%>}}</string>
+        <key>sourceSize</key>
+        <string>{<%sourceSize.w%>,<%sourceSize.h%>}</string>
       </dict>
       <%/rects%>
     </dict>

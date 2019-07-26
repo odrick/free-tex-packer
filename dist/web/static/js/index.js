@@ -38883,10 +38883,15 @@ mustache_default.a.Formatters = {
   divide: function divide(v1, v2) {
     return v1 / v2;
   },
-  offset: function offset(start, size1, size2) {
+  offsetLeft: function offsetLeft(start, size1, size2) {
     var x1 = start + size1 / 2;
     var x2 = size2 / 2;
     return x1 - x2;
+  },
+  offsetRight: function offsetRight(start, size1, size2) {
+    var x1 = start + size1 / 2;
+    var x2 = size2 / 2;
+    return x2 - x1;
   },
   mirror: function mirror(start, size1, size2) {
     return size2 - start - size1;
