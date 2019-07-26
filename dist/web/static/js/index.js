@@ -41126,7 +41126,7 @@ function (_Packer) {
 // CONCATENATED MODULE: ./src/client/packers/index.js
 
 
-var packers_list = [packers_MaxRectsPacker, packers_MaxRectsBin];
+var packers_list = [packers_MaxRectsBin, packers_MaxRectsPacker];
 
 function getPackerByType(type) {
   for (var _i = 0, _list = packers_list; _i < _list.length; _i++) {
