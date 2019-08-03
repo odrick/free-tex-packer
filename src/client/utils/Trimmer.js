@@ -8,12 +8,12 @@ class Trimmer {
         return data[((y * (width * 4)) + (x * 4)) + 3];
     }
 
-    static getLeftSpace(data, width, height) {
+    static getLeftSpace(data, width, height, threshold=0) {
         let x = 0;
 
         for(x=0; x<width; x++) {
             for(let y=0; y<height; y++) {
-                if(this.getAlpha(data, width, x, y)) {
+                if(this.getAlpha(data, width, x, y) > threshold) {
                     return x;
                 }
             }
@@ -22,12 +22,12 @@ class Trimmer {
         return 0;
     }
 
-    static getRightSpace(data, width, height) {
+    static getRightSpace(data, width, height, threshold=0) {
         let x = 0;
 
         for(x=width-1; x>=0; x--) {
             for(let y=0; y<height; y++) {
-                if(this.getAlpha(data, width, x, y)) {
+                if(this.getAlpha(data, width, x, y) > threshold) {
                     return width-x-1;
                 }
             }
@@ -36,12 +36,12 @@ class Trimmer {
         return 0;
     }
 
-    static getTopSpace(data, width, height) {
+    static getTopSpace(data, width, height, threshold=0) {
         let y = 0;
 
         for(y=0; y<height; y++) {
             for(let x=0; x<width; x++) {
-                if(this.getAlpha(data, width, x, y)) {
+                if(this.getAlpha(data, width, x, y) > threshold) {
                     return y;
                 }
             }
@@ -50,12 +50,12 @@ class Trimmer {
         return 0;
     }
 
-    static getBottomSpace(data, width, height) {
+    static getBottomSpace(data, width, height, threshold=0) {
         let y = 0;
 
         for(y=height-1; y>=0; y--) {
             for(let x=0; x<width; x++) {
-                if(this.getAlpha(data, width, x, y)) {
+                if(this.getAlpha(data, width, x, y) > threshold) {
                     return height-y-1;
                 }
             }
@@ -64,7 +64,7 @@ class Trimmer {
         return 0;
     }
 
-    static trim(rects) {
+    static trim(rects, threshold=0) {
 
         let cns = document.createElement("canvas");
         let ctx = cns.getContext("2d");
@@ -84,11 +84,11 @@ class Trimmer {
 
             let spaces = {left: 0, right: 0, top: 0, bottom: 0};
 
-            spaces.left = this.getLeftSpace(data, img.width, img.height);
-            if(spaces.left != img.width) {
-                spaces.right = this.getRightSpace(data, img.width, img.height);
-                spaces.top = this.getTopSpace(data, img.width, img.height);
-                spaces.bottom = this.getBottomSpace(data, img.width, img.height);
+            spaces.left = this.getLeftSpace(data, img.width, img.height, threshold);
+            if(spaces.left !== img.width) {
+                spaces.right = this.getRightSpace(data, img.width, img.height, threshold);
+                spaces.top = this.getTopSpace(data, img.width, img.height, threshold);
+                spaces.bottom = this.getBottomSpace(data, img.width, img.height, threshold);
 
                 if(spaces.left > 0 || spaces.right > 0 || spaces.top > 0 || spaces.bottom > 0) {
                     item.trimmed = true;

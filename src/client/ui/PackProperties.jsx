@@ -90,6 +90,7 @@ class PackProperties extends React.Component {
         data.allowRotation = data.allowRotation === undefined ? true : data.allowRotation;
         data.allowTrim = data.allowTrim === undefined ? true : data.allowTrim;
         data.trimMode = data.trimMode === undefined ? "trim" : data.trimMode;
+        data.alphaThreshold = data.alphaThreshold || 0;
         data.detectIdentical = data.detectIdentical === undefined ? true : data.detectIdentical;
         data.packer = getPackerByType(data.packer) ? data.packer : packers[0].type;
         
@@ -143,6 +144,7 @@ class PackProperties extends React.Component {
         data.allowRotation = ReactDOM.findDOMNode(this.refs.allowRotation).checked;
         data.allowTrim = ReactDOM.findDOMNode(this.refs.allowTrim).checked;
         data.trimMode = ReactDOM.findDOMNode(this.refs.trimMode).value;
+        data.alphaThreshold = ReactDOM.findDOMNode(this.refs.alphaThreshold).value;
         data.detectIdentical = ReactDOM.findDOMNode(this.refs.detectIdentical).checked;
         data.packer = ReactDOM.findDOMNode(this.refs.packer).value;
         data.packerMethod = ReactDOM.findDOMNode(this.refs.packerMethod).value;
@@ -172,6 +174,7 @@ class PackProperties extends React.Component {
         ReactDOM.findDOMNode(this.refs.allowRotation).checked = this.packOptions.allowRotation;
         ReactDOM.findDOMNode(this.refs.allowTrim).checked = this.packOptions.allowTrim;
         ReactDOM.findDOMNode(this.refs.trimMode).value = this.packOptions.trimMode;
+        ReactDOM.findDOMNode(this.refs.alphaThreshold).value = this.packOptions.alphaThreshold || 0;
         ReactDOM.findDOMNode(this.refs.detectIdentical).checked = this.packOptions.detectIdentical;
         ReactDOM.findDOMNode(this.refs.packer).value = this.packOptions.packer;
         ReactDOM.findDOMNode(this.refs.packerMethod).value = this.packOptions.packerMethod;
@@ -398,6 +401,11 @@ class PackProperties extends React.Component {
                                         <option value="crop">crop</option>
                                     </select>
                                 </td>
+                                <td></td>
+                            </tr>
+                            <tr title={I18.f("ALPHA_THRESHOLD_TITLE")}>
+                                <td>{I18.f("ALPHA_THRESHOLD")}</td>
+                                <td><input ref="alphaThreshold" type="number" className="border-color-gray" defaultValue={this.packOptions.alphaThreshold} min="0" max="255" onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
                                 <td></td>
                             </tr>
                             <tr title={I18.f("DETECT_IDENTICAL_TITLE")}>

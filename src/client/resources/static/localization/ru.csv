@@ -64,6 +64,8 @@ ALLOW_ROTATION;Разрешить поворот:
 ALLOW_ROTATION_TITLE;Разрешает поворот спрайта в текстуре
 ALLOW_TRIM;Разрешить обрезку:
 ALLOW_TRIM_TITLE;Разрешает обрезку незначимых пикселей спрайта в текстуре
+ALPHA_THRESHOLD;Порог альфа-канала:
+ALPHA_THRESHOLD_TITLE;Порог альфа-канала для обрезки
 TRIM_MODE;Метод обрезки:
 TRIM_MODE_TITLE;Варианты меода обрезки
 DETECT_IDENTICAL;Определять идентичные:

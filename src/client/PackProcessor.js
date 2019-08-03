@@ -72,6 +72,9 @@ class PackProcessor {
 
         let maxWidth = 0, maxHeight = 0;
         let minWidth = 0, minHeight = 0;
+        
+        let alphaThreshold = options.alphaThreshold || 0;
+        if(alphaThreshold > 255) alphaThreshold = 255;
 
         let names = Object.keys(images);
         
@@ -126,7 +129,7 @@ class PackProcessor {
         }
 
         if(options.allowTrim) {
-            Trimmer.trim(rects);
+            Trimmer.trim(rects, alphaThreshold);
         }
 
         for(let item of rects) {
