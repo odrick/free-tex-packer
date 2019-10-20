@@ -8,6 +8,7 @@ LANGUAGE;language:
 LANGUAGE_en;english
 LANGUAGE_es;español
 LANGUAGE_ru;русский
+LANGUAGE_de;deutsch
 ADD_IMAGES;Add images
 ADD_IMAGES_TITLE;Add images
 ADD_FOLDER;Add folder
