@@ -8,7 +8,7 @@ import MainLayout from './ui/MainLayout.jsx';
 import Storage from './utils/Storage';
 import {Observer, GLOBAL_EVENT} from './Observer';
 
-import appInfo from '../../package.json';
+import languages from './resources/static/localization/languages.json';
 
 import Controller from 'platform/Controller';
 
@@ -26,7 +26,9 @@ function run() {
 }
 
 function loadLocalization() {
-    I18.supportedLanguages = appInfo.localizations.slice();
+    for(let i = 1; i < languages.length; i++) {
+        I18.supportedLanguages.push(languages[i].lang);
+    }
     I18.path = "static/localization";
     I18.init(Storage.load(STORAGE_LANGUAGE_KEY, false));
 

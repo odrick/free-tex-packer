@@ -10,6 +10,7 @@ let RECENT_PROJECTS = [];
 let CURRENT_LOCALE = "";
 let LOCALE_STRINGS = {};
 let APP_INFO = {};
+let LANGUAGES = [];
 let CURRENT_PROJECT = "";
 let CURRENT_PROJECT_MODIFIED = false;
 
@@ -238,12 +239,12 @@ function buildMenu() {
     });
     
     let langs = [];
-    if(APP_INFO.localizations) {
-        for (let lang of APP_INFO.localizations) {
+    if(LANGUAGES !== []) {
+        for (let lang of LANGUAGES) {
             langs.push({
-                label: LOCALE_STRINGS['LANGUAGE_' + lang],
-                custom: lang,
-                checked: CURRENT_LOCALE === lang,
+                label: lang.name,
+                custom: lang.lang,
+                checked: CURRENT_LOCALE === lang.lang,
                 type: 'checkbox',
                 actionName: 'change-locale',
                 click: sendMessage
@@ -355,6 +356,11 @@ ipcMain.on('update-app-info', (e, data) => {
     APP_INFO = data;
     buildMenu();
     updateWindowTitle();
+});
+
+ipcMain.on('update-languages', (e, data) => {
+    LANGUAGES = data;
+    buildMenu();
 });
 
 ipcMain.on('update-locale', (e, data) => {
