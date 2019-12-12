@@ -42,7 +42,7 @@ class MainHeader extends React.Component {
                         {
                             languages.map((item) => {
                                 return (
-                                    <option key={"localization_" + item} value={item.lang}>
+                                    <option key={"localization_" + item.lang} value={item.lang}>
                                         {item.name}
                                     </option>
                                 )

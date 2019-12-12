@@ -5,10 +5,6 @@ CANCEL;取消
 SAVE;保存
 IMAGES;图片
 LANGUAGE;语言:
-LANGUAGE_en;english
-LANGUAGE_es;español
-LANGUAGE_ru;русский
-LANGUAGE_zh-cn;简体中文
 ADD_IMAGES;添加图片
 ADD_IMAGES_TITLE;添加图片
 ADD_FOLDER;添加文件夹

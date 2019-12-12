@@ -5,10 +5,6 @@ CANCEL;Abbrechen
 SAVE;Speichern
 IMAGES;Bilder
 LANGUAGE;Sprache:
-LANGUAGE_en;english
-LANGUAGE_es;español
-LANGUAGE_ru;русский
-LANGUAGE_de;deutsch
 ADD_IMAGES;Bilder hinzu.
 ADD_IMAGES_TITLE;Bilder hinzufügen
 ADD_FOLDER;Ordner hinzu.
