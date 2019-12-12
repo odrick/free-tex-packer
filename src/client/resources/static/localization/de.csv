@@ -1,0 +1,140 @@
+OK;Ok
+YES;Ja
+NO;Nein
+CANCEL;Abbrechen
+SAVE;Speichern
+IMAGES;Bilder
+LANGUAGE;Sprache:
+LANGUAGE_en;english
+LANGUAGE_es;español
+LANGUAGE_ru;русский
+LANGUAGE_de;deutsch
+ADD_IMAGES;Bilder hinzu.
+ADD_IMAGES_TITLE;Bilder hinzufügen
+ADD_FOLDER;Ordner hinzu.
+ADD_FOLDER_TITLE;Ordner hinzufügen
+ADD_ZIP;ZIP hinzu.
+ADD_ZIP_TITLE;Bilder eines ZIP-Archivs hinzufügen
+IMAGE_DROP_HELP;Oder Bilder per Drag'n Drop hinzufügen
+CLEAR;Alle löschen
+CLEAR_TITLE;Löscht alle Bilder
+DELETE;Löschen
+DELETE_TITLE;Löscht das ausgewählte Bild
+DISPLAY_OUTLINES;Umriss:
+SCALE;Skalierung:
+SHOW_SPRITES;Animationen
+SPRITE_NAME;Sprite-Name:
+ANIMATION_SPEED;Animationsgeschwindigkeit:
+TEXTURE_NAME;Texturname:
+TEXTURE_NAME_TITLE;Texturname für den Export
+TEXTURE_FORMAT;Texturformat:
+TEXTURE_FORMAT_TITLE;Texturformat für den Export
+REMOVE_FILE_EXT;Dateierweiterung entfernen:
+REMOVE_FILE_EXT_TITLE;Dateierweiterung entfernen
+PREPEND_FOLDER;Ordnername voranstellen:
+PREPEND_FOLDER_TITLE;Ordnername vor Dateiname stellen
+BASE64_EXPORT;Export in base64
+BASE64_EXPORT_TITLE;Export im base64-Format (Wenn möglich)
+TINIFY;Tinify
+TINIFY_TITLE;Tinify mithilfe von https://tinypng.com
+TINIFY_KEY;TinyPNG Schlüssel
+TINIFY_KEY_TITLE;TinyPNG Schlüssel https://tinypng.com/developers 
+SCALE_TITLE;Basistextur Skalierung
+FILTER;Filter:
+FILTER_TITLE;Filter für die Ausgabedatei
+FORMAT;Ausgabeformat:
+FORMAT_TITLE;Format der Ausgabedatei
+FILE_NAME;Dateiname:
+FILE_NAME_TITLE;Dateiname der Ausgabedatei
+SAVE_PATH;Speicherpfad
+SAVE_PATH_TITLE;Speicherpfad der Datei
+WIDTH;Breite (px):
+WIDTH_TITLE;Maximale Breite der Textur
+HEIGHT;Höhe (px):
+HEIGHT_TITLE;Maximale Höhe der Textur
+FIXED_SIZE;Auflösung festsetzen:
+FIXED_SIZE_TITLE;Feste Wete für die Bildgröße verwenden
+POWER_OF_TWO;Zweierpotenz:
+POWER_OF_TWO_TITLE;Texturauflösung ist eine Zweierpotenz
+PADDING;Abstand:
+PADDING_TITLE;Abstand zwischen den Sprites
+EXTRUDE;Vergrößern:
+EXTRUDE_TITLE;Randpixel des Sprites werde für die Vergrößerung verwendet
+ALLOW_ROTATION;Rotation erlauben:
+ALLOW_ROTATION_TITLE;Sprites können rotiert werden
+ALLOW_TRIM;Zuschneiden erlauben:
+ALLOW_TRIM_TITLE;Erlaubt das Zuschneiden der Sprites
+ALPHA_THRESHOLD;Alpha Grenzwert:
+ALPHA_THRESHOLD_TITLE;Alpha Grenzwert
+TRIM_MODE;Trim Modus:
+TRIM_MODE_TITLE;Mögliche Trim Modi
+DETECT_IDENTICAL;Doubletten erkennen:
+DETECT_IDENTICAL_TITLE;Identische Sprites erkennen
+PACKER;Packer:
+PACKER_TITLE;Packer
+PACKER_METHOD;Methode:
+PACKER_METHOD_TITLE;Packermethode
+EXPORT;Exportieren
+FILE_EXT;Dateierweiterung:
+DOCUMENTATION;Dokumentation
+PLEASE_WAIT;Bitte warten...
+SAVE_CHANGES_CONFIRM;Änderungen speichern?
+INVALID_SIZE_ERROR;Ungültige Größe. Min: %sx%s
+NO_IMAGES_ERROR;Bitte erst ein Bild hinzufügen
+CLEAR_WARNING;Wollen Sie alle Bilder löschen?
+INVALID_ZIP_ERROR;Ungültige ZIP-Datei
+NO_TINIFY_KEY_ERROR;Setze bitte deinen TinyPNG Schlüssel https://tinypng.com/developers
+TINIFY_ERROR;Tinify Error: %s
+TINIFY_ERROR_COMMON;Tinify Error...
+OLD_BROWSER_MESSAGE1;Ihr Browser ist für diese App leider zu alt...
+OLD_BROWSER_MESSAGE2;Bitte benutzen Sie einen der folgenden Browser:
+EXPORTER_ERROR;Export Error: %s
+CUSTOM_EXPORTER_ERROR;Template Error: %s
+ABOUT_HOMEPAGE;Startseite:
+ABOUT_SOURCES;Quellcode:
+ABOUT_BUGS;Bugs melden:
+ABOUT_APPS;App downloaden:
+ABOUT_WEB;Web-version:
+ABOUT_LIBS;Verwendete Libraries:
+ABOUT_GULP_VERSION;Gulp module:
+ABOUT_WEBPACK_VERSION;Webpack plugin:
+ABOUT_CONTRIBUTORS;Mitwirkende:
+MENU_FILE;Datei
+MENU_FILE_PROJECT_NEW;Neues Projekt
+MENU_FILE_PROJECT_LOAD;Projekt öffnen
+MENU_FILE_PROJECT_LOAD_RECENT;Zuletzt geöffnet
+MENU_FILE_PROJECT_SAVE;Projekt speichern
+MENU_FILE_PROJECT_SAVE_AS;Projekt speichern als...
+MENU_FILE_PREFERENCES_SAVE;Einstellungen speichern
+MENU_FILE_INSTALL_CLI;CLI installieren
+MENU_FILE_EXIT;Beenden
+MENU_ACTIONS;Bearbeiten
+MENU_ACTIONS_ADD_IMAGES;Bild hinzufügen
+MENU_ACTIONS_ADD_FOLDER;Ordner hinzufügen
+MENU_ACTIONS_SELECT_ALL;Alles markieren
+MENU_ACTIONS_DELETE;Löschen
+MENU_ACTIONS_CLEAR;Alles löschen
+MENU_ACTIONS_EXPORT;Exportieren
+MENU_TOOLS;Werkzeuge
+MENU_TOOLS_SPLITTER;Sprites aus Bild extrahieren
+MENU_LANGUAGE;Sprache
+MENU_HELP;Hilfe
+MENU_HELP_ABOUT;Über
+UPDATER_TITLE;Neue Version verfügbar: %s
+CLOSE;Schließen
+INSTALL;Installieren
+SKIP_VERSION;Überspringen
+SKIP_VERSION_CONFIRM;Wollen Sie diese Version wirklich überspringen und keine Benachrichtigungen mehr erhalten?
+CONTEXT_MENU_UNDO;Rückganging
+CONTEXT_MENU_REDO;Wiederherstellen
+CONTEXT_MENU_CUT;Ausschneiden
+CONTEXT_MENU_COPY;Kopieren
+CONTEXT_MENU_PASTE;Einfügen
+CONTEXT_MENU_DELETE;Löschen
+CONTEXT_MENU_SELECT_ALL;Alles markieren
+SPLIT;Extrahieren
+SELECT_TEXTURE;Textur
+SELECT_DATA_FILE;Daten-Datei
+SPLITTER;Sprites aus Bild extrahieren
+SPLITTER_ERROR_NO_FRAMES;Sprites wurden nicht gefunden. Vermutlich ist das Atlas Format falsch.
+HOLD_TRIM;Trim beibehalten:
