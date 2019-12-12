@@ -3,6 +3,7 @@ const {ipcRenderer} = require('electron');
 import {GLOBAL_EVENT, Observer} from "../../Observer";
 import I18 from '../../utils/I18';
 import appInfo from '../../../../package.json';
+import languages from '../../resources/static/localization/languages.json';
 
 import Project from 'platform/Project';
 
@@ -87,6 +88,7 @@ class Controller {
         });
 
         ipcRenderer.send('update-app-info', appInfo);
+        ipcRenderer.send('update-languages', languages);
         
         Controller.updateRecentProjects();
         
