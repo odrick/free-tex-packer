@@ -74,6 +74,9 @@ class TextureRenderer {
     renderExtrude(ctx, item, options) {
         if(!options.extrude) return;
         
+        let imageSmoothingEnabled = ctx.imageSmoothingEnabled;
+        ctx.imageSmoothingEnabled = false;
+        
         let dx = item.frame.x;
         let dy = item.frame.y;
         
@@ -133,6 +136,8 @@ class TextureRenderer {
             item.spriteSourceSize.w, 1,
             dx, dy + item.frame.h,
             item.frame.w, options.extrude);
+
+        ctx.imageSmoothingEnabled = imageSmoothingEnabled;
     }
     
     renderItem(ctx, item, options) {
