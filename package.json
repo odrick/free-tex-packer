@@ -27,6 +27,10 @@
     {
       "name": "Querijn Heijmans aka Querijn",
       "homepage": "https://github.com/Querijn"
+    },
+    {
+      "name": "Timo Kämäräinen aka qtiki",
+      "homepage": "https://github.com/qtiki"
     }
   ],
   "scripts": {

@@ -18,7 +18,7 @@ class About extends React.Component {
 	renderDownload() {
 		return (
 			<tr>
-				<td>{I18.f("ABOUT_APPS")}</td>
+                <td><b>{I18.f("ABOUT_APPS")}</b></td>
 				<td><a href={appInfo.download} target="_blank" className="color-800">{appInfo.download}</a></td>
 			</tr>
 		)
@@ -27,7 +27,7 @@ class About extends React.Component {
 	renderWebVersion() {
 		return (
 			<tr>
-				<td>{I18.f("ABOUT_WEB")}</td>
+                <td><b>{I18.f("ABOUT_WEB")}</b></td>
 				<td><a href={appInfo.webApp} target="_blank" className="color-800">{appInfo.webApp}</a></td>
 			</tr>
 		)
@@ -49,24 +49,24 @@ class About extends React.Component {
                         <table>
                             <tbody>
                                 <tr>
-									<td>{I18.f("ABOUT_HOMEPAGE")}</td>
+                                    <td><b>{I18.f("ABOUT_HOMEPAGE")}</b></td>
 									<td><a href={appInfo.url} target="_blank" className="color-800">{appInfo.url}</a></td>
 								</tr>
                                 
                                 <tr>
-                                    <td>{I18.f("ABOUT_SOURCES")}</td>
+                                    <td><b>{I18.f("ABOUT_SOURCES")}</b></td>
                                     <td><a href={appInfo.homepage} target="_blank" className="color-800">{appInfo.homepage}</a></td>
                                 </tr>
 								
 								<tr>
-									<td>{I18.f("ABOUT_BUGS")}</td>
+                                    <td><b>{I18.f("ABOUT_BUGS")}</b></td>
 									<td><a href={appInfo.bugs.url} target="_blank" className="color-800">{appInfo.bugs.url}</a></td>
 								</tr>
                                 
 								{PLATFORM === "web" ? this.renderDownload() : this.renderWebVersion()}
 								
                                 <tr>
-                                    <td>{I18.f("ABOUT_LIBS")}</td>
+                                    <td><b>{I18.f("ABOUT_LIBS")}</b></td>
                                     <td>
                                         <div>
                                             <a href="https://facebook.github.io/react" target="_blank" className="color-800">React</a>
@@ -90,7 +90,7 @@ class About extends React.Component {
                                 </tr>
                             
                                 <tr>
-                                    <td>{I18.f("ABOUT_CONTRIBUTORS")}</td>
+                                    <td><b>{I18.f("ABOUT_CONTRIBUTORS")}</b></td>
                                     <td>
                                         {
                                             appInfo.contributors.map(contributor => {
