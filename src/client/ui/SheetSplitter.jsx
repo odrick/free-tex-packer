@@ -71,7 +71,7 @@ class SheetSplitter extends React.Component {
                 ctx.save();
 
                 ctx.translate(item.spriteSourceSize.x + item.spriteSourceSize.w/2, item.spriteSourceSize.y + item.spriteSourceSize.h/2);
-                ctx.rotate(-Math.PI/2);                
+                ctx.rotate(this.state.splitter.inverseRotation ? Math.PI/2 : -Math.PI/2);                
 
                 let dx = trimmed ? item.spriteSourceSize.y - item.spriteSourceSize.h/2 : -item.spriteSourceSize.h/2;
                 let dy = trimmed ? -(item.spriteSourceSize.x + item.spriteSourceSize.w/2) : -item.spriteSourceSize.w/2;

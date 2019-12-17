@@ -96,6 +96,10 @@ class Spine extends Splitter {
     static get type() {
         return 'Spine';
     }
+    
+    static get inverseRotation() {
+        return true;
+    }
 }
 
 export default Spine;
