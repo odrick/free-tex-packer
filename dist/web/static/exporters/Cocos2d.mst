@@ -24,17 +24,17 @@
     <key>metadata</key>
     <dict>
       <key>format</key>
-      <integer>3</integer>
+      <integer>2</integer>
       <key>pixelFormat</key>
       <string><%config.format%></string>
       <key>premultiplyAlpha</key>
       <false/>
       <key>realTextureFileName</key>
-      <string><%config.imageFile%></string>
+      <string><%config.imageName%></string>
       <key>size</key>
       <string>{<%config.imageWidth%>,<%config.imageHeight%>}</string>
       <key>textureFileName</key>
-      <string><%config.imageFile%></string>
+      <string><%config.imageName%></string>
     </dict>
   </dict>
 </plist>

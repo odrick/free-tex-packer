@@ -3,13 +3,15 @@ import JsonHash from './JsonHash';
 import JsonArray from './JsonArray';
 import XML from './XML';
 import UIKit from './UIKit';
+import Spine from './Spine';
 
 const list = [
     Grid,
     JsonHash,
     JsonArray,
     XML,
-    UIKit
+    UIKit,
+    Spine
 ];
 
 function getSplitterByType(type) {
