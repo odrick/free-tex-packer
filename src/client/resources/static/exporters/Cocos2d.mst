@@ -30,7 +30,7 @@
       <key>premultiplyAlpha</key>
       <false/>
       <key>realTextureFileName</key>
-      <string><%config.imageName%></string>
+      <string><%config.imageFile%></string>
       <key>size</key>
       <string>{<%config.imageWidth%>,<%config.imageHeight%>}</string>
       <key>textureFileName</key>
