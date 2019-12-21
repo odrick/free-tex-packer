@@ -1,7 +1,7 @@
 {
   "name": "free-tex-packer",
   "displayName": "Free texture packer",
-  "version": "0.6.4",
+  "version": "0.6.3",
   "description": "Free online texture packer",
   "url": "http://free-tex-packer.com",
   "download": "http://free-tex-packer.com/download",
@@ -17,20 +17,32 @@
   ],
   "contributors": [
     {
-      "name": "Alexander Norinchak aka Odrick",
+      "name": "Alexander Norinchak",
       "homepage": "https://github.com/odrick"
     },
     {
-      "name": "Rubén aka rtalon83",
+      "name": "Rubén",
       "homepage": "https://github.com/rtalon83"
     },
     {
-      "name": "Querijn Heijmans aka Querijn",
+      "name": "Querijn Heijmans",
       "homepage": "https://github.com/Querijn"
     },
     {
-      "name": "Timo Kämäräinen aka qtiki",
+      "name": "Timo Kämäräinen",
       "homepage": "https://github.com/qtiki"
+    },
+    {
+      "name": "Andrzej Kilijański",
+      "homepage": "https://github.com/and3md"
+    },
+    {
+      "name": "TheDarkMen3000",
+      "homepage": "https://github.com/TheDarkMen3000"
+    },
+    {
+      "name": "wen-",
+      "homepage": "https://github.com/wen-"
     }
   ],
   "scripts": {

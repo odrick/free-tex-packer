@@ -91,15 +91,14 @@ class About extends React.Component {
                             
                                 <tr>
                                     <td><b>{I18.f("ABOUT_CONTRIBUTORS")}</b></td>
-                                    <td>
+                                    <td className={"contributors-list"}>
                                         {
                                             appInfo.contributors.map(contributor => {
                                                 return (
-                                                    <div key={'contributor-' + contributor.name}>
-                                                        <a href={contributor.homepage} target="_blank" className="color-800">{contributor.name}</a>
-                                                    </div>
+                                                    <a key={'contributor-' + contributor.name} href={contributor.homepage} target="_blank" className="color-800">{contributor.name}</a>
                                                 )
-                                            })
+                                            }).
+                                            reduce((prev, curr) => [prev, ', ', curr])
                                         }
                                     </td>
                                 </tr>
