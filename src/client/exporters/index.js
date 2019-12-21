@@ -94,6 +94,23 @@ function prepareData(data, options) {
             sourceSize.w = spriteSourceSize.w;
             sourceSize.h = spriteSourceSize.h;
         }
+        
+        if(options.scale !== 1) {
+            frame.x *= options.scale;
+            frame.y *= options.scale;
+            frame.w *= options.scale;
+            frame.h *= options.scale;
+            frame.hw *= options.scale;
+            frame.hh *= options.scale;
+
+            spriteSourceSize.x *= options.scale;
+            spriteSourceSize.y *= options.scale;
+            spriteSourceSize.w *= options.scale;
+            spriteSourceSize.h *= options.scale;
+
+            sourceSize.w *= options.scale;
+            sourceSize.h *= options.scale;
+        }
 
         ret.push({
             name: name,

@@ -2,6 +2,7 @@ class TextureRenderer {
     
     constructor(data, options={}) {
         this.buffer = document.createElement("canvas");
+        this.tempBuffer = document.createElement("canvas");
 
         this.width = 0;
         this.height = 0;
@@ -74,6 +75,21 @@ class TextureRenderer {
 
         for(let item of data) {
             this.renderItem(ctx, item, options);
+        }
+        
+        if(options.scale !== 1) {
+            this.tempBuffer.width = width;
+            this.tempBuffer.height = height;
+            
+            let tempCtx = this.tempBuffer.getContext("2d");
+            tempCtx.clearRect(0, 0, width, height);
+            tempCtx.drawImage(this.buffer, 0, 0);
+
+            this.buffer.width = width * options.scale;
+            this.buffer.height = height * options.scale;
+
+            ctx.clearRect(0, 0, this.buffer.width, this.buffer.height);
+            ctx.drawImage(this.tempBuffer, 0, 0, width, height, 0, 0, this.buffer.width, this.buffer.height);
         }
     }
     
