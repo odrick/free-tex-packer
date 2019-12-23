@@ -23,8 +23,7 @@
         },
         "linux": {
             "target": [
-                "deb",
-                "AppImage"
+                "deb"
             ],
             "category": "Graphics",
             "executableName": "FreeTexturePacker",
