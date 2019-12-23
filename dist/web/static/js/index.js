@@ -740,7 +740,7 @@ exports.prepareContent = function(name, inputData, isBinary, isOptimizedBinarySt
 /* 10 */
 /***/ (function(module) {
 
-module.exports = {"name":"free-tex-packer","displayName":"Free texture packer","version":"0.6.3","description":"Free online texture packer","url":"http://free-tex-packer.com","download":"http://free-tex-packer.com/download","webApp":"http://free-tex-packer.com/app","main":"src/index.js","tinifyUrl":"http://free-tex-packer.com/server/tinify.php","localizations":["en","es","ru","zh-cn","de"],"contributors":[{"name":"Alexander Norinchak aka Odrick","homepage":"https://github.com/odrick"},{"name":"Rubén aka rtalon83","homepage":"https://github.com/rtalon83"},{"name":"Querijn Heijmans aka Querijn","homepage":"https://github.com/Querijn"},{"name":"Timo Kämäräinen aka qtiki","homepage":"https://github.com/qtiki"}],"scripts":{"start":"webpack-dev-server --host 127.0.0.1 --port 4000","start-electron":"webpack-dev-server --host 127.0.0.1 --port 4000 --platform electron","build-web":"webpack --build --platform web","build-electron":"webpack --build --platform electron"},"repository":{"type":"git","url":"git+https://github.com/odrick/free-tex-packer.git"},"keywords":["texture","packer","texturepacker","texture-packer","sprites","spritesheet","export","sprite","2d"],"author":"Alexander Norinchak","authorSite":"https://github.com/odrick/","authorEmail":"norinchak@gmail.com","license":"ISC","bugs":{"url":"https://github.com/odrick/free-tex-packer/issues"},"homepage":"https://github.com/odrick/free-tex-packer","devDependencies":{"@babel/core":"^7.6.4","@babel/preset-env":"^7.6.3","@babel/preset-react":"^7.7.4","@jvitela/mustache-wax":"^1.0.1","babel-loader":"^8.0.5","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.23.0","babel-preset-es2015":"^6.24.0","babel-preset-stage-0":"^6.22.0","babel-runtime":"^6.23.0","chokidar":"^2.0.4","copy-webpack-plugin":"^4.6.0","electron":"^4.0.4","eventemitter3":"^3.0.1","file-saver":"^2.0.0","glob":"^7.1.1","json-loader":"^0.5.4","jszip":"^3.1.3","maxrects-packer":"^2.5.0","mustache":"^3.0.1","optimist":"^0.6.1","plist":"^3.0.1","react":"^16.8.1","react-dom":"^16.8.1","webpack":"^4.29.3","webpack-cli":"^3.2.3","webpack-dev-server":"^3.1.14","xml2js":"^0.4.19"}};
+module.exports = {"name":"free-tex-packer","displayName":"Free texture packer","version":"0.6.3","description":"Free online texture packer","url":"http://free-tex-packer.com","download":"http://free-tex-packer.com/download","webApp":"http://free-tex-packer.com/app","main":"src/index.js","tinifyUrl":"http://free-tex-packer.com/server/tinify.php","localizations":["en","es","ru","zh-cn","de"],"contributors":[{"name":"Alexander Norinchak","homepage":"https://github.com/odrick"},{"name":"Rubén","homepage":"https://github.com/rtalon83"},{"name":"Querijn Heijmans","homepage":"https://github.com/Querijn"},{"name":"Timo Kämäräinen","homepage":"https://github.com/qtiki"},{"name":"Andrzej Kilijański","homepage":"https://github.com/and3md"},{"name":"TheDarkMen3000","homepage":"https://github.com/TheDarkMen3000"},{"name":"wen-","homepage":"https://github.com/wen-"}],"scripts":{"start":"webpack-dev-server --host 127.0.0.1 --port 4000","start-electron":"webpack-dev-server --host 127.0.0.1 --port 4000 --platform electron","build-web":"webpack --build --platform web","build-electron":"webpack --build --platform electron"},"repository":{"type":"git","url":"git+https://github.com/odrick/free-tex-packer.git"},"keywords":["texture","packer","texturepacker","texture-packer","sprites","spritesheet","export","sprite","2d"],"author":"Alexander Norinchak","authorSite":"https://github.com/odrick/","authorEmail":"norinchak@gmail.com","license":"ISC","bugs":{"url":"https://github.com/odrick/free-tex-packer/issues"},"homepage":"https://github.com/odrick/free-tex-packer","devDependencies":{"@babel/core":"^7.6.4","@babel/preset-env":"^7.6.3","@babel/preset-react":"^7.7.4","@jvitela/mustache-wax":"^1.0.1","babel-loader":"^8.0.5","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.23.0","babel-preset-es2015":"^6.24.0","babel-preset-stage-0":"^6.22.0","babel-runtime":"^6.23.0","chokidar":"^2.0.4","copy-webpack-plugin":"^4.6.0","electron":"^4.0.4","eventemitter3":"^3.0.1","file-saver":"^2.0.0","glob":"^7.1.1","json-loader":"^0.5.4","jszip":"^3.1.3","maxrects-packer":"^2.5.0","mustache":"^3.0.1","optimist":"^0.6.1","plist":"^3.0.1","react":"^16.8.1","react-dom":"^16.8.1","webpack":"^4.29.3","webpack-cli":"^3.2.3","webpack-dev-server":"^3.1.14","xml2js":"^0.4.19"}};
 
 /***/ }),
 /* 11 */
@@ -38916,6 +38916,17 @@ function () {
       }
     }
   }, {
+    key: "scale",
+    value: function scale(val) {
+      if (val === 1) return this.buffer;
+      var tempBuffer = document.createElement("canvas");
+      tempBuffer.width = Math.round(this.buffer.width * val) || 1;
+      tempBuffer.height = Math.round(this.buffer.height * val) || 1;
+      var tempCtx = tempBuffer.getContext("2d");
+      tempCtx.drawImage(this.buffer, 0, 0, this.buffer.width, this.buffer.height, 0, 0, tempBuffer.width, tempBuffer.height);
+      return tempBuffer;
+    }
+  }, {
     key: "renderExtrude",
     value: function renderExtrude(ctx, item, options) {
       if (!options.extrude) return;
@@ -39845,7 +39856,7 @@ function getFilterByType(type) {
     for (var _iterator = filters_list[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var item = _step.value;
 
-      if (item.type == type) {
+      if (item.type === type) {
         return item;
       }
     }
@@ -40009,6 +40020,21 @@ function prepareData(data, options) {
         spriteSourceSize.y = 0;
         sourceSize.w = spriteSourceSize.w;
         sourceSize.h = spriteSourceSize.h;
+      }
+
+      if (options.scale !== 1) {
+        frame.x *= options.scale;
+        frame.y *= options.scale;
+        frame.w *= options.scale;
+        frame.h *= options.scale;
+        frame.hw *= options.scale;
+        frame.hh *= options.scale;
+        spriteSourceSize.x *= options.scale;
+        spriteSourceSize.y *= options.scale;
+        spriteSourceSize.w *= options.scale;
+        spriteSourceSize.h *= options.scale;
+        sourceSize.w *= options.scale;
+        sourceSize.h *= options.scale;
       }
 
       ret.push({
@@ -40375,7 +40401,8 @@ function () {
           var renderer = new utils_TextureRenderer(data, this.packOptions);
           this.packResult.push({
             data: data,
-            buffer: renderer.buffer
+            buffer: renderer.buffer,
+            renderer: renderer
           });
         }
       } catch (err) {
@@ -40428,7 +40455,7 @@ function () {
       var _doExport = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee() {
-        var exporter, textureName, filterClass, filter, files, ix, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, item, fName, imageData, parts, pixelFormat, options;
+        var exporter, textureName, filterClass, filter, files, ix, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, item, fName, buffer, imageData, parts, pixelFormat, options;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -40448,61 +40475,62 @@ function () {
 
               case 11:
                 if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-                  _context.next = 51;
+                  _context.next = 52;
                   break;
                 }
 
                 item = _step2.value;
                 fName = textureName + (this.packResult.length > 1 ? "-" + ix : "");
-                imageData = filter.apply(item.buffer).toDataURL(this.packOptions.textureFormat == "png" ? "image/png" : "image/jpeg");
+                buffer = item.renderer.scale(this.packOptions.scale);
+                imageData = filter.apply(buffer).toDataURL(this.packOptions.textureFormat === "png" ? "image/png" : "image/jpeg");
                 parts = imageData.split(",");
                 parts.shift();
                 imageData = parts.join(",");
-                _context.prev = 18;
-                _context.next = 21;
+                _context.prev = 19;
+                _context.next = 22;
                 return web_Tinifyer.start(imageData, this.packOptions);
 
-              case 21:
+              case 22:
                 imageData = _context.sent;
-                _context.next = 29;
+                _context.next = 30;
                 break;
 
-              case 24:
-                _context.prev = 24;
-                _context.t0 = _context["catch"](18);
+              case 25:
+                _context.prev = 25;
+                _context.t0 = _context["catch"](19);
                 Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
                 Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, _context.t0);
                 return _context.abrupt("return");
 
-              case 29:
+              case 30:
                 files.push({
                   name: "".concat(fName, ".").concat(this.packOptions.textureFormat),
                   content: imageData,
                   base64: true
                 }); //TODO: move to options
 
-                pixelFormat = this.packOptions.textureFormat == "png" ? "RGBA8888" : "RGB888";
+                pixelFormat = this.packOptions.textureFormat === "png" ? "RGBA8888" : "RGB888";
                 options = {
                   imageName: "".concat(fName),
                   imageFile: "".concat(fName, ".").concat(this.packOptions.textureFormat),
                   imageData: imageData,
                   format: pixelFormat,
                   textureFormat: this.packOptions.textureFormat,
-                  imageWidth: item.buffer.width,
-                  imageHeight: item.buffer.height,
+                  imageWidth: buffer.width,
+                  imageHeight: buffer.height,
                   removeFileExtension: this.packOptions.removeFileExtension,
                   prependFolderName: this.packOptions.prependFolderName,
                   base64Export: this.packOptions.base64Export,
                   scale: this.packOptions.scale,
                   trimMode: this.packOptions.trimMode
                 };
-                _context.prev = 32;
+                _context.prev = 33;
                 _context.t1 = files;
                 _context.t2 = fName + "." + this.packOptions.exporter.fileExt;
-                _context.next = 37;
+                _context.next = 38;
                 return startExporter(exporter, item.data, options);
 
-              case 37:
+              case 38:
                 _context.t3 = _context.sent;
                 _context.t4 = {
                   name: _context.t2,
@@ -40511,68 +40539,68 @@ function () {
 
                 _context.t1.push.call(_context.t1, _context.t4);
 
-                _context.next = 47;
+                _context.next = 48;
                 break;
 
-              case 42:
-                _context.prev = 42;
-                _context.t5 = _context["catch"](32);
+              case 43:
+                _context.prev = 43;
+                _context.t5 = _context["catch"](33);
                 Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
                 Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, utils_I18.f("EXPORTER_ERROR", _context.t5));
                 return _context.abrupt("return");
 
-              case 47:
+              case 48:
                 ix++;
 
-              case 48:
+              case 49:
                 _iteratorNormalCompletion2 = true;
                 _context.next = 11;
                 break;
 
-              case 51:
-                _context.next = 57;
+              case 52:
+                _context.next = 58;
                 break;
 
-              case 53:
-                _context.prev = 53;
+              case 54:
+                _context.prev = 54;
                 _context.t6 = _context["catch"](9);
                 _didIteratorError2 = true;
                 _iteratorError2 = _context.t6;
 
-              case 57:
-                _context.prev = 57;
+              case 58:
                 _context.prev = 58;
+                _context.prev = 59;
 
                 if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
                   _iterator2["return"]();
                 }
 
-              case 60:
-                _context.prev = 60;
+              case 61:
+                _context.prev = 61;
 
                 if (!_didIteratorError2) {
-                  _context.next = 63;
+                  _context.next = 64;
                   break;
                 }
 
                 throw _iteratorError2;
 
-              case 63:
-                return _context.finish(60);
-
               case 64:
-                return _context.finish(57);
+                return _context.finish(61);
 
               case 65:
+                return _context.finish(58);
+
+              case 66:
                 web_Downloader.run(files, this.packOptions.fileName, this.packOptions.savePath);
                 Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
 
-              case 67:
+              case 68:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[9, 53, 57, 65], [18, 24], [32, 42], [58,, 60, 64]]);
+        }, _callee, this, [[9, 54, 58, 66], [19, 25], [33, 43], [59,, 61, 65]]);
       }));
 
       function doExport() {
@@ -42318,10 +42346,10 @@ function (_React$Component) {
       }, react_default.a.createElement("td", null, utils_I18.f("SCALE")), react_default.a.createElement("td", null, react_default.a.createElement("input", {
         ref: "scale",
         type: "number",
-        min: "1",
+        min: "0",
         className: "border-color-gray",
         defaultValue: this.packOptions.scale,
-        onBlur: this.onExporterPropChanged
+        onBlur: this.onPropChanged
       })), react_default.a.createElement("td", null)), react_default.a.createElement("tr", {
         title: utils_I18.f("FILTER_TITLE")
       }, react_default.a.createElement("td", null, utils_I18.f("FILTER")), react_default.a.createElement("td", null, react_default.a.createElement("select", {
@@ -43141,6 +43169,7 @@ function (_React$Component) {
 
     _this = PackResults_possibleConstructorReturn(this, PackResults_getPrototypeOf(PackResults).call(this, props));
     _this.textureBackColors = ["grid-back", "white-back", "pink-back", "black-back"];
+    _this.step = 0.1;
     _this.state = {
       packResult: null,
       textureBack: _this.textureBackColors[0],
@@ -43149,17 +43178,27 @@ function (_React$Component) {
       playerVisible: false,
       scale: 1
     };
+    _this.rangeRef = react_default.a.createRef();
+    _this.wheelRef = react_default.a.createRef();
     _this.setBack = _this.setBack.bind(PackResults_assertThisInitialized(_this));
     _this.changeOutlines = _this.changeOutlines.bind(PackResults_assertThisInitialized(_this));
     _this.changeScale = _this.changeScale.bind(PackResults_assertThisInitialized(_this));
     _this.toggleSpritesPlayer = _this.toggleSpritesPlayer.bind(PackResults_assertThisInitialized(_this));
     _this.clearSelection = _this.clearSelection.bind(PackResults_assertThisInitialized(_this));
+    _this.handleWheel = _this.handleWheel.bind(PackResults_assertThisInitialized(_this));
     Observer.on(GLOBAL_EVENT.PACK_COMPLETE, _this.updatePackResult, PackResults_assertThisInitialized(_this));
     Observer.on(GLOBAL_EVENT.IMAGES_LIST_SELECTED_CHANGED, _this.onImagesSelected, PackResults_assertThisInitialized(_this));
     return _this;
   }
 
   PackResults_createClass(PackResults, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.wheelRef.current.addEventListener('wheel', this.handleWheel, {
+        passive: false
+      });
+    }
+  }, {
     key: "onImagesSelected",
     value: function onImagesSelected(data) {
       this.setState({
@@ -43214,6 +43253,34 @@ function (_React$Component) {
       Observer.emit(GLOBAL_EVENT.IMAGE_CLEAR_SELECTION, null);
     }
   }, {
+    key: "handleWheel",
+    value: function handleWheel(event) {
+      if (!event.ctrlKey) return;
+      var value = this.state.scale;
+
+      if (event.deltaY >= 0) {
+        if (this.state.scale > 0.1) {
+          value = Number((this.state.scale - this.step).toPrecision(2));
+          this.setState({
+            scale: value
+          });
+        }
+      } else {
+        if (this.state.scale < 2.0) {
+          value = Number((this.state.scale + this.step).toPrecision(2));
+          this.setState({
+            scale: value
+          });
+        }
+      } // update range component
+
+
+      this.rangeRef.current.value = value;
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+    }
+  }, {
     key: "changeOutlines",
     value: function changeOutlines(e) {
       this.setState({
@@ -43224,7 +43291,7 @@ function (_React$Component) {
     key: "changeScale",
     value: function changeScale(e) {
       this.setState({
-        scale: e.target.value
+        scale: Number(e.target.value)
       });
     }
   }, {
@@ -43281,6 +43348,7 @@ function (_React$Component) {
       }, react_default.a.createElement("div", {
         className: "results-view-wrapper"
       }, react_default.a.createElement("div", {
+        ref: this.wheelRef,
         className: "results-view-container back-white",
         onClick: this.clearSelection
       }, react_default.a.createElement("div", {
@@ -43306,10 +43374,11 @@ function (_React$Component) {
         id: "result-view-outline",
         onChange: this.changeOutlines
       })), react_default.a.createElement("td", null, utils_I18.f("SCALE")), react_default.a.createElement("td", null, react_default.a.createElement("input", {
+        ref: this.rangeRef,
         type: "range",
         min: "0.1",
-        max: "1",
-        step: "0.01",
+        max: "2",
+        step: this.step,
         defaultValue: "1",
         onChange: this.changeScale
       })), react_default.a.createElement("td", null, react_default.a.createElement("div", {
@@ -43710,14 +43779,17 @@ function (_React$Component) {
         href: "https://www.npmjs.com/package/maxrects-packer",
         target: "_blank",
         className: "color-800"
-      }, "MaxRectsPacker")))), react_default.a.createElement("tr", null, react_default.a.createElement("td", null, react_default.a.createElement("b", null, utils_I18.f("ABOUT_CONTRIBUTORS"))), react_default.a.createElement("td", null, package_0.contributors.map(function (contributor) {
-        return react_default.a.createElement("div", {
-          key: 'contributor-' + contributor.name
-        }, react_default.a.createElement("a", {
+      }, "MaxRectsPacker")))), react_default.a.createElement("tr", null, react_default.a.createElement("td", null, react_default.a.createElement("b", null, utils_I18.f("ABOUT_CONTRIBUTORS"))), react_default.a.createElement("td", {
+        className: "contributors-list"
+      }, package_0.contributors.map(function (contributor) {
+        return react_default.a.createElement("a", {
+          key: 'contributor-' + contributor.name,
           href: contributor.homepage,
           target: "_blank",
           className: "color-800"
-        }, contributor.name));
+        }, contributor.name);
+      }).reduce(function (prev, curr) {
+        return [prev, ', ', curr];
       }))))), react_default.a.createElement("div", {
         className: "about-controls"
       }, react_default.a.createElement("div", {
@@ -45217,11 +45289,14 @@ function (_React$Component) {
 
     _this = SheetSplitter_possibleConstructorReturn(this, SheetSplitter_getPrototypeOf(SheetSplitter).call(this, props));
     _this.textureBackColors = ["grid-back", "white-back", "pink-back", "black-back"];
+    _this.step = 0.1;
     _this.state = {
       splitter: getDefaultSplitter(),
       textureBack: _this.textureBackColors[0],
       scale: 1
     };
+    _this.rangeRef = react_default.a.createRef();
+    _this.wheelRef = react_default.a.createRef();
     _this.texture = null;
     _this.data = null;
     _this.frames = null;
@@ -45236,6 +45311,7 @@ function (_React$Component) {
     _this.changeSplitter = _this.changeSplitter.bind(SheetSplitter_assertThisInitialized(_this));
     _this.setBack = _this.setBack.bind(SheetSplitter_assertThisInitialized(_this));
     _this.changeScale = _this.changeScale.bind(SheetSplitter_assertThisInitialized(_this));
+    _this.handleWheel = _this.handleWheel.bind(SheetSplitter_assertThisInitialized(_this));
     return _this;
   }
 
@@ -45243,6 +45319,39 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.updateTexture();
+      this.wheelRef.current.addEventListener('wheel', this.handleWheel, {
+        passive: false
+      });
+    }
+  }, {
+    key: "handleWheel",
+    value: function handleWheel(event) {
+      if (!event.ctrlKey) return;
+      var value = this.state.scale;
+
+      if (event.deltaY >= 0) {
+        if (this.state.scale > 0.1) {
+          value = Number((this.state.scale - this.step).toPrecision(2));
+          this.setState({
+            scale: value
+          });
+          this.updateTextureScale(value);
+        }
+      } else {
+        if (this.state.scale < 2.0) {
+          value = Number((this.state.scale + this.step).toPrecision(2));
+          this.setState({
+            scale: value
+          });
+          this.updateTextureScale(value);
+        }
+      } // update range component
+
+
+      this.rangeRef.current.value = value;
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
     }
   }, {
     key: "doSplit",
@@ -45514,7 +45623,7 @@ function (_React$Component) {
   }, {
     key: "changeScale",
     value: function changeScale(e) {
-      var val = e.target.value;
+      var val = Number(e.target.value);
       this.setState({
         scale: val
       });
@@ -45567,6 +45676,7 @@ function (_React$Component) {
         className: "back-400 border-color-gray color-black sheet-splitter-info-text",
         ref: "dataFileName"
       }, "\xA0")))))), react_default.a.createElement("div", {
+        ref: this.wheelRef,
         className: "sheet-splitter-view"
       }, react_default.a.createElement("canvas", {
         ref: "view"
@@ -45623,10 +45733,11 @@ function (_React$Component) {
           onClick: _this5.setBack
         }, "\xA0"));
       }), react_default.a.createElement("td", null, utils_I18.f("SCALE")), react_default.a.createElement("td", null, react_default.a.createElement("input", {
+        ref: this.rangeRef,
         type: "range",
         min: "0.1",
         max: "1",
-        step: "0.01",
+        step: this.step,
         defaultValue: "1",
         onChange: this.changeScale
       }))))), react_default.a.createElement("div", null, react_default.a.createElement("div", {

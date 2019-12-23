@@ -16,6 +16,7 @@ CLEAR;Limpiar
 CLEAR_TITLE;Quitar todas las imágenes
 DELETE;Borrar
 DELETE_TITLE;borrar imágenes seleccionadas
+REPLACE_FILES_PROMPT;Reemplazar archivos existentes?
 DISPLAY_OUTLINES;Outlines:
 SCALE;Escala:
 SHOW_SPRITES;Animaciones

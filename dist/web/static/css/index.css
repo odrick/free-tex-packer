@@ -678,6 +678,10 @@ html, body {
     padding: 2px;
 }
 
+.about-content td.contributors-list {
+    white-space: normal;
+}
+
 .about-controls {
     text-align: center;
     padding: 8px;
