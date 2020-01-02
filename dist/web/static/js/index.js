@@ -740,7 +740,7 @@ exports.prepareContent = function(name, inputData, isBinary, isOptimizedBinarySt
 /* 10 */
 /***/ (function(module) {
 
-module.exports = {"name":"free-tex-packer","displayName":"Free texture packer","version":"0.6.3","description":"Free online texture packer","url":"http://free-tex-packer.com","download":"http://free-tex-packer.com/download","webApp":"http://free-tex-packer.com/app","main":"src/index.js","tinifyUrl":"http://free-tex-packer.com/server/tinify.php","localizations":["en","es","ru","zh-cn","de"],"contributors":[{"name":"Alexander Norinchak","homepage":"https://github.com/odrick"},{"name":"Rubén","homepage":"https://github.com/rtalon83"},{"name":"Querijn Heijmans","homepage":"https://github.com/Querijn"},{"name":"Timo Kämäräinen","homepage":"https://github.com/qtiki"},{"name":"Andrzej Kilijański","homepage":"https://github.com/and3md"},{"name":"TheDarkMen3000","homepage":"https://github.com/TheDarkMen3000"},{"name":"wen-","homepage":"https://github.com/wen-"}],"scripts":{"start":"webpack-dev-server --host 127.0.0.1 --port 4000","start-electron":"webpack-dev-server --host 127.0.0.1 --port 4000 --platform electron","build-web":"webpack --build --platform web","build-electron":"webpack --build --platform electron"},"repository":{"type":"git","url":"git+https://github.com/odrick/free-tex-packer.git"},"keywords":["texture","packer","texturepacker","texture-packer","sprites","spritesheet","export","sprite","2d"],"author":"Alexander Norinchak","authorSite":"https://github.com/odrick/","authorEmail":"norinchak@gmail.com","license":"ISC","bugs":{"url":"https://github.com/odrick/free-tex-packer/issues"},"homepage":"https://github.com/odrick/free-tex-packer","devDependencies":{"@babel/core":"^7.6.4","@babel/preset-env":"^7.6.3","@babel/preset-react":"^7.7.4","@jvitela/mustache-wax":"^1.0.1","babel-loader":"^8.0.5","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.23.0","babel-preset-es2015":"^6.24.0","babel-preset-stage-0":"^6.22.0","babel-runtime":"^6.23.0","chokidar":"^2.0.4","copy-webpack-plugin":"^4.6.0","electron":"^4.0.4","eventemitter3":"^3.0.1","file-saver":"^2.0.0","glob":"^7.1.1","json-loader":"^0.5.4","jszip":"^3.1.3","maxrects-packer":"^2.5.0","mustache":"^3.0.1","optimist":"^0.6.1","plist":"^3.0.1","react":"^16.8.1","react-dom":"^16.8.1","webpack":"^4.29.3","webpack-cli":"^3.2.3","webpack-dev-server":"^3.1.14","xml2js":"^0.4.19"}};
+module.exports = {"name":"free-tex-packer","displayName":"Free texture packer","version":"0.6.4","description":"Free online texture packer","url":"http://free-tex-packer.com","download":"http://free-tex-packer.com/download","webApp":"http://free-tex-packer.com/app","main":"src/index.js","tinifyUrl":"http://free-tex-packer.com/server/tinify.php","localizations":["en","es","ru","zh-cn","de"],"contributors":[{"name":"Alexander Norinchak","homepage":"https://github.com/odrick"},{"name":"Rubén","homepage":"https://github.com/rtalon83"},{"name":"Querijn Heijmans","homepage":"https://github.com/Querijn"},{"name":"Timo Kämäräinen","homepage":"https://github.com/qtiki"},{"name":"Andrzej Kilijański","homepage":"https://github.com/and3md"},{"name":"TheDarkMen3000","homepage":"https://github.com/TheDarkMen3000"},{"name":"wen-","homepage":"https://github.com/wen-"}],"scripts":{"start":"webpack-dev-server --host 127.0.0.1 --port 4000","start-electron":"webpack-dev-server --host 127.0.0.1 --port 4000 --platform electron","build-web":"webpack --build --platform web","build-electron":"webpack --build --platform electron"},"repository":{"type":"git","url":"git+https://github.com/odrick/free-tex-packer.git"},"keywords":["texture","packer","texturepacker","texture-packer","sprites","spritesheet","export","sprite","2d"],"author":"Alexander Norinchak","authorSite":"https://github.com/odrick/","authorEmail":"norinchak@gmail.com","license":"ISC","bugs":{"url":"https://github.com/odrick/free-tex-packer/issues"},"homepage":"https://github.com/odrick/free-tex-packer","devDependencies":{"@babel/core":"^7.6.4","@babel/preset-env":"^7.6.3","@babel/preset-react":"^7.7.4","@jvitela/mustache-wax":"^1.0.1","babel-loader":"^8.0.5","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.23.0","babel-preset-es2015":"^6.24.0","babel-preset-stage-0":"^6.22.0","babel-runtime":"^6.23.0","chokidar":"^2.0.4","copy-webpack-plugin":"^4.6.0","electron":"^4.0.4","eventemitter3":"^3.0.1","file-saver":"^2.0.0","glob":"^7.1.1","json-loader":"^0.5.4","jszip":"^3.1.3","maxrects-packer":"^2.5.0","mustache":"^3.0.1","optimist":"^0.6.1","plist":"^3.0.1","react":"^16.8.1","react-dom":"^16.8.1","webpack":"^4.29.3","webpack-cli":"^3.2.3","webpack-dev-server":"^3.1.14","xml2js":"^0.4.19"}};
 
 /***/ }),
 /* 11 */
@@ -42276,7 +42276,9 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var exporter = getExporterByType(this.packOptions.exporter);
+      var allowRotation = this.packOptions.allowRotation && exporter.allowRotation;
       var exporterRotationDisabled = exporter.allowRotation ? "" : "disabled";
+      var allowTrim = this.packOptions.allowTrim && exporter.allowTrim;
       var exporterTrimDisabled = exporter.allowTrim ? "" : "disabled";
       return react_default.a.createElement("div", {
         className: "props-list back-white"
@@ -42472,7 +42474,7 @@ function (_React$Component) {
         type: "checkbox",
         className: "border-color-gray",
         onChange: this.onPropChanged,
-        defaultChecked: this.packOptions.allowRotation ? "checked" : "",
+        defaultChecked: allowRotation ? "checked" : "",
         disabled: exporterRotationDisabled
       })), react_default.a.createElement("td", null)), react_default.a.createElement("tr", {
         title: utils_I18.f("ALLOW_TRIM_TITLE")
@@ -42481,7 +42483,7 @@ function (_React$Component) {
         type: "checkbox",
         className: "border-color-gray",
         onChange: this.onPropChanged,
-        defaultChecked: this.packOptions.allowTrim ? "checked" : "",
+        defaultChecked: allowTrim ? "checked" : "",
         disabled: exporterTrimDisabled
       })), react_default.a.createElement("td", null)), react_default.a.createElement("tr", {
         title: utils_I18.f("TRIM_MODE_TITLE")
