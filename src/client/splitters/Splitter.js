@@ -17,6 +17,10 @@ class Splitter {
         
         return name;
     }
+
+    static get inverseRotation() {
+        return false;
+    }
 }
 
 export default Splitter;

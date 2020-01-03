@@ -613,7 +613,7 @@ html, body {
 
 .about-content {
     width: 490px;
-    height: 340px;
+    height: 360px;
     background: #fff;
     margin: auto;
     margin-top: 86px;
@@ -676,6 +676,10 @@ html, body {
     white-space: nowrap;
     vertical-align: top;
     padding: 2px;
+}
+
+.about-content td.contributors-list {
+    white-space: normal;
 }
 
 .about-controls {

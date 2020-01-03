@@ -5,9 +5,6 @@ CANCEL;CANCEL
 SAVE;SAVE
 IMAGES;Images
 LANGUAGE;language:
-LANGUAGE_en;english
-LANGUAGE_es;español
-LANGUAGE_ru;русский
 ADD_IMAGES;Add images
 ADD_IMAGES_TITLE;Add images
 ADD_FOLDER;Add folder
@@ -19,6 +16,7 @@ CLEAR;Clear
 CLEAR_TITLE;Clear all images
 DELETE;Delete
 DELETE_TITLE;Delete selected images
+REPLACE_FILES_PROMPT;Replace existing files?
 DISPLAY_OUTLINES;Outlines:
 SCALE;Scale:
 SHOW_SPRITES;Animations

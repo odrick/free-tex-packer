@@ -69,7 +69,8 @@ class APP {
 
             this.packResult.push({
                 data: data,
-                buffer: renderer.buffer
+                buffer: renderer.buffer,
+                renderer: renderer
             });
         }
 
@@ -110,7 +111,9 @@ class APP {
             
             let fName = textureName + (this.packResult.length > 1 ? "-" + ix : "");
             
-            let imageData = filter.apply(item.buffer).toDataURL(this.packOptions.textureFormat == "png" ? "image/png" : "image/jpeg");
+            let buffer = item.renderer.scale(this.packOptions.scale);
+            
+            let imageData = filter.apply(buffer).toDataURL(this.packOptions.textureFormat === "png" ? "image/png" : "image/jpeg");
             let parts = imageData.split(",");
             parts.shift();
             imageData = parts.join(",");
@@ -131,7 +134,7 @@ class APP {
             });
 
             //TODO: move to options
-            let pixelFormat = this.packOptions.textureFormat == "png" ? "RGBA8888" : "RGB888";
+            let pixelFormat = this.packOptions.textureFormat === "png" ? "RGBA8888" : "RGB888";
 
             let options = {
                 imageName: `${fName}`,
@@ -139,8 +142,8 @@ class APP {
                 imageData: imageData,
                 format: pixelFormat,
                 textureFormat: this.packOptions.textureFormat,
-                imageWidth: item.buffer.width,
-                imageHeight: item.buffer.height,
+                imageWidth: buffer.width,
+                imageHeight: buffer.height,
                 removeFileExtension: this.packOptions.removeFileExtension,
                 prependFolderName: this.packOptions.prependFolderName,
                 base64Export: this.packOptions.base64Export,

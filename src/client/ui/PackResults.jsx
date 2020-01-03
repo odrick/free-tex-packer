@@ -9,7 +9,8 @@ class PackResults extends React.Component {
         super(props);
 
         this.textureBackColors = ["grid-back", "white-back", "pink-back", "black-back"];
-        
+        this.step = 0.1;
+
         this.state = {
             packResult: null,
             textureBack: this.textureBackColors[0],
@@ -18,15 +19,23 @@ class PackResults extends React.Component {
             playerVisible: false,
             scale: 1
         };
+
+        this.rangeRef = React.createRef();
+        this.wheelRef = React.createRef();        
         
         this.setBack = this.setBack.bind(this);
         this.changeOutlines = this.changeOutlines.bind(this);
         this.changeScale = this.changeScale.bind(this);
-        this.toggleSpritesPlayer = this.toggleSpritesPlayer.bind(this);
+        this.toggleSpritesPlayer = this.toggleSpritesPlayer.bind(this);        
         this.clearSelection = this.clearSelection.bind(this);
+        this.handleWheel = this.handleWheel.bind(this);
 
         Observer.on(GLOBAL_EVENT.PACK_COMPLETE, this.updatePackResult, this);
-        Observer.on(GLOBAL_EVENT.IMAGES_LIST_SELECTED_CHANGED, this.onImagesSelected, this);
+        Observer.on(GLOBAL_EVENT.IMAGES_LIST_SELECTED_CHANGED, this.onImagesSelected, this);        
+    }
+    
+    componentDidMount() {
+        this.wheelRef.current.addEventListener('wheel', this.handleWheel, { passive: false });
     }
     
     onImagesSelected(data) {
@@ -53,26 +62,49 @@ class PackResults extends React.Component {
         Observer.emit(GLOBAL_EVENT.IMAGE_CLEAR_SELECTION, null);
     }
 
+    handleWheel(event) {
+        if(!event.ctrlKey) return;
+
+        let value = this.state.scale;
+        if (event.deltaY >= 0) {
+            if (this.state.scale > 0.1) {
+                value = Number((this.state.scale - this.step).toPrecision(2));
+                this.setState({scale: value});
+            }            
+        } else {            
+            if (this.state.scale < 2.0) {
+                value = Number((this.state.scale + this.step).toPrecision(2));
+                this.setState({scale: value});
+            }
+        }
+        
+        // update range component
+        this.rangeRef.current.value = value;
+
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
+    }
+
     changeOutlines(e) {
         this.setState({displayOutline: e.target.checked});
     }
 
     changeScale(e) {
-        this.setState({scale: e.target.value});
+        this.setState({scale: Number(e.target.value)});
     }
 
     toggleSpritesPlayer() {
         this.setState({playerVisible: !this.state.playerVisible});
     }
 
-    render() {
-       
+    render() {       
         let views = [], ix=0;
         if(this.state.packResult) {
             for (let item of this.state.packResult) {
                 views.push((
                     <TextureView key={"tex-view-" + ix} data={item} scale={this.state.scale} textureBack={this.state.textureBack} selectedImages={this.state.selectedImages} displayOutline={this.state.displayOutline} />
-                ));
+                ));               
                 ix++;
             }
         }
@@ -82,7 +114,7 @@ class PackResults extends React.Component {
                 
                 <div className="results-view-wrapper">
                 
-                    <div className="results-view-container back-white" onClick={this.clearSelection}>
+                    <div ref={this.wheelRef} className="results-view-container back-white" onClick={this.clearSelection}>
                         <div className={this.state.playerVisible ? "block-hidden" : "block-visible"}>
                             {views}
                         </div>
@@ -115,11 +147,11 @@ class PackResults extends React.Component {
                                         {I18.f("SCALE")}
                                     </td>
                                     <td>
-                                        <input type="range" min="0.1" max="1" step="0.01" defaultValue="1" onChange={this.changeScale}/>
+                                        <input ref={this.rangeRef} type="range" min="0.1" max="2" step={this.step} defaultValue="1" onChange={this.changeScale}/>
                                     </td>
                                     <td>
                                         <div className="btn back-800 border-color-gray color-white" onClick={this.toggleSpritesPlayer}>{I18.f("SHOW_SPRITES")}</div>
-                                    </td>
+                                    </td>                                    
                                 </tr>
                                 </tbody>
                             </table>

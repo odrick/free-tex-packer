@@ -258,7 +258,9 @@ class PackProperties extends React.Component {
     render() {
 
         let exporter = getExporterByType(this.packOptions.exporter);
+        let allowRotation = this.packOptions.allowRotation && exporter.allowRotation;
         let exporterRotationDisabled = exporter.allowRotation ? "" : "disabled";
+        let allowTrim = this.packOptions.allowTrim && exporter.allowTrim;
         let exporterTrimDisabled = exporter.allowTrim ? "" : "disabled";
         
         return (
@@ -308,7 +310,7 @@ class PackProperties extends React.Component {
                             </tr>
                             <tr title={I18.f("SCALE_TITLE")}>
                                 <td>{I18.f("SCALE")}</td>
-                                <td><input ref="scale" type="number" min="1" className="border-color-gray" defaultValue={this.packOptions.scale} onBlur={this.onExporterPropChanged}/></td>
+                                <td><input ref="scale" type="number" min="0" className="border-color-gray" defaultValue={this.packOptions.scale} onBlur={this.onPropChanged}/></td>
                                 <td></td>
                             </tr>
                             <tr title={I18.f("FILTER_TITLE")}>
@@ -385,12 +387,12 @@ class PackProperties extends React.Component {
                             </tr>
                             <tr title={I18.f("ALLOW_ROTATION_TITLE")}>
                                 <td>{I18.f("ALLOW_ROTATION")}</td>
-                                <td><input ref="allowRotation" type="checkbox" className="border-color-gray" onChange={this.onPropChanged} defaultChecked={this.packOptions.allowRotation ? "checked" : ""} disabled={exporterRotationDisabled} /></td>
+                                <td><input ref="allowRotation" type="checkbox" className="border-color-gray" onChange={this.onPropChanged} defaultChecked={allowRotation ? "checked" : ""} disabled={exporterRotationDisabled} /></td>
                                 <td></td>
                             </tr>
                             <tr title={I18.f("ALLOW_TRIM_TITLE")}>
                                 <td>{I18.f("ALLOW_TRIM")}</td>
-                                <td><input ref="allowTrim" type="checkbox" className="border-color-gray" onChange={this.onPropChanged} defaultChecked={this.packOptions.allowTrim ? "checked" : ""}  disabled={exporterTrimDisabled} /></td>
+                                <td><input ref="allowTrim" type="checkbox" className="border-color-gray" onChange={this.onPropChanged} defaultChecked={allowTrim ? "checked" : ""}  disabled={exporterTrimDisabled} /></td>
                                 <td></td>
                             </tr>
                             <tr title={I18.f("TRIM_MODE_TITLE")}>

@@ -9,12 +9,10 @@ class TextureRenderer {
         this.render(data, options);
     }
     
-    render(data, options={}) {
-        let ctx = this.buffer.getContext("2d");
-
+    static getSize(data, options={}) {
         let width = options.width || 0;
         let height = options.height || 0;
-        
+
         let padding = options.padding || 0;
         let extrude = options.extrude || 0;
 
@@ -48,16 +46,24 @@ class TextureRenderer {
         if (options.powerOfTwo) {
             let sw = Math.round(Math.log(width)/Math.log(2));
             let sh = Math.round(Math.log(height)/Math.log(2));
-			
-			let pw = Math.pow(2, sw);
+
+            let pw = Math.pow(2, sw);
             let ph = Math.pow(2, sh);
-			
-			if(pw < width) pw = Math.pow(2, sw + 1);
-			if(ph < height) ph = Math.pow(2, sh + 1);
-			
-			width = pw;
-			height = ph;
+
+            if(pw < width) pw = Math.pow(2, sw + 1);
+            if(ph < height) ph = Math.pow(2, sh + 1);
+
+            width = pw;
+            height = ph;
         }
+        
+        return {width, height};
+    }
+    
+    render(data, options={}) {
+        let ctx = this.buffer.getContext("2d");
+
+        let { width, height } = TextureRenderer.getSize(data, options);
 
         this.width = width;
         this.height = height;
@@ -71,8 +77,24 @@ class TextureRenderer {
         }
     }
     
+    scale(val) {
+        if(val === 1) return this.buffer;
+        
+        let tempBuffer = document.createElement("canvas");
+        tempBuffer.width = Math.round(this.buffer.width * val) || 1;
+        tempBuffer.height = Math.round(this.buffer.height * val) || 1;
+
+        let tempCtx = tempBuffer.getContext("2d");
+        tempCtx.drawImage(this.buffer, 0, 0, this.buffer.width, this.buffer.height, 0, 0, tempBuffer.width, tempBuffer.height);
+
+        return tempBuffer;
+    }
+    
     renderExtrude(ctx, item, options) {
         if(!options.extrude) return;
+        
+        let imageSmoothingEnabled = ctx.imageSmoothingEnabled;
+        ctx.imageSmoothingEnabled = false;
         
         let dx = item.frame.x;
         let dy = item.frame.y;
@@ -133,6 +155,8 @@ class TextureRenderer {
             item.spriteSourceSize.w, 1,
             dx, dy + item.frame.h,
             item.frame.w, options.extrude);
+
+        ctx.imageSmoothingEnabled = imageSmoothingEnabled;
     }
     
     renderItem(ctx, item, options) {

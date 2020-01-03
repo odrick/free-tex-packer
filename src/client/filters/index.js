@@ -10,7 +10,7 @@ const list = [
 
 function getFilterByType(type) {
     for(let item of list) {
-        if(item.type == type) {
+        if(item.type === type) {
             return item;
         }
     }

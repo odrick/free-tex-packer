@@ -14,13 +14,17 @@ class SheetSplitter extends React.Component {
         super(props);
         
         this.textureBackColors = ["grid-back", "white-back", "pink-back", "black-back"];
+        this.step = 0.1;
 
         this.state = {
             splitter: getDefaultSplitter(),
             textureBack: this.textureBackColors[0],
             scale: 1
         };
-        
+
+        this.rangeRef = React.createRef();
+        this.wheelRef = React.createRef();
+
         this.texture = null;
         this.data = null;
         this.frames = null;
@@ -37,11 +41,39 @@ class SheetSplitter extends React.Component {
         this.updateView = this.updateView.bind(this);
         this.changeSplitter = this.changeSplitter.bind(this);       
         this.setBack = this.setBack.bind(this);       
-        this.changeScale = this.changeScale.bind(this);       
+        this.changeScale = this.changeScale.bind(this);
+        this.handleWheel = this.handleWheel.bind(this);
     }
     
     componentDidMount() {
         this.updateTexture();
+        this.wheelRef.current.addEventListener('wheel', this.handleWheel, { passive: false });
+    }
+
+    handleWheel(event) {
+        if(!event.ctrlKey) return;
+
+        let value = this.state.scale;
+        if (event.deltaY >= 0) {
+            if (this.state.scale > 0.1) {
+                value = Number((this.state.scale - this.step).toPrecision(2));
+                this.setState({scale: value});
+                this.updateTextureScale(value);
+            }
+        } else {
+            if (this.state.scale < 2.0) {
+                value = Number((this.state.scale + this.step).toPrecision(2));
+                this.setState({scale: value});
+                this.updateTextureScale(value);
+            }
+        }
+
+        // update range component
+        this.rangeRef.current.value = value;
+
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
     }
     
     doSplit() {
@@ -71,7 +103,7 @@ class SheetSplitter extends React.Component {
                 ctx.save();
 
                 ctx.translate(item.spriteSourceSize.x + item.spriteSourceSize.w/2, item.spriteSourceSize.y + item.spriteSourceSize.h/2);
-                ctx.rotate(-Math.PI/2);                
+                ctx.rotate(this.state.splitter.inverseRotation ? Math.PI/2 : -Math.PI/2);                
 
                 let dx = trimmed ? item.spriteSourceSize.y - item.spriteSourceSize.h/2 : -item.spriteSourceSize.h/2;
                 let dy = trimmed ? -(item.spriteSourceSize.x + item.spriteSourceSize.w/2) : -item.spriteSourceSize.w/2;
@@ -266,9 +298,9 @@ class SheetSplitter extends React.Component {
     }
 
     changeScale(e) {
-        let val = e.target.value;
+        let val = Number(e.target.value);
         this.setState({scale: val});
-        this.updateTextureScale(val);
+        this.updateTextureScale(val);        
     }
 
     close() {
@@ -317,8 +349,8 @@ class SheetSplitter extends React.Component {
                         </table>
                     </div>
 
-                    <div className="sheet-splitter-view">
-                        <canvas ref='view'></canvas>
+                    <div ref={this.wheelRef} className="sheet-splitter-view">
+                        <canvas ref='view'/>
                     </div>
 
                     <div className="sheet-splitter-controls">
@@ -378,7 +410,7 @@ class SheetSplitter extends React.Component {
                                         {I18.f("SCALE")}
                                     </td>
                                     <td>
-                                        <input type="range" min="0.1" max="1" step="0.01" defaultValue="1" onChange={this.changeScale}/>
+                                        <input ref={this.rangeRef} type="range" min="0.1" max="1" step={this.step} defaultValue="1" onChange={this.changeScale}/>
                                     </td>
                                 </tr>
                             </tbody>
