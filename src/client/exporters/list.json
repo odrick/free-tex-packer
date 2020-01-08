@@ -48,6 +48,14 @@
     "fileExt": "json"
   },
   {
+    "type": "Godot (atlas)",
+    "description": "Godot Atlas format",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "GodotAtlas.mst",
+    "fileExt": "tpsheet"
+  },
+  {
     "type": "Phaser (hash)",
     "description": "Phaser (json hash)",
     "allowTrim": true,
