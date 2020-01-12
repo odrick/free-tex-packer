@@ -1,0 +1,41 @@
+#
+# Texture Tileset data for Godot 3.x.
+#
+# To import the texture atlas into your Godot project, download "TexturePacker Importer":
+# https://godotengine.org/asset-library/asset/169
+#
+{
+	"textures": [
+		{
+			"image": "{{config.imageFile}}",
+			"size": {
+				"w": {{config.imageWidth}},
+				"h": {{config.imageHeight}}
+			},
+			"sprites": [
+				{{#rects}}
+				{
+					"filename": "{{{name}}}",
+					"region": {
+						"x": {{frame.x}},
+						"y": {{frame.y}},
+						"w": {{frame.w}},
+						"h": {{frame.h}}
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}{{^last}},{{/last}}
+				{{/rects}}
+			]
+		}
+	],
+	"meta": {
+		"app": "{{{appInfo.url}}}",
+		"version": "{{appInfo.version}}",
+		"format": "{{config.format}}",
+	}
+}
