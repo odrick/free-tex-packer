@@ -23,10 +23,10 @@
 						"h": {{frame.h}}
 					},
 					"margin": {
-						"x": {{spriteSourceSize.x}},
-						"y": {{spriteSourceSize.y}},
-						"w": {{spriteSourceSize.w}},
-						"h": {{spriteSourceSize.h}}
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
 					}
 				}{{^last}},{{/last}}
 				{{/rects}}
