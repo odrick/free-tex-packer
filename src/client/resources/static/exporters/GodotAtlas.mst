@@ -1,9 +1,3 @@
-#
-# Texture Atlas data for Godot 3.x.
-#
-# To import the texture atlas into your Godot project, download "TexturePacker Importer":
-# https://godotengine.org/asset-library/asset/169
-#
 {
 	"textures": [
 		{
@@ -23,10 +17,10 @@
 						"h": {{frame.h}}
 					},
 					"margin": {
-						"x": {{spriteSourceSize.x}},
-						"y": {{spriteSourceSize.y}},
-						"w": {{spriteSourceSize.w}},
-						"h": {{spriteSourceSize.h}}
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
 					}
 				}{{^last}},{{/last}}
 				{{/rects}}
