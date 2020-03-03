@@ -36,6 +36,8 @@ TINIFY_TITLE;Tinify usando https://tinypng.com
 TINIFY;Tinify
 TINIFY_KEY_TITLE;TinyPNG key https://tinypng.com/developers 
 TINIFY_KEY;TinyPNG key
+DISABLE_SMOOTHING;Deshabilitar suavizado
+DISABLE_SMOOTHING_TITLE;Deshabilitar suavizado de imagen
 SCALE;Escala:
 SCALE_TITLE;Escala de la textura base
 FILTER;Filtro:

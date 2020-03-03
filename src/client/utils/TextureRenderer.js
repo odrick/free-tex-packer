@@ -63,6 +63,9 @@ class TextureRenderer {
     render(data, options={}) {
         let ctx = this.buffer.getContext("2d");
 
+        let imageSmoothingEnabled = ctx.imageSmoothingEnabled;
+        ctx.imageSmoothingEnabled = !options.disableSmoothing;
+
         let { width, height } = TextureRenderer.getSize(data, options);
 
         this.width = width;
@@ -75,6 +78,8 @@ class TextureRenderer {
         for(let item of data) {
             this.renderItem(ctx, item, options);
         }
+
+        ctx.imageSmoothingEnabled = imageSmoothingEnabled;
     }
     
     scale(val) {
