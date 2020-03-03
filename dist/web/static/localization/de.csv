@@ -18,6 +18,8 @@ DELETE;Löschen
 DELETE_TITLE;Löscht das ausgewählte Bild
 REPLACE_FILES_PROMPT;Bestehende Dateien ersetzen?
 DISPLAY_OUTLINES;Umriss:
+DISABLE_SMOOTHING;Glättung deaktivieren
+DISABLE_SMOOTHING_TITLE;Deaktivieren Sie die Bildglättung
 SCALE;Skalierung:
 SHOW_SPRITES;Animationen
 SPRITE_NAME;Sprite-Name:

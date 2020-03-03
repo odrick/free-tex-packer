@@ -36,6 +36,8 @@ TINIFY_TITLE;Оптимизировать, используя TinyPNG https://ti
 TINIFY;Оптимизировать TinyPNG
 TINIFY_KEY_TITLE;Ключ TinyPNG https://tinypng.com/developers 
 TINIFY_KEY;Ключ TinyPNG
+DISABLE_SMOOTHING;Отключить сглаживание
+DISABLE_SMOOTHING_TITLE;Отключить сглаживание изображения
 SCALE;Масштаб:
 SCALE_TITLE;Текущий масштаб текстуры. Влияет на пересчет размеров и координат при экспорте
 FILTER;Фильтр:

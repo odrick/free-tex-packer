@@ -36,6 +36,8 @@ TINIFY_TITLE;Tinify using https://tinypng.com
 TINIFY;Tinify
 TINIFY_KEY_TITLE;TinyPNG key https://tinypng.com/developers 
 TINIFY_KEY;TinyPNG key
+DISABLE_SMOOTHING;Disable smoothing
+DISABLE_SMOOTHING_TITLE;Disable image smoothing
 SCALE;Scale:
 SCALE_TITLE;Base texture scale
 FILTER;Filter:
