@@ -261,9 +261,10 @@ class PackProperties extends React.Component {
 
         let exporter = getExporterByType(this.packOptions.exporter);
         let allowRotation = this.packOptions.allowRotation && exporter.allowRotation;
-        let exporterRotationDisabled = exporter.allowRotation ? "" : "disabled";
+        let rotationDisabled = this.packOptions.packer !== 'OptimalPacker' && exporter.allowRotation ? "" : "disabled";
         let allowTrim = this.packOptions.allowTrim && exporter.allowTrim;
         let exporterTrimDisabled = exporter.allowTrim ? "" : "disabled";
+        let methodDisabled = this.packOptions.packer !== 'OptimalPacker' ? "" : "disabled";
         
         return (
             <div className="props-list back-white">
@@ -394,7 +395,7 @@ class PackProperties extends React.Component {
                             </tr>
                             <tr title={I18.f("ALLOW_ROTATION_TITLE")}>
                                 <td>{I18.f("ALLOW_ROTATION")}</td>
-                                <td><input ref="allowRotation" type="checkbox" className="border-color-gray" onChange={this.onPropChanged} defaultChecked={allowRotation ? "checked" : ""} disabled={exporterRotationDisabled} /></td>
+                                <td><input ref="allowRotation" type="checkbox" className="border-color-gray" onChange={this.onPropChanged} defaultChecked={allowRotation ? "checked" : ""} disabled={rotationDisabled} /></td>
                                 <td></td>
                             </tr>
                             <tr title={I18.f("ALLOW_TRIM_TITLE")}>
@@ -435,7 +436,7 @@ class PackProperties extends React.Component {
                             </tr>
                             <tr title={I18.f("PACKER_METHOD_TITLE")}>
                                 <td>{I18.f("PACKER_METHOD")}</td>
-                                <td><PackerMethods ref="packerMethod" packer={this.state.packer} defaultMethod={this.packOptions.packerMethod} handler={this.onPropChanged}/></td>
+                                <td><PackerMethods ref="packerMethod" packer={this.state.packer} defaultMethod={this.packOptions.packerMethod} handler={this.onPropChanged} disabled={methodDisabled}/></td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -462,7 +463,9 @@ class PackerMethods extends React.Component {
         }
 
         return (
-            <select onChange={this.props.handler} className="border-color-gray" defaultValue={this.props.defaultMethod} >{items}</select>
+            <select onChange={this.props.handler} className="border-color-gray" defaultValue={this.props.defaultMethod} disabled={this.props.disabled}>
+                {items}
+            </select>
         )
     }
 }
