@@ -35,11 +35,16 @@ class LocalImagesLoader {
         
         if(types.indexOf(item.type) >= 0) {
             let img = new Image();
+            img.fsPath = {
+                folder: '',
+                name: item.name,
+                path: item.path
+            };
 
-            let reader = new FileReader();
+            let reader = new FileReader();            
             reader.onload = e => {
                 img.src = e.target.result;
-                img._base64 = e.target.result;
+                img._base64 = e.target.result;                
 
                 this.loaded[item.name] = img;
                 this.loadedCnt++;
