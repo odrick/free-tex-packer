@@ -155,7 +155,9 @@ class PackProcessor {
                 if (packerClass !== OptimalPacker) {
                     for (let method in packerClass.methods) {
                         methods.push({packerClass, packerMethod: packerClass.methods[method], allowRotation: false});
-                        methods.push({packerClass, packerMethod: packerClass.methods[method], allowRotation: true});
+                        if(options.allowRotation) {
+                            methods.push({packerClass, packerMethod: packerClass.methods[method], allowRotation: true});
+                        }
                     }
                 }
             }
