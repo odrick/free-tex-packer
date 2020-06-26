@@ -384,12 +384,12 @@ class PackProperties extends React.Component {
                             </tr>
                             <tr title={I18.f("PADDING_TITLE")}>
                                 <td>{I18.f("PADDING")}</td>
-                                <td><input ref="padding" type="number" className="border-color-gray" defaultValue={this.packOptions.padding} min="0" onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
+                                <td><input ref="padding" type="number" className="border-color-gray" defaultValue={this.packOptions.padding} min="0" onInput={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
                                 <td></td>
                             </tr>
                             <tr title={I18.f("EXTRUDE_TITLE")}>
                                 <td>{I18.f("EXTRUDE")}</td>
-                                <td><input ref="extrude" type="number" className="border-color-gray" defaultValue={this.packOptions.extrude} min="0" onBlur={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
+                                <td><input ref="extrude" type="number" className="border-color-gray" defaultValue={this.packOptions.extrude} min="0" onInput={this.onPropChanged} onKeyDown={this.forceUpdate}/></td>
                                 <td></td>
                             </tr>
                             <tr title={I18.f("ALLOW_ROTATION_TITLE")}>
