@@ -63,9 +63,6 @@ class TextureRenderer {
     render(data, options={}) {
         let ctx = this.buffer.getContext("2d");
 
-        let imageSmoothingEnabled = ctx.imageSmoothingEnabled;
-        ctx.imageSmoothingEnabled = !options.disableSmoothing;
-
         let { width, height } = TextureRenderer.getSize(data, options);
 
         this.width = width;
@@ -79,7 +76,6 @@ class TextureRenderer {
             this.renderItem(ctx, item, options);
         }
 
-        ctx.imageSmoothingEnabled = imageSmoothingEnabled;
     }
     
     scale(val) {
@@ -97,9 +93,6 @@ class TextureRenderer {
     
     renderExtrude(ctx, item, options) {
         if(!options.extrude) return;
-        
-        let imageSmoothingEnabled = ctx.imageSmoothingEnabled;
-        ctx.imageSmoothingEnabled = false;
         
         let dx = item.frame.x;
         let dy = item.frame.y;
@@ -161,7 +154,6 @@ class TextureRenderer {
             dx, dy + item.frame.h,
             item.frame.w, options.extrude);
 
-        ctx.imageSmoothingEnabled = imageSmoothingEnabled;
     }
     
     renderItem(ctx, item, options) {
