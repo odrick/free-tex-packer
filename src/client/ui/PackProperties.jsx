@@ -131,7 +131,6 @@ class PackProperties extends React.Component {
         data.tinify = ReactDOM.findDOMNode(this.refs.tinify).checked;
         data.tinifyKey = ReactDOM.findDOMNode(this.refs.tinifyKey).value;
         data.scale = Number(ReactDOM.findDOMNode(this.refs.scale).value);
-        data.disableSmoothing = ReactDOM.findDOMNode(this.refs.disableSmoothing).checked;
         data.filter = ReactDOM.findDOMNode(this.refs.filter).value;
         data.exporter = ReactDOM.findDOMNode(this.refs.exporter).value;
         data.fileName = ReactDOM.findDOMNode(this.refs.fileName).value;
@@ -162,7 +161,6 @@ class PackProperties extends React.Component {
         ReactDOM.findDOMNode(this.refs.tinify).checked = this.packOptions.tinify;
         ReactDOM.findDOMNode(this.refs.tinifyKey).value = this.packOptions.tinifyKey;
         ReactDOM.findDOMNode(this.refs.scale).value = Number(this.packOptions.scale);
-        ReactDOM.findDOMNode(this.refs.disableSmoothing).checked = this.packOptions.disableSmoothing;
         ReactDOM.findDOMNode(this.refs.filter).value = this.packOptions.filter;
         ReactDOM.findDOMNode(this.refs.exporter).value = this.packOptions.exporter;
         ReactDOM.findDOMNode(this.refs.fileName).value = this.packOptions.fileName;
@@ -308,11 +306,6 @@ class PackProperties extends React.Component {
                             <tr title={I18.f("TINIFY_KEY_TITLE")}>
                                 <td>{I18.f("TINIFY_KEY")}</td>
                                 <td><input ref="tinifyKey" type="text" className="border-color-gray" defaultValue={this.packOptions.tinifyKey} onBlur={this.onExporterPropChanged} /></td>
-                                <td></td>
-                            </tr>
-                            <tr title={I18.f("DISABLE_SMOOTHING_TITLE")}>
-                                <td>{I18.f("DISABLE_SMOOTHING")}</td>
-                                <td><input ref="disableSmoothing" type="checkbox" className="border-color-gray" onChange={this.onPropChanged} defaultChecked={this.packOptions.disableSmoothing ? "checked" : ""} /></td>
                                 <td></td>
                             </tr>
                             <tr title={I18.f("SCALE_TITLE")}>
