@@ -408,6 +408,7 @@ html, body {
 .texture-view canvas {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+  image-rendering: -moz-crisp-edges;
 }
 
 .white-back {
@@ -947,6 +948,7 @@ html, body {
 .sheet-splitter-view canvas {
     image-rendering: pixelated;
     image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;
     border: 1px dotted #333;
     margin: 4px;
 }
