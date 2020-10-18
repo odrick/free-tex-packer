@@ -4,11 +4,11 @@
 
 Free texture packer creates sprite sheets for you game or site. Rotation, trimming, multipacking, various export formats (json, xml, css, pixi.js, godot, phaser, cocos2d). Zip support. TinyPNG support. Split sheet tool.
 
-![screenshot](http://free-tex-packer.com/wp-content/uploads/2019/01/screenshot.png)
+![screenshot](https://free-tex-packer.com/wp-content/uploads/2019/01/screenshot.png)
 
-Homepage: [http://free-tex-packer.com](http://free-tex-packer.com)
+Homepage: [https://free-tex-packer.com](https://free-tex-packer.com)
 
-Web version: [http://free-tex-packer.com/app](http://free-tex-packer.com/app)
+Web version: [https://free-tex-packer.com/app](https://free-tex-packer.com/app)
 
 Desktop versions for win, mac, linux: [https://github.com/odrick/free-tex-packer/releases](https://github.com/odrick/free-tex-packer/releases)
 
