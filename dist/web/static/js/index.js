@@ -750,7 +750,7 @@ exports.prepareContent = function(name, inputData, isBinary, isOptimizedBinarySt
 /* 11 */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"free-tex-packer\",\"displayName\":\"Free texture packer\",\"version\":\"0.6.6\",\"description\":\"Free online texture packer\",\"url\":\"http://free-tex-packer.com\",\"download\":\"http://free-tex-packer.com/download\",\"webApp\":\"http://free-tex-packer.com/app\",\"main\":\"src/index.js\",\"tinifyUrl\":\"http://free-tex-packer.com/server/tinify.php\",\"localizations\":[\"en\",\"es\",\"ru\",\"zh-cn\",\"de\"],\"contributors\":[{\"name\":\"Alexander Norinchak\",\"homepage\":\"https://github.com/odrick\"},{\"name\":\"Rubén\",\"homepage\":\"https://github.com/rtalon83\"},{\"name\":\"Querijn Heijmans\",\"homepage\":\"https://github.com/Querijn\"},{\"name\":\"Timo Kämäräinen\",\"homepage\":\"https://github.com/qtiki\"},{\"name\":\"Andrzej Kilijański\",\"homepage\":\"https://github.com/and3md\"},{\"name\":\"TheDarkMen3000\",\"homepage\":\"https://github.com/TheDarkMen3000\"},{\"name\":\"wen-\",\"homepage\":\"https://github.com/wen-\"},{\"name\":\"Davide Matta aka DadeKuma\",\"homepage\":\"https://github.com/DadeKuma\"}],\"scripts\":{\"start\":\"webpack-dev-server --host 127.0.0.1 --port 4000\",\"start-electron\":\"webpack-dev-server --host 127.0.0.1 --port 4000 --platform electron\",\"build-web\":\"webpack --build --platform web\",\"build-electron\":\"webpack --build --platform electron\"},\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/odrick/free-tex-packer.git\"},\"keywords\":[\"texture\",\"packer\",\"texturepacker\",\"texture-packer\",\"sprites\",\"spritesheet\",\"export\",\"sprite\",\"2d\"],\"author\":\"Alexander Norinchak\",\"authorSite\":\"https://github.com/odrick/\",\"authorEmail\":\"norinchak@gmail.com\",\"license\":\"ISC\",\"bugs\":{\"url\":\"https://github.com/odrick/free-tex-packer/issues\"},\"homepage\":\"https://github.com/odrick/free-tex-packer\",\"devDependencies\":{\"@babel/core\":\"^7.6.4\",\"@babel/preset-env\":\"^7.6.3\",\"@babel/preset-react\":\"^7.7.4\",\"@jvitela/mustache-wax\":\"^1.0.1\",\"babel-loader\":\"^8.0.5\",\"babel-plugin-transform-runtime\":\"^6.23.0\",\"babel-polyfill\":\"^6.23.0\",\"babel-preset-es2015\":\"^6.24.0\",\"babel-preset-stage-0\":\"^6.22.0\",\"babel-runtime\":\"^6.23.0\",\"chokidar\":\"^2.0.4\",\"copy-webpack-plugin\":\"^4.6.0\",\"electron\":\"^4.0.4\",\"eventemitter3\":\"^3.0.1\",\"file-saver\":\"^2.0.0\",\"glob\":\"^7.1.1\",\"json-loader\":\"^0.5.4\",\"jszip\":\"^3.1.3\",\"maxrects-packer\":\"^2.5.0\",\"mustache\":\"^3.0.1\",\"optimist\":\"^0.6.1\",\"plist\":\"^3.0.1\",\"react\":\"^16.8.1\",\"react-dom\":\"^16.8.1\",\"webpack\":\"^4.29.3\",\"webpack-cli\":\"^3.2.3\",\"webpack-dev-server\":\"^3.1.14\",\"xml2js\":\"^0.4.19\"}}");
+module.exports = JSON.parse("{\"name\":\"free-tex-packer\",\"displayName\":\"Free texture packer\",\"version\":\"0.6.7\",\"description\":\"Free online texture packer\",\"url\":\"http://free-tex-packer.com\",\"download\":\"http://free-tex-packer.com/download\",\"webApp\":\"http://free-tex-packer.com/app\",\"main\":\"src/index.js\",\"tinifyUrl\":\"http://free-tex-packer.com/server/tinify.php\",\"localizations\":[\"en\",\"es\",\"ru\",\"zh-cn\",\"de\"],\"contributors\":[{\"name\":\"Alexander Norinchak\",\"homepage\":\"https://github.com/odrick\"},{\"name\":\"Rubén\",\"homepage\":\"https://github.com/rtalon83\"},{\"name\":\"Querijn Heijmans\",\"homepage\":\"https://github.com/Querijn\"},{\"name\":\"Timo Kämäräinen\",\"homepage\":\"https://github.com/qtiki\"},{\"name\":\"Andrzej Kilijański\",\"homepage\":\"https://github.com/and3md\"},{\"name\":\"TheDarkMen3000\",\"homepage\":\"https://github.com/TheDarkMen3000\"},{\"name\":\"wen-\",\"homepage\":\"https://github.com/wen-\"},{\"name\":\"Davide Matta aka DadeKuma\",\"homepage\":\"https://github.com/DadeKuma\"}],\"scripts\":{\"start\":\"webpack-dev-server --host 127.0.0.1 --port 4000\",\"start-electron\":\"webpack-dev-server --host 127.0.0.1 --port 4000 --platform electron\",\"build-web\":\"webpack --build --platform web\",\"build-electron\":\"webpack --build --platform electron\"},\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/odrick/free-tex-packer.git\"},\"keywords\":[\"texture\",\"packer\",\"texturepacker\",\"texture-packer\",\"sprites\",\"spritesheet\",\"export\",\"sprite\",\"2d\"],\"author\":\"Alexander Norinchak\",\"authorSite\":\"https://github.com/odrick/\",\"authorEmail\":\"norinchak@gmail.com\",\"license\":\"ISC\",\"bugs\":{\"url\":\"https://github.com/odrick/free-tex-packer/issues\"},\"homepage\":\"https://github.com/odrick/free-tex-packer\",\"devDependencies\":{\"@babel/core\":\"^7.6.4\",\"@babel/preset-env\":\"^7.6.3\",\"@babel/preset-react\":\"^7.7.4\",\"@jvitela/mustache-wax\":\"^1.0.1\",\"babel-loader\":\"^8.0.5\",\"babel-plugin-transform-runtime\":\"^6.23.0\",\"babel-polyfill\":\"^6.23.0\",\"babel-preset-es2015\":\"^6.24.0\",\"babel-preset-stage-0\":\"^6.22.0\",\"babel-runtime\":\"^6.23.0\",\"chokidar\":\"^2.0.4\",\"copy-webpack-plugin\":\"^4.6.0\",\"electron\":\"^4.0.4\",\"eventemitter3\":\"^3.0.1\",\"file-saver\":\"^2.0.0\",\"glob\":\"^7.1.1\",\"json-loader\":\"^0.5.4\",\"jszip\":\"^3.1.3\",\"maxrects-packer\":\"^2.7.2\",\"mustache\":\"^3.0.1\",\"optimist\":\"^0.6.1\",\"plist\":\"^3.0.1\",\"react\":\"^16.8.1\",\"react-dom\":\"^16.8.1\",\"webpack\":\"^4.29.3\",\"webpack-cli\":\"^3.2.3\",\"webpack-dev-server\":\"^3.1.14\",\"xml2js\":\"^0.4.19\"}}");
 
 /***/ }),
 /* 12 */
@@ -14160,7 +14160,7 @@ module.exports = function isCallable(value) {
 /* 166 */
 /***/ (function(module) {
 
-module.exports = JSON.parse("[{\"type\":\"JSON (hash)\",\"description\":\"Json hash\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonHash.mst\",\"fileExt\":\"json\"},{\"type\":\"JSON (array)\",\"description\":\"Json array\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonArray.mst\",\"fileExt\":\"json\"},{\"type\":\"XML\",\"description\":\"Plain XML format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"XML.mst\",\"fileExt\":\"xml\"},{\"type\":\"css (modern)\",\"description\":\"css format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Css.mst\",\"fileExt\":\"css\"},{\"type\":\"css (old)\",\"description\":\"old css format\",\"allowTrim\":false,\"allowRotation\":false,\"template\":\"OldCss.mst\",\"fileExt\":\"css\"},{\"type\":\"pixi.js\",\"description\":\"pixi.js format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonHash.mst\",\"fileExt\":\"json\"},{\"type\":\"Godot (atlas)\",\"description\":\"Godot Atlas format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"GodotAtlas.mst\",\"fileExt\":\"tpsheet\"},{\"type\":\"Godot (tileset)\",\"description\":\"Godot Tileset format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"GodotTileset.mst\",\"fileExt\":\"tpset\"},{\"type\":\"Phaser (hash)\",\"description\":\"Phaser (json hash)\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonHash.mst\",\"fileExt\":\"json\"},{\"type\":\"Phaser (array)\",\"description\":\"Phaser (json array)\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonArray.mst\",\"fileExt\":\"json\"},{\"type\":\"Phaser 3\",\"description\":\"Phaser 3\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Phaser3.mst\",\"fileExt\":\"json\"},{\"type\":\"Spine\",\"description\":\"Spine atlas\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Spine.mst\",\"fileExt\":\"atlas\"},{\"type\":\"cocos2d\",\"description\":\"cocos2d format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Cocos2d.mst\",\"fileExt\":\"plist\"},{\"type\":\"UnrealEngine\",\"description\":\"UnrealEngine - Paper2d\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Unreal.mst\",\"fileExt\":\"paper2dsprites\"},{\"type\":\"Starling\",\"description\":\"Starling format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Starling.mst\",\"fileExt\":\"xml\"},{\"type\":\"UIKit\",\"description\":\"UIKit sprite sheet\",\"allowTrim\":true,\"allowRotation\":false,\"template\":\"UIKit.mst\",\"fileExt\":\"plist\",\"predefined\":true},{\"type\":\"Unity3D\",\"description\":\"Unity3D sprite sheet\",\"allowTrim\":true,\"allowRotation\":false,\"template\":\"Unity3D.mst\",\"fileExt\":\"tpsheet\",\"predefined\":true},{\"type\":\"custom\",\"description\":\"Custom format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"\",\"fileExt\":\"\"}]");
+module.exports = JSON.parse("[{\"type\":\"JSON (hash)\",\"description\":\"Json hash\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonHash.mst\",\"fileExt\":\"json\"},{\"type\":\"JSON (array)\",\"description\":\"Json array\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonArray.mst\",\"fileExt\":\"json\"},{\"type\":\"XML\",\"description\":\"Plain XML format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"XML.mst\",\"fileExt\":\"xml\"},{\"type\":\"css (modern)\",\"description\":\"css format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Css.mst\",\"fileExt\":\"css\"},{\"type\":\"css (old)\",\"description\":\"old css format\",\"allowTrim\":false,\"allowRotation\":false,\"template\":\"OldCss.mst\",\"fileExt\":\"css\"},{\"type\":\"pixi.js\",\"description\":\"pixi.js format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonHash.mst\",\"fileExt\":\"json\"},{\"type\":\"Godot (atlas)\",\"description\":\"Godot Atlas format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"GodotAtlas.mst\",\"fileExt\":\"tpsheet\"},{\"type\":\"Godot (tileset)\",\"description\":\"Godot Tileset format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"GodotTileset.mst\",\"fileExt\":\"tpset\"},{\"type\":\"Phaser (hash)\",\"description\":\"Phaser (json hash)\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonHash.mst\",\"fileExt\":\"json\"},{\"type\":\"Phaser (array)\",\"description\":\"Phaser (json array)\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonArray.mst\",\"fileExt\":\"json\"},{\"type\":\"Phaser 3\",\"description\":\"Phaser 3\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Phaser3.mst\",\"fileExt\":\"json\"},{\"type\":\"Spine\",\"description\":\"Spine atlas\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Spine.mst\",\"fileExt\":\"atlas\"},{\"type\":\"cocos2d\",\"description\":\"cocos2d format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Cocos2d.mst\",\"fileExt\":\"plist\"},{\"type\":\"UnrealEngine\",\"description\":\"UnrealEngine - Paper2d\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Unreal.mst\",\"fileExt\":\"paper2dsprites\"},{\"type\":\"Starling\",\"description\":\"Starling format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Starling.mst\",\"fileExt\":\"xml\"},{\"type\":\"UIKit\",\"description\":\"UIKit sprite sheet\",\"allowTrim\":true,\"allowRotation\":false,\"template\":\"UIKit.mst\",\"fileExt\":\"plist\",\"predefined\":true},{\"type\":\"Unity3D\",\"description\":\"Unity3D sprite sheet\",\"allowTrim\":true,\"allowRotation\":false,\"template\":\"Unity3D.mst\",\"fileExt\":\"tpsheet\",\"predefined\":true},{\"type\":\"Egret2D\",\"description\":\"Egret2D sprite sheet\",\"allowTrim\":false,\"allowRotation\":false,\"template\":\"Egret2D.mst\",\"fileExt\":\"json\",\"predefined\":true},{\"type\":\"custom\",\"description\":\"Custom format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"\",\"fileExt\":\"\"}]");
 
 /***/ }),
 /* 167 */
@@ -15316,9 +15316,10 @@ class Rectangle {
      * @param {number} [x=0]
      * @param {number} [y=0]
      * @param {boolean} [rot=false]
+     * @param {boolean} [allowRotation=false]
      * @memberof Rectangle
      */
-    constructor(width = 0, height = 0, x = 0, y = 0, rot = false) {
+    constructor(width = 0, height = 0, x = 0, y = 0, rot = false, allowRotation = undefined) {
         /**
          * Oversized tag on rectangle which is bigger than packer itself.
          *
@@ -15327,6 +15328,7 @@ class Rectangle {
          */
         this.oversized = false;
         this._rot = false;
+        this._allowRotation = undefined;
         this._dirty = 0;
         this._width = width;
         this._height = height;
@@ -15334,13 +15336,14 @@ class Rectangle {
         this._y = y;
         this._data = {};
         this._rot = rot;
+        this._allowRotation = allowRotation;
     }
     /**
      * Test if two given rectangle collide each other
      *
      * @static
-     * @param {Rectangle} first
-     * @param {Rectangle} second
+     * @param {IRectangle} first
+     * @param {IRectangle} second
      * @returns
      * @memberof Rectangle
      */
@@ -15349,8 +15352,8 @@ class Rectangle {
      * Test if the first rectangle contains the second one
      *
      * @static
-     * @param {Rectangle} first
-     * @param {Rectangle} second
+     * @param {IRectangle} first
+     * @param {IRectangle} second
      * @returns
      * @memberof Rectangle
      */
@@ -15365,7 +15368,7 @@ class Rectangle {
     /**
      * Test if the given rectangle collide with this rectangle.
      *
-     * @param {Rectangle} rect
+     * @param {IRectangle} rect
      * @returns {boolean}
      * @memberof Rectangle
      */
@@ -15378,7 +15381,7 @@ class Rectangle {
     /**
      * Test if this rectangle contains the given rectangle.
      *
-     * @param {Rectangle} rect
+     * @param {IRectangle} rect
      * @returns {boolean}
      * @memberof Rectangle
      */
@@ -15429,6 +15432,8 @@ class Rectangle {
      * @memberof Rectangle
      */
     set rot(value) {
+        if (this._allowRotation === false)
+            return;
         if (this._rot !== value) {
             const tmp = this.width;
             this.width = this.height;
@@ -15437,11 +15442,33 @@ class Rectangle {
             this._dirty++;
         }
     }
+    /**
+     * If the rectangle allow rotation
+     *
+     * @type {boolean}
+     * @memberof Rectangle
+     */
+    get allowRotation() { return this._allowRotation; }
+    /**
+     * Set the allowRotation tag of the rectangle.
+     *
+     * @memberof Rectangle
+     */
+    set allowRotation(value) {
+        if (this._allowRotation !== value) {
+            this._allowRotation = value;
+            this._dirty++;
+        }
+    }
     get data() { return this._data; }
     set data(value) {
-        if (value === this._data)
+        if (value === null || value === this._data)
             return;
         this._data = value;
+        // extract allowRotation settings
+        if (typeof value === "object" && value.hasOwnProperty("allowRotation")) {
+            this._allowRotation = value.allowRotation;
+        }
         this._dirty++;
     }
     get dirty() { return this._dirty > 0; }
@@ -15470,15 +15497,25 @@ class Bin {
 }
 
 class MaxRectsBin extends Bin {
-    constructor(maxWidth = EDGE_MAX_VALUE, maxHeight = EDGE_MAX_VALUE, padding = 0, options = { smart: true, pot: true, square: true, allowRotation: false, tag: false, border: 0, logic: PACKING_LOGIC.MAX_AREA }) {
+    constructor(maxWidth = EDGE_MAX_VALUE, maxHeight = EDGE_MAX_VALUE, padding = 0, options = {}) {
         super();
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
         this.padding = padding;
-        this.options = options;
         this.freeRects = [];
         this.rects = [];
         this.verticalExpand = false;
+        this.options = {
+            smart: true,
+            pot: true,
+            square: true,
+            allowRotation: false,
+            tag: false,
+            exclusiveTag: true,
+            border: 0,
+            logic: PACKING_LOGIC.MAX_EDGE
+        };
+        this.options = Object.assign(Object.assign({}, this.options), options);
         this.width = this.options.smart ? 0 : maxWidth;
         this.height = this.options.smart ? 0 : maxHeight;
         this.border = this.options.border ? this.options.border : 0;
@@ -15494,13 +15531,13 @@ class MaxRectsBin extends Bin {
             rect = args[0];
             // Check if rect.tag match bin.tag, if bin.tag not defined, it will accept any rect
             let tag = (rect.data && rect.data.tag) ? rect.data.tag : rect.tag ? rect.tag : undefined;
-            if (this.options.tag && this.tag !== tag)
+            if (this.options.tag && this.options.exclusiveTag && this.tag !== tag)
                 return undefined;
         }
         else {
             data = args.length > 2 ? args[2] : null;
             // Check if data.tag match bin.tag, if bin.tag not defined, it will accept any rect
-            if (this.options.tag) {
+            if (this.options.tag && this.options.exclusiveTag) {
                 if (data && this.tag !== data.tag)
                     return undefined;
                 if (!data && this.tag)
@@ -15561,12 +15598,28 @@ class MaxRectsBin extends Bin {
         this.stage = new Rectangle(this.width, this.height);
         this._dirty = 0;
     }
+    clone() {
+        let clonedBin = new MaxRectsBin(this.maxWidth, this.maxHeight, this.padding, this.options);
+        for (let rect of this.rects) {
+            clonedBin.add(rect);
+        }
+        return clonedBin;
+    }
     place(rect) {
         // recheck if tag matched
         let tag = (rect.data && rect.data.tag) ? rect.data.tag : rect.tag ? rect.tag : undefined;
-        if (this.options.tag && this.tag !== tag)
+        if (this.options.tag && this.options.exclusiveTag && this.tag !== tag)
             return undefined;
-        let node = this.findNode(rect.width + this.padding, rect.height + this.padding);
+        let node;
+        let allowRotation;
+        // getter/setter do not support hasOwnProperty()
+        if (rect.hasOwnProperty("_allowRotation") && rect.allowRotation !== undefined) {
+            allowRotation = rect.allowRotation; // Per Rectangle allowRotation override packer settings
+        }
+        else {
+            allowRotation = this.options.allowRotation;
+        }
+        node = this.findNode(rect.width + this.padding, rect.height + this.padding, allowRotation);
         if (node) {
             this.updateBinSize(node);
             let numRectToProcess = this.freeRects.length;
@@ -15583,6 +15636,8 @@ class MaxRectsBin extends Bin {
             this.verticalExpand = this.width > this.height ? true : false;
             rect.x = node.x;
             rect.y = node.y;
+            if (rect.rot === undefined)
+                rect.rot = false;
             rect.rot = node.rot ? !rect.rot : rect.rot;
             this._dirty++;
             return rect;
@@ -15599,7 +15654,7 @@ class MaxRectsBin extends Bin {
         }
         return undefined;
     }
-    findNode(width, height) {
+    findNode(width, height, allowRotation) {
         let score = Number.MAX_VALUE;
         let areaFit;
         let r;
@@ -15615,7 +15670,7 @@ class MaxRectsBin extends Bin {
                     score = areaFit;
                 }
             }
-            if (!this.options.allowRotation)
+            if (!allowRotation)
                 continue;
             // Continue to test 90-degree rotated rectangle
             if (r.width >= height && r.height >= width) {
@@ -15771,6 +15826,10 @@ class OversizedElementBin extends Bin {
         // nothing to do here
     }
     repack() { return undefined; }
+    clone() {
+        let clonedBin = new OversizedElementBin(this.rects[0]);
+        return clonedBin;
+    }
 }
 
 const EDGE_MAX_VALUE = 4096;
@@ -15788,13 +15847,36 @@ class MaxRectsPacker {
      * @param {IOption} [options={}] (Optional) packing options
      * @memberof MaxRectsPacker
      */
-    constructor(width = EDGE_MAX_VALUE, height = EDGE_MAX_VALUE, padding = 0, options = { smart: true, pot: true, square: false, allowRotation: false, tag: false, border: 0, logic: PACKING_LOGIC.MAX_EDGE }) {
+    constructor(width = EDGE_MAX_VALUE, height = EDGE_MAX_VALUE, padding = 0, options = {}) {
         this.width = width;
         this.height = height;
         this.padding = padding;
-        this.options = options;
+        /**
+         * Options for MaxRect Packer
+         * @property {boolean} options.smart Smart sizing packer (default is true)
+         * @property {boolean} options.pot use power of 2 sizing (default is true)
+         * @property {boolean} options.square use square size (default is false)
+         * @property {boolean} options.allowRotation allow rotation packing (default is false)
+         * @property {boolean} options.tag allow auto grouping based on `rect.tag` (default is false)
+         * @property {boolean} options.exclusiveTag tagged rects will have dependent bin, if set to `false`, packer will try to put tag rects into the same bin (default is true)
+         * @property {boolean} options.border atlas edge spacing (default is 0)
+         * @property {PACKING_LOGIC} options.logic MAX_AREA or MAX_EDGE based sorting logic (default is MAX_EDGE)
+         * @export
+         * @interface Option
+         */
+        this.options = {
+            smart: true,
+            pot: true,
+            square: false,
+            allowRotation: false,
+            tag: false,
+            exclusiveTag: true,
+            border: 0,
+            logic: PACKING_LOGIC.MAX_EDGE
+        };
         this._currentBinIndex = 0;
         this.bins = [];
+        this.options = Object.assign(Object.assign({}, this.options), options);
     }
     add(...args) {
         if (args.length === 1) {
@@ -15850,7 +15932,72 @@ class MaxRectsPacker {
      * @memberof MaxRectsPacker
      */
     addArray(rects) {
-        this.sort(rects, this.options.logic).forEach(rect => this.add(rect));
+        if (!this.options.tag || this.options.exclusiveTag) {
+            // if not using tag or using exclusiveTag, old approach
+            this.sort(rects, this.options.logic).forEach(rect => this.add(rect));
+        }
+        else {
+            // sort rects by tags first
+            if (rects.length === 0)
+                return;
+            rects.sort((a, b) => {
+                const aTag = (a.data && a.data.tag) ? a.data.tag : a.tag ? a.tag : undefined;
+                const bTag = (b.data && b.data.tag) ? b.data.tag : b.tag ? b.tag : undefined;
+                return bTag === undefined ? -1 : aTag === undefined ? 1 : bTag > aTag ? -1 : 1;
+            });
+            // iterate all bins to find the first bin which can place rects with same tag
+            //
+            let currentTag;
+            let currentIdx = 0;
+            let targetBin = this.bins.slice(this._currentBinIndex).find(bin => {
+                let testBin = bin.clone();
+                for (let i = currentIdx; i < rects.length; i++) {
+                    const rect = rects[i];
+                    const tag = (rect.data && rect.data.tag) ? rect.data.tag : rect.tag ? rect.tag : undefined;
+                    // initialize currentTag
+                    if (i === 0)
+                        currentTag = tag;
+                    if (tag !== currentTag) {
+                        // all current tag memeber tested successfully
+                        currentTag = tag;
+                        // do addArray()
+                        this.sort(rects.slice(currentIdx, i), this.options.logic).forEach(r => bin.add(r));
+                        currentIdx = i;
+                        // recrusively addArray() with remaining rects
+                        this.addArray(rects.slice(i));
+                        return true;
+                    }
+                    // remaining untagged rect will use normal addArray()
+                    if (tag === undefined) {
+                        // do addArray()
+                        this.sort(rects.slice(i), this.options.logic).forEach(r => this.add(r));
+                        currentIdx = rects.length;
+                        // end test
+                        return true;
+                    }
+                    // still in the same tag group
+                    if (testBin.add(rect) === undefined) {
+                        // current bin cannot contain all tag members
+                        // procceed to test next bin
+                        return false;
+                    }
+                }
+                // all rects tested
+                // do addArray() to the remaining tag group
+                this.sort(rects.slice(currentIdx), this.options.logic).forEach(r => bin.add(r));
+                return true;
+            });
+            // create a new bin if no current bin fit
+            if (!targetBin) {
+                const rect = rects[currentIdx];
+                const bin = new MaxRectsBin(this.width, this.height, this.padding, this.options);
+                const tag = (rect.data && rect.data.tag) ? rect.data.tag : rect.tag ? rect.tag : undefined;
+                if (this.options.tag && this.options.exclusiveTag && tag)
+                    bin.tag = tag;
+                this.bins.push(bin);
+                this.addArray(rects.slice(currentIdx));
+            }
+        }
     }
     /**
      * Reset entire packer to initial states, keep settings
@@ -15940,7 +16087,7 @@ class MaxRectsPacker {
                 options: bin.options
             };
             if (bin.tag)
-                saveBin = Object.assign({}, saveBin, { tag: bin.tag });
+                saveBin = Object.assign(Object.assign({}, saveBin), { tag: bin.tag });
             bin.freeRects.forEach(r => {
                 saveBin.freeRects.push({
                     x: r.x,
@@ -15960,7 +16107,7 @@ class MaxRectsPacker {
      *
      * @private
      * @param {T[]} rects
-     * @param {string} [logic="area"] sorting logic, "area" or "edge"
+     * @param {PACKING_LOGIC} [logic=PACKING_LOGIC.MAX_EDGE] sorting logic, "area" or "edge"
      * @returns
      * @memberof MaxRectsPacker
      */
@@ -47741,9 +47888,9 @@ var MaxRectsPacker_METHOD = {
   Smart: "Smart",
   SmartArea: "SmartArea",
   Square: "Square",
-  SquareArea: "SquareArea",
-  SmartSquare: "SmartSquare",
-  SmartSquareArea: "SmartSquareArea"
+  SquareArea: "SquareArea" // SmartSquare: "SmartSquare",
+  // SmartSquareArea: "SmartSquareArea"
+
 };
 
 var MaxRectsPacker =
@@ -48157,8 +48304,6 @@ function () {
     value: function render(data) {
       var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var ctx = this.buffer.getContext("2d");
-      var imageSmoothingEnabled = ctx.imageSmoothingEnabled;
-      ctx.imageSmoothingEnabled = !options.disableSmoothing;
 
       var _TextureRenderer$getS = TextureRenderer.getSize(data, options),
           width = _TextureRenderer$getS.width,
@@ -48192,8 +48337,6 @@ function () {
           }
         }
       }
-
-      ctx.imageSmoothingEnabled = imageSmoothingEnabled;
     }
   }, {
     key: "scale",
@@ -48210,8 +48353,6 @@ function () {
     key: "renderExtrude",
     value: function renderExtrude(ctx, item, options) {
       if (!options.extrude) return;
-      var imageSmoothingEnabled = ctx.imageSmoothingEnabled;
-      ctx.imageSmoothingEnabled = false;
       var dx = item.frame.x;
       var dy = item.frame.y;
 
@@ -48231,7 +48372,6 @@ function () {
       ctx.drawImage(img, item.sourceSize.w - 1, item.spriteSourceSize.y, 1, item.spriteSourceSize.h, dx + item.frame.w, dy, options.extrude, item.frame.h);
       ctx.drawImage(img, item.spriteSourceSize.x, 0, item.spriteSourceSize.w, 1, dx, dy - options.extrude, item.frame.w, options.extrude);
       ctx.drawImage(img, item.spriteSourceSize.x, item.sourceSize.h - 1, item.spriteSourceSize.w, 1, dx, dy + item.frame.h, item.frame.w, options.extrude);
-      ctx.imageSmoothingEnabled = imageSmoothingEnabled;
     }
   }, {
     key: "renderItem",
@@ -49931,6 +50071,22 @@ function () {
 
       if (types.indexOf(item.type) >= 0) {
         var img = new Image();
+        var path = "";
+        var name = "";
+
+        if (item.path) {
+          path = item.path.split("\\").join("/");
+          name = path.split("/").pop();
+        } else {
+          path = item.name;
+          name = item.name;
+        }
+
+        img.fsPath = {
+          name: name,
+          path: path,
+          folder: ""
+        };
         var reader = new FileReader();
 
         reader.onload = function (e) {
@@ -51386,7 +51542,6 @@ function (_React$Component) {
       data.tinify = react_dom_default.a.findDOMNode(this.refs.tinify).checked;
       data.tinifyKey = react_dom_default.a.findDOMNode(this.refs.tinifyKey).value;
       data.scale = Number(react_dom_default.a.findDOMNode(this.refs.scale).value);
-      data.disableSmoothing = react_dom_default.a.findDOMNode(this.refs.disableSmoothing).checked;
       data.filter = react_dom_default.a.findDOMNode(this.refs.filter).value;
       data.exporter = react_dom_default.a.findDOMNode(this.refs.exporter).value;
       data.fileName = react_dom_default.a.findDOMNode(this.refs.fileName).value;
@@ -51417,7 +51572,6 @@ function (_React$Component) {
       react_dom_default.a.findDOMNode(this.refs.tinify).checked = this.packOptions.tinify;
       react_dom_default.a.findDOMNode(this.refs.tinifyKey).value = this.packOptions.tinifyKey;
       react_dom_default.a.findDOMNode(this.refs.scale).value = Number(this.packOptions.scale);
-      react_dom_default.a.findDOMNode(this.refs.disableSmoothing).checked = this.packOptions.disableSmoothing;
       react_dom_default.a.findDOMNode(this.refs.filter).value = this.packOptions.filter;
       react_dom_default.a.findDOMNode(this.refs.exporter).value = this.packOptions.exporter;
       react_dom_default.a.findDOMNode(this.refs.fileName).value = this.packOptions.fileName;
@@ -51590,14 +51744,6 @@ function (_React$Component) {
         defaultValue: this.packOptions.tinifyKey,
         onBlur: this.onExporterPropChanged
       })), react_default.a.createElement("td", null)), react_default.a.createElement("tr", {
-        title: utils_I18.f("DISABLE_SMOOTHING_TITLE")
-      }, react_default.a.createElement("td", null, utils_I18.f("DISABLE_SMOOTHING")), react_default.a.createElement("td", null, react_default.a.createElement("input", {
-        ref: "disableSmoothing",
-        type: "checkbox",
-        className: "border-color-gray",
-        onChange: this.onPropChanged,
-        defaultChecked: this.packOptions.disableSmoothing ? "checked" : ""
-      })), react_default.a.createElement("td", null)), react_default.a.createElement("tr", {
         title: utils_I18.f("SCALE_TITLE")
       }, react_default.a.createElement("td", null, utils_I18.f("SCALE")), react_default.a.createElement("td", null, react_default.a.createElement("input", {
         ref: "scale",
@@ -51709,7 +51855,7 @@ function (_React$Component) {
         className: "border-color-gray",
         defaultValue: this.packOptions.padding,
         min: "0",
-        onBlur: this.onPropChanged,
+        onInput: this.onPropChanged,
         onKeyDown: this.forceUpdate
       })), react_default.a.createElement("td", null)), react_default.a.createElement("tr", {
         title: utils_I18.f("EXTRUDE_TITLE")
@@ -51719,7 +51865,7 @@ function (_React$Component) {
         className: "border-color-gray",
         defaultValue: this.packOptions.extrude,
         min: "0",
-        onBlur: this.onPropChanged,
+        onInput: this.onPropChanged,
         onKeyDown: this.forceUpdate
       })), react_default.a.createElement("td", null)), react_default.a.createElement("tr", {
         title: utils_I18.f("ALLOW_ROTATION_TITLE")
@@ -51985,7 +52131,8 @@ function (_React$Component) {
           }
         }
 
-        view.className = this.props.textureBack;
+        var back = react_dom_default.a.findDOMNode(this.refs.back);
+        back.className = "texture-view " + this.props.textureBack;
       }
     }
   }, {
@@ -52517,12 +52664,17 @@ function (_React$Component) {
       if (event.deltaY >= 0) {
         if (this.state.scale > 0.1) {
           value = Number((this.state.scale - this.step).toPrecision(2));
+
+          if (value < 0.1) {
+            value = 0.1;
+          }
+
           this.setState({
             scale: value
           });
         }
       } else {
-        if (this.state.scale < 2.0) {
+        if (this.state.scale < 2) {
           value = Number((this.state.scale + this.step).toPrecision(2));
           this.setState({
             scale: value
@@ -54992,7 +55144,7 @@ function (_React$Component) {
         ref: this.rangeRef,
         type: "range",
         min: "0.1",
-        max: "1",
+        max: "2",
         step: this.step,
         defaultValue: "1",
         onChange: this.changeScale
