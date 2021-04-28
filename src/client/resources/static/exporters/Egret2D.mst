@@ -1,0 +1,15 @@
+{
+    "file": "{{config.imageName}}",
+    "frames": {
+        {{#rects}}
+        "{{{name}}}": {
+            "x": {{frame.x}},
+            "y": {{frame.y}},
+            "w": {{frame.w}},
+            "h": {{frame.h}},
+            "hw": {{frame.hw}},
+            "hh": {{frame.hh}}
+        }{{^last}},{{/last}}
+        {{/rects}}
+    }
+}
