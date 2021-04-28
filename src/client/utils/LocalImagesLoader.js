@@ -11,10 +11,10 @@ class LocalImagesLoader {
         this.waitImages = this.waitImages.bind(this);
     }
 
-    load(data, onProgress=null, onEnd=null) {
+    load(data, onProgress = null, onEnd = null) {
         this.data = [];
 
-        for(let i=0; i<data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             this.data.push(data[i]);
         }
 
@@ -25,16 +25,34 @@ class LocalImagesLoader {
     }
 
     loadNext() {
-        if(!this.data.length) {
+        if (!this.data.length) {
             this.waitImages();
             return;
         }
 
         let types = ["image/png", "image/jpg", "image/jpeg", "image/gif"];
         let item = this.data.shift();
-        
-        if(types.indexOf(item.type) >= 0) {
+
+        if (types.indexOf(item.type) >= 0) {
             let img = new Image();
+
+            let path = "";
+            let name = "";
+
+            if (item.path) {
+                path = item.path.split("\\").join("/");
+                name = path.split("/").pop();
+            }
+            else {
+                path = item.name;
+                name = item.name;
+            }
+
+            img.fsPath = {
+                name: name,
+                path: path,
+                folder: ""
+            };
 
             let reader = new FileReader();
             reader.onload = e => {
@@ -61,15 +79,15 @@ class LocalImagesLoader {
     waitImages() {
         let ready = true;
 
-        for(let key of Object.keys(this.loaded)) {
-            if(!this.loaded[key].complete) {
+        for (let key of Object.keys(this.loaded)) {
+            if (!this.loaded[key].complete) {
                 ready = false;
                 break;
             }
         }
 
-        if(ready) {
-            if(this.onEnd) this.onEnd(this.loaded);
+        if (ready) {
+            if (this.onEnd) this.onEnd(this.loaded);
         }
         else {
             setTimeout(this.waitImages, 50);
