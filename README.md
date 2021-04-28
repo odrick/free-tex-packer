@@ -4,7 +4,7 @@
 
 #
 
-## IMPORTANT: I don't have time to imporove this app. Only critical bugs will be fixed.
+## IMPORTANT: I don't have time to imporove this app anymore. Only critical bugs will be fixed.
 
 #
 
