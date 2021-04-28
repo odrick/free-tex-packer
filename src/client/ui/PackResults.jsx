@@ -9,7 +9,7 @@ class PackResults extends React.Component {
         super(props);
 
         this.textureBackColors = ["grid-back", "white-back", "pink-back", "black-back"];
-        this.step = 0.5;
+        this.step = 0.1;
 
         this.state = {
             packResult: null,
@@ -63,7 +63,7 @@ class PackResults extends React.Component {
     }
 
     handleWheel(event) {
-        //if(!event.ctrlKey) return;
+        if(!event.ctrlKey) return;
 
         let value = this.state.scale;
         if (event.deltaY >= 0) {
@@ -75,7 +75,7 @@ class PackResults extends React.Component {
                 this.setState({scale: value});
             }            
         } else {            
-            if (this.state.scale < 10.0) {
+            if (this.state.scale < 2) {
                 value = Number((this.state.scale + this.step).toPrecision(2));
                 this.setState({scale: value});
             }
@@ -150,7 +150,7 @@ class PackResults extends React.Component {
                                         {I18.f("SCALE")}
                                     </td>
                                     <td>
-                                        <input ref={this.rangeRef} type="range" min="0.1" max="10" step={this.step} defaultValue="1" onChange={this.changeScale}/>
+                                        <input ref={this.rangeRef} type="range" min="0.1" max="2" step={this.step} defaultValue="1" onChange={this.changeScale}/>
                                     </td>
                                     <td>
                                         <div className="btn back-800 border-color-gray color-white" onClick={this.toggleSpritesPlayer}>{I18.f("SHOW_SPRITES")}</div>

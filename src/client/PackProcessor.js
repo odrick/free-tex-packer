@@ -104,8 +104,8 @@ class PackProcessor {
             });
         }
 
-        let width = options.width / options.scale || 0;
-        let height = options.height / options.scale || 0;
+        let width = options.width || 0;
+        let height = options.height || 0;
 
         if (!width) width = maxWidth;
         if (!height) height = maxHeight;
@@ -126,7 +126,7 @@ class PackProcessor {
 
         if (width < minWidth || height < minHeight) {
             if (onError) onError({
-                description: I18.f("INVALID_SIZE_ERROR", Math.round(minWidth * options.scale), Math.round(minHeight * options.scale))
+                description: I18.f("INVALID_SIZE_ERROR", minWidth, minHeight)
             });
             return;
         }

@@ -72,7 +72,8 @@ class TextureView extends React.Component {
                 }
             }
 
-            view.className = this.props.textureBack;
+            let back = ReactDOM.findDOMNode(this.refs.back);
+            back.className = "texture-view " + this.props.textureBack;
         }
     }
 

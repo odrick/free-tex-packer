@@ -51,7 +51,7 @@ class SheetSplitter extends React.Component {
     }
 
     handleWheel(event) {
-        //if(!event.ctrlKey) return;
+        if(!event.ctrlKey) return;
 
         let value = this.state.scale;
         if (event.deltaY >= 0) {
