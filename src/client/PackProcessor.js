@@ -1,22 +1,23 @@
-import MaxRectsBinPack from './packers/MaxRectsBin';
-import OptimalPacker from './packers/OptimalPacker';
-import allPackers from './packers';
-import Trimmer from './utils/Trimmer';
-import TextureRenderer from './utils/TextureRenderer';
+import MaxRectsBinPack from "./packers/MaxRectsBin";
+import OptimalPacker from "./packers/OptimalPacker";
+import allPackers from "./packers";
+import Trimmer from "./utils/Trimmer";
+import TextureRenderer from "./utils/TextureRenderer";
 
-import I18 from './utils/I18';
+import I18 from "./utils/I18";
 
 class PackProcessor {
-
     static detectIdentical(rects) {
-
         let identical = [];
 
         for (let i = 0; i < rects.length; i++) {
             let rect1 = rects[i];
             for (let n = i + 1; n < rects.length; n++) {
                 let rect2 = rects[n];
-                if (rect1.image._base64 === rect2.image._base64 && identical.indexOf(rect2) < 0) {
+                if (
+                    rect1.image._base64 === rect2.image._base64 &&
+                    identical.indexOf(rect2) < 0
+                ) {
                     rect2.identical = rect1;
                     identical.push(rect2);
                 }
@@ -29,8 +30,8 @@ class PackProcessor {
 
         return {
             rects: rects,
-            identical: identical
-        }
+            identical: identical,
+        };
     }
 
     static applyIdentical(rects, identical) {
@@ -67,14 +68,15 @@ class PackProcessor {
     }
 
     static pack(images = {}, options = {}, onComplete = null, onError = null) {
-
         let rects = [];
 
         let padding = options.padding || 0;
         let extrude = options.extrude || 0;
 
-        let maxWidth = 0, maxHeight = 0;
-        let minWidth = 0, minHeight = 0;
+        let maxWidth = 0,
+            maxHeight = 0;
+        let minWidth = 0,
+            minHeight = 0;
 
         let alphaThreshold = options.alphaThreshold || 0;
         if (alphaThreshold > 255) alphaThreshold = 255;
@@ -89,8 +91,10 @@ class PackProcessor {
             maxWidth += img.width;
             maxHeight += img.height;
 
-            if (img.width > minWidth) minWidth = img.width + padding * 2 + extrude * 2;
-            if (img.height > minHeight) minHeight = img.height + padding * 2 + extrude * 2;
+            if (img.width > minWidth)
+                minWidth = img.width + padding * 2 + extrude * 2;
+            if (img.height > minHeight)
+                minHeight = img.height + padding * 2 + extrude * 2;
 
             rects.push({
                 frame: { x: 0, y: 0, w: img.width, h: img.height },
@@ -98,9 +102,10 @@ class PackProcessor {
                 trimmed: false,
                 spriteSourceSize: { x: 0, y: 0, w: img.width, h: img.height },
                 sourceSize: { w: img.width, h: img.height },
+                pivot: { x: 0.5, y: 0.5 },
                 name: name,
                 file: key,
-                image: img
+                image: img,
             });
         }
 
@@ -125,9 +130,14 @@ class PackProcessor {
         }
 
         if (width < minWidth || height < minHeight) {
-            if (onError) onError({
-                description: I18.f("INVALID_SIZE_ERROR", minWidth, minHeight)
-            });
+            if (onError)
+                onError({
+                    description: I18.f(
+                        "INVALID_SIZE_ERROR",
+                        minWidth,
+                        minHeight
+                    ),
+                });
             return;
         }
 
@@ -154,9 +164,17 @@ class PackProcessor {
             for (let packerClass of allPackers) {
                 if (packerClass !== OptimalPacker) {
                     for (let method in packerClass.methods) {
-                        methods.push({ packerClass, packerMethod: packerClass.methods[method], allowRotation: false });
+                        methods.push({
+                            packerClass,
+                            packerMethod: packerClass.methods[method],
+                            allowRotation: false,
+                        });
                         if (options.allowRotation) {
-                            methods.push({ packerClass, packerMethod: packerClass.methods[method], allowRotation: true });
+                            methods.push({
+                                packerClass,
+                                packerMethod: packerClass.methods[method],
+                                allowRotation: true,
+                            });
                         }
                     }
                 }
@@ -165,8 +183,18 @@ class PackProcessor {
         };
 
         let packerClass = options.packer || MaxRectsBinPack;
-        let packerMethod = options.packerMethod || MaxRectsBinPack.methods.BestShortSideFit;
-        let packerCombos = (packerClass === OptimalPacker) ? getAllPackers() : [{ packerClass, packerMethod, allowRotation: options.allowRotation }];
+        let packerMethod =
+            options.packerMethod || MaxRectsBinPack.methods.BestShortSideFit;
+        let packerCombos =
+            packerClass === OptimalPacker
+                ? getAllPackers()
+                : [
+                      {
+                          packerClass,
+                          packerMethod,
+                          allowRotation: options.allowRotation,
+                      },
+                  ];
 
         let optimalRes;
         let optimalSheets = Infinity;
@@ -182,26 +210,44 @@ class PackProcessor {
             let sheetArea = 0;
 
             // duplicate rects if more than 1 combo since the array is mutated in pack()
-            let _rects = packerCombos.length > 1 ? rects.map(rect => {
-                return Object.assign({}, rect, {
-                    frame: Object.assign({}, rect.frame),
-                    spriteSourceSize: Object.assign({}, rect.spriteSourceSize),
-                    sourceSize: Object.assign({}, rect.sourceSize)
-                });
-            }) : rects;
+            let _rects =
+                packerCombos.length > 1
+                    ? rects.map((rect) => {
+                          return Object.assign({}, rect, {
+                              frame: Object.assign({}, rect.frame),
+                              spriteSourceSize: Object.assign(
+                                  {},
+                                  rect.spriteSourceSize
+                              ),
+                              sourceSize: Object.assign({}, rect.sourceSize),
+                          });
+                      })
+                    : rects;
 
             // duplicate identical if more than 1 combo and fix references to point to the
             //  cloned rects since the array is mutated in applyIdentical()
-            let _identical = packerCombos.length > 1 ? identical.map(rect => {
-                for (let rect2 of _rects) {
-                    if (rect.identical.image._base64 == rect2.image._base64) {
-                        return Object.assign({}, rect, { identical: rect2 });
-                    }
-                }
-            }) : identical;
+            let _identical =
+                packerCombos.length > 1
+                    ? identical.map((rect) => {
+                          for (let rect2 of _rects) {
+                              if (
+                                  rect.identical.image._base64 ==
+                                  rect2.image._base64
+                              ) {
+                                  return Object.assign({}, rect, {
+                                      identical: rect2,
+                                  });
+                              }
+                          }
+                      })
+                    : identical;
 
             while (_rects.length) {
-                let packer = new combo.packerClass(width, height, combo.allowRotation);
+                let packer = new combo.packerClass(
+                    width,
+                    height,
+                    combo.allowRotation
+                );
                 let result = packer.pack(_rects, combo.packerMethod);
 
                 for (let item of result) {
@@ -221,14 +267,18 @@ class PackProcessor {
                     this.removeRect(_rects, item.name);
                 }
 
-                let { width: sheetWidth, height: sheetHeight } = TextureRenderer.getSize(result, options);
+                let { width: sheetWidth, height: sheetHeight } =
+                    TextureRenderer.getSize(result, options);
                 sheetArea += sheetWidth * sheetHeight;
             }
 
             let sheets = res.length;
             let efficiency = sourceArea / sheetArea;
 
-            if (sheets < optimalSheets || (sheets === optimalSheets && efficiency > optimalEfficiency)) {
+            if (
+                sheets < optimalSheets ||
+                (sheets === optimalSheets && efficiency > optimalEfficiency)
+            ) {
                 optimalRes = res;
                 optimalSheets = sheets;
                 optimalEfficiency = efficiency;

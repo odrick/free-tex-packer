@@ -21,8 +21,8 @@
         "h": {{sourceSize.h}}
       },
       "pivot": {
-        "x": 0.5,
-        "y": 0.5
+        "x": {{pivot.x}},
+        "y": {{pivot.y}}
       }
     }{{^last}},{{/last}}
     {{/rects}}

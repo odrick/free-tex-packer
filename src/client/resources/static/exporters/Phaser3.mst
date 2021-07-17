@@ -29,6 +29,10 @@
 						"y": {{frame.y}},
 						"w": {{frame.w}},
 						"h": {{frame.h}}
+					},
+					"pivot": {
+						"x": {{pivot.x}},
+						"y": {{pivot.y}}
 					}
 				}{{^last}},{{/last}}
 				{{/rects}}
