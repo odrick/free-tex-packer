@@ -106,10 +106,31 @@ class APP {
 
         let files = [];
 
+        let hasPattern = false;
+
+        //Trying to get a pattern
+        let pattern = textureName.substring(
+            textureName.indexOf("{") + 1, 
+            textureName.lastIndexOf("}")
+        );
+
+        if(pattern && pattern.includes("$")) { //Checking for pattern to exist and has an "$" to replace for index
+            hasPattern = true;
+        }
+
         let ix = 0;
         for (let item of this.packResult) {
 
-            let fName = textureName + (this.packResult.length > 1 ? "-" + ix : "");
+            if(this.packResult.length > 1) {
+                if(hasPattern) { 
+                    fName = textureName.replace("{" + pattern + "}", pattern.replace("$", ix));
+                } else {
+                    fName = textureName + "-" + ix;
+                }
+            }
+            else {
+                fName = textureName;
+            }
 
             let buffer = item.renderer.scale(this.packOptions.scale);
 
