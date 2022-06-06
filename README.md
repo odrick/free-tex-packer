@@ -2,11 +2,11 @@
 
 ![logo](https://raw.githubusercontent.com/odrick/free-tex-packer/master/electron/build/icons/96x96.png)
 
-#
+# Why fork?
 
-## IMPORTANT: I don't have time to imporove this app anymore. Only critical bugs will be fixed.
+The original project is no longer maintained and I'd like to continue using it. It contains many of the features of TexturePacker and, more importantly, is a web app. I'll do my best to continue updating and maintaining this tool.
 
-#
+# Original Readme
 
 Free texture packer creates sprite sheets for you game or site. Rotation, trimming, multipacking, various export formats (json, xml, css, pixi.js, godot, phaser, cocos2d). Zip support. TinyPNG support. Split sheet tool.
 

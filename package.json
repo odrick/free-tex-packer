@@ -3,11 +3,7 @@
   "displayName": "Free texture packer",
   "version": "0.6.7",
   "description": "Free online texture packer",
-  "url": "http://free-tex-packer.com",
-  "download": "http://free-tex-packer.com/download",
-  "webApp": "http://free-tex-packer.com/app",
   "main": "src/index.js",
-  "tinifyUrl": "http://free-tex-packer.com/server/tinify.php",
   "localizations": [
     "en",
     "es",
@@ -47,6 +43,10 @@
     {
       "name": "Davide Matta aka DadeKuma",
       "homepage": "https://github.com/DadeKuma"
+    },
+    {
+      "name": "Mochan",
+      "homepage": "https://kitsu.cafe"
     }
   ],
   "scripts": {
@@ -56,7 +56,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/odrick/free-tex-packer.git"
+    "url": "git+https://github.com/mochancrimthann/free-tex-packer"
   },
   "keywords": [
     "texture",
@@ -69,14 +69,14 @@
     "sprite",
     "2d"
   ],
-  "author": "Alexander Norinchak",
-  "authorSite": "https://github.com/odrick/",
-  "authorEmail": "norinchak@gmail.com",
+  "author": "Mochan",
+  "authorSite": "https://kitsu.cafe",
+  "authorEmail": "shibamet@protonmail.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/odrick/free-tex-packer/issues"
+    "url": "https://github.com/mochancrimthann/free-tex-packer/issues"
   },
-  "homepage": "https://github.com/odrick/free-tex-packer",
+  "homepage": "https://github.com/mochancrimthann/free-tex-packer",
   "devDependencies": {
     "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
