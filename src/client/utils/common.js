@@ -1,4 +1,4 @@
-function smartSortImages(f1, f2) {
+export function smartSortImages(f1, f2) {
     let t1 = f1.split('/');
     let t2 = f2.split('/');
 
@@ -27,7 +27,3 @@ function smartSortImages(f1, f2) {
     if(f1 === f2) return 0;
     return f1 > f2 ? 1 : -1;
 }
-
-module.exports = {
-    smartSortImages: smartSortImages
-};

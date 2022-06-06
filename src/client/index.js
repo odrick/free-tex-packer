@@ -1,19 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-import I18 from './utils/I18';
-import APP from './APP';
-import MainLayout from './ui/MainLayout.jsx';
-
-import Storage from './utils/Storage';
-import {Observer, GLOBAL_EVENT} from './Observer';
-
-import languages from './resources/static/localization/languages.json';
-
 import Controller from 'platform/Controller';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import APP from './APP';
+import { GLOBAL_EVENT, Observer } from './Observer';
+import languages from './resources/static/localization/languages.json';
+import MainLayout from './ui/MainLayout.jsx';
+import I18 from './utils/I18';
+import Storage from './utils/Storage';
 
 let app = null;
-let layout = null;
+let layout = ReactDOM.createRoot(document.getElementById('app'));
 
 const STORAGE_LANGUAGE_KEY = "language";
 
@@ -41,7 +37,7 @@ function loadLocalization() {
 
 function renderLayout() {
     Controller.updateLocale();
-    layout = ReactDOM.render(React.createElement(MainLayout), document.getElementById("root"));
+    layout.render(React.createElement(MainLayout));
 }
 
 function injectCss(path) {
