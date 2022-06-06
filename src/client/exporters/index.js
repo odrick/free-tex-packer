@@ -44,8 +44,8 @@ mustache.Formatters = {
 };
 
 function getExporterByType(type) {
-    for(let item of list) {
-        if(item.type === type) {
+    for (let item of list) {
+        if (item.type === type) {
             return item;
         }
     }
@@ -64,39 +64,39 @@ function prepareData(data, options) {
 
     let ret = [];
 
-    for(let item of data) {
+    for (let item of data) {
 
         let name = item.originalFile || item.file;
 
-        if(options.trimSpriteNames) {
+        if (options.trimSpriteNames) {
             name.trim();
         }
 
-        if(options.removeFileExtension) {
+        if (options.removeFileExtension) {
             let parts = name.split(".");
-            if(parts.length > 1) parts.pop();
+            if (parts.length > 1) parts.pop();
             name = parts.join(".");
         }
 
-        if(!options.prependFolderName) {
+        if (!options.prependFolderName) {
             name = name.split("/").pop();
         }
 
-        let frame = {x: item.frame.x, y: item.frame.y, w: item.frame.w, h: item.frame.h, hw: item.frame.w/2, hh: item.frame.h/2};
-        let spriteSourceSize = {x: item.spriteSourceSize.x, y: item.spriteSourceSize.y, w: item.spriteSourceSize.w, h: item.spriteSourceSize.h};
-        let sourceSize = {w: item.sourceSize.w, h: item.sourceSize.h};
-        
+        let frame = { x: item.frame.x, y: item.frame.y, w: item.frame.w, h: item.frame.h, hw: item.frame.w / 2, hh: item.frame.h / 2 };
+        let spriteSourceSize = { x: item.spriteSourceSize.x, y: item.spriteSourceSize.y, w: item.spriteSourceSize.w, h: item.spriteSourceSize.h };
+        let sourceSize = { w: item.sourceSize.w, h: item.sourceSize.h };
+
         let trimmed = item.trimmed;
-        
-        if(item.trimmed && options.trimMode === 'crop') {
+
+        if (item.trimmed && options.trimMode === 'crop') {
             trimmed = false;
             spriteSourceSize.x = 0;
             spriteSourceSize.y = 0;
             sourceSize.w = spriteSourceSize.w;
             sourceSize.h = spriteSourceSize.h;
         }
-        
-        if(opt.scale !== 1) {
+
+        if (opt.scale !== 1) {
             frame.x *= opt.scale;
             frame.y *= opt.scale;
             frame.w *= opt.scale;
@@ -124,12 +124,12 @@ function prepareData(data, options) {
 
     }
 
-    if(ret.length) {
+    if (ret.length) {
         ret[0].first = true;
-        ret[ret.length-1].last = true;
+        ret[ret.length - 1].last = true;
     }
 
-    return {rects: ret, config: opt};
+    return { rects: ret, config: opt };
 }
 
 function compareFrames(a, b) {
@@ -142,32 +142,48 @@ function compareFrames(a, b) {
 }
 
 function sortFrames(matches) {
-    return matches.sort(compareFrames).map(([filename]) => filename)
+    console.log(matches)
+    const frames = matches.sort(compareFrames)
+        .map(({ value }) => ({ value: value[0] }))
+    frames[frames.length - 1].lastFrame = true
+    return frames
 }
 
 const animationRegex = /^(.+)[_-](\d+)\.(.+)$/
 function extractAnimations(rects) {
     const matches = rects.map(r => r.name)
-        .map(animationRegex.exec.bind(animationRegex))
-    const grouped = groupBy(([, name]) => name, matches)
-    return mapObj(sortFrames, grouped)
+        .map(name => animationRegex.exec(name))
+        .map(x => x)
+
+    if (matches.length === 0) return {}
+
+    const grouped = groupBy(({ value }) => value[1], matches.map(value => ({ value })))
+    const entries = Object.entries(grouped)
+    const sorted = entries.map(([name, frames]) => ({
+        name,
+        frames: sortFrames(frames)
+    }))
+
+    sorted[sorted.length - 1].lastAnimation = true
+    return sorted
 }
 
 function startExporter(exporter, data, options) {
     return new Promise((resolve, reject) => {
-        let {rects, config} = prepareData(data, options);
+        let { rects, config } = prepareData(data, options);
         let renderOptions = {
             rects: rects,
             config: config,
             anims: extractAnimations(rects),
             appInfo: appInfo
         };
+        console.log(renderOptions.anims)
 
-        if(exporter.content) {
+        if (exporter.content) {
             finishExporter(exporter, renderOptions, resolve, reject);
             return;
         }
-        
+
         GET("static/exporters/" + exporter.template, null, (template) => {
             exporter.content = template;
             finishExporter(exporter, renderOptions, resolve, reject);
@@ -180,7 +196,7 @@ function finishExporter(exporter, renderOptions, resolve, reject) {
         let ret = mustache.render(exporter.content, renderOptions);
         resolve(ret);
     }
-    catch(e) {
+    catch (e) {
         reject(e.message);
     }
 }
