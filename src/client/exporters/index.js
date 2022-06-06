@@ -133,8 +133,8 @@ function prepareData(data, options) {
 }
 
 function compareFrames(a, b) {
-    const an = a[2]
-    const bn = b[2]
+    const an = a.value[2]
+    const bn = b.value[2]
 
     if (an > bn) return 1
     else if (an < bn) return -1
