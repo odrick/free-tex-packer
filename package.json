@@ -50,13 +50,9 @@
     }
   ],
   "scripts": {
-    "start": "webpack-dev-server --host 0.0.0.0 --port 4000",
-    "start-electron": "webpack-dev-server --host 127.0.0.1 --port 4000 --platform electron",
-    "build-web": "webpack --build --platform web",
-    "build-electron": "webpack --build --platform electron",
-    "serve-vite": "vite --host",
-    "build-vite": "vite build",
-    "preview-vite": "vite preview"
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",

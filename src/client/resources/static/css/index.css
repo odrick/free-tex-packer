@@ -17,6 +17,10 @@ html, body {
     user-select: none;
 }
 
+#app {
+    height: 100%;
+}
+
 .main-container {
     position: absolute;
     top: 0;
