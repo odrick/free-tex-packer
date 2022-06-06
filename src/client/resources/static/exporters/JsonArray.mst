@@ -30,8 +30,8 @@
   ],
   "animations": {
     {{#anims}}
-      {{{name}}}: [{{#frames}}{{/frames}}]{{^last}},
-      {{/last}}
+      "{{{name}}}": [{{#frames}}"{{value}}"{{^lastFrame}},{{/lastFrame}}{{/frames}}]{{^lastAnimation}},
+      {{/lastAnimation}}
     {{/anims}}
   },
   "meta": {
