@@ -142,7 +142,6 @@ function compareFrames(a, b) {
 }
 
 function sortFrames(matches) {
-    console.log(matches)
     const frames = matches.sort(compareFrames)
         .map(({ value }) => ({ value: value[0] }))
     frames[frames.length - 1].lastFrame = true
@@ -177,8 +176,6 @@ function startExporter(exporter, data, options) {
             anims: extractAnimations(rects),
             appInfo: appInfo
         };
-        console.log(renderOptions.anims)
-
         if (exporter.content) {
             finishExporter(exporter, renderOptions, resolve, reject);
             return;
