@@ -27,6 +27,12 @@
     }{{^last}},{{/last}}
     {{/rects}}
   },
+  "animations": {
+    {{#anims}}
+      {{{name}}}: [{{#frames}}{{/frames}}]{{^last}},
+      {{/last}}
+    {{/anims}}
+  },
   "meta": {
     "app": "{{{appInfo.url}}}",
     "version": "{{appInfo.version}}",

@@ -95,6 +95,7 @@ class I18 {
 
     static load(callback) {
         let url = I18.path + "/" + I18.iniPrefix + I18.currentLocale + "." + I18.iniExt + "?v=" + (new Date().getTime());
+        console.log(url)
         GET(url, null, data => {
             I18.setup(I18.parse(data));
             if(callback) callback();

@@ -1,8 +1,9 @@
-import list from './list.json';
-import appInfo from '../../../package.json';
-import {GET} from '../utils/ajax';
-import mustache from 'mustache';
 import wax from '@jvitela/mustache-wax';
+import mustache from 'mustache';
+import appInfo from '../../../package.json';
+import { GET } from '../utils/ajax';
+import { groupBy, mapObj } from '../utils/common';
+import list from './list.json';
 
 wax(mustache);
 
@@ -131,15 +132,37 @@ function prepareData(data, options) {
     return {rects: ret, config: opt};
 }
 
+function compareFrames(a, b) {
+    const an = a[2]
+    const bn = b[2]
+
+    if (an > bn) return 1
+    else if (an < bn) return -1
+    else return 0
+}
+
+function sortFrames(matches) {
+    return matches.sort(compareFrames).map(([filename]) => filename)
+}
+
+const animationRegex = /^(.+)[_-](\d+)\.(.+)$/
+function extractAnimations(rects) {
+    const matches = rects.map(r => r.name)
+        .map(animationRegex.exec.bind(animationRegex))
+    const grouped = groupBy(([, name]) => name, matches)
+    return mapObj(sortFrames, grouped)
+}
+
 function startExporter(exporter, data, options) {
     return new Promise((resolve, reject) => {
         let {rects, config} = prepareData(data, options);
         let renderOptions = {
             rects: rects,
             config: config,
+            anims: extractAnimations(rects),
             appInfo: appInfo
         };
-        
+
         if(exporter.content) {
             finishExporter(exporter, renderOptions, resolve, reject);
             return;
@@ -162,5 +185,5 @@ function finishExporter(exporter, renderOptions, resolve, reject) {
     }
 }
 
-export {getExporterByType, startExporter};
+export { getExporterByType, startExporter };
 export default list;
