@@ -14,6 +14,7 @@ const outDir = isElectron() ? 'web/' : '../electron/www/'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './',
   outDir: path.resolve(root, outDir),
   publicDir: 'src/client/resources',
   define: {
