@@ -157,8 +157,7 @@ function extractAnimations(rects) {
     if (matches.length === 0) return {}
 
     const grouped = groupBy(({ value }) => value[1], matches.map(value => ({ value })))
-    const entries = Object.entries(grouped)
-    const sorted = entries.map(([name, frames]) => ({
+    const sorted = Object.entries(grouped).map(([name, frames]) => ({
         name,
         frames: sortFrames(frames)
     }))

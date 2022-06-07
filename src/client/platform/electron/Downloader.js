@@ -1,28 +1,29 @@
-const fs = require('fs');
-const path = require('path');
-const {dialog} = require('electron').remote;
-
+import { remote } from 'electron';
+import fs from 'fs';
+import path from 'path';
 import I18 from '../../utils/I18';
+
+const dialog = remote
 
 class Downloader {
 
     static run(files, fileName, savePath) {
-        
+
         let dir = savePath;
-        
-        if(!dir) {
+
+        if (!dir) {
             dir = dialog.showOpenDialog({
                 properties: ['openDirectory']
             });
         }
-        
-        if(dir) {
+
+        if (dir) {
             dir = String(dir);
 
             let complete = () => {
-                for(let file of files) {
+                for (let file of files) {
                     let content = file.content;
-                    if(file.base64) content = Buffer.from(content, 'base64');
+                    if (file.base64) content = Buffer.from(content, 'base64');
 
                     let savePath = path.normalize(dir + "/" + file.name);
                     savePath = savePath.split("\\").join("/");
@@ -30,9 +31,9 @@ class Downloader {
                     let saveDirParts = savePath.split("/");
                     saveDirParts.pop();
                     let currentPath = '';
-                    while(saveDirParts.length) {
+                    while (saveDirParts.length) {
                         currentPath = currentPath + saveDirParts.shift() + '/';
-                        if(!fs.existsSync(currentPath)) {
+                        if (!fs.existsSync(currentPath)) {
                             fs.mkdirSync(currentPath);
                         }
                     }
@@ -40,18 +41,18 @@ class Downloader {
                     fs.writeFileSync(savePath, content);
                 }
             };
-            
+
             let exists = false;
-            for(let file of files) {
-                if(fs.existsSync(path.normalize(dir + "/" + file.name))) {
+            for (let file of files) {
+                if (fs.existsSync(path.normalize(dir + "/" + file.name))) {
                     exists = true;
                     break;
                 }
             }
-            
-            if(exists) {
-                dialog.showMessageBox({buttons: ["Yes","No","Cancel"], message: I18.f('REPLACE_FILES_PROMPT')}, (res) => {
-                    if(res === 0) complete();
+
+            if (exists) {
+                dialog.showMessageBox({ buttons: ["Yes", "No", "Cancel"], message: I18.f('REPLACE_FILES_PROMPT') }, (res) => {
+                    if (res === 0) complete();
                 });
             }
             else {

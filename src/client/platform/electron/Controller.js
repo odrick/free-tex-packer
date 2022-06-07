@@ -1,14 +1,14 @@
-const {ipcRenderer} = require('electron');
-
-import {GLOBAL_EVENT, Observer} from "../../Observer";
-import I18 from '../../utils/I18';
-import appInfo from '../../../../package.json';
-import languages from '../../resources/static/localization/languages.json';
-
+import { ipcRenderer } from 'electron';
 import Project from 'platform/Project';
-
-import PackProperties from '../../ui/PackProperties.jsx';
+import appInfo from '../../../../package.json';
+import { GLOBAL_EVENT, Observer } from "../../Observer";
+import languages from '../../resources/static/localization/languages.json';
 import ImagesList from "../../ui/ImagesList.jsx";
+import PackProperties from '../../ui/PackProperties.jsx';
+import I18 from '../../utils/I18';
+
+
+
 
 class Controller {
     static init() {
@@ -22,11 +22,11 @@ class Controller {
 
         ipcRenderer.on("project-load", (e, payload) => {
             let path = "";
-            if(payload) path = payload.data;
-            
+            if (payload) path = payload.data;
+
             Project.load(path);
         });
-        
+
         ipcRenderer.on("project-save", (e, payload) => {
             Project.save();
         });
@@ -38,7 +38,7 @@ class Controller {
         ipcRenderer.on("project-new", (e, payload) => {
             Project.create();
         });
-        
+
         ipcRenderer.on("preferences-save", (e, payload) => {
             PackProperties.i.saveOptions(true);
         });
@@ -46,7 +46,7 @@ class Controller {
         ipcRenderer.on("quit", (e, payload) => {
             Controller.quit();
         });
-        
+
         ipcRenderer.on("action-add-images", (e, payload) => {
             ImagesList.i.addImagesFs();
         });
@@ -70,50 +70,50 @@ class Controller {
         ipcRenderer.on("action-export", (e, payload) => {
             Observer.emit(GLOBAL_EVENT.START_EXPORT);
         });
-        
+
         ipcRenderer.on("action-show-splitter", (e, payload) => {
             Observer.emit(GLOBAL_EVENT.SHOW_SHEET_SPLITTER);
         });
-        
+
         ipcRenderer.on("update-available", (e, payload) => {
             Observer.emit(GLOBAL_EVENT.UPDATE_AVAILABLE, payload);
         });
-        
+
         ipcRenderer.on("download-progress", (e, payload) => {
             Observer.emit(GLOBAL_EVENT.DOWNLOAD_PROGRESS_CHANGED, payload);
         });
-        
-        Observer.on(GLOBAL_EVENT.INSTALL_UPDATE, function() {
+
+        Observer.on(GLOBAL_EVENT.INSTALL_UPDATE, function () {
             ipcRenderer.send('install-update');
         });
 
         ipcRenderer.send('update-app-info', appInfo);
         ipcRenderer.send('update-languages', languages);
-        
+
         Controller.updateRecentProjects();
-        
+
         setTimeout(Project.startObserv, 1000);
     }
-    
-    static updateProject(path="") {
-        ipcRenderer.send('project-update', {path: path});
+
+    static updateProject(path = "") {
+        ipcRenderer.send('project-update', { path: path });
     }
 
     static updateProjectModified(val) {
-        ipcRenderer.send('project-modified', {val: val});
+        ipcRenderer.send('project-modified', { val: val });
     }
-    
+
     static updateRecentProjects() {
-        ipcRenderer.send('project-recent-update', {projects: Project.getRecentProjects()});
+        ipcRenderer.send('project-recent-update', { projects: Project.getRecentProjects() });
     }
-    
+
     static updateLocale() {
         ipcRenderer.send('update-locale', {
             currentLocale: I18.currentLocale,
             strings: I18.strings
         });
     }
-    
+
     static quit() {
         Project.saveChanges(() => {
             ipcRenderer.send('quit');

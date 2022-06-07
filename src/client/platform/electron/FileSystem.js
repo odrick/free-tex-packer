@@ -1,11 +1,12 @@
-const fs = require('fs');
-const chokidar = require('chokidar');
-const { dialog } = require('electron').remote;
-
+import chokidar from 'chokidar';
+import { remote } from 'electron';
+import fs from 'fs';
 import Controller from 'platform/Controller';
-import I18 from '../../utils/I18';
+import { GLOBAL_EVENT, Observer } from '../../Observer';
 import Base64ImagesLoader from '../../utils/Base64ImagesLoader';
-import { Observer, GLOBAL_EVENT } from '../../Observer';
+import I18 from '../../utils/I18';
+
+const dialog = remote;
 
 const IMAGES_EXT = ['jpg', 'png', 'gif'];
 
