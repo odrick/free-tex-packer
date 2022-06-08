@@ -132,9 +132,22 @@ function prepareData(data, options) {
     return { rects: ret, config: opt };
 }
 
+const animationRegex = /^(.+)[_-](\d+)\.(.+)$/
+function createAnimationFrame(rect, index) {
+    const match = animationRegex.exec(rect.name)
+    if (!match) return { match, index }
+    return {
+        match,
+        index,
+        filename: match[0],
+        name: match[1],
+        frame: match[2]
+    }
+}
+
 function compareFrames(a, b) {
-    const an = a.value[2]
-    const bn = b.value[2]
+    const an = a.frame
+    const bn = b.frame
 
     if (an > bn) return 1
     else if (an < bn) return -1
@@ -143,20 +156,17 @@ function compareFrames(a, b) {
 
 function sortFrames(matches) {
     const frames = matches.sort(compareFrames)
-        .map(({ value }) => ({ value: value[0] }))
     frames[frames.length - 1].lastFrame = true
     return frames
 }
 
-const animationRegex = /^(.+)[_-](\d+)\.(.+)$/
 function extractAnimations(rects) {
-    const matches = rects.map(r => r.name)
-        .map(name => animationRegex.exec(name))
-        .map(x => x)
+    const frames = rects.map(createAnimationFrame)
+        .filter(frame => frame.match)
 
-    if (matches.length === 0) return {}
+    if (frames.length === 0) return []
 
-    const grouped = groupBy(({ value }) => value[1], matches.map(value => ({ value })))
+    const grouped = groupBy(frame => frame.name, frames)
     const sorted = Object.entries(grouped).map(([name, frames]) => ({
         name,
         frames: sortFrames(frames)
@@ -175,6 +185,7 @@ function startExporter(exporter, data, options) {
             anims: extractAnimations(rects),
             appInfo: appInfo
         };
+
         if (exporter.content) {
             finishExporter(exporter, renderOptions, resolve, reject);
             return;

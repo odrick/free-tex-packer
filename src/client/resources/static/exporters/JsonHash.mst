@@ -29,7 +29,7 @@
   },
   "animations": {
     {{#anims}}
-      "{{{name}}}": [{{#frames}}"{{value}}"{{^lastFrame}},{{/lastFrame}}{{/frames}}]{{^lastAnimation}},
+      "{{{name}}}": [{{#frames}}"{{filename}}"{{^lastFrame}},{{/lastFrame}}{{/frames}}]{{^lastAnimation}},
       {{/lastAnimation}}
     {{/anims}}
   },
