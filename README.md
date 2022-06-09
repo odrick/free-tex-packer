@@ -3,7 +3,7 @@ _Logo by [razzie-dev](https://github.com/razzie-dev)_
 
 OpenPacker is a texture packing tool to create optimized spritesheets and texture atlases from a collection of images.
 
-This project is forked from [Free Texture Packer]([https://github.com/odrick/free-tex-packer/releases).
+This project is forked from [free-tex-packer](https://github.com/odrick/free-tex-packer/releases).
 
 # Features
 * Sprite rotation
