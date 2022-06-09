@@ -1,9 +1,9 @@
 {
-    "name": "free-tex-packer",
-    "version": "0.6.7",
-    "description": "Free texture packer",
-    "homepage": "https://github.com/odrick/free-tex-packer",
-    "author": "Alexander Norinchak <norinchak@gmail.com>",
+    "name": "open-packer",
+    "version": "0.0.1",
+    "description": "open-packer",
+    "homepage": "https://github.com/mochancrimthann/open-packer",
+    "author": "Mochan",
     "main": "main.js",
     "scripts": {
         "start": "electron . --env development",
@@ -12,9 +12,9 @@
         "build-publish": "electron-builder --ia32 --x64 --publish always"
     },
     "build": {
-        "appId": "com.free.tex.packer",
-        "productName": "Free texture packer",
-        "artifactName": "FreeTexturePacker-${arch}.${ext}",
+        "appId": "com.open.packer",
+        "productName": "OpenPacker",
+        "artifactName": "OpenPacker-${arch}.${ext}",
         "win": {
             "target": [
                 "nsis"
@@ -44,19 +44,19 @@
         },
         "fileAssociations": {
             "ext": "ftpp",
-            "name": "Free texture packer project"
+            "name": "OpenPacker"
         },
         "publish": [
             {
                 "provider": "github",
-                "owner": "odrick",
-                "repo": "free-tex-packer"
+                "owner": "mochancrimthann",
+                "repo": "open-packer"
             }
         ]
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/odrick/free-tex-packer.git"
+        "url": "git+https://github.com/mochancrimthann/open-packer.git"
     },
     "keywords": [],
     "license": "ISC",

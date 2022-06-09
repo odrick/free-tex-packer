@@ -163,7 +163,7 @@ class FileSystem {
 
     static saveProject(data, path = "") {
         let options = {
-            filters: [{ name: "Free texture packer", extensions: ['ftpp'] }]
+            filters: [{ name: "OpenPacker", extensions: ['ftpp'] }]
         };
 
         if (!path) {
@@ -193,7 +193,7 @@ class FileSystem {
         }
         else {
             path = dialog.showOpenDialog({
-                filters: [{ name: "Free texture packer", extensions: ['ftpp'] }],
+                filters: [{ name: "OpenPacker", extensions: ['ftpp'] }],
                 properties: ['openFile']
             });
 
