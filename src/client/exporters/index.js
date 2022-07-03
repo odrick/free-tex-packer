@@ -62,6 +62,7 @@ function prepareData(data, options) {
     opt.base64Prefix = options.textureFormat === "png" ? "data:image/png;base64," : "data:image/jpeg;base64,";
 
     let ret = [];
+    let frameIndex = 1;
 
     for(let item of data) {
 
@@ -80,13 +81,13 @@ function prepareData(data, options) {
         if(!options.prependFolderName) {
             name = name.split("/").pop();
         }
-
-        let frame = {x: item.frame.x, y: item.frame.y, w: item.frame.w, h: item.frame.h, hw: item.frame.w/2, hh: item.frame.h/2};
+                       
+        let frame = { x: item.frame.x, y: item.frame.y, w: item.frame.w, h: item.frame.h, hw: item.frame.w / 2, hh: item.frame.h / 2, index: frameIndex };
         let spriteSourceSize = {x: item.spriteSourceSize.x, y: item.spriteSourceSize.y, w: item.spriteSourceSize.w, h: item.spriteSourceSize.h};
         let sourceSize = {w: item.sourceSize.w, h: item.sourceSize.h};
-        
-        let trimmed = item.trimmed;
-        
+
+        let trimmed = item.trimmed;        
+       
         if(item.trimmed && options.trimMode === 'crop') {
             trimmed = false;
             spriteSourceSize.x = 0;
@@ -94,7 +95,7 @@ function prepareData(data, options) {
             sourceSize.w = spriteSourceSize.w;
             sourceSize.h = spriteSourceSize.h;
         }
-        
+
         if(opt.scale !== 1) {
             frame.x *= opt.scale;
             frame.y *= opt.scale;
@@ -121,6 +122,7 @@ function prepareData(data, options) {
             trimmed: trimmed
         });
 
+        frameIndex++;
     }
 
     if(ret.length) {

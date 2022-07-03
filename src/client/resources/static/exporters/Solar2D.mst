@@ -1,0 +1,48 @@
+local SheetInfo = {}
+
+SheetInfo.sheet =
+{
+  frames =  {
+    {{#rects}}
+      {
+        -- {{{name}}}
+        {{#trimmed}}
+        sourceX = {{spriteSourceSize.x}},
+        sourceY = {{spriteSourceSize.y}},
+        sourceWidth = {{spriteSourceSize.w}},
+        sourceHeight = {{spriteSourceSize.h}},
+        {{/trimmed}}
+
+        x = {{frame.x}},
+        y = {{frame.y}},
+        width = {{frame.w}},
+        height = {{frame.h}},
+      },
+    {{/rects}} 
+  },
+
+  sheetContentWidth = {{config.imageWidth}},
+  sheetContentHeight = {{config.imageHeight}}
+}
+
+
+SheetInfo.frameIndex =
+{
+    {{#rects}}
+    ["{{name}}"] = {{frame.index}},
+    {{/rects}}
+}
+
+
+function SheetInfo:getSheet()
+    return self.sheet;
+end
+
+
+function SheetInfo:getFrameIndex(name)
+    return self.frameIndex[name];
+end
+
+
+return SheetInfo
+
