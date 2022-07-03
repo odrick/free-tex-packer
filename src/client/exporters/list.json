@@ -147,6 +147,15 @@
     "predefined": true
   },
   {
+    "type": "Solar2D",
+    "description": "Solar2D (CoronaSDK) sprite sheet",
+    "allowTrim": true,
+    "allowRotation": false,
+    "template": "Solar2D.mst",
+    "fileExt": "lua",
+    "predefined": true
+  },
+  {
     "type": "custom",
     "description": "Custom format",
     "allowTrim": true,
