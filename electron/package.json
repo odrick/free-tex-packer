@@ -61,14 +61,14 @@
     "keywords": [],
     "license": "ISC",
     "devDependencies": {
-        "electron": "^4.0.4",
-        "electron-builder": "^20.38.5"
+        "electron": "4.0.4",
+        "electron-builder": "20.38.5"
     },
     "dependencies": {
-        "electron-log": "^2.2.17",
-        "electron-updater": "^4.0.6",
-        "electron-window-state": "^5.0.3",
-        "optimist": "^0.6.1",
-        "tinify": "^1.3.0"
+        "electron-log": "2.2.17",
+        "electron-updater": "4.0.6",
+        "electron-window-state": "5.0.3",
+        "optimist": "0.6.1",
+        "tinify": "1.3.0"
     }
 }

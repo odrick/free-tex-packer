@@ -49913,7 +49913,8 @@ function () {
                 prependFolderName: this.packOptions.prependFolderName,
                 base64Export: this.packOptions.base64Export,
                 scale: this.packOptions.scale,
-                trimMode: this.packOptions.trimMode
+                trimMode: this.packOptions.trimMode,
+                sortByName: this.packOptions.sortByName
               };
               _context.prev = 33;
               _context.t1 = files;
@@ -51499,6 +51500,7 @@ function (_React$Component) {
       data.alphaThreshold = data.alphaThreshold || 0;
       data.detectIdentical = data.detectIdentical === undefined ? true : data.detectIdentical;
       data.packer = getPackerByType(data.packer) ? data.packer : packers[0].type;
+      data.sortByName = data.sortByName === undefined ? true : data.sortByName;      
       var methodValid = false;
       var packer = getPackerByType(data.packer);
       var packerMethods = Object.keys(packer.methods);
@@ -51559,6 +51561,7 @@ function (_React$Component) {
       data.detectIdentical = react_dom_default.a.findDOMNode(this.refs.detectIdentical).checked;
       data.packer = react_dom_default.a.findDOMNode(this.refs.packer).value;
       data.packerMethod = react_dom_default.a.findDOMNode(this.refs.packerMethod).value;
+      data.sortByName = react_dom_default.a.findDOMNode(this.refs.sortByName).checked;      
       this.packOptions = this.applyOptionsDefaults(data);
     }
   }, {
@@ -51589,6 +51592,7 @@ function (_React$Component) {
       react_dom_default.a.findDOMNode(this.refs.detectIdentical).checked = this.packOptions.detectIdentical;
       react_dom_default.a.findDOMNode(this.refs.packer).value = this.packOptions.packer;
       react_dom_default.a.findDOMNode(this.refs.packerMethod).value = this.packOptions.packerMethod;
+      react_dom_default.a.findDOMNode(this.refs.sortByName).checked = this.packOptions.sortByName;      
     }
   }, {
     key: "getPackOptions",
@@ -51935,6 +51939,14 @@ function (_React$Component) {
         packer: this.state.packer,
         defaultMethod: this.packOptions.packerMethod,
         handler: this.onPropChanged
+      })), react_default.a.createElement("td", null)), react_default.a.createElement("tr", {
+        title: utils_I18.f("SORT_BY_NAME_TITLE")
+      }, react_default.a.createElement("td", null, utils_I18.f("SORT_BY_NAME")), react_default.a.createElement("td", null, react_default.a.createElement("input", {
+        ref: "sortByName",
+        type: "checkbox",
+        className: "border-color-gray",
+        onChange: this.onPropChanged,
+        defaultChecked: sortByName ? "checked" : ""
       })), react_default.a.createElement("td", null))))));
     }
   }], [{
