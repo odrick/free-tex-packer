@@ -9,8 +9,8 @@ SheetInfo.sheet =
         {{#trimmed}}
         sourceX = {{spriteSourceSize.x}},
         sourceY = {{spriteSourceSize.y}},
-        sourceWidth = {{spriteSourceSize.w}},
-        sourceHeight = {{spriteSourceSize.h}},
+        sourceWidth = {{sourceSize.w}},
+        sourceHeight = {{sourceSize.h}},
         {{/trimmed}}
 
         x = {{frame.x}},
