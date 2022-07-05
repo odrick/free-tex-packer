@@ -7518,7 +7518,29 @@ module.exports = {
 /* 76 */
 /***/ (function(module) {
 
-module.exports = JSON.parse("[{\"lang\":\"en\",\"name\":\"english\"},{\"lang\":\"de\",\"name\":\"deutsch\"},{\"lang\":\"es\",\"name\":\"español\"},{\"lang\":\"ru\",\"name\":\"русский\"},{\"lang\":\"zh-cn\",\"name\":\"简体中文\"}]");
+//module.exports = JSON.parse("[{\"lang\":\"en\",\"name\":\"english\"},{\"lang\":\"de\",\"name\":\"deutsch\"},{\"lang\":\"es\",\"name\":\"español\"},{\"lang\":\"ru\",\"name\":\"русский\"},{\"lang\":\"zh-cn\",\"name\":\"简体中文\"}]");
+module.exports = JSON.parse(
+  "[{\"type\":\"JSON (hash)\",\"description\":\"Json hash\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonHash.mst\",\"fileExt\":\"json\"},\
+  {\"type\":\"JSON (array)\",\"description\":\"Json array\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonArray.mst\",\"fileExt\":\"json\"},\
+  {\"type\":\"XML\",\"description\":\"Plain XML format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"XML.mst\",\"fileExt\":\"xml\"},\
+  {\"type\":\"css (modern)\",\"description\":\"css format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Css.mst\",\"fileExt\":\"css\"},\
+  {\"type\":\"css (old)\",\"description\":\"old css format\",\"allowTrim\":false,\"allowRotation\":false,\"template\":\"OldCss.mst\",\"fileExt\":\"css\"},\
+  {\"type\":\"pixi.js\",\"description\":\"pixi.js format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonHash.mst\",\"fileExt\":\"json\"},\
+  {\"type\":\"Godot (atlas)\",\"description\":\"Godot Atlas format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"GodotAtlas.mst\",\"fileExt\":\"tpsheet\"},\
+  {\"type\":\"Godot (tileset)\",\"description\":\"Godot Tileset format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"GodotTileset.mst\",\"fileExt\":\"tpset\"},\
+  {\"type\":\"Phaser (hash)\",\"description\":\"Phaser (json hash)\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonHash.mst\",\"fileExt\":\"json\"},\
+  {\"type\":\"Phaser (array)\",\"description\":\"Phaser (json array)\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"JsonArray.mst\",\"fileExt\":\"json\"},\
+  {\"type\":\"Phaser 3\",\"description\":\"Phaser 3\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Phaser3.mst\",\"fileExt\":\"json\"},\
+  {\"type\":\"Spine\",\"description\":\"Spine atlas\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Spine.mst\",\"fileExt\":\"atlas\"},\
+  {\"type\":\"cocos2d\",\"description\":\"cocos2d format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Cocos2d.mst\",\"fileExt\":\"plist\"},\
+  {\"type\":\"UnrealEngine\",\"description\":\"UnrealEngine - Paper2d\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Unreal.mst\",\"fileExt\":\"paper2dsprites\"},\
+  {\"type\":\"Starling\",\"description\":\"Starling format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"Starling.mst\",\"fileExt\":\"xml\"},\
+  {\"type\":\"UIKit\",\"description\":\"UIKit sprite sheet\",\"allowTrim\":true,\"allowRotation\":false,\"template\":\"UIKit.mst\",\"fileExt\":\"plist\",\"predefined\":true},\
+  {\"type\":\"Unity3D\",\"description\":\"Unity3D sprite sheet\",\"allowTrim\":true,\"allowRotation\":false,\"template\":\"Unity3D.mst\",\"fileExt\":\"tpsheet\",\"predefined\":true},\
+  {\"type\":\"Solar2D\",\"description\":\"Solar2D (CoronaSDK) sprite sheet\",\"allowTrim\":true,\"allowRotation\":false,\"template\":\"Solar2D.mst\",\"fileExt\":\"lua\",\"predefined\":true},\
+  {\"type\":\"Egret2D\",\"description\":\"Egret2D sprite sheet\",\"allowTrim\":false,\"allowRotation\":false,\"template\":\"Egret2D.mst\",\"fileExt\":\"json\",\"predefined\":true},\
+  {\"type\":\"custom\",\"description\":\"Custom format\",\"allowTrim\":true,\"allowRotation\":true,\"template\":\"\",\"fileExt\":\"\"}]"
+  );
 
 /***/ }),
 /* 77 */
@@ -49913,7 +49935,8 @@ function () {
                 prependFolderName: this.packOptions.prependFolderName,
                 base64Export: this.packOptions.base64Export,
                 scale: this.packOptions.scale,
-                trimMode: this.packOptions.trimMode
+                trimMode: this.packOptions.trimMode,
+                sortByName: this.packOptions.sortByName
               };
               _context.prev = 33;
               _context.t1 = files;
@@ -51499,6 +51522,7 @@ function (_React$Component) {
       data.alphaThreshold = data.alphaThreshold || 0;
       data.detectIdentical = data.detectIdentical === undefined ? true : data.detectIdentical;
       data.packer = getPackerByType(data.packer) ? data.packer : packers[0].type;
+      data.sortByName = data.sortByName === undefined ? true : data.sortByName;      
       var methodValid = false;
       var packer = getPackerByType(data.packer);
       var packerMethods = Object.keys(packer.methods);
@@ -51559,6 +51583,7 @@ function (_React$Component) {
       data.detectIdentical = react_dom_default.a.findDOMNode(this.refs.detectIdentical).checked;
       data.packer = react_dom_default.a.findDOMNode(this.refs.packer).value;
       data.packerMethod = react_dom_default.a.findDOMNode(this.refs.packerMethod).value;
+      data.sortByName = react_dom_default.a.findDOMNode(this.refs.sortByName).checked;      
       this.packOptions = this.applyOptionsDefaults(data);
     }
   }, {
@@ -51589,6 +51614,7 @@ function (_React$Component) {
       react_dom_default.a.findDOMNode(this.refs.detectIdentical).checked = this.packOptions.detectIdentical;
       react_dom_default.a.findDOMNode(this.refs.packer).value = this.packOptions.packer;
       react_dom_default.a.findDOMNode(this.refs.packerMethod).value = this.packOptions.packerMethod;
+      react_dom_default.a.findDOMNode(this.refs.sortByName).checked = this.packOptions.sortByName;      
     }
   }, {
     key: "getPackOptions",
@@ -51935,6 +51961,14 @@ function (_React$Component) {
         packer: this.state.packer,
         defaultMethod: this.packOptions.packerMethod,
         handler: this.onPropChanged
+      })), react_default.a.createElement("td", null)), react_default.a.createElement("tr", {
+        title: utils_I18.f("SORT_BY_NAME_TITLE")
+      }, react_default.a.createElement("td", null, utils_I18.f("SORT_BY_NAME")), react_default.a.createElement("td", null, react_default.a.createElement("input", {
+        ref: "sortByName",
+        type: "checkbox",
+        className: "border-color-gray",
+        onChange: this.onPropChanged,
+        defaultChecked: sortByName ? "checked" : ""
       })), react_default.a.createElement("td", null))))));
     }
   }], [{

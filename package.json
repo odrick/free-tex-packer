@@ -91,7 +91,7 @@
     "babel-runtime": "^6.23.0",
     "chokidar": "^2.0.4",
     "copy-webpack-plugin": "^4.6.0",
-    "electron": "^4.0.4",
+    "electron": "4.0.4",
     "eventemitter3": "^3.0.1",
     "file-saver": "^2.0.0",
     "glob": "^7.1.1",

@@ -138,3 +138,5 @@ SELECT_DATA_FILE;Data file
 SPLITTER;Split sheet
 SPLITTER_ERROR_NO_FRAMES;Sprites not found. Probably, atlas format is incorrect.
 HOLD_TRIM;Hold trim:
+SORT_BY_NAME_TITLE;Sort file list by name.
+SORT_BY_NAME;Sort files by name:

@@ -93,6 +93,7 @@ class PackProperties extends React.Component {
         data.alphaThreshold = data.alphaThreshold || 0;
         data.detectIdentical = data.detectIdentical === undefined ? true : data.detectIdentical;
         data.packer = getPackerByType(data.packer) ? data.packer : packers[0].type;
+        data.sortByName = data.sortByName === undefined ? true : data.sortByName;
         
         let methodValid = false;
         let packer = getPackerByType(data.packer);
@@ -148,6 +149,7 @@ class PackProperties extends React.Component {
         data.detectIdentical = ReactDOM.findDOMNode(this.refs.detectIdentical).checked;
         data.packer = ReactDOM.findDOMNode(this.refs.packer).value;
         data.packerMethod = ReactDOM.findDOMNode(this.refs.packerMethod).value;
+        data.sortByName = ReactDOM.findDOMNode(this.refs.sortByName).checked;        
 
         this.packOptions = this.applyOptionsDefaults(data);
     }
@@ -178,6 +180,8 @@ class PackProperties extends React.Component {
         ReactDOM.findDOMNode(this.refs.detectIdentical).checked = this.packOptions.detectIdentical;
         ReactDOM.findDOMNode(this.refs.packer).value = this.packOptions.packer;
         ReactDOM.findDOMNode(this.refs.packerMethod).value = this.packOptions.packerMethod;
+        ReactDOM.findDOMNode(this.refs.sortByName).checked = this.packOptions.sortByName;
+        
     }
 
     getPackOptions() {
@@ -431,6 +435,13 @@ class PackProperties extends React.Component {
                                 <td><PackerMethods ref="packerMethod" packer={this.state.packer} defaultMethod={this.packOptions.packerMethod} handler={this.onPropChanged}/></td>
                                 <td></td>
                             </tr>
+
+                            <tr title={I18.f("SORT_BY_NAME_TITLE")}>
+                                <td>{I18.f("SORT_BY_NAME")}</td>
+                                <td><input ref="sortByName" className="border-color-gray" type="checkbox" defaultChecked={this.packOptions.sortByName ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
+                                <td></td>
+                            </tr>
+
                         </tbody>
                     </table>
                 </div>

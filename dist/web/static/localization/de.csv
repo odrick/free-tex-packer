@@ -137,3 +137,5 @@ SELECT_DATA_FILE;Daten-Datei
 SPLITTER;Sprites aus Bild extrahieren
 SPLITTER_ERROR_NO_FRAMES;Sprites wurden nicht gefunden. Vermutlich ist das Atlas Format falsch.
 HOLD_TRIM;Trim beibehalten:
+SORT_BY_NAME_TITLE;Sort file list by name.
+SORT_BY_NAME;Sort files by name:

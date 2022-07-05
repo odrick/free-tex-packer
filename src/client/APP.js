@@ -148,7 +148,8 @@ class APP {
                 prependFolderName: this.packOptions.prependFolderName,
                 base64Export: this.packOptions.base64Export,
                 scale: this.packOptions.scale,
-                trimMode: this.packOptions.trimMode
+                trimMode: this.packOptions.trimMode,
+                sortByName: this.packOptions.sortByName
             };
 
             try {

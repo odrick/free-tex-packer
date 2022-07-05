@@ -138,3 +138,5 @@ SELECT_DATA_FILE;数据文件
 SPLITTER;分割精灵表
 SPLITTER_ERROR_NO_FRAMES;精灵图没有找到，请检查文件格式是否正确。
 HOLD_TRIM;保持整齐(修剪):
+SORT_BY_NAME_TITLE;Sort file list by name.
+SORT_BY_NAME;Sort files by name:
