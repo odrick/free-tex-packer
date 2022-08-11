@@ -5,12 +5,6 @@ const windowStateKeeper = require('electron-window-state')
 const argv = require('optimist').argv
 const path = require('path')
 const tinify = require('tinify')
-// import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
-// import { autoUpdater } from 'electron-updater'
-// import windowStateKeeper from 'electron-window-state'
-// import { argv } from 'optimist'
-// import path from 'path'
-// import tinify from 'tinify'
 
 let mainWindow
 let RECENT_PROJECTS = []
