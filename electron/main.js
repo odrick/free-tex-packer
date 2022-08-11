@@ -1,33 +1,41 @@
-import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
-import { autoUpdater } from 'electron-updater'
-import windowStateKeeper from 'electron-window-state'
-import { argv } from 'optimist'
-import path from 'path'
-import tinify from 'tinify'
+const electron = require('electron')
+const { app, BrowserWindow, ipcMain, Menu, shell } = electron
+const autoUpdater = require('electron-updater').autoUpdater
+const windowStateKeeper = require('electron-window-state')
+const argv = require('optimist').argv
+const path = require('path')
+const tinify = require('tinify')
+// import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
+// import { autoUpdater } from 'electron-updater'
+// import windowStateKeeper from 'electron-window-state'
+// import { argv } from 'optimist'
+// import path from 'path'
+// import tinify from 'tinify'
 
-let mainWindow;
-let RECENT_PROJECTS = [];
-let CURRENT_LOCALE = "";
-let LOCALE_STRINGS = {};
-let APP_INFO = {};
-let LANGUAGES = [];
-let CURRENT_PROJECT = "";
-let CURRENT_PROJECT_MODIFIED = false;
+let mainWindow
+let RECENT_PROJECTS = []
+let CURRENT_LOCALE = ""
+let LOCALE_STRINGS = {}
+let APP_INFO = {}
+let LANGUAGES = []
+let CURRENT_PROJECT = ""
+let CURRENT_PROJECT_MODIFIED = false
+const root = path.resolve(__dirname, '../dist')
 
-function createWindow() {
-	let w = 1300;
-	let h = 700;
+function createWindow () {
+    let w = 1300
+    let h = 700
 
-	if(process.platform === "win32") {
-		w = 1320;
-		h = 740;
-	}
-	
-	let mainWindowState = windowStateKeeper({
+    if (process.platform === "win32") {
+        w = 1320
+        h = 740
+    }
+
+    let mainWindowState = windowStateKeeper({
         defaultWidth: w,
         defaultHeight: h
-    });
-    
+    })
+
     mainWindow = new BrowserWindow({
         x: mainWindowState.x,
         y: mainWindowState.y,
@@ -36,60 +44,60 @@ function createWindow() {
         minWidth: w,
         minHeight: h,
         title: "",
-        icon: path.resolve(__dirname, 'www/static/images/icon.png')
-    });
+        icon: path.resolve(root, './static/images/icon.png')
+    })
 
-    mainWindowState.manage(mainWindow);
+    mainWindowState.manage(mainWindow)
 
-    mainWindow.on('page-title-updated', function(e) {
-        e.preventDefault();
-    });
+    mainWindow.on('page-title-updated', function (e) {
+        e.preventDefault()
+    })
 
     if (argv.env === 'development') {
-        mainWindow.loadURL('http://localhost:4000/');
+        mainWindow.loadURL('http://localhost:3000/')
     }
     else {
-        mainWindow.loadFile('./www/index.html');
+        mainWindow.loadFile(path.resolve(root, 'index.html'))
     }
 
-    Menu.setApplicationMenu(null);
+    Menu.setApplicationMenu(null)
 
-    mainWindow.on('close', function(e) {
-        if(CURRENT_PROJECT_MODIFIED) {
-            sendMessage({actionName: 'quit'});
-            e.preventDefault();
+    mainWindow.on('close', function (e) {
+        if (CURRENT_PROJECT_MODIFIED) {
+            sendMessage({ actionName: 'quit' })
+            e.preventDefault()
         }
-    });
-    
-    mainWindow.on('closed', function() {
-        mainWindow = null;
-    });
-	
-	mainWindow.webContents.on('will-navigate', handleRedirect);
-	mainWindow.webContents.on('new-window', handleRedirect);
+    })
 
-    mainWindow.webContents.on('did-finish-load', function() {
-        CURRENT_PROJECT = "";
-        CURRENT_PROJECT_MODIFIED = false;
-        updateWindowTitle();
-		
-		if(argv.env !== 'development' && process.argv.length > 1) {
-			sendMessage({actionName: 'project-load', custom: process.argv[1]});
-		}
+    mainWindow.on('closed', function () {
+        mainWindow = null
+    })
 
-        autoUpdater.checkForUpdates();
-    });
+    mainWindow.webContents.on('will-navigate', handleRedirect)
+    mainWindow.webContents.on('new-window', handleRedirect)
 
-    mainWindow.webContents.on('context-menu', showInputContextMenu);
+    mainWindow.webContents.on('did-finish-load', function () {
+        CURRENT_PROJECT = ""
+        CURRENT_PROJECT_MODIFIED = false
+        updateWindowTitle()
 
-    startAutoUpdater();
+        if (argv.env !== 'development' && process.argv.length > 1) {
+            sendMessage({ actionName: 'project-load', custom: process.argv[1] })
+        }
 
-    onProjectUpdated();
+        autoUpdater.checkForUpdates()
+    })
+
+    mainWindow.webContents.on('context-menu', showInputContextMenu)
+
+    startAutoUpdater()
+
+    onProjectUpdated()
 }
 
-function showInputContextMenu(e, props) {
-    if(!props.isEditable) return;
-    
+function showInputContextMenu (e, props) {
+    if (!props.isEditable) return
+
     const menu = Menu.buildFromTemplate([
         {
             label: LOCALE_STRINGS.CONTEXT_MENU_UNDO,
@@ -139,107 +147,107 @@ function showInputContextMenu(e, props) {
             enabled: props.editFlags.canSelectAll,
             accelerator: 'CmdOrCtrl+A'
         }
-    ]);
+    ])
 
-    menu.popup(mainWindow);
+    menu.popup(mainWindow)
 }
 
-function startAutoUpdater() {
-    autoUpdater.autoDownload = false;
-    autoUpdater.autoInstallOnAppQuit = false;
+function startAutoUpdater () {
+    autoUpdater.autoDownload = false
+    autoUpdater.autoInstallOnAppQuit = false
 
     autoUpdater.on('checking-for-update', () => {
-    });
+    })
 
     autoUpdater.on('update-available', (info) => {
-        mainWindow.send('update-available', info);
-    });
+        mainWindow.send('update-available', info)
+    })
 
     autoUpdater.on('update-not-available', (info) => {
-    });
+    })
 
     autoUpdater.on('error', (err) => {
-    });
+    })
 
     autoUpdater.on('download-progress', (progressObj) => {
-        mainWindow.send('download-progress', progressObj.percent);
-    });
+        mainWindow.send('download-progress', progressObj.percent)
+    })
 
     autoUpdater.on('update-downloaded', (info) => {
-        autoUpdater.quitAndInstall(true, true);
-    });
+        autoUpdater.quitAndInstall(true, true)
+    })
 
     ipcMain.on('install-update', (e, data) => {
-        autoUpdater.downloadUpdate();
-    });
+        autoUpdater.downloadUpdate()
+    })
 }
 
-function handleRedirect(e, url) {
-	if(url !== mainWindow.getURL()) {
-        e.preventDefault();
-        shell.openExternal(url);
+function handleRedirect (e, url) {
+    if (url !== mainWindow.getURL()) {
+        e.preventDefault()
+        shell.openExternal(url)
     }
 }
 
-function buildMenu() {
-    let template = [];
-    
-    let recentProjects = [];
-    
-    if(RECENT_PROJECTS.length) {
-        for(let path of RECENT_PROJECTS) {
-            let name = path.split("/").pop();
-            recentProjects.push({label: name, actionName: 'project-load', click: sendMessage, custom: path});
+function buildMenu () {
+    let template = []
+
+    let recentProjects = []
+
+    if (RECENT_PROJECTS.length) {
+        for (let path of RECENT_PROJECTS) {
+            let name = path.split("/").pop()
+            recentProjects.push({ label: name, actionName: 'project-load', click: sendMessage, custom: path })
         }
     }
     else {
-        recentProjects.push({label: "...", enabled: false});
+        recentProjects.push({ label: "...", enabled: false })
     }
 
-    let quitAcc = "CmdOrCtrl+F4";
-    if(process.platform === "darwin") quitAcc = "CmdOrCtrl+Q";
-    
+    let quitAcc = "CmdOrCtrl+F4"
+    if (process.platform === "darwin") quitAcc = "CmdOrCtrl+Q"
+
     template.push({
         label: LOCALE_STRINGS.MENU_FILE,
         submenu: [
-            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_NEW, actionName: 'project-new', click: sendMessage, accelerator: 'CmdOrCtrl+N'},
-            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_LOAD, actionName: 'project-load', click: sendMessage, accelerator: 'CmdOrCtrl+O'},
-            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_LOAD_RECENT, submenu: recentProjects},
-            {type: 'separator'},
-            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_SAVE, actionName: 'project-save', click: sendMessage, accelerator: 'CmdOrCtrl+S'},
-            {label: LOCALE_STRINGS.MENU_FILE_PROJECT_SAVE_AS, actionName: 'project-save-as', click: sendMessage, accelerator: 'CmdOrCtrl+Shift+N'},
-            {type: 'separator'},
-            {label: LOCALE_STRINGS.MENU_FILE_PREFERENCES_SAVE, actionName: 'preferences-save', click: sendMessage},
-            {type: 'separator'},
-            {label: LOCALE_STRINGS.MENU_FILE_INSTALL_CLI, click: installCLI},
-            {type: 'separator'},
-            {label: LOCALE_STRINGS.MENU_FILE_EXIT, actionName: 'quit', click: sendMessage, accelerator: quitAcc}
+            { label: LOCALE_STRINGS.MENU_FILE_PROJECT_NEW, actionName: 'project-new', click: sendMessage, accelerator: 'CmdOrCtrl+N' },
+            { label: LOCALE_STRINGS.MENU_FILE_PROJECT_LOAD, actionName: 'project-load', click: sendMessage, accelerator: 'CmdOrCtrl+O' },
+            { label: LOCALE_STRINGS.MENU_FILE_PROJECT_LOAD_RECENT, submenu: recentProjects },
+            { type: 'separator' },
+            { label: LOCALE_STRINGS.MENU_FILE_PROJECT_SAVE, actionName: 'project-save', click: sendMessage, accelerator: 'CmdOrCtrl+S' },
+            { label: LOCALE_STRINGS.MENU_FILE_PROJECT_SAVE_AS, actionName: 'project-save-as', click: sendMessage, accelerator: 'CmdOrCtrl+Shift+N' },
+            { type: 'separator' },
+            { label: LOCALE_STRINGS.MENU_FILE_PREFERENCES_SAVE, actionName: 'preferences-save', click: sendMessage },
+            { type: 'separator' },
+            { label: LOCALE_STRINGS.MENU_FILE_INSTALL_CLI, click: installCLI },
+            { type: 'separator' },
+            { label: LOCALE_STRINGS.MENU_FILE_EXIT, actionName: 'quit', click: sendMessage, accelerator: quitAcc }
         ]
-    });
+    })
 
     template.push({
         label: LOCALE_STRINGS.MENU_ACTIONS,
         submenu: [
-            {label: LOCALE_STRINGS.MENU_ACTIONS_ADD_IMAGES, actionName: 'action-add-images', click: sendMessage, accelerator: 'Shift+A'},
-            {label: LOCALE_STRINGS.MENU_ACTIONS_ADD_FOLDER, actionName: 'action-add-folder', click: sendMessage, accelerator: 'Shift+F'},
-            {type: 'separator'},
-            {label: LOCALE_STRINGS.MENU_ACTIONS_SELECT_ALL, actionName: 'action-select-all', click: sendMessage, accelerator: 'CmdOrCtrl+A'},
-            {label: LOCALE_STRINGS.MENU_ACTIONS_DELETE, actionName: 'action-delete', click: sendMessage, accelerator: 'Delete'},
-            {label: LOCALE_STRINGS.MENU_ACTIONS_CLEAR, actionName: 'action-clear', click: sendMessage, accelerator: 'CmdOrCtrl+Shift+C'},
-            {type: 'separator'},
-            {label: LOCALE_STRINGS.MENU_ACTIONS_EXPORT, actionName: 'action-export', click: sendMessage, accelerator: 'CmdOrCtrl+E'}
+            { label: LOCALE_STRINGS.MENU_ACTIONS_ADD_IMAGES, actionName: 'action-add-images', click: sendMessage, accelerator: 'Shift+A' },
+            { label: LOCALE_STRINGS.MENU_ACTIONS_ADD_FOLDER, actionName: 'action-add-folder', click: sendMessage, accelerator: 'Shift+F' },
+            { type: 'separator' },
+            { label: LOCALE_STRINGS.MENU_ACTIONS_SELECT_ALL, actionName: 'action-select-all', click: sendMessage, accelerator: 'CmdOrCtrl+A' },
+            { label: LOCALE_STRINGS.MENU_ACTIONS_DELETE, actionName: 'action-delete', click: sendMessage, accelerator: 'Delete' },
+            { label: LOCALE_STRINGS.MENU_ACTIONS_CLEAR, actionName: 'action-clear', click: sendMessage, accelerator: 'CmdOrCtrl+Shift+C' },
+            { type: 'separator' },
+            { label: LOCALE_STRINGS.MENU_ACTIONS_EXPORT, actionName: 'action-export', click: sendMessage, accelerator: 'CmdOrCtrl+E' }
         ]
-    });
+    })
 
     template.push({
         label: LOCALE_STRINGS.MENU_TOOLS,
         submenu: [
-            {label: LOCALE_STRINGS.MENU_TOOLS_SPLITTER, actionName: 'action-show-splitter', click: sendMessage,}
+            { label: LOCALE_STRINGS.MENU_TOOLS_SPLITTER, actionName: 'action-show-splitter', click: sendMessage, }
         ]
-    });
-    
-    let langs = [];
-    if(LANGUAGES !== []) {
+    })
+
+    let langs = []
+    if (LANGUAGES !== []) {
         for (let lang of LANGUAGES) {
             langs.push({
                 label: lang.name,
@@ -248,140 +256,142 @@ function buildMenu() {
                 type: 'checkbox',
                 actionName: 'change-locale',
                 click: sendMessage
-            });
+            })
         }
     }
 
     template.push({
         label: LOCALE_STRINGS.MENU_LANGUAGE,
         submenu: langs
-    });
+    })
 
     template.push({
         label: LOCALE_STRINGS.MENU_HELP,
         submenu: [
-            {label: LOCALE_STRINGS.MENU_HELP_ABOUT, actionName: 'show-about', click: sendMessage, accelerator: 'F1'}
+            { label: LOCALE_STRINGS.MENU_HELP_ABOUT, actionName: 'show-about', click: sendMessage, accelerator: 'F1' }
         ]
-    });
-    
-    if(argv.env === 'development') {
-        template.push({label: 'Dev', submenu: [
-            {label: 'Console', click: () => mainWindow.webContents.openDevTools()},
-            {label: 'Reload', click: () => mainWindow.webContents.reload()}
-        ]});
+    })
+
+    if (argv.env === 'development') {
+        template.push({
+            label: 'Dev', submenu: [
+                { label: 'Console', click: () => mainWindow.webContents.openDevTools() },
+                { label: 'Reload', click: () => mainWindow.webContents.reload() }
+            ]
+        })
     }
-    
-    let menu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(menu);
+
+    let menu = Menu.buildFromTemplate(template)
+    Menu.setApplicationMenu(menu)
 }
 
-function installCLI() {
-    shell.openExternal('https://github.com/odrick/free-tex-packer-cli');
+function installCLI () {
+    shell.openExternal('https://github.com/odrick/free-tex-packer-cli')
 }
 
-function quit() {
-    CURRENT_PROJECT_MODIFIED = false;
-    app.quit();
+function quit () {
+    CURRENT_PROJECT_MODIFIED = false
+    app.quit()
 }
 
-function sendMessage(e) {
-    let payload = null;
-    if(e.custom) {
-        payload = {data: e.custom};
+function sendMessage (e) {
+    let payload = null
+    if (e.custom) {
+        payload = { data: e.custom }
     }
-    
-    mainWindow.send(e.actionName, payload);
+
+    mainWindow.send(e.actionName, payload)
 }
 
-function onProjectUpdated(data=null) {
-    CURRENT_PROJECT = data ? data.path : "";
-    CURRENT_PROJECT_MODIFIED = false;
-    updateWindowTitle();
+function onProjectUpdated (data = null) {
+    CURRENT_PROJECT = data ? data.path : ""
+    CURRENT_PROJECT_MODIFIED = false
+    updateWindowTitle()
 }
 
-function onProjectModified(data=null) {
-    CURRENT_PROJECT_MODIFIED = data ? data.val : false;
-    updateWindowTitle();
+function onProjectModified (data = null) {
+    CURRENT_PROJECT_MODIFIED = data ? data.val : false
+    updateWindowTitle()
 }
 
-function updateWindowTitle() {
-    if(!APP_INFO.displayName) {
-        mainWindow.setTitle("");
-        return;
+function updateWindowTitle () {
+    if (!APP_INFO.displayName) {
+        mainWindow.setTitle("")
+        return
     }
-    
-    let name;
 
-    if(!CURRENT_PROJECT) name = "untitled.ftpp";
-    else name = CURRENT_PROJECT.split('/').pop();
+    let name
 
-    mainWindow.setTitle((CURRENT_PROJECT_MODIFIED ? "* " : "") + name + ' - ' + APP_INFO.displayName);
+    if (!CURRENT_PROJECT) name = "untitled.ftpp"
+    else name = CURRENT_PROJECT.split('/').pop()
+
+    mainWindow.setTitle((CURRENT_PROJECT_MODIFIED ? "* " : "") + name + ' - ' + APP_INFO.displayName)
 }
 
-app.on('ready', createWindow);
+app.on('ready', createWindow)
 
 app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
-        app.quit();
+        app.quit()
     }
-});
+})
 
 app.on('activate', function () {
     if (mainWindow === null) {
-        createWindow();
+        createWindow()
     }
-});
+})
 
 ipcMain.on('tinify', (e, data) => {
-    tinify.key = data.key;
+    tinify.key = data.key
     tinify.fromBuffer(Buffer.from(data.imageData, 'base64')).toBuffer((err, res) => {
         if (err) {
             e.sender.send('tinify-complete', {
                 success: false,
                 uid: data.uid,
                 error: err.message
-            });
-            return;
+            })
+            return
         }
-        
+
         e.sender.send('tinify-complete', {
             success: true,
             uid: data.uid,
             data: res.toString('base64')
-        });
-    });
-});
+        })
+    })
+})
 
 ipcMain.on('update-app-info', (e, data) => {
-    APP_INFO = data;
-    buildMenu();
-    updateWindowTitle();
-});
+    APP_INFO = data
+    buildMenu()
+    updateWindowTitle()
+})
 
 ipcMain.on('update-languages', (e, data) => {
-    LANGUAGES = data;
-    buildMenu();
-});
+    LANGUAGES = data
+    buildMenu()
+})
 
 ipcMain.on('update-locale', (e, data) => {
-    CURRENT_LOCALE = data.currentLocale;
-    LOCALE_STRINGS = data.strings;
-    buildMenu();
-});
+    CURRENT_LOCALE = data.currentLocale
+    LOCALE_STRINGS = data.strings
+    buildMenu()
+})
 
 ipcMain.on('project-recent-update', (e, data) => {
-    RECENT_PROJECTS = data.projects;
-    buildMenu();
-});
+    RECENT_PROJECTS = data.projects
+    buildMenu()
+})
 
 ipcMain.on('project-update', (e, data) => {
-    onProjectUpdated(data);
-});
+    onProjectUpdated(data)
+})
 
 ipcMain.on('project-modified', (e, data) => {
-    onProjectModified(data);
-});
+    onProjectModified(data)
+})
 
 ipcMain.on('quit', (e, data) => {
-    quit();
-});
+    quit()
+})

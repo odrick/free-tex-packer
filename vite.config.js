@@ -1,8 +1,8 @@
-import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
-import path from 'path';
-import { defineConfig } from 'vite';
-import envCompatible from 'vite-plugin-env-compatible';
-import { injectHtml } from 'vite-plugin-html';
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
+import path from 'path'
+import { defineConfig } from 'vite'
+import envCompatible from 'vite-plugin-env-compatible'
+import { injectHtml } from 'vite-plugin-html'
 
 const platform = process.argv.platform || 'web'
 const isElectron = () => platform === 'electron'
@@ -50,5 +50,13 @@ export default defineConfig({
     envCompatible(),
     injectHtml()
   ],
-  build: {}
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: `[name].js`,
+        chunkFileNames: `[name].js`,
+        assetFileNames: `[name].[ext]`,
+      }
+    }
+  }
 })
