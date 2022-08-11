@@ -50,10 +50,12 @@
     }
   ],
   "scripts": {
-    "start": "npm run dev",
-    "dev": "concurrently -k \"vite\" \"npm run electron:dev\"",
-    "build": "vite build",
-    "preview": "vite preview",
+    "start": "npm run build && npm run dev",
+    "dev": "concurrently -k \"npm run web:dev\" \"npm run electron:dev\"",
+    "build": "npm run web:build && npm run electron:build",
+    "web:dev": "vite",
+    "web:build": "vite build",
+    "web:preview": "vite preview",
     "deploy": "gh-pages -d dist",
     "electron:start": "npm run build && electron-forge start",
     "electron:dev": "electron-forge start -- --env=development",
