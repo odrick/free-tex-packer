@@ -3,7 +3,7 @@
   "displayName": "OpenPacker",
   "version": "0.6.8",
   "description": "Free online texture packer",
-  "main": "src/index.js",
+  "main": "./electron/main.js",
   "localizations": [
     "en",
     "es",
@@ -50,10 +50,15 @@
     }
   ],
   "scripts": {
-    "start": "vite",
+    "start": "npm run dev",
+    "dev": "concurrently -k \"vite\" \"npm run electron:dev\"",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "electron:start": "npm run build && electron-forge start",
+    "electron:dev": "electron-forge start -- --env=development",
+    "electron:build": "electron-forge make",
+    "electron:package": "electron-forge package"
   },
   "repository": {
     "type": "git",
@@ -82,6 +87,11 @@
     "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
+    "@electron-forge/cli": "^6.0.0-beta.65",
+    "@electron-forge/maker-deb": "^6.0.0-beta.65",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.65",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.65",
+    "@electron-forge/maker-zip": "^6.0.0-beta.65",
     "@jvitela/mustache-wax": "^1.0.4",
     "@originjs/vite-plugin-commonjs": "^1.0.1",
     "babel-loader": "^8.2.5",
@@ -92,8 +102,10 @@
     "babel-runtime": "^6.26.0",
     "buffer": "^6.0.3",
     "chokidar": "^3.5.3",
+    "concurrently": "^7.3.0",
     "copy-webpack-plugin": "^11.0.0",
-    "electron": "^19.0.3",
+    "cross-env": "^7.0.3",
+    "electron": "20.0.2",
     "eventemitter3": "^4.0.7",
     "file-saver": "^2.0.5",
     "gh-pages": "^4.0.0",
@@ -117,5 +129,38 @@
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.9.1",
     "xml2js": "^0.4.23"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-updater": "^5.2.1",
+    "electron-window-state": "^5.0.3",
+    "tinify": "^1.6.1"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "open_packer"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }
