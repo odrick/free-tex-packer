@@ -38,7 +38,7 @@ function createWindow () {
         minWidth: w,
         minHeight: h,
         title: "",
-        icon: path.resolve(root, './static/images/icon.png')
+        icon: path.resolve(root, './static/images/icon.ico')
     })
 
     mainWindowState.manage(mainWindow)

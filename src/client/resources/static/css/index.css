@@ -646,7 +646,6 @@ html, body {
 .about-logo {
     width: 44px;
     height: 50px;
-    background-image: url(../images/logo_black.png);
     background-repeat: no-repeat;
     background-size: 44px 50px;
     float: left;
