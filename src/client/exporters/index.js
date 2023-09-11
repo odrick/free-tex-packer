@@ -84,6 +84,9 @@ function prepareData(data, options) {
         let frame = {x: item.frame.x, y: item.frame.y, w: item.frame.w, h: item.frame.h, hw: item.frame.w/2, hh: item.frame.h/2};
         let spriteSourceSize = {x: item.spriteSourceSize.x, y: item.spriteSourceSize.y, w: item.spriteSourceSize.w, h: item.spriteSourceSize.h};
         let sourceSize = {w: item.sourceSize.w, h: item.sourceSize.h};
+
+        //Used when importing to Godot Atlas to retain the original sprite size
+        let margin = {x: (sourceSize.w - spriteSourceSize.w)/2, y: (sourceSize.h - spriteSourceSize.h)/2, h: sourceSize.h - spriteSourceSize.h, w: sourceSize.w - spriteSourceSize.w}
         
         let trimmed = item.trimmed;
         
@@ -102,6 +105,10 @@ function prepareData(data, options) {
             frame.h *= opt.scale;
             frame.hw *= opt.scale;
             frame.hh *= opt.scale;
+            margin.x *= opt.scale;
+            margin.y *= opt.scale;
+            margin.w *= opt.scale;
+            margin.h *= opt.scale;
 
             spriteSourceSize.x *= opt.scale;
             spriteSourceSize.y *= opt.scale;
@@ -117,6 +124,7 @@ function prepareData(data, options) {
             frame: frame,
             spriteSourceSize: spriteSourceSize,
             sourceSize: sourceSize,
+            margin: margin,
             rotated: item.rotated,
             trimmed: trimmed
         });

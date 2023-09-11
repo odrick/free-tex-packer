@@ -51,15 +51,15 @@
     "type": "Godot (atlas)",
     "description": "Godot Atlas format",
     "allowTrim": true,
-    "allowRotation": true,
+    "allowRotation": false,
     "template": "GodotAtlas.mst",
     "fileExt": "tpsheet"
   },
   {
     "type": "Godot (tileset)",
-    "description": "Godot Tileset format",
+    "description": "Godot Tileset format (3.x only)",
     "allowTrim": true,
-    "allowRotation": true,
+    "allowRotation": false,
     "template": "GodotTileset.mst",
     "fileExt": "tpset"
   },
