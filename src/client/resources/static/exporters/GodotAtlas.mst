@@ -17,10 +17,10 @@
 						"h": {{frame.h}}
 					},
 					"margin": {
-						"x": 0,
-						"y": 0,
-						"w": {{32 - frame.w}},
-						"h": {{32 - frame.h}}
+						"x": {{margin.x}},
+						"y": {{margin.y}},
+						"w": {{margin.w}},
+						"h": {{margin.h}}
 					}
 				}{{^last}},{{/last}}
 				{{/rects}}
