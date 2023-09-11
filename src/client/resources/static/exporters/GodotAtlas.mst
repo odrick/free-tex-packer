@@ -19,8 +19,8 @@
 					"margin": {
 						"x": 0,
 						"y": 0,
-						"w": 0,
-						"h": 0
+						"w": {{32 - frame.w}},
+						"h": {{32 - frame.h}}
 					}
 				}{{^last}},{{/last}}
 				{{/rects}}
