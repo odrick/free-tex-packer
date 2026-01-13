@@ -1,0 +1,21 @@
+{
+  "SubTexture": [
+    {{#rects}}
+    {
+      "name": "{{{name}}}",
+      "width": {{frame.w}},
+      "height": {{frame.h}},
+      "x": {{frame.x}},
+      "y": {{frame.y}},
+      "frameX": -{{spriteSourceSize.x}},
+      "frameY": -{{spriteSourceSize.y}},
+      "frameWidth": {{sourceSize.w}},
+      "frameHeight": {{sourceSize.h}}
+    }{{^last}},{{/last}}
+    {{/rects}}
+  ],
+  "width": {{config.imageWidth}},
+  "height": {{config.imageHeight}},
+  "name": "{{config.imageName}}",
+  "imagePath": "{{config.imageFile}}"
+}

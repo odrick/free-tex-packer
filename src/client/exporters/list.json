@@ -1,4 +1,29 @@
 [
+   {
+    "type": "cocos2d(PLIST)",
+    "description": "cocos2d format",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "Cocos2d.mst",
+    "fileExt": "plist"
+  },
+  {
+    "type": "Spine(atlas)",
+    "description": "Spine atlas",
+    "allowTrim": true,
+    "allowRotation": true,
+    "template": "Spine.mst",
+    "fileExt": "atlas"
+  },
+   {
+    "type": "DBJson(龙骨)",
+    "description": "DBJson json",
+    "allowTrim": true,
+    "allowRotation": false,
+    "removeFileExtension":true,
+    "template": "DBJson.mst",
+    "fileExt": "json"
+  },
   {
     "type": "JSON (hash)",
     "description": "Json hash",
@@ -86,22 +111,6 @@
     "allowRotation": true,
     "template": "Phaser3.mst",
     "fileExt": "json"
-  },
-  {
-    "type": "Spine",
-    "description": "Spine atlas",
-    "allowTrim": true,
-    "allowRotation": true,
-    "template": "Spine.mst",
-    "fileExt": "atlas"
-  },
-  {
-    "type": "cocos2d",
-    "description": "cocos2d format",
-    "allowTrim": true,
-    "allowRotation": true,
-    "template": "Cocos2d.mst",
-    "fileExt": "plist"
   },
   {
     "type": "UnrealEngine",

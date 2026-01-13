@@ -207,12 +207,13 @@ class PackProperties extends React.Component {
         let exporter = getExporterByType(ReactDOM.findDOMNode(this.refs.exporter).value);
         let allowTrimInput = ReactDOM.findDOMNode(this.refs.allowTrim);
         let allowRotationInput = ReactDOM.findDOMNode(this.refs.allowRotation);
-        
+        var removeFileExtension = ReactDOM.findDOMNode(this.refs.removeFileExtension);
         let doRefresh = (allowTrimInput.checked !== exporter.allowTrim) || 
                         (allowRotationInput.checked !== exporter.allowRotation);
         
         allowTrimInput.checked = exporter.allowTrim;
         allowRotationInput.checked = exporter.allowRotation;
+        removeFileExtension.checked = (exporter.removeFileExtension == true);
         
         this.updateEditCustomTemplateButton();
         

@@ -10,6 +10,6 @@ repeat: none
   xy: {{frame.x}},{{frame.y}}
   size: {{frame.w}},{{frame.h}}
   orig: {{sourceSize.w}},{{sourceSize.h}}
-  offset: 0,0
+  offset: {{spriteSourceSize.x}},{{spriteSourceSize.y}}
   index: -1
 {{/rects}}
