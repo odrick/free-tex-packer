@@ -60,6 +60,6 @@
 	"meta": {
 		"app": "{{{appInfo.url}}}",
 		"version": "{{appInfo.version}}",
-		"format": "{{config.format}}",
+		"format": "{{config.format}}"
 	}
 }
