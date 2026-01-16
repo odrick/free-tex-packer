@@ -1,9 +1,9 @@
 const path = require('path');
-const tinify = require('tinify');
+let tinify;
 const argv = require('optimist').argv;
 const windowStateKeeper = require('electron-window-state');
 const {app, BrowserWindow, ipcMain, Menu, shell} = require('electron');
-const {autoUpdater} = require("electron-updater");
+let autoUpdater;
 
 let mainWindow;
 let RECENT_PROJECTS = [];
@@ -13,6 +13,21 @@ let APP_INFO = {};
 let LANGUAGES = [];
 let CURRENT_PROJECT = "";
 let CURRENT_PROJECT_MODIFIED = false;
+
+const isDev = argv.env === 'development' || process.env.NODE_ENV === 'development' || !app.isPackaged;
+
+if (!isDev) {
+    autoUpdater = require("electron-updater").autoUpdater;
+} else {
+    autoUpdater = {
+        autoDownload: false,
+        autoInstallOnAppQuit: false,
+        on: () => {},
+        checkForUpdates: () => {},
+        downloadUpdate: () => {},
+        quitAndInstall: () => {}
+    };
+}
 
 function createWindow() {
 	let w = 1300;
@@ -333,6 +348,20 @@ app.on('activate', function () {
 });
 
 ipcMain.on('tinify', (e, data) => {
+    if (!tinify) {
+        try {
+            tinify = require('tinify');
+        }
+        catch (err) {
+            e.sender.send('tinify-complete', {
+                success: false,
+                uid: data.uid,
+                error: err.message
+            });
+            return;
+        }
+    }
+
     tinify.key = data.key;
     tinify.fromBuffer(Buffer.from(data.imageData, 'base64')).toBuffer((err, res) => {
         if (err) {

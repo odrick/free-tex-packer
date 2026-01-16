@@ -3,5 +3,6 @@
     { "lang": "de", "name": "deutsch"},
     { "lang": "es", "name": "español" },
     { "lang": "ru", "name": "русский"},
-    { "lang": "zh-cn", "name": "简体中文"}
+    { "lang": "zh-cn", "name": "简体中文"},
+    { "lang": "ko", "name": "한국어"}
 ]

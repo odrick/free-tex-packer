@@ -148,6 +148,7 @@ class APP {
                 imageHeight: buffer.height,
                 removeFileExtension: this.packOptions.removeFileExtension,
                 prependFolderName: this.packOptions.prependFolderName,
+                omitSingleRootFolder: this.packOptions.omitSingleRootFolder,
                 base64Export: this.packOptions.base64Export,
                 scale: this.packOptions.scale,
                 trimMode: this.packOptions.trimMode
@@ -186,6 +187,7 @@ class APP {
                 textureFormat: this.packOptions.textureFormat,
                 removeFileExtension: this.packOptions.removeFileExtension,
                 prependFolderName: this.packOptions.prependFolderName,
+                omitSingleRootFolder: this.packOptions.omitSingleRootFolder,
                 base64Export: this.packOptions.base64Export,
                 scale: this.packOptions.scale,
                 trimMode: this.packOptions.trimMode,

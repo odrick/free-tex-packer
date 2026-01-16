@@ -62,6 +62,28 @@ function prepareData(data, options) {
     opt.base64Prefix = options.textureFormat === "png" ? "data:image/png;base64," : "data:image/jpeg;base64,";
 
     let ret = [];
+    let rootFolder = null;
+
+    if (options.prependFolderName && options.omitSingleRootFolder) {
+        let validRoot = true;
+        for (let item of data) {
+            let name = item.originalFile || item.file;
+            let parts = name.split("/");
+
+            if (parts.length < 2) {
+                validRoot = false;
+                break;
+            }
+
+            if (!rootFolder) rootFolder = parts[0];
+            else if (rootFolder !== parts[0]) {
+                validRoot = false;
+                break;
+            }
+        }
+
+        if (!validRoot) rootFolder = null;
+    }
 
     for(let item of data) {
 
@@ -79,6 +101,13 @@ function prepareData(data, options) {
 
         if(!options.prependFolderName) {
             name = name.split("/").pop();
+        }
+        else if (rootFolder) {
+            let parts = name.split("/");
+            if (parts.length > 1) {
+                parts.shift();
+                name = parts.join("/");
+            }
         }
 
         let frame = {x: item.frame.x, y: item.frame.y, w: item.frame.w, h: item.frame.h, hw: item.frame.w/2, hh: item.frame.h/2};
@@ -124,8 +153,11 @@ function prepareData(data, options) {
     }
 
     if(ret.length) {
-        ret[0].first = true;
-        ret[ret.length-1].last = true;
+        let lastIndex = ret.length - 1;
+        for (let i = 0; i < ret.length; i++) {
+            ret[i].first = i === 0;
+            ret[i].last = i === lastIndex;
+        }
     }
 
     return {rects: ret, config: opt};
@@ -139,6 +171,10 @@ function startExporter(exporter, data, options) {
             config: config,
             appInfo: appInfo
         };
+
+        if (config && config.textures) {
+            renderOptions.textures = config.textures;
+        }
         
         if(exporter.content) {
             finishExporter(exporter, renderOptions, resolve, reject);
