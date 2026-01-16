@@ -73,6 +73,7 @@ class PackProperties extends React.Component {
         data.textureFormat = data.textureFormat || "png";
         data.removeFileExtension = data.removeFileExtension === undefined ? false : data.removeFileExtension;
         data.prependFolderName = data.prependFolderName === undefined ? true : data.prependFolderName;
+        data.saveInSingleFolder = data.saveInSingleFolder === undefined ? false : data.saveInSingleFolder;
         data.scale = data.scale || 1;
         data.filter = getFilterByType(data.filter) ? data.filter : filters[0].type;
         data.exporter = getExporterByType(data.exporter) ? data.exporter : exporters[0].type;
@@ -127,6 +128,7 @@ class PackProperties extends React.Component {
         data.textureFormat = ReactDOM.findDOMNode(this.refs.textureFormat).value;
         data.removeFileExtension = ReactDOM.findDOMNode(this.refs.removeFileExtension).checked;
         data.prependFolderName = ReactDOM.findDOMNode(this.refs.prependFolderName).checked;
+        data.saveInSingleFolder = ReactDOM.findDOMNode(this.refs.saveInSingleFolder).checked;
         data.base64Export = ReactDOM.findDOMNode(this.refs.base64Export).checked;
         data.tinify = ReactDOM.findDOMNode(this.refs.tinify).checked;
         data.tinifyKey = ReactDOM.findDOMNode(this.refs.tinifyKey).value;
@@ -157,6 +159,7 @@ class PackProperties extends React.Component {
         ReactDOM.findDOMNode(this.refs.textureFormat).value = this.packOptions.textureFormat;
         ReactDOM.findDOMNode(this.refs.removeFileExtension).checked = this.packOptions.removeFileExtension;
         ReactDOM.findDOMNode(this.refs.prependFolderName).checked = this.packOptions.prependFolderName;
+        ReactDOM.findDOMNode(this.refs.saveInSingleFolder).checked = this.packOptions.saveInSingleFolder;
         ReactDOM.findDOMNode(this.refs.base64Export).checked = this.packOptions.base64Export;
         ReactDOM.findDOMNode(this.refs.tinify).checked = this.packOptions.tinify;
         ReactDOM.findDOMNode(this.refs.tinifyKey).value = this.packOptions.tinifyKey;
@@ -291,6 +294,11 @@ class PackProperties extends React.Component {
                             <tr title={I18.f("PREPEND_FOLDER_TITLE")}>
                                 <td>{I18.f("PREPEND_FOLDER")}</td>
                                 <td><input ref="prependFolderName" className="border-color-gray" type="checkbox" defaultChecked={this.packOptions.prependFolderName ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
+                                <td></td>
+                            </tr>
+                            <tr title={I18.f("SAVE_SINGLE_FOLDER_TITLE")}>
+                                <td>{I18.f("SAVE_SINGLE_FOLDER")}</td>
+                                <td><input ref="saveInSingleFolder" className="border-color-gray" type="checkbox" defaultChecked={this.packOptions.saveInSingleFolder ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
                                 <td></td>
                             </tr>
                             <tr title={I18.f("BASE64_EXPORT_TITLE")}>

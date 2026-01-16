@@ -30,6 +30,8 @@ REMOVE_FILE_EXT;Quitar extensión:
 REMOVE_FILE_EXT_TITLE;Quita extensión de fichero en el nombre de sprites
 PREPEND_FOLDER;Mantener carpetas
 PREPEND_FOLDER_TITLE;Mantiene el nombre de carpetas
+SAVE_SINGLE_FOLDER;Guardar en una sola carpeta:
+SAVE_SINGLE_FOLDER_TITLE;Guardar datos del atlas en una sola carpeta
 BASE64_EXPORT_TITLE;Exporta a formato base64 (si es posible)
 BASE64_EXPORT;Exporta a base64
 TINIFY_TITLE;Tinify usando https://tinypng.com

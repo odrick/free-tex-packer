@@ -30,6 +30,8 @@ REMOVE_FILE_EXT;移除文件后缀:
 REMOVE_FILE_EXT_TITLE;移除精灵名称中后缀
 PREPEND_FOLDER;前置文件夹名称:
 PREPEND_FOLDER_TITLE;将文件夹名称添加到文件名
+SAVE_SINGLE_FOLDER;保存在单个文件夹:
+SAVE_SINGLE_FOLDER_TITLE;将图集数据保存在单个文件夹
 BASE64_EXPORT_TITLE;导出base64格式(如果支持)
 BASE64_EXPORT;导出base64
 TINIFY_TITLE;Tinify 用法 https://tinypng.com（压缩png）

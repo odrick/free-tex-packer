@@ -32,6 +32,8 @@ REMOVE_FILE_EXT;Dateierweiterung entfernen:
 REMOVE_FILE_EXT_TITLE;Dateierweiterung entfernen
 PREPEND_FOLDER;Ordnername voranstellen:
 PREPEND_FOLDER_TITLE;Ordnername vor Dateiname stellen
+SAVE_SINGLE_FOLDER;In einem Ordner speichern:
+SAVE_SINGLE_FOLDER_TITLE;Atlas-Daten in einem Ordner speichern
 BASE64_EXPORT;Export in base64
 BASE64_EXPORT_TITLE;Export im base64-Format (Wenn möglich)
 TINIFY;Tinify

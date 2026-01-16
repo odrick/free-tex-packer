@@ -162,5 +162,5 @@ function finishExporter(exporter, renderOptions, resolve, reject) {
     }
 }
 
-export {getExporterByType, startExporter};
+export {getExporterByType, startExporter, prepareData};
 export default list;
