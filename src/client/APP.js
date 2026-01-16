@@ -3,7 +3,7 @@ import PackProcessor from './PackProcessor';
 import TextureRenderer from './utils/TextureRenderer';
 import { getFilterByType } from './filters';
 import I18 from './utils/I18';
-import { startExporter } from './exporters';
+import { startExporter, prepareData } from './exporters';
 import Tinifyer from 'platform/Tinifyer';
 import Downloader from 'platform/Downloader';
 
@@ -103,8 +103,13 @@ class APP {
         let textureName = this.packOptions.textureName;
         let filterClass = getFilterByType(this.packOptions.filter);
         let filter = new filterClass();
+        let saveSingleFolder = !!this.packOptions.saveInSingleFolder && exporter && exporter.template === "GodotAtlas.mst";
 
         let files = [];
+        let textures = saveSingleFolder ? [] : null;
+
+        //TODO: move to options
+        let pixelFormat = this.packOptions.textureFormat === "png" ? "RGBA8888" : "RGB888";
 
         let ix = 0;
         for (let item of this.packResult) {
@@ -133,9 +138,6 @@ class APP {
                 base64: true
             });
 
-            //TODO: move to options
-            let pixelFormat = this.packOptions.textureFormat === "png" ? "RGBA8888" : "RGB888";
-
             let options = {
                 imageName: `${fName}`,
                 imageFile: `${fName}.${this.packOptions.textureFormat}`,
@@ -146,15 +148,56 @@ class APP {
                 imageHeight: buffer.height,
                 removeFileExtension: this.packOptions.removeFileExtension,
                 prependFolderName: this.packOptions.prependFolderName,
+                omitSingleRootFolder: this.packOptions.omitSingleRootFolder,
                 base64Export: this.packOptions.base64Export,
                 scale: this.packOptions.scale,
                 trimMode: this.packOptions.trimMode
             };
 
+            if (saveSingleFolder) {
+                textures.push(prepareData(item.data, options));
+            }
+            else {
+                try {
+                    files.push({
+                        name: fName + "." + this.packOptions.exporter.fileExt,
+                        content: await startExporter(exporter, item.data, options)
+                    });
+                }
+                catch (e) {
+                    Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
+                    Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("EXPORTER_ERROR", e));
+                    return;
+                }
+            }
+
+            ix++;
+        }
+
+        if (saveSingleFolder) {
+            if (textures.length) {
+                textures[0].first = true;
+                textures[textures.length - 1].last = true;
+            }
+
+            let combinedOptions = {
+                imageName: `${textureName}`,
+                imageFile: `${textureName}.${this.packOptions.textureFormat}`,
+                format: pixelFormat,
+                textureFormat: this.packOptions.textureFormat,
+                removeFileExtension: this.packOptions.removeFileExtension,
+                prependFolderName: this.packOptions.prependFolderName,
+                omitSingleRootFolder: this.packOptions.omitSingleRootFolder,
+                base64Export: this.packOptions.base64Export,
+                scale: this.packOptions.scale,
+                trimMode: this.packOptions.trimMode,
+                textures: textures
+            };
+
             try {
                 files.push({
-                    name: fName + "." + this.packOptions.exporter.fileExt,
-                    content: await startExporter(exporter, item.data, options)
+                    name: textureName + "." + this.packOptions.exporter.fileExt,
+                    content: await startExporter(exporter, [], combinedOptions)
                 });
             }
             catch (e) {
@@ -162,8 +205,6 @@ class APP {
                 Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("EXPORTER_ERROR", e));
                 return;
             }
-
-            ix++;
         }
 
         Downloader.run(files, this.packOptions.fileName, this.packOptions.savePath);

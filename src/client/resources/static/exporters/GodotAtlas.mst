@@ -1,5 +1,34 @@
 {
 	"textures": [
+		{{#textures}}
+		{
+			"image": "{{config.imageFile}}",
+			"size": {
+				"w": {{config.imageWidth}},
+				"h": {{config.imageHeight}}
+			},
+			"sprites": [
+				{{#rects}}
+				{
+					"filename": "{{{name}}}",
+					"region": {
+						"x": {{frame.x}},
+						"y": {{frame.y}},
+						"w": {{frame.w}},
+						"h": {{frame.h}}
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}{{^last}},{{/last}}
+				{{/rects}}
+			]
+		}{{^last}},{{/last}}
+		{{/textures}}
+		{{^textures}}
 		{
 			"image": "{{config.imageFile}}",
 			"size": {
@@ -26,10 +55,11 @@
 				{{/rects}}
 			]
 		}
+		{{/textures}}
 	],
 	"meta": {
 		"app": "{{{appInfo.url}}}",
 		"version": "{{appInfo.version}}",
-		"format": "{{config.format}}",
+		"format": "{{config.format}}"
 	}
 }

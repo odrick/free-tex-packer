@@ -30,6 +30,10 @@ REMOVE_FILE_EXT;Удалить расширение:
 REMOVE_FILE_EXT_TITLE;Удаляет расширения файла при экспорте
 PREPEND_FOLDER;Добавить путь:
 PREPEND_FOLDER_TITLE;Добавить путь к имени файла
+OMIT_SINGLE_ROOT;Убирать один корневой каталог:
+OMIT_SINGLE_ROOT_TITLE;Если верхний каталог один, не добавлять его
+SAVE_SINGLE_FOLDER;Сохранять в одной папке:
+SAVE_SINGLE_FOLDER_TITLE;Сохранять данные атласа в одной папке
 BASE64_EXPORT_TITLE;Экспортировать в формате base64 (при возможности)
 BASE64_EXPORT;Экспортировать в base64
 TINIFY_TITLE;Оптимизировать, используя TinyPNG https://tinypng.com

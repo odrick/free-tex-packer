@@ -30,6 +30,10 @@ REMOVE_FILE_EXT;Remove file ext:
 REMOVE_FILE_EXT_TITLE;Remove file ext in sprites name
 PREPEND_FOLDER;Prepend folder name:
 PREPEND_FOLDER_TITLE;Prepend folder name to file name
+OMIT_SINGLE_ROOT;Omit single root folder:
+OMIT_SINGLE_ROOT_TITLE;If there is a single top-level folder, omit it
+SAVE_SINGLE_FOLDER;Save in single folder:
+SAVE_SINGLE_FOLDER_TITLE;Save atlas data in a single folder
 BASE64_EXPORT_TITLE;Export to base64 format (if possible)
 BASE64_EXPORT;Export to base64
 TINIFY_TITLE;Tinify using https://tinypng.com
