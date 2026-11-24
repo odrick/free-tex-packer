@@ -70,7 +70,8 @@ let config = {
         ]
     },
     optimization: {
-        minimize: false
+        // Minify only the published web bundle; keep the electron bundle readable.
+        minimize: !!env.build && PLATFORM === 'web'
     },
     plugins: plugins,
     devServer: {host: '127.0.0.1', port: 4000}
