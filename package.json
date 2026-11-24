@@ -6,7 +6,9 @@
   "url": "https://github.com/odrick/free-tex-packer",
   "download": "https://github.com/odrick/free-tex-packer/releases",
   "webApp": "https://odrick.github.io/free-tex-packer/",
-  "main": "src/index.js",
+  "engines": {
+    "node": ">=18.12"
+  },
   "localizations": [
     "en",
     "es",
