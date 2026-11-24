@@ -7,7 +7,6 @@
   "download": "http://free-tex-packer.com/download",
   "webApp": "http://free-tex-packer.com/app",
   "main": "src/index.js",
-  "tinifyUrl": "http://free-tex-packer.com/server/tinify.php",
   "localizations": [
     "en",
     "es",
