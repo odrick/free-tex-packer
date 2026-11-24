@@ -239,7 +239,7 @@ function buildMenu() {
     });
     
     let langs = [];
-    if(LANGUAGES !== []) {
+    if(LANGUAGES.length) {
         for (let lang of LANGUAGES) {
             langs.push({
                 label: lang.name,

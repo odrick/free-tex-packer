@@ -13,7 +13,6 @@ let plugins = [];
 
 let devtool = 'eval-source-map';
 let output = 'static/js/index.js';
-let debug = true;
 
 let PLATFORM = env.platform || 'web';
 let NODE_ENV = env.build ? 'production' : 'development';
@@ -41,7 +40,6 @@ if (env.build) {
 
     devtool = false;
     output = outputDir + 'static/js/index.js';
-    debug = false;
 }
 else {
     plugins.push(new CopyWebpackPlugin({patterns: [{from: 'src/client/resources', to: './'}]}));

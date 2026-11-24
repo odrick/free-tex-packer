@@ -68,7 +68,7 @@ function prepareData(data, options) {
         let name = item.originalFile || item.file;
 
         if(options.trimSpriteNames) {
-            name.trim();
+            name = name.trim();
         }
 
         if(options.removeFileExtension) {
