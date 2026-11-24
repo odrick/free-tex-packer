@@ -94,7 +94,9 @@ class FileSystem {
                 watcher.add(path);
             }
         }
-        catch (e) { }
+        catch (e) {
+            console.warn('Cannot watch ' + path + ': ' + e.message);
+        }
     }
 
     static stopWatch(path) {
@@ -129,7 +131,9 @@ class FileSystem {
                     content = "data:image/" + ext + ";base64," + content;
                     files.push({ name: item.name, url: content, fsPath: item });
                 }
-                catch (e) { }
+                catch (e) {
+                    console.warn('Cannot read ' + path + ': ' + e.message);
+                }
             }
         }
 
