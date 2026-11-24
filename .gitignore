@@ -3,8 +3,6 @@
 
 node_modules/*
 
-package-lock.json
-
 .DS_Store
 /index.js
 /index.js.map
