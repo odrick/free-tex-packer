@@ -72,7 +72,7 @@
   "author": "Alexander Norinchak",
   "authorSite": "https://github.com/odrick/",
   "authorEmail": "norinchak@gmail.com",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/odrick/free-tex-packer/issues"
   },
