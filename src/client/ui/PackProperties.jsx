@@ -298,12 +298,12 @@ class PackProperties extends React.Component {
                                 <td><input ref="base64Export" className="border-color-gray" type="checkbox" defaultChecked={this.packOptions.base64Export ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
                                 <td></td>
                             </tr>
-                            <tr title={I18.f("TINIFY_TITLE")}>
+                            <tr title={I18.f("TINIFY_TITLE")} style={{display: PLATFORM === 'electron' ? '' : 'none'}}>
                                 <td>{I18.f("TINIFY")}</td>
                                 <td><input ref="tinify" className="border-color-gray" type="checkbox" defaultChecked={this.packOptions.tinify ? "checked" : ""} onChange={this.onExporterPropChanged} /></td>
                                 <td></td>
                             </tr>
-                            <tr title={I18.f("TINIFY_KEY_TITLE")}>
+                            <tr title={I18.f("TINIFY_KEY_TITLE")} style={{display: PLATFORM === 'electron' ? '' : 'none'}}>
                                 <td>{I18.f("TINIFY_KEY")}</td>
                                 <td><input ref="tinifyKey" type="text" className="border-color-gray" defaultValue={this.packOptions.tinifyKey} onBlur={this.onExporterPropChanged} /></td>
                                 <td></td>

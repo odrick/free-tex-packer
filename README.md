@@ -2,21 +2,17 @@
 
 ![logo](https://raw.githubusercontent.com/odrick/free-tex-packer/master/electron/build/icons/96x96.png)
 
-#
+---
 
-## IMPORTANT: I don't have time to imporove this app anymore. Only critical bugs will be fixed.
+## IMPORTANT: I no longer have time to improve this app. Only critical bugs will be fixed.
 
-#
+---
 
-Free texture packer creates sprite sheets for you game or site. Rotation, trimming, multipacking, various export formats (json, xml, css, pixi.js, godot, phaser, cocos2d). Zip support. TinyPNG support. Split sheet tool.
+Free texture packer creates sprite sheets for your game or site. It supports rotation, trimming, multipacking and various export formats (JSON, XML, CSS, pixi.js, Godot, Phaser, cocos2d), can load images from ZIP archives, and includes a sheet splitting tool. TinyPNG compression is available in the desktop version.
 
-![screenshot](https://free-tex-packer.com/wp-content/uploads/2019/01/screenshot.png)
+Web version: [https://odrick.github.io/free-tex-packer/](https://odrick.github.io/free-tex-packer/)
 
-Homepage: [https://free-tex-packer.com](https://free-tex-packer.com)
-
-Web version: [https://free-tex-packer.com/app](https://free-tex-packer.com/app)
-
-Desktop versions for win, mac, linux: [https://github.com/odrick/free-tex-packer/releases](https://github.com/odrick/free-tex-packer/releases)
+Desktop versions for Windows, macOS and Linux: [https://github.com/odrick/free-tex-packer/releases](https://github.com/odrick/free-tex-packer/releases)
 
 Gulp module: [https://github.com/odrick/gulp-free-tex-packer](https://github.com/odrick/gulp-free-tex-packer)
 
@@ -27,44 +23,44 @@ Webpack plugin: [https://github.com/odrick/webpack-free-tex-packer](https://gith
 CLI: [https://github.com/odrick/free-tex-packer-cli](https://github.com/odrick/free-tex-packer-cli)
 
 # Custom templates
-Free texture packer uses [mustache](http://mustache.github.io/) template engine.
+Free texture packer uses the [mustache](https://mustache.github.io/) template engine.
 
-There are 3 objects passed to template:
+Three objects are passed to the template:
 
-**rects** (Array) list of sprites for export
+**rects** (Array): list of sprites to export
 
-| prop             | type    | description                     |
-| ---              | ---     | ---                             |
-| name             | String  | sprite name                     |
-| frame            | Object  | frame info (x, y, w, h, hw, hh) |
-| rotated          | Boolean | sprite rotation flag            |
-| trimmed          | Boolean | sprite trimmed flag             |
-| spriteSourceSize | Object  | sprite source size (x, y, w, h) |
-| sourceSize       | Object  | original size (w, h)            |
-| first            | Boolean | first element in array flag     |
-| last             | Boolean | last element in array flag      |
+| property         | type    | description                         |
+| ---              | ---     | ---                                 |
+| name             | String  | sprite name                         |
+| frame            | Object  | frame info (x, y, w, h, hw, hh)     |
+| rotated          | Boolean | true if the sprite is rotated       |
+| trimmed          | Boolean | true if the sprite is trimmed       |
+| spriteSourceSize | Object  | sprite source size (x, y, w, h)     |
+| sourceSize       | Object  | original size (w, h)                |
+| first            | Boolean | true for the first element of array |
+| last             | Boolean | true for the last element of array  |
 
-**config** (Object) current export config
+**config** (Object): current export configuration
 
-| prop           | type    | description                        |
-| ---            | ---     | ---                                |
-| imageWidth     | Number  | texture width                      |
-| imageHeight    | Number  | texture height                     |
-| scale          | Number  | texture scale                      |
-| format         | String  | texture format                     |
-| imageName      | String  | texture name                       |
-| imageFile      | String  | texture file (name with extension) |
-| base64Export   | Boolean | base64 export flag                 |
-| base64Prefix   | String  | prefix for base64 string           |
-| imageData      | String  | base64 image data                  |
+| property       | type    | description                          |
+| ---            | ---     | ---                                  |
+| imageWidth     | Number  | texture width                        |
+| imageHeight    | Number  | texture height                       |
+| scale          | Number  | texture scale                        |
+| format         | String  | texture pixel format (e.g. RGBA8888) |
+| imageName      | String  | texture name                         |
+| imageFile      | String  | texture file name (with extension)   |
+| base64Export   | Boolean | true if base64 export is enabled     |
+| base64Prefix   | String  | prefix for the base64 string         |
+| imageData      | String  | base64 image data                    |
 
-**appInfo** (Object) application info
+**appInfo** (Object): application info
 
-| prop           | type    | description          |
+| property       | type    | description          |
 | ---            | ---     | ---                  |
-| displayName    | String  | App name             |
-| version        | String  | App version          |
-| url            | String  | App url              |
+| displayName    | String  | app name             |
+| version        | String  | app version          |
+| url            | String  | app URL              |
 
 **Example:**
 ```

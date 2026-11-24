@@ -174,10 +174,21 @@ function startAutoUpdater() {
     });
 }
 
+// Only hand web links to the OS: never file:, smb:, custom protocol handlers and the like.
+function isSafeExternalUrl(url) {
+    try {
+        let protocol = new URL(url).protocol;
+        return protocol === 'http:' || protocol === 'https:';
+    }
+    catch (err) {
+        return false;
+    }
+}
+
 function handleRedirect(e, url) {
 	if(url !== mainWindow.getURL()) {
         e.preventDefault();
-        shell.openExternal(url);
+        if(isSafeExternalUrl(url)) shell.openExternal(url);
     }
 }
 
@@ -239,7 +250,7 @@ function buildMenu() {
     });
     
     let langs = [];
-    if(LANGUAGES !== []) {
+    if(LANGUAGES.length) {
         for (let lang of LANGUAGES) {
             langs.push({
                 label: lang.name,

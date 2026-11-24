@@ -1,0 +1,10 @@
+/*
+   ---------------------------
+   created with Free texture packer v0.6.7
+   https://github.com/odrick/free-tex-packer
+   ---------------------------
+*/
+.a.png { display:inline-block;overflow:hidden;background:url(texture.png) no-repeat -1px -0px;width:32px;height:17px }
+.dir/b & c.png { display:inline-block;overflow:hidden;background:url(texture.png) no-repeat -11px -7px;width:33px;height:18px }
+.q"uo<te>.png { display:inline-block;overflow:hidden;background:url(texture.png) no-repeat -21px -14px;width:34px;height:19px }
+.it's:50%#1;x.png { display:inline-block;overflow:hidden;background:url(texture.png) no-repeat -31px -21px;width:35px;height:20px }

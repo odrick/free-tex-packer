@@ -89,7 +89,7 @@ class APP {
             return;
         }
 
-        if (this.packOptions.tinify && !this.packOptions.tinifyKey) {
+        if (PLATFORM !== "web" && this.packOptions.tinify && !this.packOptions.tinifyKey) {
             Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("NO_TINIFY_KEY_ERROR"));
             return;
         }

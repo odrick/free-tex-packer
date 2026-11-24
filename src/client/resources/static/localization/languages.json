@@ -2,6 +2,6 @@
     { "lang": "en", "name": "english" },
     { "lang": "de", "name": "deutsch"},
     { "lang": "es", "name": "español" },
-    { "lang": "ru", "name": "русский"},
+    { "lang": "uk", "name": "українська"},
     { "lang": "zh-cn", "name": "简体中文"}
 ]

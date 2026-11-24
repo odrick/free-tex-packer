@@ -15,13 +15,13 @@ IMAGE_DROP_HELP;o arrastrar y soltar imágenes aquí
 CLEAR;Limpiar
 CLEAR_TITLE;Quitar todas las imágenes
 DELETE;Borrar
-DELETE_TITLE;borrar imágenes seleccionadas
-REPLACE_FILES_PROMPT;Reemplazar archivos existentes?
-DISPLAY_OUTLINES;Outlines:
+DELETE_TITLE;Borrar imágenes seleccionadas
+REPLACE_FILES_PROMPT;¿Reemplazar archivos existentes?
+DISPLAY_OUTLINES;Contornos:
 SCALE;Escala:
 SHOW_SPRITES;Animaciones
 SPRITE_NAME;Nombre de sprite:
-ANIMATION_SPEED;Velocidad Animación:
+ANIMATION_SPEED;Velocidad de animación:
 TEXTURE_NAME;Nombre de textura:
 TEXTURE_NAME_TITLE;Nombre de textura para exportar
 TEXTURE_FORMAT;Formato de textura:
@@ -34,8 +34,8 @@ BASE64_EXPORT_TITLE;Exporta a formato base64 (si es posible)
 BASE64_EXPORT;Exporta a base64
 TINIFY_TITLE;Tinify usando https://tinypng.com
 TINIFY;Tinify
-TINIFY_KEY_TITLE;TinyPNG key https://tinypng.com/developers 
-TINIFY_KEY;TinyPNG key
+TINIFY_KEY_TITLE;Clave de TinyPNG https://tinypng.com/developers 
+TINIFY_KEY;Clave de TinyPNG
 DISABLE_SMOOTHING;Deshabilitar suavizado
 DISABLE_SMOOTHING_TITLE;Deshabilitar suavizado de imagen
 SCALE;Escala:
@@ -62,7 +62,7 @@ EXTRUDE;Extraer:
 EXTRUDE_TITLE;Tamaño del borde de los sprites para extraer
 ALLOW_ROTATION;Permitir rotación:
 ALLOW_ROTATION_TITLE;Permite que el sprite pueda rotar
-ALLOW_TRIM;Permitir Recorte:
+ALLOW_TRIM;Permitir recorte:
 ALLOW_TRIM_TITLE;Permite que los sprites se puedan recortar
 TRIM_MODE;Modo de recorte:
 TRIM_MODE_TITLE;Modos con los que podemos recortar
@@ -78,21 +78,21 @@ EXPORT;Exportar
 PLEASE_WAIT;Por favor, espere...
 INVALID_SIZE_ERROR;Tamaño incorrecto. Min: %sx%s
 NO_IMAGES_ERROR;Por favor, primero añada imágenes
-CLEAR_WARNING;¿Quiéres borrar todas las imágenes?
+CLEAR_WARNING;¿Quieres borrar todas las imágenes?
 INVALID_ZIP_ERROR;Fichero zip incorrecto
-NO_TINIFY_KEY_ERROR;Por favor, escriba su TinyPNG key https://tinypng.com/developers
-TINIFY_ERROR;Tinify error: %s
-TINIFY_ERROR_COMMON;Tinify error...
+NO_TINIFY_KEY_ERROR;Por favor, escriba su clave de TinyPNG https://tinypng.com/developers
+TINIFY_ERROR;Error de Tinify: %s
+TINIFY_ERROR_COMMON;Error de Tinify...
 OLD_BROWSER_MESSAGE1;Lo sentimos, su navegador es muy viejo para esta aplicación...
-OLD_BROWSER_MESSAGE2;Por favor, utilice un navegador más actualizado.
+OLD_BROWSER_MESSAGE2;Por favor, utilice un navegador más actualizado:
 ABOUT_HOMEPAGE;Página principal:
-ABOUT_SOURCES;Sources:
-ABOUT_BUGS;Bugtracker:
-ABOUT_APPS;Download app:
-ABOUT_WEB;Web version:
-ABOUT_LIBS;Used libs:
-ABOUT_GULP_VERSION;Gulp module:
-ABOUT_WEBPACK_VERSION;Webpack plugin:
+ABOUT_SOURCES;Código fuente:
+ABOUT_BUGS;Reportar errores:
+ABOUT_APPS;Descargar aplicación:
+ABOUT_WEB;Versión web:
+ABOUT_LIBS;Librerías utilizadas:
+ABOUT_GULP_VERSION;Módulo de Gulp:
+ABOUT_WEBPACK_VERSION;Plugin de Webpack:
 ABOUT_CONTRIBUTORS;Contribuyentes:
 EXPORTER_ERROR;Error de exportación: %s
 CUSTOM_EXPORTER_ERROR;Error de plantilla: %s
@@ -131,7 +131,7 @@ CONTEXT_MENU_CUT;Cortar
 CONTEXT_MENU_COPY;Copiar
 CONTEXT_MENU_PASTE;Pegar
 CONTEXT_MENU_DELETE;Borrar
-Desembalaje;Selecionar todo
+CONTEXT_MENU_SELECT_ALL;Seleccionar todo
 SPLIT;Desembalaje
 SELECT_TEXTURE;Textura
 SELECT_DATA_FILE;Datos

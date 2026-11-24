@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+
+Sprite sheet file created for UIKit using Free texture packer v0.6.7
+https://github.com/odrick/free-tex-packer
+
+-->
+<plist version="1.0">
+	<dict>
+        <key>frames</key>
+        <dict>
+            <key>a.png</key>
+            <dict>
+                <key>x</key><real>1</real>
+                <key>y</key><real>0</real>
+                <key>w</key><real>32</real>
+                <key>h</key><real>17</real>
+                <key>oX</key><real>0</real>
+                <key>oY</key><real>0</real>
+                <key>oW</key><real>40</real>
+                <key>oH</key><real>20</real>
+            </dict>
+            <key>dir/b & c.png</key>
+            <dict>
+                <key>x</key><real>11</real>
+                <key>y</key><real>7</real>
+                <key>w</key><real>33</real>
+                <key>h</key><real>18</real>
+                <key>oX</key><real>1</real>
+                <key>oY</key><real>2</real>
+                <key>oW</key><real>40</real>
+                <key>oH</key><real>20</real>
+            </dict>
+            <key>q"uo<te>.png</key>
+            <dict>
+                <key>x</key><real>21</real>
+                <key>y</key><real>14</real>
+                <key>w</key><real>34</real>
+                <key>h</key><real>19</real>
+                <key>oX</key><real>2</real>
+                <key>oY</key><real>4</real>
+                <key>oW</key><real>40</real>
+                <key>oH</key><real>20</real>
+            </dict>
+            <key>it's:50%#1;x.png</key>
+            <dict>
+                <key>x</key><real>31</real>
+                <key>y</key><real>21</real>
+                <key>w</key><real>35</real>
+                <key>h</key><real>20</real>
+                <key>oX</key><real>3</real>
+                <key>oY</key><real>6</real>
+                <key>oW</key><real>40</real>
+                <key>oH</key><real>20</real>
+            </dict>
+        </dict>
+
+        <key>meta</key>
+        <dict>
+            <key>image</key>
+            <string>texture</string>
+            <key>width</key>
+            <integer></integer>
+            <key>height</key>
+            <integer></integer>
+        </dict>
+    </dict>
+</plist>

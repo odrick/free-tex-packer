@@ -93,10 +93,10 @@ ABOUT_HOMEPAGE;Startseite:
 ABOUT_SOURCES;Quellcode:
 ABOUT_BUGS;Bugs melden:
 ABOUT_APPS;App downloaden:
-ABOUT_WEB;Web-version:
+ABOUT_WEB;Web-Version:
 ABOUT_LIBS;Verwendete Libraries:
-ABOUT_GULP_VERSION;Gulp module:
-ABOUT_WEBPACK_VERSION;Webpack plugin:
+ABOUT_GULP_VERSION;Gulp-Modul:
+ABOUT_WEBPACK_VERSION;Webpack-Plugin:
 ABOUT_CONTRIBUTORS;Mitwirkende:
 MENU_FILE;Datei
 MENU_FILE_PROJECT_NEW;Neues Projekt

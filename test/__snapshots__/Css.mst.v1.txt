@@ -1,0 +1,10 @@
+/*
+   ---------------------------
+   created with Free texture packer v0.6.7
+   https://github.com/odrick/free-tex-packer
+   ---------------------------
+*/
+.a.png { display:inline-block;overflow:hidden;background:url(texture.png) no-repeat -1px -0px;width:32px;height:17px; }
+.dir/b & c.png { display:inline-block;overflow:hidden;background:url(texture.png) no-repeat -11px -7px;width:18px;height:33px;transform-origin:16.5px 9px;-moz-transform-origin:16.5px 9px;-ms-transform-origin:16.5px 9px;-webkit-transform-origin:16.5px 9px;-o-transform-origin:16.5px 9px;transform:rotate(-90deg);-moz-transform:rotate(-90deg);-ms-transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-o-transform:rotate(-90deg);margin-left:1px;margin-top:2px }
+.q"uo<te>.png { display:inline-block;overflow:hidden;background:url(texture.png) no-repeat -21px -14px;width:34px;height:19px;margin-left:2px;margin-top:4px }
+.it's:50%#1;x.png { display:inline-block;overflow:hidden;background:url(texture.png) no-repeat -31px -21px;width:20px;height:35px;transform-origin:17.5px 10px;-moz-transform-origin:17.5px 10px;-ms-transform-origin:17.5px 10px;-webkit-transform-origin:17.5px 10px;-o-transform-origin:17.5px 10px;transform:rotate(-90deg);-moz-transform:rotate(-90deg);-ms-transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-o-transform:rotate(-90deg);margin-left:3px;margin-top:6px }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+
+Sprite sheet file created for UIKit using Free texture packer v0.6.7
+https://github.com/odrick/free-tex-packer
+
+-->
+<plist version="1.0">
+	<dict>
+        <key>frames</key>
+        <dict>
+            <key>a</key>
+            <dict>
+                <key>x</key><real>0.5</real>
+                <key>y</key><real>0</real>
+                <key>w</key><real>16</real>
+                <key>h</key><real>8.5</real>
+                <key>oX</key><real>0</real>
+                <key>oY</key><real>0</real>
+                <key>oW</key><real>40</real>
+                <key>oH</key><real>20</real>
+            </dict>
+            <key>b & c</key>
+            <dict>
+                <key>x</key><real>5.5</real>
+                <key>y</key><real>3.5</real>
+                <key>w</key><real>16.5</real>
+                <key>h</key><real>9</real>
+                <key>oX</key><real>1</real>
+                <key>oY</key><real>2</real>
+                <key>oW</key><real>40</real>
+                <key>oH</key><real>20</real>
+            </dict>
+            <key>q"uo<te></key>
+            <dict>
+                <key>x</key><real>10.5</real>
+                <key>y</key><real>7</real>
+                <key>w</key><real>17</real>
+                <key>h</key><real>9.5</real>
+                <key>oX</key><real>2</real>
+                <key>oY</key><real>4</real>
+                <key>oW</key><real>40</real>
+                <key>oH</key><real>20</real>
+            </dict>
+            <key>it's:50%#1;x</key>
+            <dict>
+                <key>x</key><real>15.5</real>
+                <key>y</key><real>10.5</real>
+                <key>w</key><real>17.5</real>
+                <key>h</key><real>10</real>
+                <key>oX</key><real>3</real>
+                <key>oY</key><real>6</real>
+                <key>oW</key><real>40</real>
+                <key>oH</key><real>20</real>
+            </dict>
+        </dict>
+
+        <key>meta</key>
+        <dict>
+            <key>image</key>
+            <string>texture</string>
+            <key>width</key>
+            <integer></integer>
+            <key>height</key>
+            <integer></integer>
+        </dict>
+    </dict>
+</plist>

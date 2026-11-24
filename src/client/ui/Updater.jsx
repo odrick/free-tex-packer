@@ -3,6 +3,7 @@ import React from 'react';
 import {Observer, GLOBAL_EVENT} from '../Observer';
 import Storage from '../utils/Storage';
 import I18 from '../utils/I18';
+import sanitizeHtml from '../utils/sanitizeHtml';
 
 const STORAGE_SKIPPED_VERSIONS_KEY = "skipped-versions";
 
@@ -63,7 +64,7 @@ class Updater extends React.Component {
                 <div className="updater-content">
 
                     <div className="updater-header">{I18.f("UPDATER_TITLE", this.props.data.releaseName)}</div>
-                    <div className="updater-release-notes" dangerouslySetInnerHTML={{ __html: this.props.data.releaseNotes }}></div>
+                    <div className="updater-release-notes" dangerouslySetInnerHTML={{ __html: sanitizeHtml(this.props.data.releaseNotes) }}></div>
                     
                     {
                         this.state.installation

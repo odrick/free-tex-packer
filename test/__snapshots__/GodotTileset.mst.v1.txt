@@ -1,0 +1,78 @@
+{
+	"textures": [
+		{
+			"image": "texture.png",
+			"size": {
+				"w": ,
+				"h": 
+			},
+			"sprites": [
+				{
+					"filename": "a.png",
+					"region": {
+						"x": 1,
+						"y": 0,
+						"w": 32,
+						"h": 17
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dir/b & c.png",
+					"region": {
+						"x": 11,
+						"y": 7,
+						"w": 33,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "q"uo<te>.png",
+					"region": {
+						"x": 21,
+						"y": 14,
+						"w": 34,
+						"h": 19
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "it's:50%#1;x.png",
+					"region": {
+						"x": 31,
+						"y": 21,
+						"w": 35,
+						"h": 20
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://github.com/odrick/free-tex-packer",
+		"version": "0.6.7",
+		"format": "RGBA8888",
+	}
+}

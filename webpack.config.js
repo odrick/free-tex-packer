@@ -1,10 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const argv = require('optimist').argv;
+
+module.exports = (env = {}) => {
 
 let entry = [
-    'babel-polyfill',
+    'core-js/stable',
+    'regenerator-runtime/runtime',
     './src/client/index'
 ];
 
@@ -12,10 +14,9 @@ let plugins = [];
 
 let devtool = 'eval-source-map';
 let output = 'static/js/index.js';
-let debug = true;
 
-let PLATFORM = argv.platform || 'web';
-let NODE_ENV = argv.build ? 'production' : 'development';
+let PLATFORM = env.platform || 'web';
+let NODE_ENV = env.build ? 'production' : 'development';
 
 let target = 'web';
 if (PLATFORM === 'electron') target = 'electron-renderer';
@@ -25,7 +26,7 @@ plugins.push(new webpack.DefinePlugin({
     'PLATFORM': JSON.stringify(PLATFORM)
 }));
 
-if (argv.build) {
+if (env.build) {
     let outputDir;
 
     if (PLATFORM === 'web') {
@@ -36,15 +37,13 @@ if (argv.build) {
         outputDir = '../electron/www/';
     }
 
-    plugins.push(new CopyWebpackPlugin([{from: 'src/client/resources', to: outputDir}]));
+    plugins.push(new CopyWebpackPlugin({patterns: [{from: 'src/client/resources', to: outputDir}]}));
 
     devtool = false;
     output = outputDir + 'static/js/index.js';
-    debug = false;
 }
 else {
-    entry.push('webpack-dev-server/client?http://localhost:4000');
-    plugins.push(new CopyWebpackPlugin([{from: 'src/client/resources', to: './'}]));
+    plugins.push(new CopyWebpackPlugin({patterns: [{from: 'src/client/resources', to: './'}]}));
 }
 
 let config = {
@@ -68,23 +67,31 @@ let config = {
                 test: /\.js$/,
                 include: [path.resolve(__dirname, 'src')],
                 use: [{loader: 'babel-loader', options: {presets: ['@babel/preset-env']}}]
-            },
-            {
-                test: /\.(html|htm)$/,
-                use: [{loader: 'dom'}]
             }
         ]
     },
     optimization: {
-        minimize: false
+        // Minify only the published web bundle; keep the electron bundle readable.
+        minimize: !!env.build && PLATFORM === 'web'
     },
-    plugins: plugins
+    plugins: plugins,
+    devServer: {host: '127.0.0.1', port: 4000}
 };
 
 if (target === 'electron-renderer') {
     config.resolve = {alias: {'platform': path.resolve(__dirname, './src/client/platform/electron')}};
 } else {
-    config.resolve = {alias: {'platform': path.resolve(__dirname, './src/client/platform/web')}};
+    config.resolve = {
+        alias: {'platform': path.resolve(__dirname, './src/client/platform/web')},
+        // webpack 5 no longer polyfills node core modules
+        fallback: {
+            buffer: require.resolve('buffer/'),
+            stream: require.resolve('stream-browserify'),
+            timers: require.resolve('timers-browserify')
+        }
+    };
 }
 
-module.exports = config;
+return config;
+
+};

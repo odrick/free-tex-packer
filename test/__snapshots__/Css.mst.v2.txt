@@ -1,0 +1,10 @@
+/*
+   ---------------------------
+   created with Free texture packer v0.6.7
+   https://github.com/odrick/free-tex-packer
+   ---------------------------
+*/
+.a { display:inline-block;overflow:hidden;background:url(texture.png) no-repeat -0.5px -0px;width:16px;height:8.5px; }
+.b & c { display:inline-block;overflow:hidden;background:url(texture.png) no-repeat -5.5px -3.5px;width:9px;height:16.5px;transform-origin:8.25px 4.5px;-moz-transform-origin:8.25px 4.5px;-ms-transform-origin:8.25px 4.5px;-webkit-transform-origin:8.25px 4.5px;-o-transform-origin:8.25px 4.5px;transform:rotate(-90deg);-moz-transform:rotate(-90deg);-ms-transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-o-transform:rotate(-90deg); }
+.q"uo<te> { display:inline-block;overflow:hidden;background:url(texture.png) no-repeat -10.5px -7px;width:17px;height:9.5px; }
+.it's:50%#1;x { display:inline-block;overflow:hidden;background:url(texture.png) no-repeat -15.5px -10.5px;width:10px;height:17.5px;transform-origin:8.75px 5px;-moz-transform-origin:8.75px 5px;-ms-transform-origin:8.75px 5px;-webkit-transform-origin:8.75px 5px;-o-transform-origin:8.75px 5px;transform:rotate(-90deg);-moz-transform:rotate(-90deg);-ms-transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-o-transform:rotate(-90deg); }
