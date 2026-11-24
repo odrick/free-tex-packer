@@ -1,9 +1,0 @@
-/*
-   ---------------------------
-   created with {{appInfo.displayName}} v{{appInfo.version}}
-   {{{appInfo.url}}}
-   ---------------------------
-*/
-{{#rects}}
-.{{{name}}} { display:inline-block;overflow:hidden;background:url({{config.imageFile}}) no-repeat -{{frame.x}}px -{{frame.y}}px;width:{{frame.w}}px;height:{{frame.h}}px }
-{{/rects}}
