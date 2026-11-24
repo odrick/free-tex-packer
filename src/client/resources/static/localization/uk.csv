@@ -1,0 +1,140 @@
+OK;OK
+YES;ТАК
+NO;НІ
+CANCEL;СКАСУВАТИ
+SAVE;ЗБЕРЕГТИ
+IMAGES;Зображення
+LANGUAGE;мова:
+ADD_IMAGES;Додати
+ADD_IMAGES_TITLE;Додати зображення
+ADD_FOLDER;Додати теку
+ADD_FOLDER_TITLE;Додати теку
+ADD_ZIP;Додати ZIP
+ADD_ZIP_TITLE;Додати запаковані зображення
+IMAGE_DROP_HELP;або перетягніть зображення сюди
+CLEAR;Очистити
+CLEAR_TITLE;Очистити всі зображення
+DELETE;Видалити
+DELETE_TITLE;Видалити вибрані зображення
+REPLACE_FILES_PROMPT;Замінити наявні файли?
+DISPLAY_OUTLINES;Контури:
+SCALE;Масштаб:
+SHOW_SPRITES;Анімації
+SPRITE_NAME;Назва спрайта:
+ANIMATION_SPEED;Швидкість анімації:
+TEXTURE_NAME;Назва текстури:
+TEXTURE_NAME_TITLE;Назва, яка використовуватиметься для іменування окремих файлів
+TEXTURE_FORMAT;Формат текстури:
+TEXTURE_FORMAT_TITLE;Формат, у якому буде збережено текстуру
+REMOVE_FILE_EXT;Прибрати розширення:
+REMOVE_FILE_EXT_TITLE;Прибирає розширення файлів в іменах спрайтів під час експорту
+PREPEND_FOLDER;Додати шлях:
+PREPEND_FOLDER_TITLE;Додати шлях до імені файлу
+BASE64_EXPORT_TITLE;Експортувати у форматі base64 (якщо можливо)
+BASE64_EXPORT;Експортувати в base64
+TINIFY_TITLE;Оптимізувати за допомогою TinyPNG https://tinypng.com
+TINIFY;Оптимізувати TinyPNG
+TINIFY_KEY_TITLE;Ключ TinyPNG https://tinypng.com/developers
+TINIFY_KEY;Ключ TinyPNG
+DISABLE_SMOOTHING;Вимкнути згладжування
+DISABLE_SMOOTHING_TITLE;Вимкнути згладжування зображення
+SCALE;Масштаб:
+SCALE_TITLE;Базовий масштаб текстури. Впливає на перерахунок розмірів і координат під час експорту
+FILTER;Фільтр:
+FILTER_TITLE;Фільтр, який буде застосовано до результуючої текстури
+FORMAT;Формат:
+FORMAT_TITLE;Формат експорту
+FILE_NAME;Ім'я файлу:
+FILE_NAME_TITLE;Ім'я результуючого файлу
+SAVE_PATH;Шлях для збереження
+SAVE_PATH_TITLE;Шлях для збереження результатів пакування
+WIDTH;Ширина:
+WIDTH_TITLE;Максимальна ширина текстури
+HEIGHT;Висота:
+HEIGHT_TITLE;Максимальна висота текстури
+FIXED_SIZE;Фіксований розмір:
+FIXED_SIZE_TITLE;Фіксований розмір текстури
+POWER_OF_TWO;Степінь двійки:
+POWER_OF_TWO_TITLE;Розмір текстури у степенях двійки
+PADDING;Відступи:
+PADDING_TITLE;Відступи між спрайтами в текстурі
+EXTRUDE;Видавлювання:
+EXTRUDE_TITLE;Видавлювання пікселів на межах спрайтів
+ALLOW_ROTATION;Дозволити поворот:
+ALLOW_ROTATION_TITLE;Дозволяє повертати спрайти в текстурі
+ALLOW_TRIM;Дозволити обрізання:
+ALLOW_TRIM_TITLE;Дозволяє обрізати незначущі пікселі спрайтів у текстурі
+ALPHA_THRESHOLD;Поріг альфа-каналу:
+ALPHA_THRESHOLD_TITLE;Поріг альфа-каналу для обрізання
+TRIM_MODE;Режим обрізання:
+TRIM_MODE_TITLE;Варіанти режиму обрізання
+DETECT_IDENTICAL;Визначати ідентичні:
+DETECT_IDENTICAL_TITLE;Дозволяє визначати ідентичні спрайти й не дублювати їх у текстурі
+PACKER;Пакувальник:
+PACKER_TITLE;Пакувальник
+PACKER_METHOD;Метод:
+PACKER_METHOD_TITLE;Метод пакувальника
+EXPORT;Експорт
+PLEASE_WAIT;Будь ласка, зачекайте...
+INVALID_SIZE_ERROR;Неправильний розмір. Мінімально можливий: %sx%s
+NO_IMAGES_ERROR;Спочатку додайте зображення
+CLEAR_WARNING;Справді видалити всі зображення?
+INVALID_ZIP_ERROR;Неправильний zip-файл
+NO_TINIFY_KEY_ERROR;Будь ласка, вкажіть ваш ключ TinyPNG https://tinypng.com/developers
+TINIFY_ERROR;Помилка оптимізації: %s
+TINIFY_ERROR_COMMON;Помилка оптимізації...
+OLD_BROWSER_MESSAGE1;Вибачте, але ваш браузер застарів...
+OLD_BROWSER_MESSAGE2;Будь ласка, встановіть і використовуйте один із сучасних браузерів:
+ABOUT_HOMEPAGE;Домашня сторінка:
+ABOUT_SOURCES;Вихідний код:
+ABOUT_BUGS;Повідомити про помилку:
+ABOUT_APPS;Завантажити застосунок:
+ABOUT_WEB;Web-версія:
+ABOUT_LIBS;Використані бібліотеки:
+ABOUT_GULP_VERSION;Модуль для gulp:
+ABOUT_WEBPACK_VERSION;Плагін для webpack:
+ABOUT_CONTRIBUTORS;Автори:
+EXPORTER_ERROR;Помилка експорту: %s
+CUSTOM_EXPORTER_ERROR;Помилка в шаблоні: %s
+FILE_EXT;Розширення файлу:
+DOCUMENTATION;документація
+SAVE_CHANGES_CONFIRM;Зберегти зміни в проєкті?
+MENU_FILE;Файл
+MENU_FILE_PROJECT_NEW;Новий проєкт
+MENU_FILE_PROJECT_LOAD;Відкрити проєкт
+MENU_FILE_PROJECT_LOAD_RECENT;Відкрити нещодавній
+MENU_FILE_PROJECT_SAVE;Зберегти проєкт
+MENU_FILE_PROJECT_SAVE_AS;Зберегти проєкт як...
+MENU_FILE_PREFERENCES_SAVE;Зберегти налаштування
+MENU_FILE_INSTALL_CLI;Встановити CLI
+MENU_FILE_EXIT;Вихід
+MENU_ACTIONS;Дії
+MENU_ACTIONS_ADD_IMAGES;Додати зображення
+MENU_ACTIONS_ADD_FOLDER;Додати теку
+MENU_ACTIONS_SELECT_ALL;Виділити все
+MENU_ACTIONS_DELETE;Видалити
+MENU_ACTIONS_CLEAR;Очистити
+MENU_ACTIONS_EXPORT;Експорт
+MENU_TOOLS;Інструменти
+MENU_TOOLS_SPLITTER;Розпакування атласу
+MENU_LANGUAGE;Мова
+MENU_HELP;Довідка
+MENU_HELP_ABOUT;Про програму
+UPDATER_TITLE;Доступна нова версія: %s
+CLOSE;Закрити
+INSTALL;Встановити
+SKIP_VERSION;Пропустити
+SKIP_VERSION_CONFIRM;Справді пропустити цю версію й більше про неї не нагадувати?
+CONTEXT_MENU_UNDO;Скасувати
+CONTEXT_MENU_REDO;Повторити
+CONTEXT_MENU_CUT;Вирізати
+CONTEXT_MENU_COPY;Копіювати
+CONTEXT_MENU_PASTE;Вставити
+CONTEXT_MENU_DELETE;Видалити
+CONTEXT_MENU_SELECT_ALL;Виділити все
+SPLIT;Розпакувати
+SELECT_TEXTURE;Текстура
+SELECT_DATA_FILE;Дані
+SPLITTER;Розпакування атласу
+SPLITTER_ERROR_NO_FRAMES;Не знайдено жодного спрайта. Можливо, формат атласу неправильний.
+HOLD_TRIM;Обрізати:
