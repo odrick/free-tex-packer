@@ -3,9 +3,9 @@
   "displayName": "Free texture packer",
   "version": "0.6.7",
   "description": "Free online texture packer",
-  "url": "http://free-tex-packer.com",
-  "download": "http://free-tex-packer.com/download",
-  "webApp": "http://free-tex-packer.com/app",
+  "url": "https://github.com/odrick/free-tex-packer",
+  "download": "https://github.com/odrick/free-tex-packer/releases",
+  "webApp": "https://odrick.github.io/free-tex-packer/",
   "main": "src/index.js",
   "localizations": [
     "en",
