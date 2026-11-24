@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 https://github.com/odrick/free-tex-packer
+Format:
+n  => name
+x  => x pos
+y  => y pos
+w  => width
+h  => height
+pX => x pos of the pivot point
+pY => y pos of the pivot point
+oX => x-corner offset
+oY => y-corner offset
+oW => original width
+oH => original height
+r => 'y' if sprite is rotated-->
+<TextureAtlas imagePath="texture.png" width="" height="" scale="1" format="RGBA8888">
+  <sprite n="a.png" x="1" y="0" w="32" h="17" pX="0.5" pY="0.5"/>
+  <sprite n="dir/b & c.png" x="11" y="7" w="33" h="18" pX="0.5" pY="0.5" oX="1" oY="2" oW="40" oH="20" r="y"/>
+  <sprite n="q"uo<te>.png" x="21" y="14" w="34" h="19" pX="0.5" pY="0.5" oX="2" oY="4" oW="40" oH="20"/>
+  <sprite n="it's:50%#1;x.png" x="31" y="21" w="35" h="20" pX="0.5" pY="0.5" oX="3" oY="6" oW="40" oH="20" r="y"/>
+</TextureAtlas>

@@ -52,7 +52,8 @@
     "start": "webpack serve --env platform=web",
     "start-electron": "webpack serve --env platform=electron",
     "build-web": "webpack --env build --env platform=web",
-    "build-electron": "webpack --env build --env platform=electron"
+    "build-electron": "webpack --env build --env platform=electron",
+    "test": "node --test"
   },
   "repository": {
     "type": "git",

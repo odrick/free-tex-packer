@@ -1,0 +1,103 @@
+{
+	"textures": [
+		{
+			"image": "texture",
+			"format": "RGBA8888",
+			"size": {
+				"w": ,
+				"h": 
+			},
+			"scale": 0.5,
+			"frames": [
+				{
+					"filename": "a",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 30,
+						"h": 15
+					},
+					"frame": {
+						"x": 0.5,
+						"y": 0,
+						"w": 16,
+						"h": 8.5
+					}
+				},
+				{
+					"filename": "b & c",
+					"rotated": true,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 2,
+						"w": 30,
+						"h": 15
+					},
+					"frame": {
+						"x": 5.5,
+						"y": 3.5,
+						"w": 16.5,
+						"h": 9
+					}
+				},
+				{
+					"filename": "q"uo<te>",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 4,
+						"w": 30,
+						"h": 15
+					},
+					"frame": {
+						"x": 10.5,
+						"y": 7,
+						"w": 17,
+						"h": 9.5
+					}
+				},
+				{
+					"filename": "it's:50%#1;x",
+					"rotated": true,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 6,
+						"w": 30,
+						"h": 15
+					},
+					"frame": {
+						"x": 15.5,
+						"y": 10.5,
+						"w": 17.5,
+						"h": 10
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://github.com/odrick/free-tex-packer",
+		"version": "0.6.7"
+	}
+}

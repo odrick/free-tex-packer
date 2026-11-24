@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 https://github.com/odrick/free-tex-packer
+-->
+<TextureAtlas imagePath="texture.png" width="" height="">
+  <SubTexture name="a.png" x="1" y="0"  width="32" height="17" frameX="-0" frameY="-0" frameWidth="40" frameHeight="20"/>
+  <SubTexture name="dir/b & c.png" x="11" y="7" width="18" height="33" rotated="true"  frameX="-1" frameY="-2" frameWidth="40" frameHeight="20"/>
+  <SubTexture name="q"uo<te>.png" x="21" y="14"  width="34" height="19" frameX="-2" frameY="-4" frameWidth="40" frameHeight="20"/>
+  <SubTexture name="it's:50%#1;x.png" x="31" y="21" width="20" height="35" rotated="true"  frameX="-3" frameY="-6" frameWidth="40" frameHeight="20"/>
+</TextureAtlas>
