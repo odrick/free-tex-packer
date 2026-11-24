@@ -5,7 +5,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = (env = {}) => {
 
 let entry = [
-    'babel-polyfill',
+    'core-js/stable',
+    'regenerator-runtime/runtime',
     './src/client/index'
 ];
 
